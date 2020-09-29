@@ -1,10 +1,8 @@
 import React from 'react';
-
+import BaseLayout from './components/layout'
 function App() {
   return (
-    <div>
-      
-    </div>
+    <BaseLayout />
   );
 }
 
