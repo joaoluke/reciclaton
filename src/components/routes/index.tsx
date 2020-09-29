@@ -10,7 +10,7 @@ const Routes = () => {
           *PAGINA INICIAL*
         </Route>
         <Route exact path="/login">
-          <Login/>
+          <Login />
         </Route>
         <Route exact path="/ranking">
           *PAGINA DE RANKING*
