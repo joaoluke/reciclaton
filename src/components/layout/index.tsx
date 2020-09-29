@@ -8,6 +8,9 @@ import {
   Container,
   HeaderBar,
   SearchInput,
+  Open,
+  Close,
+  RollBar,
 } from "./styled-layout";
 
 interface LayoutInterface {
@@ -15,21 +18,29 @@ interface LayoutInterface {
 }
 
 const BaseLayout = ({ children }: LayoutInterface) => {
+  const [open, setOpen] = React.useState(false);
   return (
     <div>
       <Container>
         <Header>
           <HeaderBar>
             <Logo />
-
-            <SearchInput />
             <SearchContainer>
+              <SearchInput />
               <SearchIcon />
             </SearchContainer>
+            <div>
+              {open ? (
+                <Open onClick={() => setOpen(false)} />
+              ) : (
+                <Close onClick={() => setOpen(true)} />
+              )}
+            </div>
           </HeaderBar>
         </Header>
+        {open && <RollBar>hi</RollBar>}
+        <Content>conteudo{children}</Content>
       </Container>
-      <Content>conteudo{children}</Content>
     </div>
   );
 };
