@@ -1,4 +1,5 @@
 import React from "react";
+import Login from "../../pages/login";
 import { Switch, Route } from "react-router-dom";
 
 const Routes = () => {
@@ -9,7 +10,7 @@ const Routes = () => {
           *PAGINA INICIAL*
         </Route>
         <Route exact path="/login">
-          *PAGINA DE LOGIN*
+          <Login/>
         </Route>
         <Route exact path="/ranking">
           *PAGINA DE RANKING*
