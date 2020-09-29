@@ -3,6 +3,7 @@ import { BsSearch } from "react-icons/bs";
 import { AiFillCaretRight, AiFillCaretDown } from "react-icons/ai";
 import LogoReciclaton from "./img/LogoReciclaton.png";
 import LogoResponsivo from "./img/LogoResponsivo.png";
+import { motion } from "framer-motion";
 export const Container = styled.div`
   display: flex;
   justify-content: center;
@@ -27,7 +28,7 @@ export const Header = styled.div`
 
 export const HeaderBar = styled.div`
   height: 46px;
-  background-color: #c4ff66;
+  background-color: #e1f3ce;
   display: flex;
   flex-flow: nowrap row;
   align-items: center;
@@ -66,6 +67,9 @@ export const Logo = styled.div`
 
 export const SearchInput = styled.input`
   border: none;
+  @media screen and (max-width: 540px) {
+    width: 125px;
+  }
 `;
 
 export const SearchIcon = styled(BsSearch)`
@@ -79,25 +83,31 @@ export const SearchIcon = styled(BsSearch)`
 
 export const SearchContainer = styled.div``;
 
-export const Close = styled(AiFillCaretRight)`
+export const Right = styled(AiFillCaretRight)`
   :hover {
     cursor: pointer;
   }
   padding: 15px 15px;
 `;
-export const Open = styled(AiFillCaretDown)`
+export const Down = styled(AiFillCaretDown)`
   :hover {
     cursor: pointer;
   }
   padding: 15px 15px;
 `;
 
-export const RollBar = styled.div`
+export const RollBar = styled(motion.div)`
   position: fixed;
   right: 0;
-  margin: 40px 1px;
-  width: 100px;
+  margin: 30px -30px;
+  width: 200px;
   height: 200px;
   z-index: 1;
-  background-color: whitesmoke;
+  background-color: #dcf2c4;
+  border-radius: 5px;
+
+  @media screen and (max-width: 540px) {
+    margin: 36px -30px;
+    width: 150px;
+  }
 `;

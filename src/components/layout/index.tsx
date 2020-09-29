@@ -8,8 +8,8 @@ import {
   Container,
   HeaderBar,
   SearchInput,
-  Open,
-  Close,
+  Down,
+  Right,
   RollBar,
 } from "./styled-layout";
 
@@ -31,14 +31,14 @@ const BaseLayout = ({ children }: LayoutInterface) => {
             </SearchContainer>
             <div>
               {open ? (
-                <Open onClick={() => setOpen(false)} />
+                <Down onClick={() => setOpen(false)} />
               ) : (
-                <Close onClick={() => setOpen(true)} />
+                <Right onClick={() => setOpen(true)} />
               )}
             </div>
           </HeaderBar>
         </Header>
-        {open && <RollBar>hi</RollBar>}
+        {open && <RollBar animate={{ x: -28 }}>hi</RollBar>}
         <Content>conteudo{children}</Content>
       </Container>
     </div>
