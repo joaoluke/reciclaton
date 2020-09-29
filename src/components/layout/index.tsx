@@ -1,5 +1,14 @@
 import * as React from "react";
-import { Header, Content, Container, HeaderBar } from "./styled-layout";
+import {
+  SearchIcon,
+  SearchContainer,
+  Logo,
+  Header,
+  Content,
+  Container,
+  HeaderBar,
+  SearchInput,
+} from "./styled-layout";
 
 interface LayoutInterface {
   children: string | React.ReactNode | Array<React.ReactNode>;
@@ -11,7 +20,12 @@ const BaseLayout = ({ children }: LayoutInterface) => {
       <Container>
         <Header>
           <HeaderBar>
-            <h1>oi</h1>
+            <Logo />
+
+            <SearchInput />
+            <SearchContainer>
+              <SearchIcon />
+            </SearchContainer>
           </HeaderBar>
         </Header>
       </Container>
