@@ -13,6 +13,9 @@ const Routes = () => {
       <Route exact path="/ranking">
         *PAGINA DE RANKING*
     </Route>
+      <Route exact path="/profile">
+        *PAGINA DE PROFILE*
+    </Route>
     </Switch>
   </>
 }
