@@ -11,6 +11,11 @@ import {
   Down,
   Right,
   RollBar,
+  Logout,
+  User,
+  ChangeProfile,
+  Services,
+  StyledLink,
 } from "./styled-layout";
 
 interface LayoutInterface {
@@ -38,7 +43,26 @@ const BaseLayout = ({ children }: LayoutInterface) => {
             </div>
           </HeaderBar>
         </Header>
-        {open && <RollBar animate={{ x: -28 }}>hi</RollBar>}
+        {open && (
+          <RollBar animate={{ x: -28 }}>
+            <StyledLink>
+              <Logout />
+              Deslogar
+            </StyledLink>
+            <StyledLink>
+              <User />
+              Perfil
+            </StyledLink>
+            <StyledLink>
+              <ChangeProfile />
+              Mudar Informações
+            </StyledLink>
+            <StyledLink>
+              <Services />
+              Chamados
+            </StyledLink>
+          </RollBar>
+        )}
         <Content>conteudo{children}</Content>
       </Container>
     </div>
