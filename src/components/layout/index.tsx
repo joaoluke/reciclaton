@@ -18,6 +18,8 @@ import {
   StyledLink,
 } from "./styled-layout";
 
+import { Redirect } from "react-router-dom";
+
 interface LayoutInterface {
   children: string | React.ReactNode | Array<React.ReactNode>;
 }
@@ -45,14 +47,16 @@ const BaseLayout = ({ children }: LayoutInterface) => {
         </Header>
         {open && (
           <RollBar animate={{ x: -28 }}>
-            <StyledLink>
+            <StyledLink onClick={() => <Redirect to="/" />}>
               <Logout />
               Deslogar
             </StyledLink>
-            <StyledLink>
+
+            <StyledLink onClick={() => <Redirect to="/profile" />}>
               <User />
               Perfil
             </StyledLink>
+
             <StyledLink>
               <ChangeProfile />
               Mudar Informações
