@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import LogoResponsivo from "./img/LogoResponsivo.png";
 export const Logo = styled.div`
   margin: 0 10px;
   width: 35px;
