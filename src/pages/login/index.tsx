@@ -1,4 +1,6 @@
 import React from "react";
+import { loginAction } from "../../redux/action/login";
+import { useDispatch } from "react-redux";
 import { useForm, SubmitHandler } from "react-hook-form";
 import {
   FormContainer,
@@ -10,14 +12,16 @@ import {
 } from "./styled";
 
 type FormValues = {
-  email: string | number;
-  password: string | number;
+  email: string;
+  password: string;
   rememberme: boolean;
 };
 
 const Login = () => {
+  const dispatch = useDispatch();
   const { register, handleSubmit, errors } = useForm<FormValues>();
-  const onSubmit: SubmitHandler<FormValues> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<FormValues> = ({ email, password }) =>
+    dispatch(loginAction(email, password));
   return (
     <FormContainer>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
