@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const BaseHeader = styled.div`
-  background-color: #e1f3ce;
+  background-color: #C2F185;
   display: flex;
   flex-flow: wrap;
   justify-content: space-between;
