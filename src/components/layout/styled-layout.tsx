@@ -117,13 +117,21 @@ export const RollBar = styled(motion.div)`
     width: 150px;
   }
 `;
-export const User = styled(AiOutlineUser)``;
+export const User = styled(AiOutlineUser)`
+  margin: 0 10px;
+`;
 
-export const Logout = styled(CgLogOut)``;
+export const Logout = styled(CgLogOut)`
+  margin: 0 10px;
+`;
 
-export const ChangeProfile = styled(RiUserSettingsLine)``;
+export const ChangeProfile = styled(RiUserSettingsLine)`
+  margin: 0 10px;
+`;
 
-export const Services = styled(FaRegBell)``;
+export const Services = styled(FaRegBell)`
+  margin: 0 10px;
+`;
 
 export const StyledLink = styled.div`
   margin: 10px 0 0 10px;
