@@ -2,38 +2,44 @@ import React from 'react';
 import Header from '../../components/header'
 import reciclagem from './images/vector-illustration-recycling-nature-flat_82574-3408.png'
 import cleitinho from './images/cleitinho.png'
-import { StyleMain, StyleImg, StyleContainer, StyledEmpresa, StyleTitle, StyleParagraph, StyledBox, StyleCleitinho, StyleSelo } from './styled'
+import { StyledLogo, StyledSocial, StyledList, StyleMain, StyleImg, StyleContainer, StyledEmpresa, StyleTitle, StyleParagraph, StyledBox, StyleCleitinho, StyleSelo } from './styled'
+import facebook from './images/facebook.png';
+import linkedin from './images/linkedin.png';
+import instagram from './images/instagram.png';
+
 
 const Home = () => {
   return (
     <>
       <Header> </Header>
       <StyleMain>
-
         <StyleContainer>
           <StyleImg src={reciclagem} />
           <StyledEmpresa>
             <StyleTitle>PARA SUA EMPRESA:</StyleTitle>
-            <StyleParagraph>Através de nossa plataforma é possível solicitar a coleta informando a quantidade e os tipos de resíduos que estão sendo descartados, e um coletor vai  até seu estabelecimento realizar a coleta do lixo reciclável. A partir da nota de avaliação dada ao coletor, conseguimos garantir a qualidade do atendimento</StyleParagraph>
+            <StyleParagraph style={{ fontSize: "20px" }}>Através de nossa plataforma é possível solicitar a coleta informando a quantidade e os tipos de resíduos que estão sendo descartados, e um coletor vai  até seu estabelecimento realizar a coleta do lixo reciclável. A partir da nota de avaliação dada ao coletor, conseguimos garantir a qualidade do atendimento</StyleParagraph>
             <StyleTitle> GOSTOU ? </StyleTitle>
-            <StyleParagraph> Cadastre-se </StyleParagraph>
+            <StyleTitle style={{ color: "#70D548" }}> Cadastre-se </StyleTitle>
           </StyledEmpresa>
         </StyleContainer>
 
         <StyledBox>
           <StyleTitle>IMPORTÂNCIA DA RECICLAGEM:</StyleTitle>
           <StyleTitle>A natureza leva para decompor:</StyleTitle>
-          <ul>
-            <li>2 a 6 semanas um jornal,</li>
-            <li>1 a 4 semanas as embalagens de papel,</li>
-            <li>3 meses as cascas de frutas,</li>
-            <li>3 meses os guardanapos de papel,</li>
-            <li>30 a 40 anos o nylon,</li>
-            <li>200 a 450 anos os sacos e copos de plástico,</li>
-            <li>100 a 500 anos as pilhas,</li>
-            <li>100 a 500 anos as latas de alumínio,</li>
-            <li>1.000.000 de anos o vidro</li>
-          </ul>
+          <StyledList>
+            <ul>
+              <li>2 a 6 semanas um jornal,</li>
+              <li>1 a 4 semanas as embalagens de papel,</li>
+              <li>3 meses as cascas de frutas,</li>
+              <li>3 meses os guardanapos de papel,</li>
+              <li>30 a 40 anos o nylon,</li>
+              <li>200 a 450 anos os sacos e copos de plástico,</li>
+              <li>100 a 500 anos as pilhas,</li>
+              <li>100 a 500 anos as latas de alumínio,</li>
+              <li>1.000.000 de anos o vidro</li>
+            </ul>
+          </StyledList>
+
         </StyledBox>
 
         <StyleContainer>
@@ -53,6 +59,13 @@ const Home = () => {
           <StyleTitle> NOSSA MISSÃO:</StyleTitle>
           <StyleParagraph>Empregando a tecnologia, proporcionamos solução estratégica e econômica para melhorar o meio ambiente, a começar pela diminuição da poluição do ar, do solo e das águas, assim como minimizar os impactos ambientais, preservar os recursos naturais que são limitados e consequentemente preservar a natureza .</StyleParagraph>
         </StyledBox>
+
+        <StyledSocial>
+          <StyledLogo logo={facebook}></StyledLogo>
+          <StyledLogo logo={instagram}></StyledLogo>
+          <StyledLogo logo={linkedin}></StyledLogo>
+        </StyledSocial>
+
 
       </StyleMain>
     </>
