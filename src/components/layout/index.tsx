@@ -63,7 +63,7 @@ const BaseLayout = ({ children }: LayoutInterface) => {
             </StyledLink>
           </RollBar>
         )}
-        <Content>conteudo{children}</Content>
+        <Content>{children}</Content>
       </Container>
     </div>
   );
