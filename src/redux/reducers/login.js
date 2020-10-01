@@ -1,10 +1,12 @@
 import { LOGIN } from "../action/login";
 
+const token = localStorage.getItem("acessToken");
+
 const defaultState = {
-  authen: "",
+  authen: token ? token : "",
 };
 
-const authentication = (state = defaultState, action: any) => {
+const authentication = (state = defaultState, action) => {
   switch (action.type) {
     case LOGIN:
       return action.auth;
