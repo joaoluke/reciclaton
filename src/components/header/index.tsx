@@ -16,16 +16,23 @@ import {
   Profile,
   Open,
   Close,
+  SubmitButton,
 } from "./header-style";
 
 import { useHistory } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Header = () => {
   const [open, setOpen] = React.useState(false);
   const [hiddenSearch, setHiddenSearch] = React.useState(false);
-  const searchCompanyName = (e: React.FormEvent<HTMLFormElement>) => {
+  const [search, setSearch] = React.useState("");
+  const FormValue = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(e);
+    console.log(search);
+  };
+
+  const getValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
   };
   const history = useHistory();
 
@@ -38,15 +45,20 @@ const Header = () => {
           {hiddenSearch ? (
             <>
               <SearchContainer>
-                <form onSubmit={(e) => searchCompanyName(e)}>
-                  <Open onClick={() => setHiddenSearch(false)} />
-                  <SearchInput
-                    type="text"
-                    placeholder="Input some company"
-                    name="search"
-                  />
-                  <SearchIcon type="submit" />
-                </form>
+                <motion.div animate={{ x: 20 }}>
+                  <form onSubmit={(e) => FormValue(e)}>
+                    <Open onClick={() => setHiddenSearch(false)} />
+                    <SearchInput
+                      type="text"
+                      placeholder="Input some company"
+                      name="search"
+                      onChange={(e) => getValue(e)}
+                    />
+                    <SubmitButton type="submit">
+                      <SearchIcon />
+                    </SubmitButton>
+                  </form>
+                </motion.div>
               </SearchContainer>
             </>
           ) : (

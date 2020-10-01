@@ -98,7 +98,13 @@ export const SearchIcon = styled(BsSearch)`
   }
 `;
 
-export const SearchContainer = styled.div``;
+export const SearchContainer = styled.div`
+  margin-left: 200px;
+
+  @media screen and (max-width: 540px) {
+    margin-left: 0;
+  }
+`;
 
 export const StyledMenu = styled(GiHamburgerMenu)`
   :hover {
@@ -149,6 +155,7 @@ export const Profile = styled(CgProfile)`
   margin-bottom: 5px;
   @media screen and (max-width: 540px) {
     font-size: 16px;
+    visibility: hidden;
   }
 `;
 
@@ -160,8 +167,18 @@ export const Open = styled(AiFillCaretRight)`
 `;
 
 export const Close = styled(AiFillCaretDown)`
+  margin-left: 200px;
+
+  @media screen and (max-width: 540px) {
+    margin-left: 0;
+  }
   :hover {
     cursor: pointer;
   }
   align-self: center;
+`;
+
+export const SubmitButton = styled.button`
+  border: none;
+  background-color: transparent;
 `;
