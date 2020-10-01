@@ -108,10 +108,12 @@ const Header = () => {
             </StyledLink>
           )}
 
-          <StyledLink>
-            <ChangeProfile />
-            Mudar Informações
-          </StyledLink>
+          {login && (
+            <StyledLink>
+              <ChangeProfile />
+              Mudar Informações
+            </StyledLink>
+          )}
           <StyledLink>
             <Services onClick={() => history.push("/ranking")} />
             Chamados
