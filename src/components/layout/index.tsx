@@ -8,17 +8,18 @@ import {
   Container,
   HeaderBar,
   SearchInput,
-  Down,
-  Right,
+  StyledMenu,
   RollBar,
   Logout,
   User,
   ChangeProfile,
   Services,
   StyledLink,
+  Profile,
+  Open,
+  Close,
 } from "./styled-layout";
-
-import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 interface LayoutInterface {
   children: string | React.ReactNode | Array<React.ReactNode>;
@@ -26,33 +27,53 @@ interface LayoutInterface {
 
 const BaseLayout = ({ children }: LayoutInterface) => {
   const [open, setOpen] = React.useState(false);
+  const [hiddenSearch, setHiddenSearch] = React.useState(false);
+  const searchCompanyName = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(e);
+  };
+  const history = useHistory();
   return (
     <div>
       <Container>
         <Header>
           <HeaderBar>
-            <Logo />
-            <SearchContainer>
-              <SearchInput />
-              <SearchIcon />
-            </SearchContainer>
+            <Logo onClick={() => history.push("/ranking")} />
+
+            {hiddenSearch ? (
+              <>
+                <SearchContainer>
+                  <form onSubmit={(e) => searchCompanyName(e)}>
+                    <Open onClick={() => setHiddenSearch(false)} />
+                    <SearchInput
+                      type="text"
+                      placeholder="Input some company"
+                      name="search"
+                    />
+                    <SearchIcon type="submit" />
+                  </form>
+                </SearchContainer>
+              </>
+            ) : (
+              <Close onClick={() => setHiddenSearch(true)} />
+            )}
+            <StyledLink onClick={() => history.push("/profile")}>
+              <Profile />
+            </StyledLink>
+
             <div>
-              {open ? (
-                <Down onClick={() => setOpen(false)} />
-              ) : (
-                <Right onClick={() => setOpen(true)} />
-              )}
+              <StyledMenu onClick={() => setOpen(!open)} />
             </div>
           </HeaderBar>
         </Header>
         {open && (
           <RollBar animate={{ x: -28 }}>
-            <StyledLink onClick={() => <Redirect to="/" />}>
+            <StyledLink onClick={() => history.push("/")}>
               <Logout />
               Deslogar
             </StyledLink>
 
-            <StyledLink onClick={() => <Redirect to="/profile" />}>
+            <StyledLink onClick={() => history.push("/profile")}>
               <User />
               Perfil
             </StyledLink>
@@ -62,7 +83,7 @@ const BaseLayout = ({ children }: LayoutInterface) => {
               Mudar Informações
             </StyledLink>
             <StyledLink>
-              <Services />
+              <Services onClick={() => history.push("/ranking")} />
               Chamados
             </StyledLink>
           </RollBar>
