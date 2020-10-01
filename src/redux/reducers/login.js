@@ -9,7 +9,11 @@ const defaultState = {
 const authentication = (state = defaultState, action) => {
   switch (action.type) {
     case LOGIN:
-      return action.auth;
+      const {
+        data: { remember, accessToken },
+      } = action;
+      remember && localStorage.setItem("accessToken", accessToken);
+      return accessToken;
     default:
       return state;
   }

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { loginAction } from "../../redux/action/login";
+import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import {
@@ -13,9 +14,13 @@ import {
 
 const Login = () => {
   const [errorText, setErrorText] = useState("");
+  const [push, setPush] = useState(false);
+  const history = useHistory();
+  push && history.push("/");
   const dispatch = useDispatch();
   const { register, handleSubmit, errors } = useForm();
-  const onSubmit = (values) => dispatch(loginAction(values, setErrorText));
+  const onSubmit = (values) =>
+    dispatch(loginAction(values, setErrorText, setPush));
   return (
     <FormContainer>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
