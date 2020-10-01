@@ -36,7 +36,7 @@ export const StyledEmpresa = styled.div`
 export const StyleImg = styled.img`
   margin-right: 0px;
   width: 50rem;
-  height: 50rem;
+  height: 42rem;
   @media screen and (max-width: 540px) {
     width: 15rem;
     height: 15rem;
