@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Content, Container } from "./styled-layout";
+import { Content, Container } from "./layout-style";
 import Header from "../header";
 interface LayoutInterface {
   children: string | React.ReactNode | Array<React.ReactNode>;

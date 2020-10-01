@@ -12,16 +12,6 @@ import { RiUserSettingsLine } from "react-icons/ri";
 import { FaRegBell } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 
-export const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-flow: row wrap;
-  height: fit-content;
-  @media screen and (max-width: 540px) {
-    width: auto;
-  }
-`;
-
 export const StyledHeader = styled.div`
   z-index: 1;
   width: 100%;
@@ -29,7 +19,6 @@ export const StyledHeader = styled.div`
   position: fixed;
   top: 0;
   text-align: center;
-  text-align: start;
   @media screen and (max-width: 540px) {
     text-align: center;
   }
