@@ -24,7 +24,7 @@ import { useHistory } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const Header = () => {
-  const [open, setOpen] = React.useState(false);
+  const [menu, setMenu] = React.useState(false);
   const [hiddenSearch, setHiddenSearch] = React.useState(false);
   const [search, setSearch] = React.useState("");
   const [login, setLogin] = React.useState(false);
@@ -73,16 +73,23 @@ const Header = () => {
           )}
 
           <div>
-            <StyledMenu onClick={() => setOpen(!open)} />
+            <StyledMenu onClick={() => setMenu(!menu)} />
           </div>
         </HeaderBar>
       </StyledHeader>
-      {open && (
+      {menu && (
         <RollBar animate={{ x: -28 }}>
-          <StyledLink onClick={() => history.push("/")}>
-            <Logout />
-            Deslogar
-          </StyledLink>
+          {login && (
+            <StyledLink
+              onClick={() => {
+                history.push("/");
+                setLogin(false);
+              }}
+            >
+              <Logout />
+              Deslogar
+            </StyledLink>
+          )}
 
           {login ? (
             <StyledLink onClick={() => history.push("/profile")}>
@@ -90,7 +97,12 @@ const Header = () => {
               Perfil
             </StyledLink>
           ) : (
-            <StyledLink onClick={() => history.push("/login")}>
+            <StyledLink
+              onClick={() => {
+                history.push("/login");
+                setLogin(true);
+              }}
+            >
               <Login />
               Login
             </StyledLink>
