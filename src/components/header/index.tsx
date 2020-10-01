@@ -17,6 +17,7 @@ import {
   Open,
   Close,
   SubmitButton,
+  Login,
 } from "./header-style";
 
 import { useHistory } from "react-router-dom";
@@ -26,6 +27,7 @@ const Header = () => {
   const [open, setOpen] = React.useState(false);
   const [hiddenSearch, setHiddenSearch] = React.useState(false);
   const [search, setSearch] = React.useState("");
+  const [login, setLogin] = React.useState(false);
   const FormValue = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(search);
@@ -64,9 +66,11 @@ const Header = () => {
           ) : (
             <Close onClick={() => setHiddenSearch(true)} />
           )}
-          <StyledLink onClick={() => history.push("/profile")}>
-            <Profile />
-          </StyledLink>
+          {login && (
+            <StyledLink onClick={() => history.push("/profile")}>
+              <Profile />
+            </StyledLink>
+          )}
 
           <div>
             <StyledMenu onClick={() => setOpen(!open)} />
@@ -80,10 +84,17 @@ const Header = () => {
             Deslogar
           </StyledLink>
 
-          <StyledLink onClick={() => history.push("/profile")}>
-            <User />
-            Perfil
-          </StyledLink>
+          {login ? (
+            <StyledLink onClick={() => history.push("/profile")}>
+              <User />
+              Perfil
+            </StyledLink>
+          ) : (
+            <StyledLink onClick={() => history.push("/login")}>
+              <Login />
+              Login
+            </StyledLink>
+          )}
 
           <StyledLink>
             <ChangeProfile />

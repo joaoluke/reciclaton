@@ -7,7 +7,7 @@ import {
 } from "react-icons/ai";
 import LogoResponsivo from "./img/LogoResponsivo.png";
 import { motion } from "framer-motion";
-import { CgLogOut, CgProfile } from "react-icons/cg";
+import { CgLogOut, CgProfile, CgLogIn } from "react-icons/cg";
 import { RiUserSettingsLine } from "react-icons/ri";
 import { FaRegBell } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -131,6 +131,9 @@ export const User = styled(AiOutlineUser)`
   margin: 0 10px;
 `;
 
+export const Login = styled(CgLogIn)`
+  margin: 0 10px;
+`;
 export const Logout = styled(CgLogOut)`
   margin: 0 10px;
 `;
