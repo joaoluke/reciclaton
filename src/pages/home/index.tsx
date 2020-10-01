@@ -1,8 +1,8 @@
 import React from 'react';
 import Header from '../../components/header'
 import reciclagem from './images/vector-illustration-recycling-nature-flat_82574-3408.png'
-import cleitinho from './images/cleitinho.png'
 import { StyledLogo, StyledSocial, StyledList, StyleMain, StyleImg, StyleContainer, StyledEmpresa, StyleTitle, StyleParagraph, StyledBox, StyleCleitinho, StyleSelo } from './styled'
+import cleitinho from './images/cleitinho.png'
 import facebook from './images/facebook.png';
 import linkedin from './images/linkedin.png';
 import instagram from './images/instagram.png';
@@ -13,6 +13,7 @@ const Home = () => {
     <>
       <Header> </Header>
       <StyleMain>
+
         <StyleContainer>
           <StyleImg src={reciclagem} />
           <StyledEmpresa>
@@ -39,7 +40,6 @@ const Home = () => {
               <li>1.000.000 de anos o vidro</li>
             </ul>
           </StyledList>
-
         </StyledBox>
 
         <StyleContainer>
@@ -65,7 +65,6 @@ const Home = () => {
           <StyledLogo logo={instagram}></StyledLogo>
           <StyledLogo logo={linkedin}></StyledLogo>
         </StyledSocial>
-
 
       </StyleMain>
     </>
