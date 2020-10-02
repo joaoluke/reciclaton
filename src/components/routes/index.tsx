@@ -1,6 +1,8 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 
+import BusinessRanking from '../business-ranking'
+
 const Routes = () => {
   return <>
     <Switch>
@@ -12,6 +14,7 @@ const Routes = () => {
     </Route>
       <Route exact path="/ranking">
         *PAGINA DE RANKING*
+        <BusinessRanking />
     </Route>
       <Route exact path="/profile">
         *PAGINA DE PROFILE*
