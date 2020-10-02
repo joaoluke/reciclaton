@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { BackgroundRank, BusinessCard, StyledButton, StyledTable, Td } from './syled-business'
 import { GiPodiumWinner, GiPodiumSecond, GiPodiumThird } from 'react-icons/gi'
-import { Table, Tooltip } from 'antd';
 
 
 const BusinessRanking = () => {
@@ -26,108 +25,30 @@ const orderByScoreYear = (businessA, businessB) => {
     return businessB.score.anual - businessA.score.anual;
 }
 
-const columns = [
-    {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
-      render: text => <a>{text}</a>,
-      width: 150,
-    },
-    {
-      title: 'Age',
-      dataIndex: 'age',
-      key: 'age',
-      width: 80,
-    },
-    {
-      title: 'Address',
-      dataIndex: 'address',
-      key: 'address 1',
-      ellipsis: {
-        showTitle: false,
-      },
-      render: address => (
-        <Tooltip placement="topLeft" title={address}>
-          {address}
-        </Tooltip>
-      ),
-    },
-    {
-      title: 'Long Column Long Column Long Column',
-      dataIndex: 'address',
-      key: 'address 2',
-      ellipsis: {
-        showTitle: false,
-      },
-      render: address => (
-        <Tooltip placement="topLeft" title={address}>
-          {address}
-        </Tooltip>
-      ),
-    },
-    {
-      title: 'Long Column Long Column',
-      dataIndex: 'address',
-      key: 'address 3',
-      ellipsis: {
-        showTitle: false,
-      },
-      render: address => (
-        <Tooltip placement="topLeft" title={address}>
-          {address}
-        </Tooltip>
-      ),
-    },
-    {
-      title: 'Long Column',
-      dataIndex: 'address',
-      key: 'address 4',
-      ellipsis: {
-        showTitle: false,
-      },
-      render: address => (
-        <Tooltip placement="topLeft" title={address}>
-          {address}
-        </Tooltip>
-      ),
-    },
-  ];
-  
-  const data = [
-    {
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park, New York No. 1 Lake Park',
-    },
-    {
-      key: '2',
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 2 Lake Park, London No. 2 Lake Park',
-    },
-    {
-      key: '3',
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park, Sidney No. 1 Lake Park',
-    },
-  ];
-
     return (
-      <div>
+      <div style={{ position: "relative", top: "-800px" }}>
+        <table border="1px" cellpadding="5px" cellspacing="0">
+          <thead>
+            <th>Posição</th>
+            <th>Nome</th>
+            <th>Prêmios</th>
+            <th>Pontuação</th>
+            <th>Website</th>
+          </thead>
+          <tbody></tbody>
+
+          {business.sort(orderByScoreMonth).map((item, index) => (
+            <tr key={index}>
+              <td>{index + 1}ª</td>
+              <td>{item.brand}</td>
+              <td>Sem por enquanto</td>
+              <td>{item.score.mensal}</td>
+              <td><a href={item.website}>{item.website}</a></td>
+            </tr>
+          ))}
+        </table>
+
         {console.log(business)}
-
-        {/* ////////////////////////////////////////////////////////////////////////////////// */}
-
-        <Table columns={columns} dataSource={data} />
-
-        {/* ////////////////////////////////////////////////////////////////////////////////////////// */}
-
-
-
-
         <BackgroundRank>
           <div style={{ display: "flex", marginBottom: "5%" }}>
             <StyledButton onClick={() => setScore(true)}>
