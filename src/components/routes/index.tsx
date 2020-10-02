@@ -1,7 +1,6 @@
 import React from "react";
 import Login from "../../pages/login";
 import { Switch, Route } from "react-router-dom";
-
 const Routes = () => {
   return (
     <>
