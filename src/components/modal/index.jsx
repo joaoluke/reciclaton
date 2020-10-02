@@ -12,7 +12,17 @@ import {
 } from "./styled.js";
 import "./style.css";
 
-let test;
+let ifCollectorMock = {
+  organic: false,
+  plastic: false,
+  glass: false,
+  paper: false,
+  metal: false,
+  battery: false,
+  cloth: false,
+  electronic: false,
+  rubber: false,
+};
 
 const Modal = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -62,9 +72,9 @@ const Modal = () => {
       electronic: false,
       rubber: false,
     },
-    "business-size": "",
+    businessSize: "",
     website: "",
-    "image-url": "",
+    imageUrl: "",
     score: {
       mensal: 0,
       anual: 0,
@@ -73,47 +83,46 @@ const Modal = () => {
     award: {},
     complaints: [],
   });
-  const history = useHistory();
-  console.log(useHistory());
 
   const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = (data) => {
-    // setDataForAPI((dataForAPI.ifCollector = test));
+    // setDataForAPI((dataForAPI.ifCollector = ifCollectorMock));
     const formattedCNPJ = data.cnpj
       .replace(".", "")
       .replace(".", "")
       .replace("/", "")
       .replace("-", "");
     const formattedCEP = data.cep.replace("-", "");
-    console.log(dataForAPI);
     setDataForAPI({
       ...dataForAPI,
-      email: data.email,
-      brand: data.nameFantasy,
-      password: data.password,
-      cnpj: formattedCNPJ,
-      adress: {
-        street: data.street,
-        number: data.number,
-        neighborhood: data.district,
-        zip: formattedCEP,
-        city: data.city,
-        state: data.state,
+      dataForAPI: { email: data.email },
+      dataForAPI: { password: data.password },
+      dataForAPI: { brand: data.nameFantasy },
+      dataForAPI: { cnpj: formattedCNPJ },
+      dataForAPI: {
+        adress: {
+          street: data.street,
+          number: data.number,
+          neighborhood: data.district,
+          zip: formattedCEP,
+          city: data.city,
+          state: data.state,
+        },
       },
-      business: data.branch,
-      "business-size": data.port,
-      website: data.site,
-      "image-url": data.url,
+      dataForAPI: { business: data.branch },
+      dataForAPI: { ifCollector: ifCollectorMock },
+      dataForAPI: { businessSize: data.port },
+      dataForAPI: { website: data.site },
+      dataForAPI: { imageUrl: data.url },
     });
   };
-
   const companyOrCollector = (e) => {
     setTypeUser(e.target.value);
   };
 
   const collectionMaterials = (checkedValues) => {
-    console.log("checked = ", checkedValues);
+    // console.log("checked = ", checkedValues);
     // setDataForAPI(...dataForAPI, )
   };
 
@@ -140,30 +149,12 @@ const Modal = () => {
   };
 
   const collector = (value) => {
-    console.log(dataForAPI.ifCollector.length);
-    console.log(value && value.checked);
-    for (let type in dataForAPI.ifCollector) {
+    for (let type in ifCollectorMock) {
       value &&
+        value.name === type &&
         value.checked &&
-        setDataForAPI((dataForAPI.ifCollector[value.name] = true));
+        (ifCollectorMock[value && value.name] = value && value.checked);
     }
-    // const collectorForm = {
-    //   organic:
-    //     value && value.name === "organic" && value.checked ? true : false,
-    //   plastic:
-    //     value && value.name === "plastic" && value.checked ? true : false,
-    //   glass: value && value.name === "glass" && value.checked ? true : false,
-    //   paper: value && value.name === "paper" && value.checked ? true : false,
-    //   metal: value && value.name === "metal" && value.checked ? true : false,
-    //   battery:
-    //     value && value.name === "battery" && value.checked ? true : false,
-    //   cloth: value && value.name === "cloth" && value.checked ? true : false,
-    //   electronic:
-    //     value && value.name === "electronic" && value.checked ? true : false,
-    //   rubber: value && value.name === "rubber" && value.checked ? true : false,
-    // };
-    // console.log(collectorForm.organic, collectorForm.plastic);
-    // return (test = collectorForm);
   };
 
   const catchZip = (e) => {
@@ -330,25 +321,32 @@ const Modal = () => {
                   <input name="plastic" type="checkbox" ref={collector} />
                 </Col>
                 <Col span={12}>
-                  <Checkbox value="glass">Vidro</Checkbox>
+                  <label>Vidro</label>
+                  <input name="glass" type="checkbox" ref={collector} />
                 </Col>
                 <Col span={12}>
-                  <Checkbox value="paper">Papel</Checkbox>
+                  <label>Papel</label>
+                  <input name="paper" type="checkbox" ref={collector} />
                 </Col>
                 <Col span={12}>
-                  <Checkbox value="metal">Metal</Checkbox>
+                  <label>Metal</label>
+                  <input name="metal" type="checkbox" ref={collector} />
                 </Col>
                 <Col span={12}>
-                  <Checkbox value="battery">Bateria</Checkbox>
+                  <label>Bateria</label>
+                  <input name="battery" type="checkbox" ref={collector} />
                 </Col>
                 <Col span={12}>
-                  <Checkbox value="cloth">Pano</Checkbox>
+                  <label>Pano</label>
+                  <input name="cloth" type="checkbox" ref={collector} />
                 </Col>
                 <Col span={12}>
-                  <Checkbox value="electronic">Eletronicos</Checkbox>
+                  <label>Eletronicos</label>
+                  <input name="electronic" type="checkbox" ref={collector} />
                 </Col>
                 <Col span={12}>
-                  <Checkbox value="rubber">Borracha</Checkbox>
+                  <label>Borracha</label>
+                  <input name="rubber" type="checkbox" ref={collector} />
                 </Col>
               </Row>
             </Checkbox.Group>
