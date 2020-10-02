@@ -1,0 +1,180 @@
+#modal:target ~ .box {
+  top: 13%;
+  transition: all 0.4s;
+  transition-delay: 0.3s;
+  margin-bottom: 10%;
+}
+
+.box {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  display: grid;
+  width: 40%;
+  position: absolute;
+  margin: auto 30% auto 30%;
+  top: -215%;
+}
+
+#close {
+  color: #bfbeba;
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+  position: absolute;
+  font-size: 20px;
+  width: 17px;
+  height: 17px;
+  text-align: center;
+  right: 5px;
+}
+
+#close:hover {
+  color: #85837e;
+}
+
+#submit {
+  margin-top: 14px;
+  background-color: #4385cc;
+  width: 30%;
+  cursor: pointer;
+  margin-left: 35%;
+  border-radius: 4px;
+}
+
+h1 {
+  font-weight: 100;
+  color: white;
+  text-align: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgb(79, 98, 148);
+}
+
+.form {
+  background: #0e101c;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+p {
+  margin: 0px;
+  color: rgb(213, 41, 65);
+}
+
+p::before {
+  display: inline;
+  content: "⚠ ";
+}
+
+input {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 4px;
+  padding: 10px 15px;
+  font-size: 14px;
+}
+
+select.branch {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 4px;
+  padding: 10px 15px;
+  font-size: 14px;
+}
+
+label {
+  text-align: left;
+  display: block;
+  margin-bottom: 9px;
+  margin-top: 9px;
+  color: #000;
+  font-size: 14px;
+  font-weight: 200;
+}
+
+button[type="submit"],
+input[type="submit"] {
+  background: #a4e58b;
+  color: #000;
+  text-transform: uppercase;
+  border: none;
+  margin-top: 40px;
+  padding: 20px;
+  font-size: 16px;
+  font-weight: 100;
+  letter-spacing: 10px;
+}
+
+button[type="submit"]:hover,
+input[type="submit"]:hover {
+  background: #e1f3ce;
+}
+
+button[type="submit"]:active,
+input[type="button"]:active,
+input[type="submit"]:active {
+  transition: 0.3s all;
+  transform: translateY(3px);
+  border: 1px solid transparent;
+  opacity: 0.8;
+}
+
+input:disabled {
+  opacity: 0.4;
+}
+
+input[type="button"]:hover {
+  transition: 0.3s all;
+}
+
+option {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+button[type="submit"],
+input[type="button"],
+input[type="submit"] {
+  -webkit-appearance: none;
+}
+
+button[type="button"] {
+  display: block;
+  appearance: none;
+  background: #333;
+  color: white;
+  border: none;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border-radius: 4px;
+}
+
+hr {
+  margin-top: 30px;
+}
+
+h6.tip {
+  margin: 0px;
+  font-weight: 200;
+}
+
+button {
+  display: block;
+  appearance: none;
+  margin-top: 40px;
+  border: 1px solid #333;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border-radius: 4px;
+}
+
+@media only screen and (max-width: 380px) {
+  .box {
+    display: grid;
+    width: 74%;
+    position: absolute;
+    margin: auto 10% auto 10%;
+    top: -150vh;
+  }
+}
