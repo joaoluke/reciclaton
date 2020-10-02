@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { Register } from "./objectModel.js";
+import { useDispatch } from "react-redux";
+import { registerForm } from "../../redux/action/register";
 import "antd/dist/antd.css";
 import { Checkbox, Row, Col } from "antd";
 import axios from "axios";
@@ -83,7 +85,7 @@ const Modal = () => {
     award: {},
     complaints: [],
   });
-
+  const dispatch = useDispatch();
   const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = (data) => {
@@ -116,6 +118,7 @@ const Modal = () => {
       dataForAPI: { website: data.site },
       dataForAPI: { imageUrl: data.url },
     });
+    dispatch(registerForm(dataForAPI))
   };
   const companyOrCollector = (e) => {
     setTypeUser(e.target.value);
