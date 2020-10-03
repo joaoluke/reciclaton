@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useHistory } from "react-router-dom";
-import { Register } from "./objectModel.js";
 import "antd/dist/antd.css";
 import { Checkbox, Row, Col } from "antd";
 import axios from "axios";
@@ -73,9 +72,7 @@ const Modal = () => {
     award: {},
     complaints: [],
   });
-  const history = useHistory();
-  console.log(useHistory());
-
+  console.log(dataForAPI);
   const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = (data) => {
@@ -86,7 +83,7 @@ const Modal = () => {
       .replace("/", "")
       .replace("-", "");
     const formattedCEP = data.cep.replace("-", "");
-    console.log(dataForAPI);
+
     setDataForAPI({
       ...dataForAPI,
       email: data.email,
@@ -106,6 +103,7 @@ const Modal = () => {
       website: data.site,
       "image-url": data.url,
     });
+    console.log(dataForAPI);
   };
 
   const companyOrCollector = (e) => {
@@ -142,11 +140,11 @@ const Modal = () => {
   const collector = (value) => {
     console.log(dataForAPI.ifCollector.length);
     console.log(value && value.checked);
-    for (let type in dataForAPI.ifCollector) {
-      value &&
-        value.checked &&
-        setDataForAPI((dataForAPI.ifCollector[value.name] = true));
-    }
+    // for (let type in dataForAPI.ifCollector) {
+    //   value &&
+    //     value.checked &&
+    //     setDataForAPI((dataForAPI.ifCollector[value.name] = true));
+    // }
     // const collectorForm = {
     //   organic:
     //     value && value.name === "organic" && value.checked ? true : false,
@@ -415,9 +413,7 @@ const Modal = () => {
         {errors.confirmPassword && <p>Digite a confirmação da senha</p>}
 
         <input type="submit" value="Registrar" />
-        <a href="" id="close">
-          x
-        </a>
+        <div id="close">x</div>
       </form>
     </div>
   );
