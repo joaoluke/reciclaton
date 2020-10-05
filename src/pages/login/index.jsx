@@ -1,6 +1,6 @@
 import React from "react";
 import { loginAction, reqError } from "../../redux/action/login";
-import { useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import {
@@ -14,8 +14,6 @@ import {
 
 const Login = () => {
   const { err, pass } = useSelector((state) => state.login);
-  const history = useHistory();
-  pass && history.push("/");
   const dispatch = useDispatch();
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = (values) => dispatch(loginAction(values));
@@ -48,7 +46,7 @@ const Login = () => {
         {err && <StyledError>{err}</StyledError>}
         <StyledLabel>Remember-me?</StyledLabel>
         <StyledInput name="rememberme" type="checkbox" ref={register} />
-
+        {pass && <Redirect to={{ pathname: "/" }} />}
         <StyledButton type="submit">Login</StyledButton>
       </StyledForm>
     </FormContainer>
