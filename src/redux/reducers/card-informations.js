@@ -3,9 +3,11 @@ const defaultState = [];
 const cardInformations = (state = defaultState, { type, addInformations }) => {
   switch (type) {
     case ADD_INFORMATIONS:
-      return addInformations;
+      return [...state, addInformations];
 
     default:
       return state;
   }
 };
+
+export default cardInformations;
