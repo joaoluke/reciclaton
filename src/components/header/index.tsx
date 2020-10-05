@@ -52,7 +52,7 @@ const Header = () => {
                     <Open onClick={() => setHiddenSearch(false)} />
                     <SearchInput
                       type="text"
-                      placeholder="Input some company"
+                      placeholder="Procurar empresa"
                       name="search"
                       onChange={(e) => getValue(e)}
                     />
