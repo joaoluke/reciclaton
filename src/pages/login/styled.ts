@@ -5,6 +5,7 @@ export const FormContainer = styled.div`
   display: flex;
   align-items: center;
   height: 100vh;
+  width: 100vw;
   justify-content: center;
   background-image: url(${natureza});
   background-size: cover;
@@ -54,4 +55,4 @@ export const StyledButton = styled.button`
 export const StyledError = styled.p`
   color: red;
   margin: 0;
-`
+`;

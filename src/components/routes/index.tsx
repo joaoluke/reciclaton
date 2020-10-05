@@ -6,17 +6,17 @@ const Routes = () => {
   return (
     <>
       <Switch>
-        <Route exact path="/">
-          *PAGINA INICIAL*
-        </Route>
-        <Route exact path="/login">
+        <Route path="/login">
           <Login />
         </Route>
-        <Route exact path="/ranking">
+        <Route path="/ranking">
           *PAGINA DE RANKING*
         </Route>
-        <Route exact path="/profile">
+        <Route path="/profile">
           *PAGINA DE PROFILE*
+        </Route>
+        <Route path="/">
+          *PAGINA INICIAL*
         </Route>
       </Switch>
     </>
