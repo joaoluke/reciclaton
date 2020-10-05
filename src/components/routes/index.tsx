@@ -1,4 +1,5 @@
 import React from "react";
+import Login from "../../pages/login";
 import { Switch, Route } from "react-router-dom";
 
 import BusinessRanking from '../business-ranking'
@@ -10,17 +11,17 @@ const Routes = () => {
     <>
       <Switch>
         <Route exact path="/">
-          <BaseLayout> *PAGINA INICIAL*</BaseLayout>
+          *PAGINA INICIAL*
         </Route>
         <Route exact path="/login">
-          <BaseLayout>*PAGINA DE LOGIN*</BaseLayout>
+          <Login />
         </Route>
         <Route exact path="/ranking">
-          <BaseLayout>*PAGINA DE RANKING*</BaseLayout>
-          <BusinessRanking />
+          *PAGINA DE RANKING*
+          <BusinessRanking/>
         </Route>
         <Route exact path="/profile">
-          <BaseLayout>*PAGINA DE PROFILE*</BaseLayout>
+          *PAGINA DE PROFILE*
         </Route>
       </Switch>
     </>
