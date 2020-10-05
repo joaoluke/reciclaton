@@ -1,10 +1,11 @@
-import React from 'react';
-import Home from './pages/home'
+import React from "react";
+import Home from "./pages/home";
+import ServiceOrder from "./pages/service-order";
 
 function App() {
   return (
     <div>
-      <Home />
+      <ServiceOrder />
     </div>
   );
 }
