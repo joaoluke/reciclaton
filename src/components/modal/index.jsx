@@ -40,6 +40,7 @@ const customStyles = {
 };
 
 const ModalComponent = () => {
+  const [errorText, setErrorText] = useState("");
   const [modalIsOpen, setIsOpen] = useState(false);
   const [areIdentical, setAreIdentical] = useState(true);
   const [password, setPassword] = useState("");
@@ -111,8 +112,7 @@ const ModalComponent = () => {
       .replace("/", "")
       .replace("-", "");
     const formattedCEP = data.cep.replace("-", "");
-    setDataForAPI({
-      ...dataForAPI,
+    const formData = {
       email: data.email,
       password: data.password,
       brand: data.nameFantasy,
@@ -125,21 +125,14 @@ const ModalComponent = () => {
         city: data.city,
         state: data.state,
       },
-      business: "data.branch",
+      business: data.branch ? data.branch : "Coletor",
       ifCollector: ifCollectorMock,
       businessSize: data.port,
       website: data.site,
-      imageUrl: data.url,
-    });
-    finalsData();
-    dispatch(registerForm(dataForAPI));
+      imageUrl: data.image,
+    };
+    dispatch(registerForm(formData));
   };
-
-  const finalsData = () => {
-    console.log(dataForAPI);
-  };
-
-  console.log(dataForAPI);
 
   let subtitle;
 
@@ -440,18 +433,18 @@ const ModalComponent = () => {
           <input
             type="password"
             name="password"
-            ref={register({ required: true, maxLength: 10 })}
+            ref={register({ required: true, minLength: 4 })}
             onBlur={(e) => {
               setPassword(e.target.value);
             }}
           />
-          {errors.password && <p>Digite sua senha</p>}
+          {errors.password && <p>Digite sua senha com mais de 4 caracteres</p>}
 
           <label>Confirmação de Senha*</label>
           <input
             type="password"
             name="confirmPassword"
-            ref={register({ required: true, maxLength: 10 })}
+            ref={register({ required: true, minLength: 4 })}
             onChange={(e) => {
               setConfirmPassword(e.target.value);
             }}
@@ -467,7 +460,7 @@ const ModalComponent = () => {
           {errors.confirmPassword && <p>Digite a confirmação da senha</p>}
 
           <input type="submit" value="Registrar" />
-
+          {errorText && <p>{errorText}</p>}
           <div id="close" onClick={closeModal}>
             fechar
           </div>
