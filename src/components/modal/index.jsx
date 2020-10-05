@@ -44,8 +44,6 @@ const ModalComponent = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [areIdentical, setAreIdentical] = useState(true);
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [isEmailValid, setIsEmailValid] = useState(true);
   const [cepError, setCepError] = useState(false);
   const [cep, setCEP] = useState("");
   const [cnpj, setCNPJ] = useState("");
@@ -103,7 +101,6 @@ const ModalComponent = () => {
   };
 
   const afterOpenModal = () => {
-    // references are now sync'd and can be accessed.
     subtitle.style.color = "#000";
     subtitle.style.textAlign = "center";
     subtitle.style.marginTop = "14px";
@@ -115,12 +112,6 @@ const ModalComponent = () => {
 
   const companyOrCollector = (e) => {
     setTypeUser(e.target.value);
-  };
-
-  const checkEmail = (email) => {
-    // eslint-disable-next-line
-    let pattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    setIsEmailValid(pattern.test(email));
   };
 
   const cnpjMask = (value) => {
@@ -192,14 +183,19 @@ const ModalComponent = () => {
 
           <label>Email*:</label>
           <input
-            onBlur={(e) => {
-              checkEmail(e.target.value);
-            }}
             name="email"
-            ref={register({ required: true })}
+            ref={register({
+              required: true,
+              // eslint-disable-next-line
+              pattern: {
+                value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                message: "Digite um email Válido",
+              },
+            })}
           />
-          {isEmailValid === false && <p>Digite um email Válido</p>}
-          {errors.email && <p>Digite o email da Empresa</p>}
+          {errors.email && errors.email.message && (
+            <p>{errors.email && errors.email.message}</p>
+          )}
 
           <label>CNPJ*:</label>
           <input
@@ -380,14 +376,14 @@ const ModalComponent = () => {
           <input
             name="site"
             placeholder="Ex.: https://www.empresa.com.br"
-            ref={register({ required: false })}
+            ref={register}
           />
 
           <label>Imagem da Empresa (URL):</label>
           <input
             name="image"
             placeholder="Ex.: https://imagem.net.com/imagemdaempresa"
-            ref={register({ required: false })}
+            ref={register}
           />
 
           <label>Senha*</label>
@@ -406,11 +402,8 @@ const ModalComponent = () => {
             type="password"
             name="confirmPassword"
             ref={register({ required: true, minLength: 4 })}
-            onChange={(e) => {
-              setConfirmPassword(e.target.value);
-            }}
-            onBlur={(e) => {
-              if (password !== confirmPassword) {
+            onBlur={({ target: { value } }) => {
+              if (password !== value) {
                 setAreIdentical(false);
               } else {
                 setAreIdentical(true);
