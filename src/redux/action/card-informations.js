@@ -1,0 +1,1 @@
+export const ADD_INFORMATIONS = "ADD_INFORMATIONS";
