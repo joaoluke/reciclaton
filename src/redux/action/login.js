@@ -19,7 +19,7 @@ export const loginAction = (
     .catch(({ response }) => setErrorText(response && response.data));
 };
 
-const userToken = ({ accessToken }, remember) => ({
+export const userToken = ({ accessToken }, remember) => ({
   type: LOGIN,
   data: { accessToken, remember },
 });

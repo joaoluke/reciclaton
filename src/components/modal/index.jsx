@@ -89,36 +89,33 @@ const Modal = () => {
   const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = (data) => {
-    // setDataForAPI((dataForAPI.ifCollector = ifCollectorMock));
+    console.log(data);
     const formattedCNPJ = data.cnpj
       .replace(".", "")
       .replace(".", "")
       .replace("/", "")
       .replace("-", "");
     const formattedCEP = data.cep.replace("-", "");
-    setDataForAPI({
-      ...dataForAPI,
-      dataForAPI: { email: data.email },
-      dataForAPI: { password: data.password },
-      dataForAPI: { brand: data.nameFantasy },
-      dataForAPI: { cnpj: formattedCNPJ },
-      dataForAPI: {
-        adress: {
-          street: data.street,
-          number: data.number,
-          neighborhood: data.district,
-          zip: formattedCEP,
-          city: data.city,
-          state: data.state,
-        },
+    const formData = {
+      email: data.email,
+      password: data.password,
+      brand: data.nameFantasy,
+      cnpj: formattedCNPJ,
+      adress: {
+        street: data.street,
+        number: data.number,
+        neighborhood: data.district,
+        zip: formattedCEP,
+        city: data.city,
+        state: data.state,
       },
-      dataForAPI: { business: data.branch },
-      dataForAPI: { ifCollector: ifCollectorMock },
-      dataForAPI: { businessSize: data.port },
-      dataForAPI: { website: data.site },
-      dataForAPI: { imageUrl: data.url },
-    });
-    dispatch(registerForm(dataForAPI))
+      business: data.branch ? data.branch : "Coletor",
+      ifCollector: ifCollectorMock,
+      businessSize: data.port,
+      website: data.site,
+      imageUrl: data.image,
+    };
+    dispatch(registerForm(formData));
   };
   const companyOrCollector = (e) => {
     setTypeUser(e.target.value);
