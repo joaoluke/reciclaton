@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { loginAction } from "../../redux/action/login";
-import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import React from "react";
+import { loginAction, reqError } from "../../redux/action/login";
+import { Redirect } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import {
   FormContainer,
@@ -13,14 +13,10 @@ import {
 } from "./styled";
 
 const Login = () => {
-  const [errorText, setErrorText] = useState("");
-  const [push, setPush] = useState(false);
-  const history = useHistory();
-  push && history.push("/");
+  const { err, pass } = useSelector((state) => state.login);
   const dispatch = useDispatch();
   const { register, handleSubmit, errors } = useForm();
-  const onSubmit = (values) =>
-    dispatch(loginAction(values, setErrorText, setPush));
+  const onSubmit = (values) => dispatch(loginAction(values));
   return (
     <FormContainer>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
@@ -28,7 +24,7 @@ const Login = () => {
         <StyledInput
           name="email"
           onChange={() => {
-            setErrorText("");
+            dispatch(reqError(""));
           }}
           ref={register({
             required: true,
@@ -42,15 +38,15 @@ const Login = () => {
           name="password"
           type="password"
           onChange={() => {
-            setErrorText("");
+            dispatch(reqError(""));
           }}
           ref={register({ required: true })}
         />
         {errors?.password && <StyledError>Campo Inválido</StyledError>}
-        {errorText && <StyledError>{errorText}</StyledError>}
+        {err && <StyledError>{err}</StyledError>}
         <StyledLabel>Remember-me?</StyledLabel>
         <StyledInput name="rememberme" type="checkbox" ref={register} />
-
+        {pass && <Redirect to={{ pathname: "/" }} />}
         <StyledButton type="submit">Login</StyledButton>
       </StyledForm>
     </FormContainer>
