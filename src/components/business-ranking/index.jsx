@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { BackgroundRank, BusinessCard, StyledButton, StyledTable, Td } from './syled-business'
+import { BackgroundRank, BusinessCard, StyledButton, StyledTable, Td, Tr } from './syled-business'
 import { GiPodiumWinner, GiPodiumSecond, GiPodiumThird } from 'react-icons/gi'
 
 
@@ -27,29 +27,70 @@ const orderByScoreYear = (businessA, businessB) => {
 
     return (
       <div style={{ position: "relative", top: "-800px" }}>
-        <table border="1px" cellpadding="5px" cellspacing="0">
-          <thead>
-            <th>Posição</th>
-            <th>Nome</th>
-            <th>Prêmios</th>
-            <th>Pontuação</th>
-            <th>Website</th>
-          </thead>
-          <tbody></tbody>
-
-          {business.sort(orderByScoreMonth).map((item, index) => (
-            <tr key={index}>
-              <td>{index + 1}ª</td>
-              <td>{item.brand}</td>
-              <td>Sem por enquanto</td>
-              <td>{item.score.mensal}</td>
-              <td><a href={item.website}>{item.website}</a></td>
-            </tr>
-          ))}
-        </table>
-
-        {console.log(business)}
         <BackgroundRank>
+          <div style={{ display: "flex", marginBottom: "5%" }}>
+            <StyledButton onClick={() => setScore(true)}>
+              Ordenar mensal
+            </StyledButton>
+            <StyledButton onClick={() => setScore(false)}>
+              Ordenar anual
+            </StyledButton>
+          </div>
+          <StyledTable border="1px" cellPadding="5px" cellSpacing="0">
+            <thead>
+              <th>Posição</th>
+              <th>Nome</th>
+              <th>Prêmios</th>
+              <th>
+                Pontuação <span>{score ? "Mensal" : "Anual"}</span>
+              </th>
+              <th>Website</th>
+            </thead>
+            <tbody>
+              {score
+                ? business.sort(orderByScoreMonth).map((item, index) => (
+                    <Tr key={index}>
+                      <Td>{index + 1}ª</Td>
+                      <Td style={{display: 'flex', alignContent: 'center', alignItems: 'center', justifyContent: 'space-start'}}>
+                        {
+                          <img
+                            src={item.imageUrl}
+                            style={{ width: "40px", borderRadius: "50px" }}
+                          />
+                        } <>&nbsp;&nbsp;&nbsp;</>
+                        {item.brand}
+                      </Td>
+                      <Td>Sem por enquanto</Td>
+                      <Td>{item.score.mensal}</Td>
+                      <Td>
+                        <a href={item.website}>{item.website}</a>
+                      </Td>
+                    </Tr>
+                  ))
+                : business.sort(orderByScoreYear).map((item, index) => (
+                  <Tr key={index}>
+                  <Td>{index + 1}ª</Td>
+                  <Td style={{display: 'flex', alignContent: 'center', alignItems: 'center', justifyContent: 'space-start'}}>
+                    {
+                      <img
+                        src={item.imageUrl}
+                        style={{ width: "40px", borderRadius: "50px" }}
+                      />
+                    } <>&nbsp;&nbsp;&nbsp;</>
+                    {item.brand}
+                  </Td>
+                  <Td>Sem por enquanto</Td>
+                  <Td>{item.score.anual}</Td>
+                  <Td>
+                    <a href={item.website}>{item.website}</a>
+                  </Td>
+                </Tr>
+                  ))}
+            </tbody>
+          </StyledTable>
+        </BackgroundRank>
+        {console.log(business)}
+        {/* <BackgroundRank>
           <div style={{ display: "flex", marginBottom: "5%" }}>
             <StyledButton onClick={() => setScore(true)}>
               Ordenar mensal
@@ -85,7 +126,7 @@ const orderByScoreYear = (businessA, businessB) => {
                   <a href={item.website}>{item.website}</a>
                 </BusinessCard>
               ))}
-        </BackgroundRank>
+        </BackgroundRank> */}
       </div>
     );
 }

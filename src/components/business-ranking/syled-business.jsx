@@ -49,8 +49,28 @@ export const StyledButton = styled.button`
 
 export const StyledTable = styled.table`
 border: 1px solid #333;
+
+tr:nth-child(1) {
+    background: gold;
+}
+tr:nth-child(2) {
+   background: silver;
+}
+tr:nth-child(3) {
+    background: #cd7f32;
+ }
+
+tr:nth-child(n + 4) {
+    background: whitesmoke;
+ }
 `;
 
 export const Td = styled.td`
 border: 1px solid #333;
+
+`;
+
+export const Tr = styled.tr`
+border: 1px solid #333;
+
 `;
