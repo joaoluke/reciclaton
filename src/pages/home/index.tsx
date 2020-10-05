@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "../../components/header";
+import BaseLayout from "../../components/layout";
 import reciclagem from "./images/vector-illustration-recycling-nature-flat_82574-3408.png";
 import {
   StyledTextBox,
@@ -23,8 +24,7 @@ import instagram from "./images/instagram.png";
 
 const Home = () => {
   return (
-    <>
-      <Header> </Header>
+    <BaseLayout>
       <StyleMain>
         <StyleContainer>
           <StyleImg src={reciclagem} />
@@ -120,7 +120,7 @@ const Home = () => {
           <StyledLogo logo={linkedin}></StyledLogo>
         </StyledSocial>
       </StyleMain>
-    </>
+    </BaseLayout>
   );
 };
 
