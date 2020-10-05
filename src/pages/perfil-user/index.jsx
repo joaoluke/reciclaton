@@ -8,15 +8,20 @@ const Perfil = () => {
 
   const dispatch = useDispatch();
   const { userId } = useParams();
-
-  useEffect(dispatch(getPerfil(userId)),
+  let userData = useSelector((state) => state.user);
+  useEffect(() => dispatch(getPerfil(userId)),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [userId])
 
-  // let userData = useSelector((state) => state)
+  console.log(userData)
+
+
+
+
 
   return (<>
 
-    <h1>user page</h1>
+    <h1>{JSON.stringify(userData)}</h1>
 
   </>
   )

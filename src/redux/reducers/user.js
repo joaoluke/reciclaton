@@ -5,13 +5,14 @@ const defaultState = {
   user: {},
 };
 
-const authentication = (state = defaultState, action) => {
+const userPage = (state = defaultState, action) => {
   switch (action.type) {
     case SET_USER:
-      return ({ ...state, user: action.user })
+      const { user } = action
+      return { ...state, user }
     default:
       return state;
   }
 };
 
-export default authentication;
+export default userPage;
