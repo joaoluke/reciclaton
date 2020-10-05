@@ -63,49 +63,11 @@ const ModalComponent = () => {
     siafi: "",
     erro: false,
   });
-  const [dataForAPI, setDataForAPI] = useState({
-    email: "",
-    password: "",
-    brand: "",
-    cnpj: "",
-    adress: {
-      street: "",
-      number: "",
-      neighborhood: "",
-      zip: "",
-      city: "",
-      state: "",
-    },
-    business: "",
-    ifCollector: {
-      organic: false,
-      plastic: false,
-      glass: false,
-      paper: false,
-      metal: false,
-      battery: false,
-      cloth: false,
-      electronic: false,
-      rubber: false,
-    },
-    businessSize: "",
-    website: "",
-    imageUrl: "",
-    score: {
-      mensal: 0,
-      anual: 0,
-    },
-    os: [],
-    award: {},
-    complaints: [],
-  });
 
   const dispatch = useDispatch();
   const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
-    // setDataForAPI((dataForAPI.ifCollector = ifCollectorMock));
     const formattedCNPJ = data.cnpj
       .replace(".", "")
       .replace(".", "")
@@ -131,7 +93,7 @@ const ModalComponent = () => {
       website: data.site,
       imageUrl: data.image,
     };
-    dispatch(registerForm(formData));
+    dispatch(registerForm(formData, setIsOpen, setErrorText));
   };
 
   let subtitle;
@@ -155,31 +117,33 @@ const ModalComponent = () => {
     setTypeUser(e.target.value);
   };
 
-  const collectionMaterials = (checkedValues) => {
-    // console.log("checked = ", checkedValues);
-    // setDataForAPI(...dataForAPI, )
-  };
-
   const checkEmail = (email) => {
+    // eslint-disable-next-line
     let pattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     setIsEmailValid(pattern.test(email));
   };
 
   const cnpjMask = (value) => {
-    return value
-      .replace(/\D/g, "")
-      .replace(/(\d{2})(\d)/, "$1.$2")
-      .replace(/(\d{3})(\d)/, "$1.$2")
-      .replace(/(\d{3})(\d)/, "$1/$2")
-      .replace(/(\d{4})(\d)/, "$1-$2")
-      .replace(/(-\d{2})\d+?$/, "$1");
+    return (
+      value
+        // eslint-disable-next-line
+        .replace(/\D/g, "")
+        .replace(/(\d{2})(\d)/, "$1.$2")
+        .replace(/(\d{3})(\d)/, "$1.$2")
+        .replace(/(\d{3})(\d)/, "$1/$2")
+        .replace(/(\d{4})(\d)/, "$1-$2")
+        .replace(/(-\d{2})\d+?$/, "$1")
+    );
   };
 
   const cepMask = (value) => {
-    return value
-      .replace(/\D/g, "")
-      .replace(/(\d{5})(\d)/, "$1-$2")
-      .replace(/(-\d{3})\d+?$/, "$1");
+    return (
+      value
+        // eslint-disable-next-line
+        .replace(/\D/g, "")
+        .replace(/(\d{5})(\d)/, "$1-$2")
+        .replace(/(-\d{3})\d+?$/, "$1")
+    );
   };
 
   const collector = (value) => {
@@ -354,10 +318,7 @@ const ModalComponent = () => {
                   Segurando CTRL você seleciona mais de um
                 </h6>
               </label>
-              <Checkbox.Group
-                style={{ width: "100%" }}
-                onChange={collectionMaterials}
-              >
+              <Checkbox.Group style={{ width: "100%" }}>
                 <Row>
                   <Col span={12}>
                     <label>Organicos</label>
@@ -462,7 +423,7 @@ const ModalComponent = () => {
           <input type="submit" value="Registrar" />
           {errorText && <p>{errorText}</p>}
           <div id="close" onClick={closeModal}>
-            fechar
+            Fechar
           </div>
         </form>
       </Modal>
