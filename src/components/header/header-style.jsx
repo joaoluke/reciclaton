@@ -110,6 +110,7 @@ export const StyledMenu = styled(GiHamburgerMenu)`
 export const Menu = styled.div`
   position: fixed;
   right: 0;
+  top:0;
   margin: 30px -30px;
   padding: 10px;
   width: 200px;
