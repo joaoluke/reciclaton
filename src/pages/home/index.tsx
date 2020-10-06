@@ -1,5 +1,4 @@
 import React from "react";
-import Header from "../../components/header";
 import reciclagem from "./images/vector-illustration-recycling-nature-flat_82574-3408.png";
 import {
   StyledTextBox,
@@ -20,11 +19,10 @@ import cleitinho from "./images/cleitinho.png";
 import facebook from "./images/facebook.png";
 import linkedin from "./images/linkedin.png";
 import instagram from "./images/instagram.png";
-
+import BaseLayout from "../../components/layout";
 const Home = () => {
   return (
-    <>
-      <Header/>
+    <BaseLayout>
       <StyleMain>
         <StyleContainer>
           <StyleImg src={reciclagem} />
@@ -120,7 +118,7 @@ const Home = () => {
           <StyledLogo logo={linkedin}></StyledLogo>
         </StyledSocial>
       </StyleMain>
-    </>
+    </BaseLayout>
   );
 };
 
