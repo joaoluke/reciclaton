@@ -1,32 +1,26 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+
 import { StyledButton, ContainerButton } from "./styled";
+import { useDispatch, useSelector } from "react-redux";
+import { requestBusiness } from "../../redux/action/user";
+import { loginAction } from "../../redux/action/login";
+import jwt_decode from "jwt-decode";
 
 const ServiceOrder = () => {
   const [status, setStatus] = useState("");
-  const [data, setData] = useState([]);
+  const business = useSelector((state) => state.user);
+  const token = useSelector((state) => state.authentication);
+  const [decode, setDecode] = useState();
+  const userId = jwt_decode(
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhZmFlbEByYWZhZWwuY29tLmJyIiwiaWF0IjoxNjAxOTI5ODMwLCJleHAiOjE2MDE5MzM0MzAsInN1YiI6Ijg3MiJ9.jp9THO7eBScUktm4Nie-SSBJf-NzpTCg2EWyu7jODWo"
+  );
+  
+  useEffect( () => {
 
-  useEffect(() => {
-    axios
-      .get(`https://reciclatonapi.herokuapp.com/664/users/1`, {
-        headers: {
-          Authorization:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhZmFlbEByYWZhZWwuY29tLmJyIiwiaWF0IjoxNjAxOTI5NTY5LCJleHAiOjE2MDE5MzMxNjksInN1YiI6Ijg3MiJ9.NXsfWJRnccxep1dHzq7vyIjit6J7zsSi2AxYqXbhJYI",
-        },
-      })
-
-      .then((resp) => {
-        setData(resp.data.business);
-        console.log("data: " + data);
-      })
-      .catch((error) => {
-        // erro no request
-        console.log(error);
-      });
-  }, [status]);
-
-  console.log("data: " + data);
-
+  }[status])
+  
+  dispatch(requestUserBooks(userId));
+  console.log(userId.sub);
   return (
     <>
       <ContainerButton>
