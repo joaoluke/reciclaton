@@ -19,9 +19,13 @@ import {
   SubmitButton,
   Login,
 } from "./header-style";
-
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { motion } from "framer-motion";
+
+interface RootState {
+  login: object,
+}
 
 const Header = () => {
   const [menu, setMenu] = React.useState(false);
@@ -32,6 +36,9 @@ const Header = () => {
     e.preventDefault();
     console.log(search);
   };
+
+  const loginState = useSelector((state: RootState) => state.login);
+  console.log(loginState);
 
   const getValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
