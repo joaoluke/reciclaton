@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React from "react";
 import { useSelector } from "react-redux";
 import decode from "jwt-decode";
@@ -19,25 +18,17 @@ import {
   ChangeProfile,
   Services,
   StyledLink,
-} from "./styled-layout";
+} from "../header/header-style";
 import { Redirect } from "react-router-dom";
 
-=======
-import * as React from "react";
-import { Content, Container } from "./layout-style";
-import Header from "../header";
->>>>>>> master
 interface LayoutInterface {
   children: string | React.ReactNode | Array<React.ReactNode>;
 }
 
 const BaseLayout = ({ children }: LayoutInterface) => {
-<<<<<<< HEAD
   const [open, setOpen] = React.useState(false);
   const logged = useSelector((state) => state);
   console.log(logged)
-=======
->>>>>>> master
   return (
     <div>
       <Container>
