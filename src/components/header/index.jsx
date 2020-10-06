@@ -78,7 +78,7 @@ const Header = () => {
           {authen && (
             <StyledLink
               onClick={() => {
-                history.push("/");
+                history.push("/ranking");
                 dispatch(logout());
                 setMenu(false);
               }}
@@ -119,7 +119,7 @@ const Header = () => {
           <StyledLink>
             <Services
               onClick={() => {
-                history.push("/ranking");
+                history.push(`/services/${decodefy && decodefy.sub}`);
                 setMenu(false);
               }}
             />
