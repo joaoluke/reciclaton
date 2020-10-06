@@ -78,7 +78,7 @@ const Header = () => {
           {authen && (
             <StyledLink
               onClick={() => {
-                history.push("/");
+                history.push("/ranking");
                 dispatch(logout());
                 setMenu(false);
               }}
@@ -99,16 +99,16 @@ const Header = () => {
               Perfil
             </StyledLink>
           ) : (
-            <StyledLink
-              onClick={() => {
-                history.push("/login");
-                setMenu(false);
-              }}
-            >
-              <Login />
+              <StyledLink
+                onClick={() => {
+                  history.push("/login");
+                  setMenu(false);
+                }}
+              >
+                <Login />
               Login
-            </StyledLink>
-          )}
+              </StyledLink>
+            )}
 
           {authen && (
             <StyledLink>
