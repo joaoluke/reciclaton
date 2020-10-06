@@ -14,12 +14,9 @@ const ServiceOrder = () => {
   const userId = jwt_decode(
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhZmFlbEByYWZhZWwuY29tLmJyIiwiaWF0IjoxNjAxOTI5ODMwLCJleHAiOjE2MDE5MzM0MzAsInN1YiI6Ijg3MiJ9.jp9THO7eBScUktm4Nie-SSBJf-NzpTCg2EWyu7jODWo"
   );
-  
-  useEffect( () => {
 
-  }[status])
-  
-  dispatch(requestUserBooks(userId));
+  useEffect(() => {}, [status]);
+  const dispatch = useDispatch();
   console.log(userId.sub);
   return (
     <>
