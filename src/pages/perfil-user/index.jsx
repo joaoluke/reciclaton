@@ -20,9 +20,9 @@ const Perfil = () => {
   console.log(parseInt(userId) !== user.id)
 
   return (<>
-    {parseInt(userId) === user.id && <Loading />}
-    {decoded.sub === userId && parseInt(userId) !== user.id && <h1>usuario no path logado aqui</h1>}
-    {decoded.sub !== userId && parseInt(userId) !== user.id && <h1>usuario no path não está logado aqui</h1>}
+    {parseInt(userId) !== user.id && <Loading />}
+    {decoded.sub === userId && parseInt(userId) === user.id && <h1>usuario no path logado aqui</h1>}
+    {decoded.sub !== userId && parseInt(userId) === user.id && <h1>usuario no path não está logado aqui</h1>}
 
   </>
   )
