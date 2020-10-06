@@ -86,8 +86,8 @@ export const StyleSelo = styled.div`
   overflow: auto;
   border-radius: 70px;
   padding: 0 45px 0;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
   ::-webkit-scrollbar {
     display: none;
   }
