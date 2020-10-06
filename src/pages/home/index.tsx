@@ -24,7 +24,7 @@ import instagram from "./images/instagram.png";
 const Home = () => {
   return (
     <>
-      <Header> </Header>
+      <Header/>
       <StyleMain>
         <StyleContainer>
           <StyleImg src={reciclagem} />
