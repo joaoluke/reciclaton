@@ -107,7 +107,7 @@ export const StyledMenu = styled(GiHamburgerMenu)`
   padding: 15px 15px;
 `;
 
-export const RollBar = styled.div`
+export const Menu = styled.div`
   position: fixed;
   right: 0;
   margin: 30px -30px;
@@ -116,10 +116,20 @@ export const RollBar = styled.div`
   z-index: 1;
   background-color: #a4e58b;
   border-radius: 5px;
+  @keyframes slide-left {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-8px);
+    }
+  }
   @media screen and (max-width: 540px) {
     margin: 36px auto;
     width: 150px;
   }
+  animation-name: slide-left;
+  animation-duration: 2s;
 `;
 export const User = styled(AiOutlineUser)`
   margin-right: 10px;
@@ -141,7 +151,7 @@ export const Services = styled(FaRegBell)`
 `;
 
 export const StyledLink = styled.div`
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   :hover {
     cursor: pointer;
   }
@@ -152,7 +162,7 @@ export const StyledLink = styled.div`
 
 export const Profile = styled(CgProfile)`
   font-size: 25px;
-  margin-top: 5px;
+  margin-top: 15px;
   margin-bottom: 5px;
   @media screen and (max-width: 540px) {
     font-size: 0px;

@@ -7,7 +7,7 @@ import {
   HeaderBar,
   SearchInput,
   StyledMenu,
-  RollBar,
+  Menu,
   Logout,
   User,
   ChangeProfile,
@@ -66,7 +66,7 @@ const Header = () => {
         </HeaderBar>
       </StyledHeader>
       {menu && (
-        <RollBar>
+        <Menu>
           {login && (
             <StyledLink
               onClick={() => {
@@ -106,7 +106,7 @@ const Header = () => {
             <Services onClick={() => history.push("/ranking")} />
             Chamados
           </StyledLink>
-        </RollBar>
+        </Menu>
       )}
     </>
   );
