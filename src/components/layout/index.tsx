@@ -1,4 +1,6 @@
-import * as React from "react";
+import React from "react";
+import { useSelector } from "react-redux";
+import decode from "jwt-decode";
 import {
   SearchIcon,
   SearchContainer,
@@ -17,7 +19,6 @@ import {
   Services,
   StyledLink,
 } from "./styled-layout";
-
 import { Redirect } from "react-router-dom";
 
 interface LayoutInterface {
@@ -26,6 +27,8 @@ interface LayoutInterface {
 
 const BaseLayout = ({ children }: LayoutInterface) => {
   const [open, setOpen] = React.useState(false);
+  const logged = useSelector((state) => state);
+  console.log(logged)
   return (
     <div>
       <Container>
