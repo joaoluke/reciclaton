@@ -6,7 +6,6 @@ import {
   AiOutlineUser,
 } from "react-icons/ai";
 import LogoResponsivo from "./img/LogoResponsivo.png";
-import { motion } from "framer-motion";
 import { CgLogOut, CgProfile, CgLogIn } from "react-icons/cg";
 import { RiUserSettingsLine } from "react-icons/ri";
 import { FaRegBell } from "react-icons/fa";
@@ -16,6 +15,7 @@ export const StyledHeader = styled.div`
   z-index: 1;
   width: 100%;
   height: auto;
+  padding: 0;
   position: fixed;
   top: 0;
   text-align: center;
@@ -31,7 +31,7 @@ export const HeaderBar = styled.div`
   align-items: center;
   justify-content: space-between;
   &:nth-child(n) {
-    max-height: 46px;
+    height: 46px;
   }
   @media screen and (max-width: 540px) {
     text-align: center;
@@ -41,7 +41,7 @@ export const HeaderBar = styled.div`
 export const Content = styled.div`
   margin-top: 46px;
   max-width: 100vw;
-  min-height: 100vh;
+  min-height: calc(100vh - 46px);
   overflow-x: hidden;
 `;
 
@@ -68,8 +68,12 @@ export const SearchInput = styled.input`
   justify-self: center;
   margin-bottom: 3px;
   border: none;
+  font-size: 18px;
+  height: 25px;
+  margin-left: 20px;
+  width: 250px;
   @media screen and (max-width: 540px) {
-    width: 100px;
+    width: 120px;
     height: 25%;
     font-size: 12px;
   }
@@ -77,9 +81,10 @@ export const SearchInput = styled.input`
 
 export const SearchIcon = styled(BsSearch)`
   color: #000;
-  font-size: 12px;
+  font-size: 18px;
   @media screen and (max-width: 540px) {
     padding: 0 10px;
+    font-size: 10px;
   }
   padding: 0 20px;
   :hover {
@@ -102,51 +107,55 @@ export const StyledMenu = styled(GiHamburgerMenu)`
   padding: 15px 15px;
 `;
 
-export const RollBar = styled(motion.div)`
+export const RollBar = styled.div`
   position: fixed;
   right: 0;
   margin: 30px -30px;
+  padding: 10px;
   width: 200px;
-  height: 200px;
   z-index: 1;
   background-color: #a4e58b;
   border-radius: 5px;
   @media screen and (max-width: 540px) {
-    margin: 36px -30px;
+    margin: 36px auto;
     width: 150px;
   }
 `;
 export const User = styled(AiOutlineUser)`
-  margin: 0 10px;
+  margin-right: 10px;
 `;
 
 export const Login = styled(CgLogIn)`
-  margin: 0 10px;
+  margin-right: 10px;
 `;
 export const Logout = styled(CgLogOut)`
-  margin: 0 10px;
+  margin-right: 10px;
 `;
 
 export const ChangeProfile = styled(RiUserSettingsLine)`
-  margin: 0 10px;
+  margin-right: 10px;
 `;
 
 export const Services = styled(FaRegBell)`
-  margin: 0 10px;
+  margin-right: 10px;
 `;
 
 export const StyledLink = styled.div`
-  margin: 10px 0 0 10px;
+  margin-bottom: 5px;
   :hover {
     cursor: pointer;
+  }
+  @media screen and (max-width: 540px) {
+    padding: 0;
   }
 `;
 
 export const Profile = styled(CgProfile)`
-  font-size: 20px;
+  font-size: 25px;
+  margin-top: 5px;
   margin-bottom: 5px;
   @media screen and (max-width: 540px) {
-    font-size: 16px;
+    font-size: 0px;
     visibility: hidden;
   }
 `;
