@@ -91,25 +91,25 @@ const Header = () => {
 
           {authen ? (
             <>
-            <StyledLink
-              onClick={() => {
-                history.push(`/profile/${decodefy && decodefy.sub}`);
-                setMenu(false);
-              }}
-            >
-              <User />
-              Perfil
-            </StyledLink>
-            <StyledLink
-            onClick={() => {
-              history.push(`/services/${decodefy && decodefy.sub}`);
-              setMenu(false);
-            }}
-          >
-            <Services />
-            Chamados
-          </StyledLink>
-          </>
+              <StyledLink
+                onClick={() => {
+                  history.push(`/profile/${decodefy && decodefy.sub}`);
+                  setMenu(false);
+                }}
+              >
+                <User />
+                Perfil
+              </StyledLink>
+              <StyledLink
+                onClick={() => {
+                  history.push(`/services/${decodefy && decodefy.sub}`);
+                  setMenu(false);
+                }}
+              >
+                <Services />
+                Chamados
+              </StyledLink>
+            </>
           ) : (
             <StyledLink
               onClick={() => {
