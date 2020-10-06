@@ -1,8 +1,11 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import decode from "jwt-decode";
-import { getPerfil } from "../../redux/action/user";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import decode from 'jwt-decode';
+import { getPerfil } from '../../redux/action/user';
+import Loading from '../../components/loading';
+
+
 
 const Perfil = () => {
   const dispatch = useDispatch();
@@ -13,16 +16,16 @@ const Perfil = () => {
   useEffect(
     () => dispatch(getPerfil(userId)),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [userId]
-  );
+    [userId])
+  console.log(parseInt(userId) !== user.id)
 
-  console.log(decoded.sub === userId);
-  return (
-    <>
-      {decoded.sub === userId && <h1>usuario no path logado aqui</h1>}
-      {decoded.sub !== userId && <h1>usuario no path não está logado aqui</h1>}
-    </>
-  );
-};
+  return (<>
+    {parseInt(userId) !== user.id && <Loading />}
+    {decoded.sub === userId && parseInt(userId) === user.id && <h1>usuario no path logado aqui</h1>}
+    {decoded.sub !== userId && parseInt(userId) === user.id && <h1>usuario no path não está logado aqui</h1>}
+
+  </>
+  )
+}
 
 export default Perfil;
