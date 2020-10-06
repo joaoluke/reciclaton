@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from "react";
 import { useSelector } from "react-redux";
 import decode from "jwt-decode";
@@ -21,55 +22,26 @@ import {
 } from "./styled-layout";
 import { Redirect } from "react-router-dom";
 
+=======
+import * as React from "react";
+import { Content, Container } from "./layout-style";
+import Header from "../header";
+>>>>>>> master
 interface LayoutInterface {
   children: string | React.ReactNode | Array<React.ReactNode>;
 }
 
 const BaseLayout = ({ children }: LayoutInterface) => {
+<<<<<<< HEAD
   const [open, setOpen] = React.useState(false);
   const logged = useSelector((state) => state);
   console.log(logged)
+=======
+>>>>>>> master
   return (
     <div>
       <Container>
-        <Header>
-          <HeaderBar>
-            <Logo />
-            <SearchContainer>
-              <SearchInput />
-              <SearchIcon />
-            </SearchContainer>
-            <div>
-              {open ? (
-                <Down onClick={() => setOpen(false)} />
-              ) : (
-                <Right onClick={() => setOpen(true)} />
-              )}
-            </div>
-          </HeaderBar>
-        </Header>
-        {open && (
-          <RollBar animate={{ x: -28 }}>
-            <StyledLink onClick={() => <Redirect to="/" />}>
-              <Logout />
-              Deslogar
-            </StyledLink>
-
-            <StyledLink onClick={() => <Redirect to="/profile" />}>
-              <User />
-              Perfil
-            </StyledLink>
-
-            <StyledLink>
-              <ChangeProfile />
-              Mudar Informações
-            </StyledLink>
-            <StyledLink>
-              <Services />
-              Chamados
-            </StyledLink>
-          </RollBar>
-        )}
+        <Header />
         <Content>{children}</Content>
       </Container>
     </div>
