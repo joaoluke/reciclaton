@@ -1,6 +1,6 @@
 import { LOGIN, PASS, ERROR } from "../action/login";
 
-const token = localStorage.getItem("acessToken");
+const token = localStorage.getItem("accessToken");
 
 const defaultState = {
   authen: token ? token : "",
