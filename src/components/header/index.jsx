@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import decode from "jwt-decode";
 import {
   SearchIcon,
@@ -14,17 +14,16 @@ import {
   ChangeProfile,
   Services,
   StyledLink,
-  Profile,
   SubmitButton,
   Login,
 } from "./header-style";
-import { useSelector } from "react-redux";
+import { logout } from "../../redux/action/login";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 const Header = () => {
-  const [menu, setMenu] = React.useState(false);
-  const [search, setSearch] = React.useState("");
-  const [login, setLogin] = React.useState(false);
+  const [menu, setMenu] = useState(false);
+  const [search, setSearch] = useState("");
   const FormValue = (e) => {
     e.preventDefault();
     console.log(search);
@@ -33,16 +32,27 @@ const Header = () => {
   const getValue = (e) => {
     setSearch(e.target.value);
   };
+
+  const dispatch = useDispatch();
   const history = useHistory();
 
   const { authen } = useSelector((state) => state.login);
   const decodefy = authen && decode(authen);
 
+  useEffect(() => {
+    console.log(authen);
+  }, [authen]);
+
   return (
     <>
       <StyledHeader>
         <HeaderBar>
-          <Logo onClick={() => history.push("/ranking")} />
+          <Logo
+            onClick={() => {
+              history.push("/ranking");
+              setMenu(false);
+            }}
+          />
 
           <SearchContainer>
             <form onSubmit={(e) => FormValue(e)}>
@@ -58,16 +68,6 @@ const Header = () => {
             </form>
           </SearchContainer>
 
-          {login && (
-            <StyledLink
-              onClick={() =>
-                history.push(`/profile/${decodefy && decodefy.sub}`)
-              }
-            >
-              <Profile />
-            </StyledLink>
-          )}
-
           <div>
             <StyledMenu onClick={() => setMenu(!menu)} />
           </div>
@@ -75,11 +75,12 @@ const Header = () => {
       </StyledHeader>
       {menu && (
         <Menu>
-          {login && (
+          {authen && (
             <StyledLink
               onClick={() => {
                 history.push("/");
-                setLogin(false);
+                dispatch(logout());
+                setMenu(false);
               }}
             >
               <Logout />
@@ -87,8 +88,13 @@ const Header = () => {
             </StyledLink>
           )}
 
-          {login ? (
-            <StyledLink onClick={() => history.push("/profile")}>
+          {authen ? (
+            <StyledLink
+              onClick={() => {
+                history.push(`/profile/${decodefy && decodefy.sub}`);
+                setMenu(false);
+              }}
+            >
               <User />
               Perfil
             </StyledLink>
@@ -96,7 +102,7 @@ const Header = () => {
             <StyledLink
               onClick={() => {
                 history.push("/login");
-                setLogin(true);
+                setMenu(false);
               }}
             >
               <Login />
@@ -104,14 +110,19 @@ const Header = () => {
             </StyledLink>
           )}
 
-          {login && (
+          {authen && (
             <StyledLink>
               <ChangeProfile />
               Mudar Informações
             </StyledLink>
           )}
           <StyledLink>
-            <Services onClick={() => history.push("/ranking")} />
+            <Services
+              onClick={() => {
+                history.push("/ranking");
+                setMenu(false);
+              }}
+            />
             Chamados
           </StyledLink>
         </Menu>
