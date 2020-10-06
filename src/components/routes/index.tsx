@@ -7,17 +7,19 @@ const Routes = () => {
   return (
     <>
       <Switch>
-        <Route path="/login">
+        <Route exact path="/login">
           <Login />
         </Route>
-        <Route path="/ranking">*PAGINA DE RANKING*</Route>
+        <Route exact path="/ranking">
+          *PAGINA DE RANKING*
+        </Route>
         <Route exact path="/profile/:userId">
           <User />
         </Route>
         <Route exact path="/services/:userId">
           *PAGINA DE SERVICO*
         </Route>
-        <Route path="/">
+        <Route exact path="/">
           <Home />
         </Route>
       </Switch>

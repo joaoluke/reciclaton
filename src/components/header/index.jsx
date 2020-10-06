@@ -13,6 +13,7 @@ import {
   User,
   ChangeProfile,
   Services,
+  Ranking,
   StyledLink,
   SubmitButton,
   Login,
@@ -89,6 +90,7 @@ const Header = () => {
           )}
 
           {authen ? (
+            <>
             <StyledLink
               onClick={() => {
                 history.push(`/profile/${decodefy && decodefy.sub}`);
@@ -98,17 +100,27 @@ const Header = () => {
               <User />
               Perfil
             </StyledLink>
+            <StyledLink
+            onClick={() => {
+              history.push(`/services/${decodefy && decodefy.sub}`);
+              setMenu(false);
+            }}
+          >
+            <Services />
+            Chamados
+          </StyledLink>
+          </>
           ) : (
-              <StyledLink
-                onClick={() => {
-                  history.push("/login");
-                  setMenu(false);
-                }}
-              >
-                <Login />
+            <StyledLink
+              onClick={() => {
+                history.push("/login");
+                setMenu(false);
+              }}
+            >
+              <Login />
               Login
-              </StyledLink>
-            )}
+            </StyledLink>
+          )}
 
           {authen && (
             <StyledLink>
@@ -116,14 +128,14 @@ const Header = () => {
               Mudar Informações
             </StyledLink>
           )}
-          <StyledLink>
-            <Services
-              onClick={() => {
-                history.push(`/services/${decodefy && decodefy.sub}`);
-                setMenu(false);
-              }}
-            />
-            Chamados
+          <StyledLink
+            onClick={() => {
+              history.push(`/ranking`);
+              setMenu(false);
+            }}
+          >
+            <Ranking />
+            Ranking
           </StyledLink>
         </Menu>
       )}
