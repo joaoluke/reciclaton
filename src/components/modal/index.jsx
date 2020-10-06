@@ -316,39 +316,39 @@ const ModalComponent = () => {
               </label>
               <Checkbox.Group style={{ width: "100%" }}>
                 <Row>
-                  <Col span={12}>
+                  <Col style={{display: "flex", alignItems: "center"}} span={12}>
                     <label>Organicos</label>
                     <input name="organic" type="checkbox" ref={collector} />
                   </Col>
-                  <Col span={12}>
+                  <Col style={{display: "flex", alignItems: "center"}} span={12}>
                     <label>Plasticos</label>
                     <input name="plastic" type="checkbox" ref={collector} />
                   </Col>
-                  <Col span={12}>
+                  <Col style={{display: "flex", alignItems: "center"}} span={12}>
                     <label>Vidro</label>
                     <input name="glass" type="checkbox" ref={collector} />
                   </Col>
-                  <Col span={12}>
+                  <Col style={{display: "flex", alignItems: "center"}} span={12}>
                     <label>Papel</label>
                     <input name="paper" type="checkbox" ref={collector} />
                   </Col>
-                  <Col span={12}>
+                  <Col style={{display: "flex", alignItems: "center"}} span={12}>
                     <label>Metal</label>
                     <input name="metal" type="checkbox" ref={collector} />
                   </Col>
-                  <Col span={12}>
+                  <Col style={{display: "flex", alignItems: "center"}} span={12}>
                     <label>Bateria</label>
                     <input name="battery" type="checkbox" ref={collector} />
                   </Col>
-                  <Col span={12}>
+                  <Col style={{display: "flex", alignItems: "center"}} span={12}>
                     <label>Pano</label>
                     <input name="cloth" type="checkbox" ref={collector} />
                   </Col>
-                  <Col span={12}>
+                  <Col style={{display: "flex", alignItems: "center"}} span={12}>
                     <label>Eletronicos</label>
                     <input name="electronic" type="checkbox" ref={collector} />
                   </Col>
-                  <Col span={12}>
+                  <Col style={{display: "flex", alignItems: "center"}} span={12}>
                     <label>Borracha</label>
                     <input name="rubber" type="checkbox" ref={collector} />
                   </Col>

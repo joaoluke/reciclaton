@@ -1,6 +1,6 @@
-import { LOGIN, PASS, ERROR } from "../action/login";
+import { LOGIN, PASS, ERROR, LOGOUT } from "../action/login";
 
-const token = localStorage.getItem("acessToken");
+const token = localStorage.getItem("accessToken");
 
 const defaultState = {
   authen: token ? token : "",
@@ -20,6 +20,9 @@ const authentication = (state = defaultState, action) => {
       return { ...state, pass: action.pass };
     case ERROR:
       return { ...state, err: action.err };
+    case LOGOUT:
+      token && localStorage.removeItem("accessToken");
+      return { ...state, ...defaultState };
     default:
       return state;
   }
