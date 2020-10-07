@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { CgClose } from "react-icons/cg";
-
+import { TiLocation } from "react-icons/ti";
+import { FaTrash, FaCheck } from "react-icons/fa";
 export const StyledButton = styled.button`
   font-family: "Roboto", sans-serif;
   display: block;
@@ -79,3 +80,23 @@ export const CloseCointainer = styled.div`
   display: flex;
   flex-flow: row-reverse;
 `;
+
+export const Location = styled(TiLocation)`
+  font-size: 40px;
+`;
+
+export const Tresh = styled(FaTrash)``;
+
+export const PopUp = styled.div`
+  position: fixed;
+  background-color: #555;
+  color: white;
+  padding: 20px 20px;
+  top: 250px;
+  width: 350px;
+  background-color: #f8faf7;
+  border: solid 1px #000000;
+  border-radius: 10px;
+`;
+
+export const Accept = styled(FaCheck)``;

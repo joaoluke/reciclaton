@@ -41,6 +41,7 @@ const Card = ({ status, title, price, adress, children }) => {
     };
     return [...data, values];
   };
+
   const aberto = "aberto";
 
   return (
@@ -53,7 +54,7 @@ const Card = ({ status, title, price, adress, children }) => {
         <Title>Endereço: {adress}</Title>
         <Title>Materiais: {children}</Title>
       </Content>
-      {content(aberto)}
+      {content("Em andamento")}
     </Container>
   );
 };
