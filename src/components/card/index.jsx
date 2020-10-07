@@ -16,6 +16,7 @@ import {
 const Card = ({ status, title, price, adress, children }) => {
   const [popUp, setPopUp] = useState(false);
   const [rating, setRating] = useState(0);
+
   const inputData = (values, conctractor, contracted, idOs) => {
     const data = {
       contratante_id: conctractor,

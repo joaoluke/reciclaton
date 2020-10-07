@@ -9,7 +9,7 @@ import {
   StarContainer,
 } from "./card.styled";
 export const content = (status, setRating, rating, price) => {
-  const SetRating = () => {
+  const GetRating = () => {
     console.log(rating);
   };
   switch (status) {
@@ -76,7 +76,7 @@ export const content = (status, setRating, rating, price) => {
           </StarContainer>
           <StyledButton
             onClick={() => {
-              SetRating();
+              GetRating();
             }}
           >
             <ButtonTitle>Avaliar</ButtonTitle>
