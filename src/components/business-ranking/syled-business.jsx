@@ -3,30 +3,24 @@ import styled from 'styled-components';
 export const BackgroundRank = styled.div`
   overflow: hidden;
   width: 100%;
-  // background-color: #E1F3CE;
-  // background-color: transparent;
-  // display: none;
-  // border-radius: 20px;
-  // padding: 2rem;
-  // display: flex;
-  // flex-direction: column;
-  // justify-content: center;
-  // align-items: center;
-  // align-content: center;
-  // width: 90%;
+  @media (max-width: 1024px) {
+    overflow: auto;
+}
 `;
 
 export const BusinessCard = styled.div`
   display: flex;
+  overflow: hidden;
   flex-direction: column;
-  border: 1px solid black;
-  margin-bottom: 10px;
-  padding: 1rem;
-  width: 60%;
+//   border: 1px solid black;
+  margin-bottom: 5px;
+//   padding: 1rem;
+  width: 100%;
   height: auto;
   justify-content: center;
   align-items:center;
   border-radius: 20px;
+  margin-top: 50px;
      h4::first-letter {
          text-transform: uppercase;
      }
@@ -43,10 +37,11 @@ export const StyledTable = styled.table`
 border: 0px solid #333;
 display: hidden;
 tr:nth-child(2n + 1) {
-    background: #e1e1e1;
+    // background: #e1e1e1;
+    background: #92D143;
  }
  tr:nth-child(2n) {
-     background: whitesmoke;
+     background: #F3E8E2;
  }
 `;
 
@@ -76,4 +71,42 @@ export const Option = styled.option`
 :active {
     color: green;
 }
+`;
+
+export const SpotlightDiv = styled.div`
+display: flex;
+flex-direction: row;
+background-color: whitesmoke;
+width: 100%;
+justify-content: space-evenly;
+@media (max-width: 600px) {
+    flex-direction:  column;
+}
+`;
+
+export const SpotlightChildDiv = styled.div`
+display: flex;
+margin: 0 15px;
+flex-direction: column;
+justify-content: space-between;
+align-items: center;
+align-content: center;
+padding: 5%;
+:hover {
+    cursor: pointer;
+    border: 1px solid gray;
+    width: 150%;
+}
+span::first-letter{
+    text-transform: uppercase;
+}
+
+@media (max-width: 600px) {
+    :hover {
+        cursor: pointer;
+        border: none;
+        width: 100%;
+    }
+}
+
 `;
