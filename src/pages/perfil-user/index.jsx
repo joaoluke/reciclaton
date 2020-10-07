@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import decode from "jwt-decode";
 import { getPerfil } from "../../redux/action/user";
 import Loading from "../../components/loading";
+import Perfil from "./perfil";
 
 const Perfil = () => {
   const dispatch = useDispatch();
@@ -22,10 +23,10 @@ const Perfil = () => {
     <>
       {parseInt(userId) !== user.id && <Loading />}
       {decoded.sub === userId && parseInt(userId) === user.id && (
-        <h1>usuario no path logado aqui</h1>
+        <h1>Usuario Logado</h1>
       )}
       {decoded.sub !== userId && parseInt(userId) === user.id && (
-        <h1>usuario no path não está logado aqui</h1>
+        <Perfil id={decoded.sub} />
       )}
     </>
   );
