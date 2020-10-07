@@ -5,7 +5,6 @@ import {
   StyledButton,
   TitlePrice,
   ButtonTitle,
-  PopUp,
 } from "./card.styled";
 const date = new Date();
 const day = date.getDate();
@@ -47,11 +46,6 @@ export const content = (status, price) => {
             -----------------
             <Tresh />
           </TitlePrice>
-          <PopUp>
-            <TitlePrice style={{ textAlign: "left" }}>
-              Tem certeza que gostaria de cancelar o serviço?
-            </TitlePrice>
-          </PopUp>
         </>
       );
 

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { CgClose } from "react-icons/cg";
 import { TiLocation } from "react-icons/ti";
 import { FaTrash, FaCheck } from "react-icons/fa";
+import { MdClose } from "react-icons/md";
 export const StyledButton = styled.button`
   font-family: "Roboto", sans-serif;
   display: block;
@@ -99,4 +100,26 @@ export const PopUp = styled.div`
   border-radius: 10px;
 `;
 
-export const Accept = styled(FaCheck)``;
+export const Accept = styled(FaCheck)`
+  margin-top: 7px;
+  color: green;
+  font-size: 50px;
+  :hover {
+    cursor: pointer;
+  }
+`;
+
+export const Decline = styled(MdClose)`
+  color: red;
+  font-size: 65px;
+  padding-bottom: 10px;
+  :hover {
+    cursor: pointer;
+  }
+`;
+
+export const Choice = styled.div`
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+`;

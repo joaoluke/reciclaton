@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { content } from "./helper";
 import {
   Container,
@@ -7,8 +7,14 @@ import {
   Title,
   CloseCointainer,
   CardTitle,
+  PopUp,
+  Accept,
+  Decline,
+  Choice,
+  TitlePrice,
 } from "./card.styled";
 const Card = ({ status, title, price, adress, children }) => {
+  const [popUp, setPopUp] = useState(false);
   const inputData = (values, conctractor, contracted, idOs) => {
     const data = {
       contratante_id: conctractor,
@@ -47,7 +53,7 @@ const Card = ({ status, title, price, adress, children }) => {
   return (
     <Container>
       <CloseCointainer>
-        <CloseCard />
+        <CloseCard onClick={() => setPopUp(true)} />
       </CloseCointainer>
       <CardTitle>{title ? title : "No Title"}</CardTitle>
       <Content>
@@ -55,6 +61,19 @@ const Card = ({ status, title, price, adress, children }) => {
         <Title>Materiais: {children}</Title>
       </Content>
       {content("Em andamento")}
+      <div>
+        {popUp && (
+          <PopUp>
+            <TitlePrice style={{ textAlign: "left" }}>
+              Tem certeza que gostaria de cancelar o serviço?
+            </TitlePrice>
+            <Choice>
+              <Decline onClick={() => setPopUp(false)} />
+              <Accept onClick={() => setPopUp(false)} />
+            </Choice>
+          </PopUp>
+        )}
+      </div>
     </Container>
   );
 };
