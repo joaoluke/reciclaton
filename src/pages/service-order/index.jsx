@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import { StyledButton, ContainerButton } from "./styled";
 import { useDispatch, useSelector } from "react-redux";
@@ -30,6 +30,7 @@ const ServiceOrder = () => {
         >
           Aberto
         </StyledButton>
+
         <StyledButton
           onClick={() => {
             setStatus("Aceito");
@@ -37,6 +38,7 @@ const ServiceOrder = () => {
         >
           Aceito
         </StyledButton>
+
         <StyledButton
           onClick={() => {
             setStatus("Em Andamento");
@@ -44,9 +46,11 @@ const ServiceOrder = () => {
         >
           Em Andamento
         </StyledButton>
+
         <StyledButton onClick={() => setStatus("Finalizado")}>
           Finalizado
         </StyledButton>
+
         <StyledButton
           onClick={() => {
             setStatus("Cancelado");
@@ -55,7 +59,6 @@ const ServiceOrder = () => {
           Cancelado
         </StyledButton>
       </ContainerButton>
-      {console.log(status)}
     </>
   );
 };

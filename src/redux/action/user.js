@@ -9,7 +9,7 @@ export const setBusiness = (business) => ({
 
 export const requestBusiness = (userId, token) => (dispatch, getState) => {
   axios
-    .get(`https://reciclatonapi.herokuapp.com/664/users/1`, {
+    .get(`https://reciclatonapi.herokuapp.com/664/users/${1}`, {
       headers: {
         Authorization: token,
       },
