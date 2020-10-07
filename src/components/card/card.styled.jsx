@@ -131,6 +131,7 @@ export const Rating = styled.div`
   width: 40px;
   height: 40px;
   background-repeat: no-repeat;
+  margin-right: 20px;
   background-size: cover;
   background-image: url(${star});
   :hover {
@@ -141,5 +142,5 @@ export const Rating = styled.div`
 
 export const StarContainer = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
 `;
