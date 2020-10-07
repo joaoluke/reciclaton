@@ -2,7 +2,7 @@ import { GET_USER } from "../action/user";
 
 const defaultState = [];
 
-const user = (state = defaultState, { type, business }) => {
+const user = (state = defaultState, { business, type }) => {
   switch (type) {
     case GET_USER:
       return [...business];

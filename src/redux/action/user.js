@@ -7,19 +7,21 @@ export const setBusiness = (business) => ({
   business,
 });
 
-export const requestBusiness = (userId, token) => (dispatch) => {
+export const requestBusiness = (userId, token) => (dispatch, getState) => {
   axios
-    .get(`https://reciclatonapi.herokuapp.com/664/users/${userId}`, {
+    .get(`https://reciclatonapi.herokuapp.com/664/users/${1}`, {
       headers: {
         Authorization: token,
       },
     })
 
-    .then(({ data }) => {
-      dispatch(requestBusiness(data));
-      console.log("data action: " + data);
+    .then((data) => {
+      dispatch(setBusiness(data));
+      console.log("DFASDGDGS");
     })
     .catch((error) => {
       console.log(error);
     });
+  //console.log(userId);
+  //console.log(token);
 };

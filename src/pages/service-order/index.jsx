@@ -7,20 +7,20 @@ import { loginAction } from "../../redux/action/login";
 import jwt_decode from "jwt-decode";
 
 const ServiceOrder = () => {
+  const dispatch = useDispatch();
   const [status, setStatus] = useState("");
   const business = useSelector((state) => state.user);
   const token = useSelector((state) => state.authentication);
-  const [decode, setDecode] = useState();
-  const userId = jwt_decode(
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhZmFlbEByYWZhZWwuY29tLmJyIiwiaWF0IjoxNjAxOTI5ODMwLCJleHAiOjE2MDE5MzM0MzAsInN1YiI6Ijg3MiJ9.jp9THO7eBScUktm4Nie-SSBJf-NzpTCg2EWyu7jODWo"
-  );
-  
-  useEffect( () => {
 
-  }[status])
-  
-  dispatch(requestUserBooks(userId));
-  console.log(userId.sub);
+  const token2 =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhZmFlbEByYWZhZWwuY29tLmJyIiwiaWF0IjoxNjAyMDEyNTYxLCJleHAiOjE2MDIwMTYxNjEsInN1YiI6Ijg3MiJ9.pw7tTXgG399eIKOxwsg52KCEfbFLZnYHQpTt5AIU_g0";
+  const userId = jwt_decode(token2);
+
+  useEffect(() => {}, [status]);
+  dispatch(requestBusiness(userId.sub, token2));
+  //console.log(userId.sub);
+  //console.log(business);
+
   return (
     <>
       <ContainerButton>
