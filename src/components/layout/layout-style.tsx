@@ -13,6 +13,6 @@ export const Container = styled.div`
 export const Content = styled.div`
   margin-top: 46px;
   max-width: 100vw;
-  min-height: 100vh;
+  min-height: calc(100vh - 46px);
   overflow-x: hidden;
 `;

@@ -3,10 +3,9 @@ import axios from "axios";
 export const LOGIN = "LOGIN";
 export const ERROR = "ERROR";
 export const PASS = "PASS";
+export const LOGOUT = "LOGOUT";
 
-export const loginAction = (
-  { email, password, rememberme },
-) => (dispatch) => {
+export const loginAction = ({ email, password, rememberme }) => (dispatch) => {
   axios
     .post("https://reciclatonapi.herokuapp.com/login", {
       email: email,
@@ -14,7 +13,7 @@ export const loginAction = (
     })
     .then(({ data }) => {
       dispatch(userToken(data, rememberme));
-      dispatch(reqPass(true))
+      dispatch(reqPass(true));
     })
     .catch(({ response }) => dispatch(reqError(response && response.data)));
 };
@@ -32,4 +31,8 @@ const reqPass = (pass) => ({
 export const reqError = (err) => ({
   type: ERROR,
   err: err,
+});
+
+export const logout = () => ({
+  type: LOGOUT,
 });

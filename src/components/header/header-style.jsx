@@ -7,7 +7,7 @@ import {
 } from "react-icons/ai";
 import LogoResponsivo from "./img/LogoResponsivo.png";
 import { CgLogOut, CgProfile, CgLogIn } from "react-icons/cg";
-import { RiUserSettingsLine } from "react-icons/ri";
+import { RiUserSettingsLine, RiVipCrownLine } from "react-icons/ri";
 import { FaRegBell } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 
@@ -110,6 +110,7 @@ export const StyledMenu = styled(GiHamburgerMenu)`
 export const Menu = styled.div`
   position: fixed;
   right: 0;
+  top: 0;
   margin: 30px -30px;
   padding: 10px;
   width: 200px;
@@ -143,6 +144,10 @@ export const Logout = styled(CgLogOut)`
 `;
 
 export const ChangeProfile = styled(RiUserSettingsLine)`
+  margin-right: 10px;
+`;
+
+export const Ranking = styled(RiVipCrownLine)`
   margin-right: 10px;
 `;
 
