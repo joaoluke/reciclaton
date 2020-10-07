@@ -5,7 +5,7 @@ const defaultState = [];
 const user = (state = defaultState, { business, type }) => {
   switch (type) {
     case GET_USER:
-      return [...business];
+      return business;
     default:
       return state;
   }

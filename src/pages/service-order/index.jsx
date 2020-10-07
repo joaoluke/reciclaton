@@ -13,16 +13,15 @@ const ServiceOrder = () => {
   const token = useSelector((state) => state.authentication);
 
   const token2 =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhZmFlbEByYWZhZWwuY29tLmJyIiwiaWF0IjoxNjAyMDEyNTYxLCJleHAiOjE2MDIwMTYxNjEsInN1YiI6Ijg3MiJ9.pw7tTXgG399eIKOxwsg52KCEfbFLZnYHQpTt5AIU_g0";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhZmFlbEByYWZhZWwuY29tLmJyIiwiaWF0IjoxNjAyMDgwNTQzLCJleHAiOjE2MDIwODQxNDMsInN1YiI6Ijg3MiJ9.SMahaSunJhvSrCF8_gvs18Dh_8BCGUQdKZp-MsoCC7c";
   const userId = jwt_decode(token2);
 
-  useEffect(() => {}, [status]);
   dispatch(requestBusiness(userId.sub, token2));
   //console.log(userId.sub);
-  //console.log(business);
 
   return (
     <>
+      {business.email}
       <ContainerButton>
         <StyledButton
           onClick={() => {

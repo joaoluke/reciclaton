@@ -9,15 +9,15 @@ export const setBusiness = (business) => ({
 
 export const requestBusiness = (userId, token) => (dispatch, getState) => {
   axios
-    .get(`https://reciclatonapi.herokuapp.com/664/users/${1}`, {
+    .get(`https://reciclatonapi.herokuapp.com/664/users/1`, {
       headers: {
         Authorization: token,
       },
     })
 
-    .then((data) => {
+    .then(({ data }) => {
+      // console.log(data);
       dispatch(setBusiness(data));
-      console.log("DFASDGDGS");
     })
     .catch((error) => {
       console.log(error);
