@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const BackgroundRank = styled.div`
-  overflow: auto;
+  overflow: hidden;
+  width: 100%;
   // background-color: #E1F3CE;
   // background-color: transparent;
   // display: none;

@@ -1,6 +1,7 @@
 import React from "react";
 import Login from "../../pages/login";
 import { Switch, Route } from "react-router-dom";
+import BusinessRanking from '../business-ranking'
 const Routes = () => {
   return (
     <>
@@ -9,7 +10,8 @@ const Routes = () => {
           <Login />
         </Route>
         <Route path="/ranking">
-          *PAGINA DE RANKING*
+          {/* *PAGINA DE RANKING* */}
+            <BusinessRanking/>
         </Route>
         <Route path="/profile">
           *PAGINA DE PROFILE*
