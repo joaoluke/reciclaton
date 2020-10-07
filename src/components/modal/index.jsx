@@ -4,12 +4,18 @@ import { useDispatch } from "react-redux";
 import Modal from "react-modal";
 import { registerForm } from "../../redux/action/register";
 import "antd/dist/antd.css";
-import { Checkbox, Row, Col } from "antd";
+import { Checkbox, Row } from "antd";
 import axios from "axios";
 import {
   ComponentNewAccount,
   ComponentModal,
   ComponentRadio,
+  ComponentProducts,
+  ComponentCheck,
+  ComponentProduct,
+  ComponentForm,
+  ComponentClose,
+  ComponentSubmit,
 } from "./styled.js";
 import "./style.css";
 
@@ -176,7 +182,7 @@ const ModalComponent = () => {
       >
         <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Registre-se</h2>
 
-        <form className="box" onSubmit={handleSubmit(onSubmit)}>
+        <ComponentForm onSubmit={handleSubmit(onSubmit)}>
           <label>Nome Fantasia*:</label>
           <input name="nameFantasy" ref={register({ required: true })} />
           {errors.nameFantasy && <p>Digite o nome da Empresa</p>}
@@ -186,8 +192,8 @@ const ModalComponent = () => {
             name="email"
             ref={register({
               required: true,
-              // eslint-disable-next-line
               pattern: {
+                // eslint-disable-next-line
                 value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
                 message: "Digite um email Válido",
               },
@@ -316,42 +322,78 @@ const ModalComponent = () => {
               </label>
               <Checkbox.Group style={{ width: "100%" }}>
                 <Row>
-                  <Col style={{display: "flex", alignItems: "center"}} span={12}>
-                    <label>Organicos</label>
-                    <input name="organic" type="checkbox" ref={collector} />
-                  </Col>
-                  <Col style={{display: "flex", alignItems: "center"}} span={12}>
-                    <label>Plasticos</label>
-                    <input name="plastic" type="checkbox" ref={collector} />
-                  </Col>
-                  <Col style={{display: "flex", alignItems: "center"}} span={12}>
-                    <label>Vidro</label>
-                    <input name="glass" type="checkbox" ref={collector} />
-                  </Col>
-                  <Col style={{display: "flex", alignItems: "center"}} span={12}>
-                    <label>Papel</label>
-                    <input name="paper" type="checkbox" ref={collector} />
-                  </Col>
-                  <Col style={{display: "flex", alignItems: "center"}} span={12}>
-                    <label>Metal</label>
-                    <input name="metal" type="checkbox" ref={collector} />
-                  </Col>
-                  <Col style={{display: "flex", alignItems: "center"}} span={12}>
-                    <label>Bateria</label>
-                    <input name="battery" type="checkbox" ref={collector} />
-                  </Col>
-                  <Col style={{display: "flex", alignItems: "center"}} span={12}>
-                    <label>Pano</label>
-                    <input name="cloth" type="checkbox" ref={collector} />
-                  </Col>
-                  <Col style={{display: "flex", alignItems: "center"}} span={12}>
-                    <label>Eletronicos</label>
-                    <input name="electronic" type="checkbox" ref={collector} />
-                  </Col>
-                  <Col style={{display: "flex", alignItems: "center"}} span={12}>
-                    <label>Borracha</label>
-                    <input name="rubber" type="checkbox" ref={collector} />
-                  </Col>
+                  <ComponentProducts span={12}>
+                    <ComponentProduct>Organicos</ComponentProduct>
+                    <ComponentCheck
+                      name="organic"
+                      type="checkbox"
+                      ref={collector}
+                    />
+                  </ComponentProducts>
+                  <ComponentProducts span={12}>
+                    <ComponentProduct>Plasticos</ComponentProduct>
+                    <ComponentCheck
+                      name="plastic"
+                      type="checkbox"
+                      ref={collector}
+                    />
+                  </ComponentProducts>
+                  <ComponentProducts span={12}>
+                    <ComponentProduct>Vidro</ComponentProduct>
+                    <ComponentCheck
+                      name="glass"
+                      type="checkbox"
+                      ref={collector}
+                    />
+                  </ComponentProducts>
+                  <ComponentProducts span={12}>
+                    <ComponentProduct>Papel</ComponentProduct>
+                    <ComponentCheck
+                      name="paper"
+                      type="checkbox"
+                      ref={collector}
+                    />
+                  </ComponentProducts>
+                  <ComponentProducts span={12}>
+                    <ComponentProduct>Metal</ComponentProduct>
+                    <ComponentCheck
+                      name="metal"
+                      type="checkbox"
+                      ref={collector}
+                    />
+                  </ComponentProducts>
+                  <ComponentProducts span={12}>
+                    <ComponentProduct>Bateria</ComponentProduct>
+                    <ComponentCheck
+                      name="battery"
+                      type="checkbox"
+                      ref={collector}
+                    />
+                  </ComponentProducts>
+                  <ComponentProducts span={12}>
+                    <ComponentProduct>Pano</ComponentProduct>
+                    <ComponentCheck
+                      name="cloth"
+                      type="checkbox"
+                      ref={collector}
+                    />
+                  </ComponentProducts>
+                  <ComponentProducts span={12}>
+                    <ComponentProduct>Eletronicos</ComponentProduct>
+                    <ComponentCheck
+                      name="electronic"
+                      type="checkbox"
+                      ref={collector}
+                    />
+                  </ComponentProducts>
+                  <ComponentProducts span={12}>
+                    <ComponentProduct>Borracha</ComponentProduct>
+                    <ComponentCheck
+                      name="rubber"
+                      type="checkbox"
+                      ref={collector}
+                    />
+                  </ComponentProducts>
                 </Row>
               </Checkbox.Group>
               {errors.materials && <p>Selecione o tipo da Coleta que deseja</p>}
@@ -413,12 +455,10 @@ const ModalComponent = () => {
           {areIdentical === false && <p>Senhas não se correspondem</p>}
           {errors.confirmPassword && <p>Digite a confirmação da senha</p>}
 
-          <input type="submit" value="Registrar" />
+          <ComponentSubmit type="submit" value="Registrar" />
           {errorText && <p>{errorText}</p>}
-          <div id="close" onClick={closeModal}>
-            Fechar
-          </div>
-        </form>
+          <ComponentClose onClick={closeModal}>Fechar</ComponentClose>
+        </ComponentForm>
       </Modal>
     </div>
   );
