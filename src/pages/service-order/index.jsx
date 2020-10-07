@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { StyledButton, ContainerButton } from "./styled";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,19 +9,23 @@ import jwt_decode from "jwt-decode";
 const ServiceOrder = () => {
   const dispatch = useDispatch();
   const [status, setStatus] = useState("");
-  const business = useSelector((state) => state.user);
+  const business = useSelector((state) => state.user.business);
+  const os = useSelector((state) => state.user.os);
   const token = useSelector((state) => state.authentication);
 
   const token2 =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhZmFlbEByYWZhZWwuY29tLmJyIiwiaWF0IjoxNjAyMDgwNTQzLCJleHAiOjE2MDIwODQxNDMsInN1YiI6Ijg3MiJ9.SMahaSunJhvSrCF8_gvs18Dh_8BCGUQdKZp-MsoCC7c";
   const userId = jwt_decode(token2);
-
-  dispatch(requestBusiness(userId.sub, token2));
-  //console.log(userId.sub);
+  useEffect(() => {
+    dispatch(requestBusiness(userId.sub, token2));
+  }, []);
 
   return (
     <>
-      {business.email}
+      {console.log("teste")}
+      {business}
+      {os}
+      {business === "Coleta" ? console.log("coletor") : console.log("nada")}
       <ContainerButton>
         <StyledButton
           onClick={() => {
