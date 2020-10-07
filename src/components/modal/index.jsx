@@ -182,7 +182,7 @@ const ModalComponent = () => {
       >
         <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Registre-se</h2>
 
-        <ComponentForm onSubmit={handleSubmit(onSubmit)}>
+        <ComponentForm className="box" onSubmit={handleSubmit(onSubmit)}>
           <label>Nome Fantasia*:</label>
           <input name="nameFantasy" ref={register({ required: true })} />
           {errors.nameFantasy && <p>Digite o nome da Empresa</p>}
