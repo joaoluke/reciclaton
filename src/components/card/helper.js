@@ -2,7 +2,7 @@ import React from "react";
 import { StyledButton, TitlePrice, ButtonTitle } from "./card.styled";
 export const content = (status, price) => {
   switch (status) {
-    case "aberto":
+    case "Aberto":
       return (
         <>
           <TitlePrice>Valor:{price}</TitlePrice>
