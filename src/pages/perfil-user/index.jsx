@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import decode from "jwt-decode";
 import { getPerfil } from "../../redux/action/user";
 import Loading from "../../components/loading";
-import Perfil from "./perfil";
 
 const Perfil = () => {
   const dispatch = useDispatch();
@@ -17,16 +16,17 @@ const Perfil = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [userId]
   );
-  console.log(parseInt(userId) !== user.id);
-
+  console.log(user);
   return (
     <>
-      {parseInt(userId) !== user.id && <Loading />}
-      {decoded.sub === userId && parseInt(userId) === user.id && (
-        <h1>Usuario Logado</h1>
-      )}
-      {decoded.sub !== userId && parseInt(userId) === user.id && (
-        <Perfil id={decoded.sub} />
+      {parseInt(userId) !== user.id ? (
+        <Loading />
+      ) : (
+        <>
+          <div>
+            <h1>{user.brand}</h1>
+          </div>
+        </>
       )}
     </>
   );
