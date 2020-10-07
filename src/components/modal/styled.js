@@ -1,12 +1,57 @@
 import styled from "styled-components";
-import { Radio, Checkbox } from "antd";
+import { Radio, Col } from "antd";
 
 export const ComponentNewAccount = styled.div`
   font-family: inherit;
 `;
 
-export const ComponentCheckBox = styled(Checkbox)`
-  font-family: inherit;
+export const ComponentForm = styled.form`
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  display: grid;
+  width: 40%;
+  position: absolute;
+  margin: auto 30% auto 30%;
+  top: 13%;
+`;
+
+export const ComponentClose = styled.div`
+  color: #bfbeba;
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+  position: absolute;
+  font-size: 20px;
+  width: 17px;
+  height: 17px;
+  text-align: center;
+  right: 5px;
+  cursor: pointer;
+`;
+
+export const ComponentSubmit = styled.input`
+  background: #a4e58b;
+  color: #000;
+  text-transform: uppercase;
+  border: none;
+  margin-top: 40px;
+  padding: 20px;
+  font-size: 16px;
+  font-weight: 100;
+  letter-spacing: 10px;
+`;
+
+export const ComponentProducts = styled(Col)`
+  display: flex;
+`;
+
+export const ComponentProduct = styled.label`
+  width: 50%;
+`;
+
+export const ComponentCheck = styled.input`
+  margin-top: 10px;
+  width: 50%;
 `;
 
 export const ComponentRadio = styled(Radio)`
