@@ -10,11 +10,7 @@ const Perfil = () => {
   const { userId } = useParams();
   let { user } = useSelector((state) => state.user);
   let logged = useSelector((state) => state.login);
-<<<<<<< HEAD
-  const decoded = logged.authen ? decode(logged.authen) : NaN;
-=======
   const decoded = logged.authen && decode(logged.authen);
->>>>>>> master
   useEffect(
     () => dispatch(getPerfil(userId)),
     // eslint-disable-next-line react-hooks/exhaustive-deps
