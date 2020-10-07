@@ -3,6 +3,9 @@ import { CgClose } from "react-icons/cg";
 import { TiLocation } from "react-icons/ti";
 import { FaTrash, FaCheck } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
+import star from "./star.png";
+import star_off from "./star_off.png";
+
 export const StyledButton = styled.button`
   font-family: "Roboto", sans-serif;
   display: block;
@@ -122,4 +125,21 @@ export const Choice = styled.div`
   margin-top: 30px;
   display: flex;
   justify-content: space-between;
+`;
+
+export const Rating = styled.div`
+  width: 40px;
+  height: 40px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url(${star});
+  :hover {
+    background-image: url(${star_off});
+    cursor: pointer;
+  }
+`;
+
+export const StarContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
 `;

@@ -5,15 +5,13 @@ import {
   StyledButton,
   TitlePrice,
   ButtonTitle,
+  Rating,
+  StarContainer,
 } from "./card.styled";
-const date = new Date();
-const day = date.getDate();
-const month = date.getMonth();
-const year = date.getFullYear();
-const hours = date.getHours();
-const minutes = date.getMinutes();
-console.log(date);
-export const content = (status, price) => {
+export const content = (status, setRating, rating, price) => {
+  const SetRating = () => {
+    console.log(rating);
+  };
   switch (status) {
     case "aberto":
       return (
@@ -39,9 +37,6 @@ export const content = (status, price) => {
         <>
           <TitlePrice>
             <TitlePrice>Valor: {price}</TitlePrice>
-            <TitlePrice>
-              <TitlePrice>Hora do pedido: {hours + ":" + minutes}</TitlePrice>
-            </TitlePrice>
             <Location />
             -----------------
             <Tresh />
@@ -49,11 +44,50 @@ export const content = (status, price) => {
         </>
       );
 
+    case "Finalizado":
+      return (
+        <>
+          <StarContainer>
+            <Rating
+              onClick={() => {
+                setRating(1);
+              }}
+            />
+            <Rating
+              onClick={() => {
+                setRating(2);
+              }}
+            />
+            <Rating
+              onClick={() => {
+                setRating(3);
+              }}
+            />
+            <Rating
+              onClick={() => {
+                setRating(4);
+              }}
+            />
+            <Rating
+              onClick={() => {
+                setRating(5);
+              }}
+            />
+          </StarContainer>
+          <StyledButton
+            onClick={() => {
+              SetRating();
+            }}
+          >
+            <ButtonTitle>Avaliar</ButtonTitle>
+          </StyledButton>
+        </>
+      );
+
     case "Cancelado":
       return (
         <>
           <TitlePrice style={{ fontSize: "35px" }}>Valor: {price}</TitlePrice>
-          <TitlePrice>Data: {day + " / " + month + " / " + year}</TitlePrice>
           {<TitlePrice>Motivo: </TitlePrice>}
           {<TitlePrice>Cancelado por:</TitlePrice>}
         </>

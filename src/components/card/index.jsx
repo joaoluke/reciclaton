@@ -15,6 +15,7 @@ import {
 } from "./card.styled";
 const Card = ({ status, title, price, adress, children }) => {
   const [popUp, setPopUp] = useState(false);
+  const [rating, setRating] = useState(0);
   const inputData = (values, conctractor, contracted, idOs) => {
     const data = {
       contratante_id: conctractor,
@@ -60,7 +61,7 @@ const Card = ({ status, title, price, adress, children }) => {
         <Title>Endereço: {adress}</Title>
         <Title>Materiais: {children}</Title>
       </Content>
-      {content("Em andamento")}
+      {content("Finalizado", setRating, rating)}
       <div>
         {popUp && (
           <PopUp>
