@@ -1,27 +1,18 @@
 import styled from 'styled-components';
 
 export const BackgroundRank = styled.div`
-    background-color: #E1F3CE;
-    border-radius: 20px;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    width: 50%;
-    div:nth-child(2) {
-        background: gold;
-    }
-    div:nth-child(3) {
-       background: silver;
-    }
-    div:nth-child(4) {
-        background: #cd7f32;
-     }
-     div:nth-child(n + 5) {
-        background: whitesmoke;
-     }
+  overflow: auto;
+  // background-color: #E1F3CE;
+  // background-color: transparent;
+  // display: none;
+  // border-radius: 20px;
+  // padding: 2rem;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: center;
+  // align-items: center;
+  // align-content: center;
+  // width: 90%;
 `;
 
 export const BusinessCard = styled.div`
@@ -30,7 +21,7 @@ export const BusinessCard = styled.div`
   border: 1px solid black;
   margin-bottom: 10px;
   padding: 1rem;
-  width: 80%;
+  width: 60%;
   height: auto;
   justify-content: center;
   align-items:center;
@@ -48,29 +39,40 @@ export const StyledButton = styled.button`
 `;
 
 export const StyledTable = styled.table`
-border: 1px solid #333;
-
-tr:nth-child(1) {
-    background: gold;
-}
-tr:nth-child(2) {
-   background: silver;
-}
-tr:nth-child(3) {
-    background: #cd7f32;
+border: 0px solid #333;
+display: hidden;
+tr:nth-child(2n + 1) {
+    background: #e1e1e1;
  }
-
-tr:nth-child(n + 4) {
-    background: whitesmoke;
+ tr:nth-child(2n) {
+     background: whitesmoke;
  }
 `;
 
 export const Td = styled.td`
-border: 1px solid #333;
-
+border: 0px solid #333;
+text-align: center;
+color: #17271A;
+ span::first-letter {
+    text-transform: uppercase;
+ }
 `;
 
 export const Tr = styled.tr`
-border: 1px solid #333;
+border: 0px solid #333;
+text-align: center;
+color: #17271A;
+span::first-letter {
+    text-transform: uppercase;
+ }
+`;
 
+export const Option = styled.option`
+:hover {
+    cursor: pointer;
+    border: 1px solid black;
+}
+:active {
+    color: green;
+}
 `;

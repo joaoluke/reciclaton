@@ -1,9 +1,9 @@
 import React from "react";
 import Login from "../../pages/login";
 import { Switch, Route } from "react-router-dom";
+import Header from '../header'
 
 import BusinessRanking from '../business-ranking'
-
 
 import BaseLayout from "../layout";
 const Routes = () => {
@@ -17,7 +17,7 @@ const Routes = () => {
           <Login />
         </Route>
         <Route exact path="/ranking">
-          *PAGINA DE RANKING*
+          <Header children='nada'/>
           <BusinessRanking/>
         </Route>
         <Route exact path="/profile">
