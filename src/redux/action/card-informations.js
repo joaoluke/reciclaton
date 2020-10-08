@@ -1,6 +1,11 @@
 import axios from "axios";
+export const GET_CARD_INFORMATIONS = "GET_CARD_INFORMATIONS";
 
-export const PostInformations = (id, token, values) => {
+const cardInformations = (informations) => ({
+  type: GET_CARD_INFORMATIONS,
+  informations,
+});
+export const PostInformations = (id, token, values, sevice) => (dispatch) => {
   const header = {
     headers: { Authotization: `Bearer ${token}` },
   };
@@ -11,11 +16,11 @@ export const PostInformations = (id, token, values) => {
         header,
         values
       ),
-      axios.post(`https://reciclatonapi.herokuapp.com/664/services/`, header),
+      axios.post(`https://reciclatonapi.herokuapp.com/664/services/`, sevice),
     ])
     .then(
       axios.spread(({ data }) => {
-        console.log(data);
+        dispatch(cardInformations(data));
       })
     )
     .catch(({ response }) => {
