@@ -1,22 +1,27 @@
 import React from "react";
 import Login from "../../pages/login";
+import User from "../../pages/perfil-user";
+import Home from "../../pages/home";
 import { Switch, Route } from "react-router-dom";
 import Ranking from '../../pages/ranking'
 const Routes = () => {
   return (
     <>
       <Switch>
-        <Route path="/login">
+        <Route exact path="/login">
           <Login />
         </Route>
         <Route path="/ranking">
             <Ranking/>
         </Route>
-        <Route path="/profile">
-          *PAGINA DE PROFILE*
+        <Route exact path="/profile/:userId">
+          <User />
         </Route>
-        <Route path="/">
-          *PAGINA INICIAL*
+        <Route exact path="/services/:userId">
+          *PAGINA DE SERVICO*
+        </Route>
+        <Route exact path="/">
+          <Home />
         </Route>
       </Switch>
     </>
