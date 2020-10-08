@@ -18,7 +18,7 @@ export const loginAction = ({ email, password, rememberme }) => (dispatch) => {
     .catch(({ response }) => dispatch(reqError(response && response.data)));
 };
 
-export const userToken = ({ accessToken }, remember) => ({
+const userToken = ({ accessToken }, remember) => ({
   type: LOGIN,
   data: { accessToken, remember },
 });
