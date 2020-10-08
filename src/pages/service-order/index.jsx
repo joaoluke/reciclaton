@@ -22,26 +22,23 @@ const ServiceOrder = () => {
 
   return (
     <>
-      {console.log("teste")}
-      {business}
       {os}
-      {business === "Coleta" ? console.log("coletor") : console.log("nada")}
       <ContainerButton>
-        <StyledButton
-          onClick={() => {
-            setStatus("Aberto");
-          }}
-        >
-          Aberto
-        </StyledButton>
+        {business == !"Coleta" && ( // empresa
+          <StyledButton onClick={() => setStatus("Chamado")}>
+            Chamado
+          </StyledButton>
+        )}
 
-        <StyledButton
-          onClick={() => {
-            setStatus("Aceito");
-          }}
-        >
-          Aceito
-        </StyledButton>
+        {business === "Coleta" && ( // coletador
+          <StyledButton
+            onClick={() => {
+              setStatus("Aceito");
+            }}
+          >
+            Aceito
+          </StyledButton>
+        )}
 
         <StyledButton
           onClick={() => {

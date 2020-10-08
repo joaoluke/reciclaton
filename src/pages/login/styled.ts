@@ -54,4 +54,4 @@ export const StyledButton = styled.button`
 export const StyledError = styled.p`
   color: red;
   margin: 0;
-`
+`;
