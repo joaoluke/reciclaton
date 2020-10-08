@@ -7,7 +7,7 @@ export const setBusiness = (business) => ({
   business,
 });
 
-export const requestBusiness = (userId, token) => (dispatch, getState) => {
+export const requestBusiness = (userId, token) => (dispatch) => {
   axios
     .get(`https://reciclatonapi.herokuapp.com/664/users/${1}`, {
       headers: {
@@ -22,6 +22,4 @@ export const requestBusiness = (userId, token) => (dispatch, getState) => {
     .catch((error) => {
       console.log(error);
     });
-  //console.log(userId);
-  //console.log(token);
 };
