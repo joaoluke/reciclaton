@@ -28,14 +28,14 @@ const Perfil = () => {
           <StyledPerfilDiv>
             <StyledImgRankCenter>
               <StyledUserImage src={user.imageUrl} alt="User" />
-              <div style={{display: "flex"}}>
+              <div style={{ display: "flex" }}>
                 <StyledRankUser>
                   <p>{user.score.anual}</p>
-                  <p>Ranking Anual</p>
+                  <p>Pontos Anual</p>
                 </StyledRankUser>
                 <StyledRankUser>
                   <p>{user.score.mensal}</p>
-                  <p>Ranking Mensal</p>
+                  <p>Pontos Mensal</p>
                 </StyledRankUser>
               </div>
             </StyledImgRankCenter>
@@ -43,7 +43,9 @@ const Perfil = () => {
               <h1>{user.brand}</h1>
               <h2>{user.business}</h2>
               <p>{user.email}</p>
-              <a href={user.website}>{user.website}</a>
+              <a href={user.website} target="_blank">
+                {user.website}
+              </a>
               <div>
                 <p>
                   {user.adress.street}, {user.adress.number}
@@ -54,14 +56,16 @@ const Perfil = () => {
               </div>
             </div>
             <StyledPerfilMaterials>
-              {Object.keys(user.ifCollector).map(
-                (material, key) =>
-                  user.ifCollector[material] && (
-                    <StyledMaterials key={key}>
-                      {showMaterial(material)}
-                    </StyledMaterials>
-                  )
-              )}
+              <div>
+                {Object.keys(user.ifCollector).map(
+                  (material, key) =>
+                    user.ifCollector[material] && (
+                      <StyledMaterials key={key}>
+                        {showMaterial(material)}
+                      </StyledMaterials>
+                    )
+                )}
+              </div>
             </StyledPerfilMaterials>
           </StyledPerfilDiv>
         </div>
@@ -74,17 +78,18 @@ export default Perfil;
 
 const StyledPerfilDiv = styled.div`
   display: flex;
+  background-color: #17271a2e;
   flex-flow: row wrap;
   justify-content: space-evenly;
   width: 100vw;
-  height: calc(40vh - 46px);
-  margin-top: 5vh;
+  padding-top: 5vh;
 `;
 
 const StyledPerfilMaterials = styled.div`
   display: flex;
   flex-flow: row wrap;
   align-items: flex-end;
+  background-color: #e1f3ce;
 `;
 
 const StyledMaterials = styled.div`
@@ -101,7 +106,6 @@ const StyledRankUser = styled.div`
   flex-flow: column nowrap;
   border-radius: 10rem;
   justify-content: center;
-  background: #f9b2f9;
   width: 4rem;
   height: 4rem;
   margin: 5px;
