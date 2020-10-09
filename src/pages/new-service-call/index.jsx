@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box } from "./new-service.style";
 import { Title } from "./new-service.style";
 import { useForm } from "react-hook-form";
 const NewServiceCalls = () => {
-  const { register, handleSubmit } = useForm();
+  const [materials, setMaterials] = useState({});
+  const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = (data) => console.log(data, data.plastic);
   return (
@@ -17,16 +18,22 @@ const NewServiceCalls = () => {
           name="contribuicao"
           ref={register({ required: "true", min: 0 })}
         />
+        <div>
+          {errors.contribuicao?.type === "required" &&
+            "Esse espaço não pode estar vazio"}
+          {errors.contribuicao?.type === "min" &&
+            "O valor mínimo é 0, por favor coloque um valor igual ou acima do mínimo"}
+        </div>
         <h2>Materiais para a coleta</h2>
         <label>Orgânico</label>
-
         <input ref={register} type="checkbox" name="organic"></input>
+
         <label>Plástico</label>
-
         <input ref={register} type="checkbox" name="plastic"></input>
-        <label>Vidro</label>
 
+        <label>Vidro</label>
         <input ref={register} type="checkbox" name="glass"></input>
+
         <label>Papel</label>
         <input ref={register} type="checkbox" name="paper"></input>
 
@@ -52,6 +59,10 @@ const NewServiceCalls = () => {
           name="quantidade_estimada"
           ref={register({ required: "true" })}
         />
+        <div>
+          {errors.quantidade_estimada?.type === "required" &&
+            "Esse espaço não pode estar vazio"}
+        </div>
 
         <input type="submit" />
       </form>
