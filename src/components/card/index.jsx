@@ -41,7 +41,9 @@ const Card = ({ status, title, price, adress, children }) => {
     };
     return [...data, values];
   };
-  const aberto = "aberto";
+  const data = new Date();
+  console.log(data);
+  const Aberto = "Aberto";
 
   return (
     <Container>
@@ -53,7 +55,7 @@ const Card = ({ status, title, price, adress, children }) => {
         <Title>Endereço: {adress}</Title>
         <Title>Materiais: {children}</Title>
       </Content>
-      {content(aberto)}
+      {content(Aberto)}
     </Container>
   );
 };

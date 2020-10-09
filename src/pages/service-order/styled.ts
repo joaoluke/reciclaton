@@ -10,7 +10,6 @@ export const StyledButton = styled.button`
   :hover {
     cursor: pointer;
     border-color: #84b84f;
-
   }
     @media screen and (max-width: 800px) {
       font-size: 0.75em;   
@@ -21,7 +20,6 @@ export const ContainerButton = styled.div`
   background-color: transparent;
   display: flex;
   justify-content: center;
-
   @media screen and (max-width: 540px) {
     flex-wrap: nowrap;
   }
