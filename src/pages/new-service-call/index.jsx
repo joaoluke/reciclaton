@@ -2,11 +2,37 @@ import React, { useState } from "react";
 import { Box } from "./new-service.style";
 import { Title } from "./new-service.style";
 import { useForm } from "react-hook-form";
+
+const materiais = {
+  organic: false,
+  plastic: false,
+  glass: false,
+  paper: false,
+  metal: false,
+  battery: false,
+  cloth: false,
+  electronic: false,
+  rubber: false,
+};
+
 const NewServiceCalls = () => {
-  const [materials, setMaterials] = useState({});
+  const [materialsError, setMaterialsError] = useState(false);
   const { register, handleSubmit, errors } = useForm();
 
-  const onSubmit = (data) => console.log(data, data.plastic);
+  const changeMaterials = (data) => {
+    for (let type in materiais) {
+      data &&
+        data.name === type &&
+        data.checked &&
+        (materiais[data && data.name] = data && data.checked);
+    }
+  };
+
+  const onSubmit = (data) => {
+    !Object.values(materiais).includes(true)
+      ? setMaterialsError(true)
+      : console.log(data);
+  };
   return (
     <Box>
       <Title>Title</Title>
@@ -26,31 +52,31 @@ const NewServiceCalls = () => {
         </div>
         <h2>Materiais para a coleta</h2>
         <label>Orgânico</label>
-        <input ref={register} type="checkbox" name="organic"></input>
+        <input ref={changeMaterials} type="checkbox" name="organic"></input>
 
         <label>Plástico</label>
-        <input ref={register} type="checkbox" name="plastic"></input>
+        <input ref={changeMaterials} type="checkbox" name="plastic"></input>
 
         <label>Vidro</label>
-        <input ref={register} type="checkbox" name="glass"></input>
+        <input ref={changeMaterials} type="checkbox" name="glass"></input>
 
         <label>Papel</label>
-        <input ref={register} type="checkbox" name="paper"></input>
+        <input ref={changeMaterials} type="checkbox" name="paper"></input>
 
         <label>Metal</label>
-        <input ref={register} type="checkbox" name="metal"></input>
+        <input ref={changeMaterials} type="checkbox" name="metal"></input>
 
         <label>Bateria</label>
-        <input ref={register} type="checkbox" name="battery"></input>
+        <input ref={changeMaterials} type="checkbox" name="battery"></input>
 
         <label>Tecido</label>
-        <input ref={register} type="checkbox" name="cloth"></input>
+        <input ref={changeMaterials} type="checkbox" name="cloth"></input>
 
         <label>Eletrônico</label>
-        <input ref={register} type="checkbox" name="electronic"></input>
+        <input ref={changeMaterials} type="checkbox" name="electronic"></input>
 
         <label>Borracha</label>
-        <input ref={register} type="checkbox" name="rubber"></input>
+        <input ref={changeMaterials} type="checkbox" name="rubber"></input>
 
         <label>Quantidade do Material para a coleta em sacos/200L </label>
         <input
@@ -63,7 +89,7 @@ const NewServiceCalls = () => {
           {errors.quantidade_estimada?.type === "required" &&
             "Esse espaço não pode estar vazio"}
         </div>
-
+        {materialsError && <p>Por favor selecionar 1 material</p>}
         <input type="submit" />
       </form>
     </Box>
