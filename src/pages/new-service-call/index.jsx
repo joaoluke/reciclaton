@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 const NewServiceCalls = () => {
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => console.log(data, data.plastic);
   return (
     <Box>
       <Title>Title</Title>
@@ -15,44 +15,36 @@ const NewServiceCalls = () => {
           type="number"
           placeholder="Ponha um valor para a coleta"
           name="contribuicao"
-          ref={register({ required: "true" })}
+          ref={register({ required: "true", min: 0 })}
         />
         <h2>Materiais para a coleta</h2>
         <label>Orgânico</label>
-        <input
-          ref={register}
-          type="checkbox"
-          value={{ organic: true }}
-          name="organic"
-        ></input>
+
+        <input ref={register} type="checkbox" name="organic"></input>
         <label>Plástico</label>
 
-        <input ref={register} type="checkbox" value={{ plastic: true }}></input>
+        <input ref={register} type="checkbox" name="plastic"></input>
         <label>Vidro</label>
 
-        <input ref={register} type="checkbox" value={{ glass: true }}></input>
+        <input ref={register} type="checkbox" name="glass"></input>
         <label>Papel</label>
+        <input ref={register} type="checkbox" name="paper"></input>
 
-        <input ref={register} type="checkbox" value={{ paper: true }}></input>
         <label>Metal</label>
+        <input ref={register} type="checkbox" name="metal"></input>
 
-        <input ref={register} type="checkbox" value={{ metal: true }}></input>
         <label>Bateria</label>
+        <input ref={register} type="checkbox" name="battery"></input>
 
-        <input ref={register} type="checkbox" value={{ battery: true }}></input>
-        <label>Eletrônico</label>
-
-        <input
-          ref={register}
-          type="checkbox"
-          value={{ eletronic: true }}
-        ></input>
         <label>Tecido</label>
+        <input ref={register} type="checkbox" name="cloth"></input>
 
-        <input ref={register} type="checkbox" value={{ cloth: true }}></input>
+        <label>Eletrônico</label>
+        <input ref={register} type="checkbox" name="electronic"></input>
+
         <label>Borracha</label>
+        <input ref={register} type="checkbox" name="rubber"></input>
 
-        <input ref={register} type="checkbox" value={{ rubber: true }}></input>
         <label>Quantidade do Material para a coleta em sacos/200L </label>
         <input
           type="number"
@@ -60,8 +52,7 @@ const NewServiceCalls = () => {
           name="quantidade_estimada"
           ref={register({ required: "true" })}
         />
-        <h2>Materiais: </h2>
-        <div>{}</div>
+
         <input type="submit" />
       </form>
     </Box>
