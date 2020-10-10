@@ -1,22 +1,12 @@
-export const inputData = (values, conctractor, contracted, idOs) => {
-  const data = {
+export const inputData = (values, conctractor, idOs) => {
+  const os = {
     contratante_id: conctractor,
-    contratado_id: contracted,
-    contribuicao: "n",
-    quantidade_estimada: "em-sacos-de-lixo-200L",
-    materiais: {
-      organic: "trueOrFalse",
-      plastic: "trueOrFalse",
-      glass: "trueOrFalse",
-      paper: "trueOrFalse",
-      metal: "trueOrFalse",
-      " battery": "trueOrFalse",
-      cloth: "trueOrFalse",
-      " electronic": "trueOrFalse",
-      rubber: "trueOrFalse",
-    },
-    id_os: idOs,
-    status: "em-aberto||aceito||em-andamento||finalizado||cancelado",
+    contratado_id: "n",
+    contribuicao: values.contribuicao,
+    quantidade_estimada: values.quantidade_estimada,
+    materiais: values.materiais,
+    id: idOs,
+    status: "em-aberto",
     "avaliacao-contratado": "n",
     "avaliacao-contratante": "n",
     "endereço-de-busca": {
@@ -28,5 +18,8 @@ export const inputData = (values, conctractor, contracted, idOs) => {
       state: "BA",
     },
   };
-  return [...data, values];
+
+  console.log(os);
+
+  return os;
 };
