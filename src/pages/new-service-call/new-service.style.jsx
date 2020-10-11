@@ -8,14 +8,70 @@ export const Box = styled.div`
   height: 300px;
   background-color: #f8faf7;
   border: solid 2px #6c9148;
-  padding: 25px;
+  padding: 40px;
 `;
 
-export const Title = styled.h1`
+export const MainTitle = styled.h1`
   font-family: "Roboto", sans-serif;
   color: #6d914a;
   font-weight: bold;
   margin: 5px;
   font-size: 35px;
+
   text-align: center;
+`;
+
+export const SubTitles = styled.h2`
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  color: #6d914a;
+  font-size: 25px;
+  text-align: left;
+  margin: 5px;
+`;
+
+export const StyledLabel = styled.label`
+  font-family: "Roboto", sans-serif;
+  color: #6d914a;
+  font-size: 17px;
+  text-align: left;
+`;
+
+export const StyledInput = styled.input`
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+
+  border: none;
+  background-color: #d6e4c8;
+  border-radius: 3px;
+  padding: 5px;
+  color: #526d36;
+`;
+
+export const CheckBoxContainerd = styled.div`
+  margin: 10px 0;
+  display: flex;
+  flex-flow: wrap;
+`;
+export const CheckBox = styled.input`
+  width: 30px;
+`;
+export const StyledSubmit = styled.input`
+  display: block;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 30px;
+  border: none;
+  padding: 10px;
+  letter-spacing: 10px;
+  color: #e1ead6;
+  background-color: #90b569;
+  :hover {
+    background-color: #88ab5f;
+    color: #cedcbc;
+  }
+`;
+
+export const Error = styled.div`
+  color: #f35361;
 `;

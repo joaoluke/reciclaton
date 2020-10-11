@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Box } from "./new-service.style";
-import { Title } from "./new-service.style";
+import {
+  MainTitle,
+  SubTitles,
+  StyledLabel,
+  StyledInput,
+  CheckBox,
+  CheckBoxContainerd,
+  StyledSubmit,
+  Error,
+} from "./new-service.style";
 import { useForm } from "react-hook-form";
 import { addService, getService } from "../../redux/action/card-informations";
 import { useDispatch, useSelector } from "react-redux";
@@ -41,7 +50,10 @@ const NewServiceCalls = () => {
   const onSubmit = (data) => {
     if (!Object.values(materiais).includes(true)) {
       setMaterialsError(true);
-    } else if (token && services[0]) {
+    } else {
+      setMaterialsError(false);
+    }
+    if (token && services[0]) {
       addService(
         token,
         inputData(
@@ -55,65 +67,111 @@ const NewServiceCalls = () => {
         history.push("/");
       }, 2000);
     }
+    inputData({ ...data, materiais }, 300, services[0] && services[0].length);
   };
   return (
     <Box>
-      <Title>Title</Title>
+      <MainTitle>Title</MainTitle>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <label>Valor para a coleta </label>
-        <input
+        <SubTitles>Materiais para a coleta</SubTitles>
+        <StyledLabel>Valor para a coleta </StyledLabel>
+        <StyledInput
           type="number"
           placeholder="Ponha um valor para a coleta"
           name="contribuicao"
           ref={register({ required: "true", min: 0 })}
         />
-        <div>
+        <Error>
           {errors.contribuicao?.type === "required" &&
             "Esse espaço não pode estar vazio"}
           {errors.contribuicao?.type === "min" &&
             "O valor mínimo é 0, por favor coloque um valor igual ou acima do mínimo"}
-        </div>
-        <h2>Materiais para a coleta</h2>
-        <input ref={changeMaterials} type="checkbox" name="organic"></input>
-        <label>Orgânico</label>
+        </Error>
+        <CheckBoxContainerd>
+          <CheckBox
+            ref={changeMaterials}
+            type="checkbox"
+            name="organic"
+          ></CheckBox>
+          <StyledLabel>Orgânico</StyledLabel>
 
-        <input ref={changeMaterials} type="checkbox" name="plastic"></input>
-        <label>Plástico</label>
+          <CheckBox
+            ref={changeMaterials}
+            type="checkbox"
+            name="plastic"
+          ></CheckBox>
+          <StyledLabel>Plástico</StyledLabel>
 
-        <input ref={changeMaterials} type="checkbox" name="glass"></input>
-        <label>Vidro</label>
+          <CheckBox
+            ref={changeMaterials}
+            type="checkbox"
+            name="glass"
+          ></CheckBox>
+          <StyledLabel>Vidro</StyledLabel>
 
-        <input ref={changeMaterials} type="checkbox" name="paper"></input>
-        <label>Papel</label>
+          <CheckBox
+            ref={changeMaterials}
+            type="checkbox"
+            name="paper"
+          ></CheckBox>
+          <StyledLabel>Papel</StyledLabel>
 
-        <input ref={changeMaterials} type="checkbox" name="metal"></input>
-        <label>Metal</label>
+          <CheckBox
+            ref={changeMaterials}
+            type="checkbox"
+            name="metal"
+          ></CheckBox>
+          <StyledLabel>Metal</StyledLabel>
 
-        <input ref={changeMaterials} type="checkbox" name="battery"></input>
-        <label>Bateria</label>
+          <CheckBox
+            ref={changeMaterials}
+            type="checkbox"
+            name="battery"
+          ></CheckBox>
+          <StyledLabel>Bateria</StyledLabel>
 
-        <input ref={changeMaterials} type="checkbox" name="cloth"></input>
-        <label>Tecido</label>
+          <CheckBox
+            ref={changeMaterials}
+            type="checkbox"
+            name="cloth"
+          ></CheckBox>
+          <StyledLabel>Tecido</StyledLabel>
 
-        <input ref={changeMaterials} type="checkbox" name="electronic"></input>
-        <label>Eletrônico</label>
+          <CheckBox
+            ref={changeMaterials}
+            type="checkbox"
+            name="electronic"
+          ></CheckBox>
+          <StyledLabel>Eletrônico</StyledLabel>
 
-        <input ref={changeMaterials} type="checkbox" name="rubber"></input>
-        <label>Borracha</label>
-
-        <label>Quantidade do Material para a coleta em sacos/200L </label>
-        <input
-          type="number"
-          placeholder="Ponha a quantidade da coleta"
-          name="quantidade_estimada"
-          ref={register({ required: "true" })}
-        />
+          <CheckBox
+            ref={changeMaterials}
+            type="checkbox"
+            name="rubber"
+          ></CheckBox>
+          <StyledLabel>Borracha</StyledLabel>
+        </CheckBoxContainerd>
         <div>
+          <StyledLabel>
+            Quantidade do Material para a coleta em sacos/200L{" "}
+          </StyledLabel>
+          <StyledInput
+            type="number"
+            placeholder="Ponha a quantidade da coleta"
+            name="quantidade_estimada"
+            ref={register({ required: "true" })}
+          />
+        </div>
+        <Error>
           {errors.quantidade_estimada?.type === "required" &&
             "Esse espaço não pode estar vazio"}
+        </Error>
+        {materialsError && (
+          <Error>Por favor selecionar pelo menos 1 material</Error>
+        )}
+        <div>
+          <StyledSubmit type="submit" />
         </div>
-        {materialsError && <p>Por favor selecionar 1 material</p>}
-        <input type="submit" />
       </form>
     </Box>
   );
