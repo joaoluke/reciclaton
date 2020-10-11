@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box } from "./new-service.style";
 import { Title } from "./new-service.style";
 import { useForm } from "react-hook-form";
-import { addService } from "../../redux/action/card-informations";
+import { addService, getService } from "../../redux/action/card-informations";
 import { useDispatch, useSelector } from "react-redux";
 import { inputData } from "./helper";
 import { useHistory } from "react-router-dom";
@@ -17,15 +17,18 @@ const materiais = {
   electronic: false,
   rubber: false,
 };
-
 const NewServiceCalls = () => {
   const [materialsError, setMaterialsError] = useState(false);
-  const [doneMessage, setDoneMessage] = useState("");
   const { register, handleSubmit, errors } = useForm();
   const dispatch = useDispatch();
   const services = useSelector((state) => state.card);
-  console.log(services.length);
-  const history = useHistory();
+  useEffect(() => {
+    dispatch(getService());
+  }, [dispatch]);
+
+  console.log(services[0] && services[0].length);
+  console.log(services);
+
   const changeMaterials = (data) => {
     for (let type in materiais) {
       data &&
@@ -34,20 +37,14 @@ const NewServiceCalls = () => {
         (materiais[data && data.name] = data && data.checked);
     }
   };
-
   const onSubmit = (data) => {
-    !Object.values(materiais).includes(true)
-      ? setMaterialsError(true)
-      : dispatch(
-          addService(
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhZmFlbEByYWZhZWwuY29tLmJyIiwiaWF0IjoxNjAyMzU3ODcxLCJleHAiOjE2MDIzNjE0NzEsInN1YiI6Ijg3MiJ9.5af0VetZ_CXcfkXSt_DIZEU6MlpN-kwM_3mNzutEByI",
-            inputData(
-              { ...data, materiais },
-              100,
-              services && services.length + 1
-            )
-          )
-        );
+    if (!Object.values(materiais).includes(true)) {
+      setMaterialsError(true);
+    }
+    addService(
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJhdGF0aW5oYUBiYXRhdGEuY29tIiwiaWF0IjoxNjAyNDE3NTU1LCJleHAiOjE2MDI0MjExNTUsInN1YiI6Ijg3MyJ9.C4zybQTwg6hM6D9vSI2b4hN98xCAHJfC39b4JiAEtBM",
+      inputData({ ...data, materiais }, 300, services[0] && services[0].length)
+    );
   };
   return (
     <Box>

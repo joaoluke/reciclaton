@@ -6,7 +6,7 @@ const cardInformations = (informations) => ({
   informations,
 });
 
-export const PostInformations = (id, token, values) => {
+export const changeInformations = (id, token, values) => {
   const header = {
     headers: { Authotization: `Bearer ${token}` },
   };
