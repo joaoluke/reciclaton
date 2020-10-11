@@ -4,8 +4,9 @@ import { Title } from "./new-service.style";
 import { useForm } from "react-hook-form";
 import { addService, getService } from "../../redux/action/card-informations";
 import { useDispatch, useSelector } from "react-redux";
-import { inputData } from "./helper";
+import { inputData, openNotification } from "./helper";
 import { useHistory } from "react-router-dom";
+
 const materiais = {
   organic: false,
   plastic: false,
@@ -20,14 +21,14 @@ const materiais = {
 const NewServiceCalls = () => {
   const [materialsError, setMaterialsError] = useState(false);
   const { register, handleSubmit, errors } = useForm();
+  const history = useHistory();
   const dispatch = useDispatch();
   const services = useSelector((state) => state.card);
   useEffect(() => {
     dispatch(getService());
   }, [dispatch]);
 
-  console.log(services[0] && services[0].length);
-  console.log(services);
+  const token = useSelector((state) => state.login.authen);
 
   const changeMaterials = (data) => {
     for (let type in materiais) {
@@ -40,11 +41,20 @@ const NewServiceCalls = () => {
   const onSubmit = (data) => {
     if (!Object.values(materiais).includes(true)) {
       setMaterialsError(true);
+    } else if (token && services[0]) {
+      addService(
+        token,
+        inputData(
+          { ...data, materiais },
+          300,
+          services[0] && services[0].length
+        )
+      );
+      openNotification();
+      setTimeout(() => {
+        history.push("/");
+      }, 2000);
     }
-    addService(
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJhdGF0aW5oYUBiYXRhdGEuY29tIiwiaWF0IjoxNjAyNDE3NTU1LCJleHAiOjE2MDI0MjExNTUsInN1YiI6Ijg3MyJ9.C4zybQTwg6hM6D9vSI2b4hN98xCAHJfC39b4JiAEtBM",
-      inputData({ ...data, materiais }, 300, services[0] && services[0].length)
-    );
   };
   return (
     <Box>
