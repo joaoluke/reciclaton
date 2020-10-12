@@ -8,7 +8,18 @@ import {
   Rating,
   StarContainer,
 } from "./card.styled";
-export const content = (status = "Aberto", setRating, rating, price) => {
+export const content = (
+  status = "Aberto",
+  setRating,
+  rating,
+  { contribuicao }
+) => {
+  const price =
+    contribuicao &&
+    contribuicao.toLocaleString("pt-br", {
+      style: "currency",
+      currency: "BRL",
+    });
   const GetRating = () => {
     console.log(rating);
   };

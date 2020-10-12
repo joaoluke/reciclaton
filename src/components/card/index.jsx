@@ -43,7 +43,6 @@ const Card = ({ status }) => {
           </PopUp>
         )}
       </div>
-      {content(status, setRating, rating)}
     </Container>
   );
 };
