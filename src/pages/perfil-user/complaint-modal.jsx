@@ -129,15 +129,13 @@ const StyledButton = styled.button`
   :hover {
     color: #b70101;
     text-shadow: 1px 0px 2px rgba(0, 0, 0, 0.4);
+    color: white;
   }
   :focus {
     outline-style: none;
   }
   color: white;
   background-color: #f55536;
-  :hover {
-    color: white;
-  }
 `;
 
 const StyledP = styled.p`
