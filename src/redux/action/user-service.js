@@ -21,6 +21,5 @@ export const requestBusiness = (userId, token) => (dispatch) => {
     })
     .catch((err) => {
       console.log(err);
-      console.log("oi");
     });
 };
