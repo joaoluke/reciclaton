@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import decode from "jwt-decode";
@@ -10,15 +10,16 @@ import styled from "styled-components";
 const Perfil = () => {
   const dispatch = useDispatch();
   const { userId } = useParams();
+  const [visible, setVisible] = useState(false);
   let { user } = useSelector((state) => state.user);
   let logged = useSelector((state) => state.login);
   const decoded = logged.authen && decode(logged.authen);
   useEffect(
     () => dispatch(getPerfil(userId)),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [userId]
+    [userId, visible]
   );
-  console.log(user);
+  console.log(visible);
   return (
     <>
       {parseInt(userId) !== user.id ? (
@@ -39,7 +40,6 @@ const Perfil = () => {
                   </StyledRankUser>
                 </div>
               </StyledImgRankCenter>
-              
               <InfoDiv>
                 <h1>{user.brand}</h1>
                 <h2>{user.business}</h2>
@@ -54,12 +54,10 @@ const Perfil = () => {
                   </p>
                 </div>
               </InfoDiv>
-
-              <div>
-                <StyledReportDiv>
-                  <p>Denuncia!</p>
-                </StyledReportDiv>
-              </div>
+              <StyledReportDiv>
+                <ReportButton onClick={() => { setVisible(true) }}>Denuncia?</ReportButton>
+                <FuncButton>Emitir Chamado</FuncButton>
+              </StyledReportDiv>
 
             </StyledPerfilDiv>
             <StyledPerfilMaterials>
@@ -91,7 +89,7 @@ const StyledPerfilDiv = styled.div`
   margin: 0 auto;
   text-align: center;
   @media only screen and (min-width:768px){
-    justify-content: space-around;
+    justify-content:space-between;
   }
   `;
 
@@ -153,10 +151,61 @@ const InfoDiv = styled.div`
     display:flex;
     flex-flow: column nowrap;
     justify-content: center;
+    margin: 0 2vw;
 
 `
-
 const StyledReportDiv = styled.div`
-  height: 20vh; 
-  margin: 1vh auto;
+  height: fit-content; 
+  margin: 0 3vw;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-around;
+  align-items:center;
+  font-size: 1.2rem;
+  @media only screen and (max-width:768px){
+    width: 100vw;
+    flex-flow: row wrap;
+  }
+  `
+const ReportButton = styled.button`
+
+  border: 0;
+  background-color: rgba(0,0,0,0);
+  height: calc(2.5rem + 15px);
+  padding: 15px;
+  font-weight:bolder;
+  text-align: center;
+  box-sizing: border-box;
+  :hover{
+    color: #B70101;
+    text-shadow: 1px 0px 2px rgba(0, 0, 0, 0.4);
+  }
+  :focus{
+    outline-style: none;
+  }
+  @media only screen and (max-width:768px){
+    color: white;
+    background-color:#F55536;
+    :hover{
+    color: white;
+  }
+
+  }
 `
+const FuncButton = styled(ReportButton)`
+  :hover {
+    color: #14453d;
+  }
+  @media only screen and (max-width: 768px) {
+    color: white;
+    background-color: rgb(104, 164, 40);
+    :hover {
+      color: white;
+    }
+  }
+`;
+
+//const StyledReportDiv = styled.div`
+  //height: 20vh; 
+  //margin: 1vh auto;
+//`
