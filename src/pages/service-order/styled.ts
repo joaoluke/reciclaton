@@ -11,8 +11,9 @@ export const StyledButton = styled.button`
     cursor: pointer;
     border-color: #84b84f;
   }
-    @media screen and (max-width: 800px) {
-      font-size: 0.75em;   
+  @media screen and (max-width: 800px) {
+    font-size: 0.75em;
+  }
 `;
 
 export const ContainerButton = styled.div`
