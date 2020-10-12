@@ -1,7 +1,6 @@
 import login from "./login";
+import userService from "./user-service";
 import user from "./user";
 import card from "./card-informations";
-import userService from "./user-service";
 import { combineReducers } from "redux";
-
-export default combineReducers({ login, user, card, userService });
+export default combineReducers({ login, userService, user, card });

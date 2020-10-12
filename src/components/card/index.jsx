@@ -76,7 +76,7 @@ const Card = ({ status, title, price, adress, children }) => {
           </PopUp>
         )}
       </div>
-      {content(status)}
+      {content(Aberto)}
     </Container>
   );
 };

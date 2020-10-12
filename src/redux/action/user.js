@@ -1,17 +1,15 @@
-import { SET_USER } from "../action/user";
+import axios from "axios";
 
-const defaultState = {
-  user: {},
+export const SET_USER = "SET_USER";
+
+export const getPerfil = (id) => (dispatch) => {
+  axios
+    .get(`https://reciclatonapi.herokuapp.com/664/users/${id}`)
+    .then(({ data }) => dispatch(setUser(data)))
+    .catch(({ response }) => console.log(response.data));
 };
 
-const userPage = (state = defaultState, action) => {
-  switch (action.type) {
-    case SET_USER:
-      const { user } = action;
-      return { ...state, user };
-    default:
-      return state;
-  }
-};
-
-export default userPage;
+const setUser = (user) => ({
+  type: SET_USER,
+  user,
+});

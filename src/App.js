@@ -1,14 +1,12 @@
 import React from "react";
-import ServiceOrder from "./pages/service-order";
-import Home from "./pages/home";
-import Card from "./components/card";
-import NewServiceCalls from "./pages/new-service-call";
-
+import Routes from "./components/routes";
+import Layout from "./components/layout";
 function App() {
   return (
     <div>
-      <ServiceOrder />
-      <NewServiceCalls />
+      <Layout>
+        <Routes />
+      </Layout>
     </div>
   );
 }
