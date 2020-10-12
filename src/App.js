@@ -1,13 +1,13 @@
 import React from "react";
-
-import ServiceOrder from "./pages/service-order";
-
+import Routes from "./components/routes";
+import Layout from "./components/layout";
 function App() {
   return (
     <div>
-      <ServiceOrder />
+      <Layout>
+        <Routes />
+      </Layout>
     </div>
   );
 }
-
 export default App;
