@@ -94,7 +94,8 @@ align-content: center;
 padding: 5%;
 :hover {
     cursor: pointer;
-    border: 1px solid gray;
+    // border: 0px 0px solid gray;
+    background-color: white;
     width: 150%;
 }
 span::first-letter{

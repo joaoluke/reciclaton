@@ -42,6 +42,7 @@ const BusinessRanking = () => {
   const [score, setScore] = useState("mensal");
   const [size, setSize] = useState("Sem filtro");
   const [category, setCategory] = useState("Sem filtro");
+  const [hasMore, setHasMore] = useState(20);
 
   const history = useHistory();
 
@@ -57,11 +58,13 @@ const BusinessRanking = () => {
 
   const setSizeValue = (value) => {
     const select = value.target.value;
+    setHasMore(20);
     return setSize(select);
   };
 
   const setCategoryValue = (value) => {
     const select = value.target.value;
+    setHasMore(20);
     return setCategory(select);
   };
 
@@ -70,8 +73,16 @@ const BusinessRanking = () => {
   const orderByScoreYear = (businessA, businessB) =>
     businessB.score.anual - businessA.score.anual;
 
+    window.onscroll = function (ev) {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+        setHasMore(hasMore + 20);
+      }
+    };
+
   return (
     <div>
+      {console.log(document.body.scrollHeight)}
+      {console.log()}
       <BusinessCard>
         <H1>Destaques do mês</H1>
         <Hr />
@@ -106,10 +117,16 @@ const BusinessRanking = () => {
       <StyledH3>Ranking</StyledH3>
       <BackgroundRank>
         <StyledDiv>
-          <StyledButton onClick={() => setScore("mensal")}>
+          <StyledButton onClick={() => {
+            setScore("mensal");
+            setHasMore(20);
+            }}>
             Ranking mensal
           </StyledButton>
-          <StyledButton onClick={() => setScore("anual")}>
+          <StyledButton onClick={() => {
+            setScore("anual");
+            setHasMore(20);
+            }}>
             Ranking anual
           </StyledButton>
         </StyledDiv>
@@ -158,124 +175,132 @@ const BusinessRanking = () => {
             {score === "mensal" &&
               size === "Sem filtro" &&
               category === "Sem filtro" &&
-              business.sort(orderByScoreMonth).map((item, index) => (
-                <Tr key={index}>
-                  <Td>{index + 1}ª</Td>
-                  <BrandTd>
-                    {<BrandImg src={item.imageUrl} />}
-                    <>&nbsp;&nbsp;&nbsp;</>
-                    {
-                      <StyledBrandSpan
-                        onClick={() => history.push(`users/${item.id}`)}
-                      >
-                        {item.brand}
-                      </StyledBrandSpan>
-                    }
-                  </BrandTd>
-                  <Td>
-                    {index === 0 && <ImageTrophies src={goldTrophie} />}
-                    {index === 1 && <ImageTrophies src={silverTrophie} />}
-                    {index === 2 && <ImageTrophies src={bronzeTrophie} />}
-                    {index <= business.sort(orderByScoreMonth).length / 3 &&
-                      index > 2 && <ImageTrophies src={goldHonor} />}
-                    {index > business.sort(orderByScoreMonth).length / 3 &&
-                      index <
-                        (2 * business.sort(orderByScoreMonth).length) / 3 && (
-                        <ImageTrophies src={silverHonor} />
-                      )}
-                    {index >=
-                      (2 * business.sort(orderByScoreMonth).length) / 3 &&
-                      index <=
-                        (3 * business.sort(orderByScoreMonth).length) / 3 && (
-                        <ImageTrophies src={bronzeHonor} />
-                      )}
-                  </Td>
-                  <ScoreTd>{item.score.mensal} </ScoreTd>
-                  <Td>
-                    <a href={item.website}>{item.website}</a>
-                  </Td>
-                  <Td>{item.business}</Td>
-                  <Td>
-                    <span>{item.businessSize}</span>
-                  </Td>
-                </Tr>
-              ))}
+              business.sort(orderByScoreMonth).map(
+                (item, index) =>
+                  index >= 0 &&
+                  index < hasMore && (
+                    <Tr key={index}>
+                      <Td>{index + 1}ª</Td>
+                      <BrandTd>
+                        {<BrandImg src={item.imageUrl} />}
+                        <>&nbsp;&nbsp;&nbsp;</>
+                        {
+                          <StyledBrandSpan
+                            onClick={() => history.push(`users/${item.id}`)}
+                          >
+                            {item.brand}
+                          </StyledBrandSpan>
+                        }
+                      </BrandTd>
+                      <Td>
+                        {index === 0 && <ImageTrophies src={goldTrophie} />}
+                        {index === 1 && <ImageTrophies src={silverTrophie} />}
+                        {index === 2 && <ImageTrophies src={bronzeTrophie} />}
+                        {index <= business.sort(orderByScoreMonth).length / 3 &&
+                          index > 2 && <ImageTrophies src={goldHonor} />}
+                        {index > business.sort(orderByScoreMonth).length / 3 &&
+                          index <
+                            (2 * business.sort(orderByScoreMonth).length) /
+                              3 && <ImageTrophies src={silverHonor} />}
+                        {index >=
+                          (2 * business.sort(orderByScoreMonth).length) / 3 &&
+                          index <=
+                            (3 * business.sort(orderByScoreMonth).length) /
+                              3 && <ImageTrophies src={bronzeHonor} />}
+                      </Td>
+                      <ScoreTd>{item.score.mensal} </ScoreTd>
+                      <Td>
+                        <a href={item.website}>{item.website}</a>
+                      </Td>
+                      <Td>{item.business}</Td>
+                      <Td>
+                        <span>{item.businessSize}</span>
+                      </Td>
+                    </Tr>
+                  )
+              )}
 
             {/* Ranking mensal-------------------------------------------- */}
 
             {score === "mensal" &&
-              size != "Sem filtro" &&
+              size !== "Sem filtro" &&
               category === "Sem filtro" &&
               business
                 .sort(orderByScoreMonth)
                 .filter((item) => item.businessSize === size)
-                .map((item, index) => (
-                  <Tr key={index}>
-                    <Td>{index + 1}ª</Td>
-                    <BrandTd>
-                      {<BrandImg src={item.imageUrl} />}
-                      <>&nbsp;&nbsp;&nbsp;</>
-                      {
-                        <StyledBrandSpan
-                          onClick={() => history.push(`users/${item.id}`)}
-                        >
-                          {item.brand}
-                        </StyledBrandSpan>
-                      }
-                    </BrandTd>
-                    <Td>
-                      {index === 0 && <ImageTrophies src={goldTrophie} />}
-                      {index === 1 && <ImageTrophies src={silverTrophie} />}
-                      {index === 2 && <ImageTrophies src={bronzeTrophie} />}
-                      {index <=
-                        business
-                          .sort(orderByScoreMonth)
-                          .filter((item) => item.businessSize === size).length /
-                          3 &&
-                        index > 2 && <ImageTrophies src={goldHonor} />}
-                      {index >
-                        business
-                          .sort(orderByScoreMonth)
-                          .filter((item) => item.businessSize === size).length /
-                          3 &&
-                        index <
-                          (2 *
+                .map(
+                  (item, index) =>
+                    index >= 0 &&
+                    index < hasMore && (
+                      <Tr key={index}>
+                        <Td>{index + 1}ª</Td>
+                        <BrandTd>
+                          {<BrandImg src={item.imageUrl} />}
+                          <>&nbsp;&nbsp;&nbsp;</>
+                          {
+                            <StyledBrandSpan
+                              onClick={() => history.push(`users/${item.id}`)}
+                            >
+                              {item.brand}
+                            </StyledBrandSpan>
+                          }
+                        </BrandTd>
+                        <Td>
+                          {index === 0 && <ImageTrophies src={goldTrophie} />}
+                          {index === 1 && <ImageTrophies src={silverTrophie} />}
+                          {index === 2 && <ImageTrophies src={bronzeTrophie} />}
+                          {index <=
                             business
                               .sort(orderByScoreMonth)
                               .filter((item) => item.businessSize === size)
-                              .length) /
-                            3 && <ImageTrophies src={silverHonor} />}
-                      {index >=
-                        (2 *
-                          business
-                            .sort(orderByScoreMonth)
-                            .filter((item) => item.businessSize === size)
-                            .length) /
-                          3 &&
-                        index <=
-                          (3 *
+                              .length /
+                              3 &&
+                            index > 2 && <ImageTrophies src={goldHonor} />}
+                          {index >
                             business
                               .sort(orderByScoreMonth)
                               .filter((item) => item.businessSize === size)
-                              .length) /
-                            3 && <ImageTrophies src={bronzeHonor} />}
-                    </Td>
-                    <ScoreTd>{item.score.mensal} </ScoreTd>
-                    <Td>
-                      <a href={item.website}>{item.website}</a>
-                    </Td>
-                    <Td>{item.business}</Td>
-                    <Td>{<span>{item.businessSize}</span>}</Td>
-                  </Tr>
-                ))}
+                              .length /
+                              3 &&
+                            index <
+                              (2 *
+                                business
+                                  .sort(orderByScoreMonth)
+                                  .filter((item) => item.businessSize === size)
+                                  .length) /
+                                3 && <ImageTrophies src={silverHonor} />}
+                          {index >=
+                            (2 *
+                              business
+                                .sort(orderByScoreMonth)
+                                .filter((item) => item.businessSize === size)
+                                .length) /
+                              3 &&
+                            index <=
+                              (3 *
+                                business
+                                  .sort(orderByScoreMonth)
+                                  .filter((item) => item.businessSize === size)
+                                  .length) /
+                                3 && <ImageTrophies src={bronzeHonor} />}
+                        </Td>
+                        <ScoreTd>{item.score.mensal} </ScoreTd>
+                        <Td>
+                          <a href={item.website}>{item.website}</a>
+                        </Td>
+                        <Td>{item.business}</Td>
+                        <Td>{<span>{item.businessSize}</span>}</Td>
+                      </Tr>
+                    )
+                )}
 
             {score === "mensal" &&
               size === "Sem filtro" &&
-              category != "Sem filtro" &&
+              category !== "Sem filtro" &&
               business
                 .sort(orderByScoreMonth)
                 .filter((item) => item.business === category)
-                .map((item, index) => (
+                .map((item, index) => index >= 0 && index < hasMore && (
                   <Tr key={index}>
                     <Td>{index + 1}ª</Td>
                     <BrandTd>
@@ -336,13 +361,13 @@ const BusinessRanking = () => {
                 ))}
 
             {score === "mensal" &&
-              size != "Sem filtro" &&
-              category != "Sem filtro" &&
+              size !== "Sem filtro" &&
+              category !== "Sem filtro" &&
               business
                 .sort(orderByScoreMonth)
                 .filter((item) => item.business === category)
                 .filter((item) => item.businessSize === size)
-                .map((item, index) => (
+                .map((item, index) => index >= 0 && index < hasMore && (
                   <Tr key={index}>
                     <Td>{index + 1}ª</Td>
                     <BrandTd>
@@ -412,7 +437,7 @@ const BusinessRanking = () => {
             {score === "anual" &&
               size === "Sem filtro" &&
               category === "Sem filtro" &&
-              business.sort(orderByScoreYear).map((item, index) => (
+              business.sort(orderByScoreYear).map((item, index) => index >= 0 && index < hasMore && (
                 <Tr key={index}>
                   <Td>{index + 1}ª</Td>
                   <BrandTd>
@@ -454,12 +479,12 @@ const BusinessRanking = () => {
               ))}
 
             {score === "anual" &&
-              size != "Sem filtro" &&
+              size !== "Sem filtro" &&
               category === "Sem filtro" &&
               business
                 .sort(orderByScoreYear)
                 .filter((item) => item.businessSize === size)
-                .map((item, index) => (
+                .map((item, index) => index >= 0 && index < hasMore && (
                   <Tr key={index}>
                     <Td>{index + 1}ª</Td>
                     <BrandTd>
@@ -521,11 +546,11 @@ const BusinessRanking = () => {
 
             {score === "anual" &&
               size === "Sem filtro" &&
-              category != "Sem filtro" &&
+              category !== "Sem filtro" &&
               business
                 .sort(orderByScoreYear)
                 .filter((item) => item.business === category)
-                .map((item, index) => (
+                .map((item, index) => index >= 0 && index < hasMore && (
                   <Tr key={index}>
                     <Td>{index + 1}ª</Td>
                     <BrandTd>
@@ -586,13 +611,13 @@ const BusinessRanking = () => {
                 ))}
 
             {score === "anual" &&
-              size != "Sem filtro" &&
-              category != "Sem filtro" &&
+              size !== "Sem filtro" &&
+              category !== "Sem filtro" &&
               business
                 .sort(orderByScoreYear)
                 .filter((item) => item.businessSize === size)
                 .filter((item) => item.business === category)
-                .map((item, index) => (
+                .map((item, index) => index >= 0 && index < hasMore && (
                   <Tr key={index}>
                     <Td>{index + 1}ª</Td>
                     <BrandTd>
