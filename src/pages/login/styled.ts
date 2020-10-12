@@ -4,7 +4,8 @@ import natureza from "./images/natureza.jpg";
 export const FormContainer = styled.div`
   display: flex;
   align-items: center;
-  height: 100vh;
+  height: calc(100vh - 46px);
+  width: 100vw;
   justify-content: center;
   background-image: url(${natureza});
   background-size: cover;
