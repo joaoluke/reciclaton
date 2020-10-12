@@ -1,40 +1,91 @@
 import React from 'react';
 import Modal from 'react-modal';
 import axios from "axios";
-import styled from "styled-components"
+import {
+  StyledForm,
+  StyledTextArea,
+  StyledInput,
+  StyledLabel,
+  StyledButtonSubmit,
+  StyledP,
+  StyledButtonCancel,
+  StyledButtonDiv
+} from "./styled";
 import { useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
+
+class Report {
+  constructor( 
+    nome = "", 
+    email = "", 
+    foto, 
+    id, 
+    id_denunciado, 
+    mensagem_denuncia, 
+    )
+  {
+    this.nome = nome;
+    this.email = email;
+    this.foto = foto;
+    this.id = id;
+    this.id_denunciado = id_denunciado;
+    this.mensagem_denuncia = mensagem_denuncia;
+    this.reviews = 0;
+    this.indicted = 0;
+    this.innocent = 0;
+  }
+};
 
 const Requisition = (data) => {
-
   axios
     .post("https://reciclatonapi.herokuapp.com/complaint", data)
-    .then(({ data }) => { })
-    .catch(({ data }) => { })
-
+    .then((resp) => {
+      console.log(resp);
+    })
+    .catch((resp) => {
+      console.log(resp.response);
+    });
 }
 
 const Complaint = ({ visible, setVisible }) => {
-  const { register, handleSubmit, watch, errors } = useForm();
-  const onSubmit = data => console.log(data);
+  const { register, handleSubmit, errors } = useForm();
+  const { userId } = useParams()
+  const onSubmit = data => {
+    axios
+    .get("https://reciclatonapi.herokuapp.com/complaint")
+    .then((resp) => { 
+      const reportSize = resp.data.length + 1
+      const newReport = new Report(
+        data.name,
+        data.email,
+        data.foto,
+        reportSize,
+        userId,
+        data.mensagem_denuncia
+      );
+      Requisition(newReport)
+    })
+    .catch((resp) => { console.log(resp.data) })
+  };
   
   const customStyles = {
     content : {
-      top                   : '50%',
-      left                  : '50%',
-      right                 : 'auto',
-      bottom                : 'auto',
-      marginRight           : '-50%',
-      transform             : 'translate(-50%, -50%)'
+      top : '50%',
+      left : '50%',
+      right : 'auto',
+      bottom : 'auto',
+      marginRight : '-50%',
+      transform : 'translate(-50%, -50%)'
     }
   };
 
   return (
     <Modal
-      isOpen={true}
+      isOpen={visible}
       onAfterOpen={() => {
         console.log("open");
       }}
-      onRequestClose={() => console.log("close")}
+      onRequestClose={() => setVisible(false)}
       ariaHideApp={false}
       style={customStyles}
       contentLabel="Example Modal"
@@ -47,8 +98,8 @@ const Complaint = ({ visible, setVisible }) => {
         <StyledInput
           name="email"
           ref={register({
-            // eslint-disable-next-line
             pattern: {
+              // eslint-disable-next-line
               value: /^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$/i,
               message: "Por favor colocar um email válido.",
             },
@@ -60,8 +111,8 @@ const Complaint = ({ visible, setVisible }) => {
           name="foto"
           ref={register({
             required: "Campo Obrigatório",
-            // eslint-disable-next-line
             pattern: {
+              // eslint-disable-next-line
               value: /((([A-Za-z]{0,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/g,
               message: "Por favor colocar um link válido.",
             },
@@ -80,65 +131,19 @@ const Complaint = ({ visible, setVisible }) => {
         {errors && errors?.mensagem_denuncia?.message && (
           <StyledP>{errors?.mensagem_denuncia?.message}</StyledP>
         )}
-        <StyledButton type="submit">Enviar</StyledButton>
+        <StyledButtonDiv>
+          <StyledButtonCancel
+            onClick={() => {
+              setVisible(false);
+            }}
+          >
+            Cancelar
+          </StyledButtonCancel>
+          <StyledButtonSubmit type="submit">Enviar</StyledButtonSubmit>
+        </StyledButtonDiv>
       </StyledForm>
     </Modal>
   );
 }
 
 export default Complaint;
-
-const StyledForm = styled.form`
-  display: flex;
-  flex-flow: column;
-  text-align: center;
-  padding: 10px;
-  width: 20vw;
-  @media only screen and (max-width: 768px) {
-    width: 50vw;
-  }
-`;
-
-const StyledTextArea = styled.textarea`
-  resize: none;
-  border: 1px solid;
-`;
-
-const StyledInput = styled.input`
-  border: 1px solid;
-`;
-
-const StyledLabel = styled.label`
-  margin: 20px 0 5px;
-  
-  :nth-child(1){
-    margin-top: 0px;
-  }
-`
-
-const StyledButton = styled.button`
-  width: fit-content;
-  margin: 20px auto 0;
-  border: 0;
-  background-color: rgba(0, 0, 0, 0);
-  height: calc(2rem + 15px);
-  padding: 0 20px;
-  font-weight: bolder;
-  text-align: center;
-  box-sizing: border-box;
-  :hover {
-    color: #b70101;
-    text-shadow: 1px 0px 2px rgba(0, 0, 0, 0.4);
-    color: white;
-  }
-  :focus {
-    outline-style: none;
-  }
-  color: white;
-  background-color: #f55536;
-`;
-
-const StyledP = styled.p`
-  margin: 0;
-  color: red;
-`;

@@ -127,3 +127,85 @@ export const FuncButton = styled(ReportButton)`
   }
 
 `
+
+export const StyledForm = styled.form`
+  display: flex;
+  flex-flow: column;
+  text-align: center;
+  padding: 10px;
+  width: 20vw;
+  @media only screen and (max-width: 768px) {
+    width: 50vw;
+  }
+`;
+
+export const StyledTextArea = styled.textarea`
+  resize: none;
+  border: 1px solid;
+`;
+
+export const StyledInput = styled.input`
+  border: 1px solid;
+`;
+
+export const StyledLabel = styled.label`
+  margin: 20px 0 5px;
+  
+  :nth-child(1){
+    margin-top: 0px;
+  }
+`
+
+export const StyledButtonSubmit = styled.button`
+  width: fit-content;
+  margin: 20px auto 0;
+  border: 0;
+  background-color: rgba(0, 0, 0, 0);
+  height: calc(2rem + 15px);
+  padding: 0 20px;
+  font-weight: bolder;
+  text-align: center;
+  box-sizing: border-box;
+  :hover {
+    color: #b70101;
+    text-shadow: 1px 0px 2px rgba(0, 0, 0, 0.4);
+    color: white;
+  }
+  :focus {
+    outline-style: none;
+  }
+  color: white;
+  background-color: #68A428;
+`;
+
+export const StyledP = styled.p`
+  margin: 0;
+  color: red;
+`;
+
+export const StyledButtonCancel = styled.button`
+  width: fit-content;
+  margin: 20px auto 0;
+  border: 0;
+  background-color: rgba(0, 0, 0, 0);
+  height: calc(2rem + 15px);
+  padding: 0 20px;
+  font-weight: bolder;
+  text-align: center;
+  box-sizing: border-box;
+  :hover {
+    color: #b70101;
+    text-shadow: 1px 0px 2px rgba(0, 0, 0, 0.4);
+    color: white;
+  }
+  :focus {
+    outline-style: none;
+  }
+  color: white;
+  background-color: #f55536;
+`;
+
+export const StyledButtonDiv = styled.div`
+  display: flex;
+  justify-content: space-around;
+`;
