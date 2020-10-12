@@ -39,9 +39,7 @@ const Perfil = () => {
                   </StyledRankUser>
                 </div>
               </StyledImgRankCenter>
-              {/*<div>
-                <div style={{ height: "20vh", width: "80vw", margin: "1vh auto" }}></div>
-              </div>*/}
+              
               <InfoDiv>
                 <h1>{user.brand}</h1>
                 <h2>{user.business}</h2>
@@ -57,6 +55,11 @@ const Perfil = () => {
                 </div>
               </InfoDiv>
 
+              <div>
+                <StyledReportDiv>
+                  <p>Denuncia!</p>
+                </StyledReportDiv>
+              </div>
 
             </StyledPerfilDiv>
             <StyledPerfilMaterials>
@@ -151,4 +154,9 @@ const InfoDiv = styled.div`
     flex-flow: column nowrap;
     justify-content: center;
 
+`
+
+const StyledReportDiv = styled.div`
+  height: 20vh; 
+  margin: 1vh auto;
 `
