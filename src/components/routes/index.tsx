@@ -3,7 +3,7 @@ import Login from "../../pages/login";
 import User from "../../pages/perfil-user";
 import Home from "../../pages/home";
 import { Switch, Route } from "react-router-dom";
-import BusinessRanking from '../business-ranking'
+import BusinessRanking from "../business-ranking";
 const Routes = () => {
   return (
     <>
@@ -11,14 +11,8 @@ const Routes = () => {
         <Route exact path="/login">
           <Login />
         </Route>
-<<<<<<< HEAD
-        <Route path="/ranking">
-          {/* *PAGINA DE RANKING* */}
-            <BusinessRanking/>
-=======
         <Route exact path="/ranking">
-          *PAGINA DE RANKING*
->>>>>>> master
+          <BusinessRanking />
         </Route>
         <Route exact path="/profile/:userId">
           <User />

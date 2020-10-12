@@ -3,18 +3,16 @@ import React from "react";
 import { Td, Tr } from "../../styled-business";
 import { useHistory } from "react-router-dom";
 
-const Case2 = ({
+const Case3 = ({
   index,
   item,
-  size,
   bronzeTrophy,
   silverTrophy,
   goldTrophy,
-  business,
+  currentBusiness,
   goldHonor,
   silverHonor,
   bronzeHonor,
-  orderByScoreMonth,
 }) => {
   const history = useHistory();
   return (
@@ -49,37 +47,19 @@ const Case2 = ({
         {index === 0 && <img src={goldTrophy} style={{ width: "30px" }} />}
         {index === 1 && <img src={silverTrophy} style={{ width: "30px" }} />}
         {index === 2 && <img src={bronzeTrophy} style={{ width: "30px" }} />}
-        {index <=
-          business
-            .sort(orderByScoreMonth)
-            .filter((item) => item.businessSize === size).length /
-            3 &&
-          index > 2 && <img src={goldHonor} style={{ width: "30px" }} />}
-        {index >
-          business
-            .sort(orderByScoreMonth)
-            .filter((item) => item.businessSize === size).length /
-            3 &&
-          index <
-            (2 *
-              business
-                .sort(orderByScoreMonth)
-                .filter((item) => item.businessSize === size).length) /
-              3 && <img src={silverHonor} style={{ width: "30px" }} />}
-        {index >=
-          (2 *
-            business
-              .sort(orderByScoreMonth)
-              .filter((item) => item.businessSize === size).length) /
-            3 &&
-          index <=
-            (3 *
-              business
-                .sort(orderByScoreMonth)
-                .filter((item) => item.businessSize === size).length) /
-              3 && <img src={bronzeHonor} style={{ width: "30px" }} />}
+        {index <= currentBusiness.length / 3 && index > 2 && (
+          <img src={goldHonor} style={{ width: "30px" }} />
+        )}
+        {index > currentBusiness.length / 3 &&
+          index < (2 * currentBusiness.length) / 3 && (
+            <img src={silverHonor} style={{ width: "30px" }} />
+          )}
+        {index >= (2 * currentBusiness.length) / 3 &&
+          index <= (3 * currentBusiness.length) / 3 && (
+            <img src={bronzeHonor} style={{ width: "30px" }} />
+          )}
       </Td>
-      <Td style={{ color: "#5A91C7" }}>{item.score.mensal} </Td>
+      <Td style={{ color: "#5A91C7" }}>{item.score.anual} </Td>
       <Td>
         <a href={item.website}>{item.website}</a>
       </Td>
@@ -89,4 +69,4 @@ const Case2 = ({
   );
 };
 
-export default Case2;
+export default Case3;

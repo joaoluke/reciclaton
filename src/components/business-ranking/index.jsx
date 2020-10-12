@@ -1,46 +1,41 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import axios from "axios";
 import Month from "./components/month";
 import Year from "./components/year";
+import Top3 from "./components/components-top3";
 import {
   BackgroundRank,
   StyledButton,
   StyledTable,
-  Td,
-  Tr,
-  Option,
+  BusinessCard,
+  SpotlightDiv,
 } from "./styled-business";
-import { useHistory } from "react-router-dom";
-import { Pagination } from "antd";
 import "antd/dist/antd.css";
+
 //images
-import goldTrophie from "./images/trophie.png";
-import silverTrophie from "./images/trophie-prata.png";
-import bronzeTrophie from "./images/trophie-bronze.png";
+import goldTrophy from "./images/trophy.png";
+import silverTrophy from "./images/trophy-prata.png";
+import bronzeTrophy from "./images/trophy-bronze.png";
 import goldHonor from "./images/medalha-ouro.png";
 import silverHonor from "./images/medalha-prata.png";
 import bronzeHonor from "./images/medalha-bronze.png";
 
 const BusinessRanking = () => {
   const [business, setBusiness] = useState([]);
-  const [saveBusiness, setSaveBusiness] = useState([]);
   const [score, setScore] = useState("mensal");
   const [size, setSize] = useState("Sem filtro");
   const [category, setCategory] = useState("Sem filtro");
   const [hasMore, setHasMore] = useState(false);
   const [currentBusiness, setCurrentBusiness] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
+  console.log(currentBusiness);
   const loading = business.length === 0;
-  console.log(loading);
-  console.log(pageNumber);
-  console.log();
-
-  const history = useHistory();
   const observer = useRef();
 
   const lastBusinessRefElement = useCallback(
     (node) => {
-      console.log("lastBusinessRefElement");
       if (loading) return;
       if (observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver((entries) => {
@@ -54,13 +49,29 @@ const BusinessRanking = () => {
   );
 
   useEffect(() => {
-    console.log("oi");
     if (loading) return;
     let beginning = 0;
     let end = currentBusiness.length + 25;
-    setCurrentBusiness([...business].slice(beginning, end));
+    if (category === "Sem filtro") {
+      setCurrentBusiness([...business].slice(beginning, end));
+    } else {
+      let businessCategory = business.filter(
+        (item) => item.business === category
+      );
+      setCurrentBusiness([...businessCategory].slice(beginning, end));
+    }
+    if (size !== "Sem filtro") {
+      let businessSize = business.filter((item) => item.businessSize === size);
+      setCurrentBusiness([...businessSize].slice(beginning, end));
+    }
+    if (size !== "Sem filtro" && category !== "Sem filtro") {
+      let businessSize = business
+        .filter((item) => item.businessSize === size)
+        .filter((item) => item.business === category);
+      setCurrentBusiness([...businessSize].slice(beginning, end));
+    }
     setHasMore(business.length !== currentBusiness.length);
-  }, [pageNumber, loading]);
+  }, [pageNumber, loading, category, size]);
 
   useEffect(() => getBusiness(), []);
 
@@ -73,6 +84,18 @@ const BusinessRanking = () => {
       .catch(({ error }) => console.log(error));
   };
 
+  const setSizeValue = (value) => {
+    setCurrentBusiness([]);
+    const select = value.target.value;
+    return setSize(select);
+  };
+
+  const setCategoryValue = (value) => {
+    setCurrentBusiness([]);
+    const select = value.target.value;
+    return setCategory(select);
+  };
+
   const orderByScoreMonth = (businessA, businessB) =>
     businessB.score.mensal - businessA.score.mensal;
   const orderByScoreYear = (businessA, businessB) =>
@@ -80,14 +103,55 @@ const BusinessRanking = () => {
 
   return (
     <div style={{}}>
+      <BusinessCard>
+        <h1 style={{ fontSize: "26px" }}>Destaques do mês</h1>
+        <SpotlightDiv>
+          {score === "mensal"
+            ? business
+                .sort(orderByScoreMonth)
+                .map(
+                  (item, index) =>
+                    index >= 0 &&
+                    index <= 2 && (
+                      <Top3
+                        goldTrophy={goldTrophy}
+                        silverTrophy={silverTrophy}
+                        bronzeTrophy={bronzeTrophy}
+                        score={score}
+                        item={item}
+                        index={index}
+                      />
+                    )
+                )
+            : business
+                .sort(orderByScoreYear)
+                .map(
+                  (item, index) =>
+                    index >= 0 &&
+                    index <= 2 && (
+                      <Top3
+                        goldTrophy={goldTrophy}
+                        silverTrophy={silverTrophy}
+                        bronzeTrophy={bronzeTrophy}
+                        score={score}
+                        item={item}
+                        index={index}
+                      />
+                    )
+                )}
+        </SpotlightDiv>
+      </BusinessCard>
+      <h3 style={{ display: "flex", justifyContent: "flex-start" }}>
+        Overall ranking
+      </h3>
       <BackgroundRank>
         <div
           style={{
             display: "flex",
-            marginBottom: "5%",
+            marginBottom: "2.5%",
             justifyContent: "center",
             alignItems: "center",
-            marginTop: "8%",
+            // marginTop: "4%",
           }}
         >
           <StyledButton onClick={() => setScore("mensal")}>
@@ -99,63 +163,39 @@ const BusinessRanking = () => {
         </div>
         <StyledTable border="1px" cellPadding="5px" cellSpacing="0">
           <thead style={{ backgroundColor: "#C0C0C0" }}>
-            <th>Position</th>
-            <th>Name</th>
-            <th>Awards</th>
+            <th>Posição</th>
+            <th>Nome</th>
+            <th>Prêmios</th>
             <th>
-              <span>{score === "mensal" ? "Monthly" : "Yearly"}</span> score
+              <span>{score === "mensal" ? "Monthly" : "Yearly"}</span> Score
             </th>
             <th>Website</th>
             <th>
-              <details>
-                <summary>Category</summary>
-                <Option onClick={() => setCategory("Sem filtro")}>
-                  Remover filtro
-                </Option>
-                <Option
-                  onClick={() => setCategory("Supermercado/Hipermercado")}
-                >
+              <select name="Categoria" onChange={setCategoryValue}>
+                <option value="Sem filtro">Remover filtro</option>
+                <option value="Supermercado/Hipermercado">
                   Supermercado/Hipermercado{" "}
-                </Option>
-                <Option onClick={() => setCategory("Restaurante/Bar")}>
-                  Restaurante/Bar
-                </Option>
-                <Option onClick={() => setCategory("Indústria")}>
-                  Indústria
-                </Option>
-                <Option onClick={() => setCategory("Mercearia")}>
-                  Mercearia
-                </Option>
-                <Option onClick={() => setCategory("Drogaria")}>
-                  Drogaria
-                </Option>
-                <Option onClick={() => setCategory("Shopping")}>
-                  Shopping
-                </Option>
-                <Option onClick={() => setCategory("Coleta")}>Coleta</Option>
-                <Option onClick={() => setCategory("Padaria")}>Padaria</Option>
-                <Option onClick={() => setCategory("Varejista")}>
-                  Varejista
-                </Option>
-                <Option onClick={() => setCategory("Hotel/Motel")}>
-                  Hotel/Motel
-                </Option>
-                <Option onClick={() => setCategory("Condominio")}>
-                  Condominio
-                </Option>
-              </details>
+                </option>
+                <option value="Restaurante/Bar">Restaurante/Bar</option>
+                <option value="Indústria">Indústria</option>
+                <option value="Mercearia">Mercearia</option>
+                <option value="Drogaria">Drogaria</option>
+                <option value="Shopping">Shopping</option>
+                <option value="Coleta">Coleta</option>
+                <option value="Padaria">Padaria</option>
+                <option value="Varejista">Varejista</option>
+                <option value="Hotel/Motel">Hotel/Motel</option>
+                <option value="Condominio">Condominio</option>
+              </select>
             </th>
             <th>
-              <details>
-                <summary>Filter by business size</summary>
-                <Option onClick={() => setSize("Sem filtro")}>
-                  Remover filtro
-                </Option>
-                <Option onClick={() => setSize("microempresa")}>Micro</Option>
-                <Option onClick={() => setSize("pequena")}>Pequena</Option>
-                <Option onClick={() => setSize("media")}>Média</Option>
-                <Option onClick={() => setSize("grande")}>Grande</Option>
-              </details>
+              <select name="Porte da Empresa" onChange={setSizeValue}>
+                <option value="Sem filtro">Remover filtro</option>
+                <option value="microempresa">Micro</option>
+                <option value="pequena">Pequena</option>
+                <option value="media">Média</option>
+                <option value="grande">Grande</option>
+              </select>
             </th>
           </thead>
           <tbody>
@@ -165,35 +205,35 @@ const BusinessRanking = () => {
                 goldHonor={goldHonor}
                 silverHonor={silverHonor}
                 bronzeHonor={bronzeHonor}
-                bronzeTrophie={bronzeTrophie}
-                silverTrophie={silverTrophie}
-                goldTrophie={goldTrophie}
+                bronzeTrophy={bronzeTrophy}
+                silverTrophy={silverTrophy}
+                goldTrophy={goldTrophy}
                 orderByScoreMonth={orderByScoreMonth}
                 score={score}
                 size={size}
                 category={category}
                 currentBusiness={currentBusiness}
+                business={business}
               />
 
               <Year
+                lastBusinessRefElement={lastBusinessRefElement}
                 goldHonor={goldHonor}
                 silverHonor={silverHonor}
                 bronzeHonor={bronzeHonor}
-                bronzeTrophie={bronzeTrophie}
-                silverTrophie={silverTrophie}
-                goldTrophie={goldTrophie}
-                orderByScoreMonth={orderByScoreMonth}
+                bronzeTrophy={bronzeTrophy}
+                silverTrophy={silverTrophy}
+                goldTrophy={goldTrophy}
+                orderByScoreYear={orderByScoreYear}
                 score={score}
                 size={size}
                 category={category}
-                business={business}
+                currentBusiness={currentBusiness}
               />
             </>
           </tbody>
         </StyledTable>
       </BackgroundRank>
-      {console.log(business)}
-      {console.log(currentBusiness, "here save business")}
     </div>
   );
 };
