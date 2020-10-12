@@ -13,7 +13,7 @@ export const content = (status, setRating, rating, price) => {
     console.log(rating);
   };
   switch (status) {
-    case "aberto":
+    case "Aberto":
       return (
         <>
           <TitlePrice>Valor:{price}</TitlePrice>
@@ -94,6 +94,6 @@ export const content = (status, setRating, rating, price) => {
       );
 
     default:
-      break;
+      return;
   }
 };

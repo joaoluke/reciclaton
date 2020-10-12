@@ -2,6 +2,7 @@ import React from "react";
 import Login from "../../pages/login";
 import User from "../../pages/perfil-user";
 import Home from "../../pages/home";
+import ServiceOrder from "../../pages/new-service-call";
 import { Switch, Route } from "react-router-dom";
 const Routes = () => {
   return (
@@ -21,6 +22,9 @@ const Routes = () => {
         </Route>
         <Route exact path="/">
           <Home />
+        </Route>
+        <Route path="/new-service-order">
+          <ServiceOrder />
         </Route>
       </Switch>
     </>
