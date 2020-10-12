@@ -2,7 +2,8 @@ import React from "react";
 import Login from "../../pages/login";
 import User from "../../pages/perfil-user";
 import Home from "../../pages/home";
-import ServiceOrder from "../../pages/new-service-call";
+import NewServiceOrder from "../../pages/new-service-call";
+import ServiceOrder from "../../pages/service-order";
 import { Switch, Route } from "react-router-dom";
 const Routes = () => {
   return (
@@ -18,13 +19,14 @@ const Routes = () => {
           <User />
         </Route>
         <Route exact path="/services/:userId">
-          *PAGINA DE SERVICO*
+          <ServiceOrder />
         </Route>
         <Route exact path="/">
           <Home />
         </Route>
+
         <Route path="/new-service-order">
-          <ServiceOrder />
+          <NewServiceOrder />
         </Route>
       </Switch>
     </>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { content } from "./helper";
 import {
   Container,
@@ -13,56 +14,22 @@ import {
   Choice,
   TitlePrice,
 } from "./card.styled";
-const Card = ({ status, title, price, adress, children }) => {
+const Card = ({ status }) => {
   const [popUp, setPopUp] = useState(false);
   const [rating, setRating] = useState(0);
-  const inputData = (values, conctractor, contracted, idOs) => {
-    const data = {
-      contratante_id: conctractor,
-      contratado_id: contracted,
-      contribuicao: "n",
-      quantidade_estimada: "em-sacos-de-lixo-200L",
-      materiais: {
-        organic: "trueOrFalse",
-        plastic: "trueOrFalse",
-        glass: "trueOrFalse",
-        paper: "trueOrFalse",
-        metal: "trueOrFalse",
-        " battery": "trueOrFalse",
-        cloth: "trueOrFalse",
-        " electronic": "trueOrFalse",
-        rubber: "trueOrFalse",
-      },
-      id_os: idOs,
-      status: "em-aberto||aceito||em-andamento||finalizado||cancelado",
-      "avaliacao-contratado": "n",
-      "avaliacao-contratante": "n",
-      "endereço-de-busca": {
-        street: "Avenida Marquês de São Vicente",
-        number: 43,
-        neighborhood: "Jardim Paulista",
-        zip: "25052872",
-        city: "Santa Bárbara",
-        state: "BA",
-      },
-    };
-    return [...data, values];
-  };
-  const data = new Date();
-  console.log(data);
-  const Aberto = "Aberto";
-
+  const { brand, adress } = useSelector((state) => state.card);
+  const test = useSelector((state) => state);
+  console.log(test);
   return (
     <Container>
       <CloseCointainer>
         <CloseCard onClick={() => setPopUp(true)} />
       </CloseCointainer>
-      <CardTitle>{title ? title : "No Title"}</CardTitle>
+      <CardTitle>{brand ? brand : "No Title"}</CardTitle>
       <Content>
-        <Title>Endereço: {adress}</Title>
-        <Title>Materiais: {children}</Title>
+        <Title>Endereço: {adress && adress.street + " " + adress.city}</Title>
+        <Title>Materiais: {}</Title>
       </Content>
-      {content("Finalizado", setRating, rating)}
       <div>
         {popUp && (
           <PopUp>
@@ -76,7 +43,7 @@ const Card = ({ status, title, price, adress, children }) => {
           </PopUp>
         )}
       </div>
-      {content(Aberto)}
+      {content(status, setRating, rating)}
     </Container>
   );
 };

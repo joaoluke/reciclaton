@@ -8,7 +8,7 @@ import {
   Rating,
   StarContainer,
 } from "./card.styled";
-export const content = (status, setRating, rating, price) => {
+export const content = (status = "Aberto", setRating, rating, price) => {
   const GetRating = () => {
     console.log(rating);
   };
@@ -32,7 +32,7 @@ export const content = (status, setRating, rating, price) => {
       return (
         <TitlePrice style={{ fontSize: "35px" }}>Valor:{price}</TitlePrice>
       );
-    case "Em andamento":
+    case "Em Andamento":
       return (
         <>
           <TitlePrice>
