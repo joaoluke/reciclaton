@@ -8,13 +8,13 @@ const cardInformations = (informations) => ({
 
 export const changeInformations = (id, token, values) => {
   const header = {
-    headers: { Authotization: `Bearer ${token}` },
+    headers: { Authorization: `Bearer ${token}` },
   };
   axios
     .patch(
       `https://reciclatonapi.herokuapp.com/664/users/${id}`,
-      header,
-      values
+      values,
+      header
     )
     .then(({ data }) => {
       console.log(data);

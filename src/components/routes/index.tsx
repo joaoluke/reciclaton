@@ -25,7 +25,7 @@ const Routes = () => {
           <Home />
         </Route>
 
-        <Route path="/new-service-order">
+        <Route path="/new-service-order/:userId">
           <NewServiceOrder />
         </Route>
       </Switch>

@@ -11,10 +11,13 @@ import {
   Error,
   Notification,
 } from "./new-service.style";
+import decode from "jwt-decode";
 import { useForm } from "react-hook-form";
 import { addService, getService } from "../../redux/action/card-informations";
 import { useDispatch, useSelector } from "react-redux";
 import { inputData } from "./helper";
+import { changeInformations } from "../../redux/action/card-informations";
+import { requestBusiness } from "../../redux/action/user-service";
 import { useHistory } from "react-router-dom";
 const materiais = {
   organic: false,
@@ -34,11 +37,14 @@ const NewServiceCalls = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const services = useSelector((state) => state.card);
-  const { brand, id } = useSelector((state) => state.user);
-
+  const { brand, id, business } = useSelector((state) => state.userService);
   useEffect(() => {
     dispatch(getService());
-  }, [dispatch]);
+    if (!brand) {
+      dispatch(requestBusiness(decode(token).sub, token));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [brand, dispatch]);
 
   const token = useSelector((state) => state.login.authen);
 
@@ -61,21 +67,29 @@ const NewServiceCalls = () => {
         token,
         inputData(
           { ...data, materiais },
-          300,
-          services[0] && services[0].length
+          id,
+          services[0] && services[0].length + 1
         )
       );
+
+      changeInformations(id, token, {
+        os: { id: services[0].length + 1 },
+      });
+
       setApproved(true);
       setTimeout(() => {
-        history.push("/");
+        history.push(`/services/${id}`);
       }, 2000);
     }
-    inputData({ ...data, materiais }, 300, services[0] && services[0].length);
-    setApproved(false);
+    inputData(
+      { ...data, materiais },
+      id,
+      services[0] && services[0].length + 1
+    );
   };
   return (
     <Box>
-      <MainTitle>{brand && brand}Title</MainTitle>
+      <MainTitle>{brand ? brand + " / " + business : "Title"}</MainTitle>
       <form onSubmit={handleSubmit(onSubmit)}>
         <SubTitles>Materiais para a coleta</SubTitles>
         <StyledLabel>Valor para a coleta </StyledLabel>
