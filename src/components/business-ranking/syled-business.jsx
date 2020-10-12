@@ -108,5 +108,82 @@ span::first-letter{
         width: 100%;
     }
 }
+`;
 
+export const H1 = styled.h1`
+font-size: 26px;
+`;
+
+export const Hr = styled.hr`
+heigth: 1px;
+width: 100%;
+`;
+
+export const StyledSpan = styled.span`
+font-size: 40px;
+`;
+
+export const StyledImg = styled.img`
+width: 100px;
+border-radius: 60px;
+`;
+
+export const StyledSpanBrand = styled.span`
+font-weigth: bolder;
+`;
+
+export const StyledH3 = styled.h3`
+display: flex;
+justify-content: flex-start;
+`;
+
+export const StyledDiv = styled.div`
+display: flex;
+margin-bottom: 2.5%;
+justify-content: center;
+align-items: center;
+`;
+
+export const StyledThead = styled.thead`
+background-color: #60789C;
+`;
+
+export const StyledThophieImage = styled.img`
+width: 40px;
+`;
+
+export const StyledTh = styled.th`
+color: whitesmoke;
+`;
+
+export const BrandTd = styled.td`
+display: flex;
+align-content: center;
+align-items: center;
+justify-content: space-start;
+cursor: pointer;
+border: 0px solid #333;
+text-align: center;
+color: #17271A;
+ span::first-letter {
+    text-transform: uppercase;
+ }
+`;
+
+export const BrandImg = styled.img`
+width: 40px;
+border-radius: 50px;
+`;
+
+export const StyledBrandSpan = styled.span`
+color: green;
+font-weigth: bolder;
+`;
+
+export const ImageTrophies = styled.img`
+width: 30px;
+`;
+
+export const ScoreTd = styled.td`
+color: #5A91C7;
 `;

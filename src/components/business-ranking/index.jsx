@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Loading from '../loading';
 import {
   BackgroundRank,
   StyledButton,
@@ -10,6 +11,21 @@ import {
   BusinessCard,
   SpotlightDiv,
   SpotlightChildDiv,
+  H1,
+  Hr,
+  StyledSpan,
+  StyledImg,
+  StyledSpanBrand,
+  StyledH3,
+  StyledDiv,
+  StyledThead,
+  StyledThophieImage,
+  StyledTh,
+  BrandTd,
+  BrandImg,
+  StyledBrandSpan,
+  ImageTrophies,
+  ScoreTd,
 } from "./syled-business";
 import { useHistory } from "react-router-dom";
 //images
@@ -29,9 +45,7 @@ const BusinessRanking = () => {
 
   const history = useHistory();
 
-  useEffect(() => getBusiness(), []);
-
-  const getBusiness = () => {
+  useEffect(() => {
     axios
       .get("https://reciclatonapi.herokuapp.com/664/users")
       .then((res) => {
@@ -39,7 +53,7 @@ const BusinessRanking = () => {
         setSaveBusiness(res.data);
       })
       .catch(({ error }) => console.log(error));
-  };
+  }, []);
 
   const setSizeValue = (value) => {
     const select = value.target.value;
@@ -57,10 +71,10 @@ const BusinessRanking = () => {
     businessB.score.anual - businessA.score.anual;
 
   return (
-    <div style={{}}>
+    <div>
       <BusinessCard>
-        <h1 style={{ fontSize: "26px" }}>Destaques do mês</h1>
-        <hr style={{ height: "1px", width: "100%" }} />
+        <H1>Destaques do mês</H1>
+        <Hr />
         <SpotlightDiv>
           {business.sort(orderByScoreMonth).map(
             (item, index) =>
@@ -70,14 +84,11 @@ const BusinessRanking = () => {
                   key={index}
                   onClick={() => history.push(`users/${item.id}`)}
                 >
-                  <span style={{ fontSize: "40px" }}>{index + 1}ª</span>
-                  <img
-                    src={item.imageUrl}
-                    style={{ width: "100px", borderRadius: "60px" }}
-                  />
-                  <span style={{ fontWeight: "bolder" }}>{item.brand}</span>
+                  <StyledSpan>{index + 1}ª</StyledSpan>
+                  <StyledImg src={item.imageUrl} />
+                  <StyledSpanBrand>{item.brand}</StyledSpanBrand>
                   {item.score.mensal} pontos
-                  <img
+                  <StyledThophieImage
                     src={
                       index === 0
                         ? goldTrophie
@@ -85,49 +96,38 @@ const BusinessRanking = () => {
                         ? silverTrophie
                         : bronzeTrophie
                     }
-                    style={{ width: "40px" }}
                   />
                 </SpotlightChildDiv>
               )
           )}
         </SpotlightDiv>
       </BusinessCard>
-      <hr style={{ height: "1px", width: "100%" }} />
-      <h3 style={{ display: "flex", justifyContent: "flex-start" }}>
-        Overall ranking
-      </h3>
+      <Hr />
+      <StyledH3>Ranking</StyledH3>
       <BackgroundRank>
-        <div
-          style={{
-            display: "flex",
-            marginBottom: "2.5%",
-            justifyContent: "center",
-            alignItems: "center",
-            // marginTop: "4%",
-          }}
-        >
+        <StyledDiv>
           <StyledButton onClick={() => setScore("mensal")}>
-            Monthly ranking
+            Ranking mensal
           </StyledButton>
           <StyledButton onClick={() => setScore("anual")}>
-            Yearly ranking
+            Ranking anual
           </StyledButton>
-        </div>
+        </StyledDiv>
         <StyledTable border="1px" cellPadding="5px" cellSpacing="0">
-          <thead style={{ backgroundColor: "#60789C" }}>
-            <th style={{ color: "whitesmoke" }}>Position</th>
-            <th style={{ color: "whitesmoke" }}>Name</th>
-            <th style={{ color: "whitesmoke" }}>Awards</th>
-            <th style={{ color: "whitesmoke" }}>
-              <span>{score === "mensal" ? "Monthly" : "Yearly"}</span> score
-            </th>
-            <th style={{ color: "whitesmoke" }}>Website</th>
-            <th style={{ color: "whitesmoke" }}>
-              <label>Category: </label>
+          <StyledThead>
+            <StyledTh>Posição</StyledTh>
+            <StyledTh>Nome</StyledTh>
+            <StyledTh>Prêmios</StyledTh>
+            <StyledTh>
+              Pontuação <span>{score === "mensal" ? "mensal" : "anual"}</span>
+            </StyledTh>
+            <StyledTh>Site</StyledTh>
+            <StyledTh>
+              <label>Categoria: </label>
               <select name="Category" onChange={setCategoryValue}>
                 <option value="Sem filtro">Remover filtro</option>
                 <option value="Supermercado/Hipermercado">
-                  Supermercado/Hipermercado{" "}
+                  Supermercado/Hipermercado
                 </option>
                 <option value="Restaurante/Bar">Restaurante/Bar</option>
                 <option value="Indústria">Indústria</option>
@@ -140,10 +140,10 @@ const BusinessRanking = () => {
                 <option value="Hotel/Motel">Hotel/Motel</option>
                 <option value="Condominio">Condominio</option>
               </select>
-            </th>
-            <th style={{ color: "whitesmoke" }}>
+            </StyledTh>
+            <StyledTh>
               <label>
-                Business size: <>&nbsp;</>
+                Porte: <>&nbsp;</>
               </label>
               <select name="Business Size" onChange={setSizeValue}>
                 <option value="Sem filtro">Remover filtro</option>
@@ -152,8 +152,8 @@ const BusinessRanking = () => {
                 <option value="media">Média</option>
                 <option value="grande">Grande</option>
               </select>
-            </th>
-          </thead>
+            </StyledTh>
+          </StyledThead>
           <tbody>
             {score === "mensal" &&
               size === "Sem filtro" &&
@@ -161,58 +161,36 @@ const BusinessRanking = () => {
               business.sort(orderByScoreMonth).map((item, index) => (
                 <Tr key={index}>
                   <Td>{index + 1}ª</Td>
-                  <Td
-                    style={{
-                      display: "flex",
-                      alignContent: "center",
-                      alignItems: "center",
-                      justifyContent: "space-start",
-                      cursor: "pointer",
-                    }}
-                  >
-                    {
-                      <img
-                        src={item.imageUrl}
-                        style={{ width: "40px", borderRadius: "50px" }}
-                      />
-                    }{" "}
+                  <BrandTd>
+                    {<BrandImg src={item.imageUrl} />}
                     <>&nbsp;&nbsp;&nbsp;</>
                     {
-                      <span
+                      <StyledBrandSpan
                         onClick={() => history.push(`users/${item.id}`)}
-                        style={{ color: "green", fontWeight: "bolder" }}
                       >
                         {item.brand}
-                      </span>
+                      </StyledBrandSpan>
                     }
-                  </Td>
+                  </BrandTd>
                   <Td>
-                    {index === 0 && (
-                      <img src={goldTrophie} style={{ width: "30px" }} />
-                    )}
-                    {index === 1 && (
-                      <img src={silverTrophie} style={{ width: "30px" }} />
-                    )}
-                    {index === 2 && (
-                      <img src={bronzeTrophie} style={{ width: "30px" }} />
-                    )}
+                    {index === 0 && <ImageTrophies src={goldTrophie} />}
+                    {index === 1 && <ImageTrophies src={silverTrophie} />}
+                    {index === 2 && <ImageTrophies src={bronzeTrophie} />}
                     {index <= business.sort(orderByScoreMonth).length / 3 &&
-                      index > 2 && (
-                        <img src={goldHonor} style={{ width: "30px" }} />
-                      )}
+                      index > 2 && <ImageTrophies src={goldHonor} />}
                     {index > business.sort(orderByScoreMonth).length / 3 &&
                       index <
                         (2 * business.sort(orderByScoreMonth).length) / 3 && (
-                        <img src={silverHonor} style={{ width: "30px" }} />
+                        <ImageTrophies src={silverHonor} />
                       )}
                     {index >=
                       (2 * business.sort(orderByScoreMonth).length) / 3 &&
                       index <=
                         (3 * business.sort(orderByScoreMonth).length) / 3 && (
-                        <img src={bronzeHonor} style={{ width: "30px" }} />
+                        <ImageTrophies src={bronzeHonor} />
                       )}
                   </Td>
-                  <Td style={{ color: "#5A91C7" }}>{item.score.mensal} </Td>
+                  <ScoreTd>{item.score.mensal} </ScoreTd>
                   <Td>
                     <a href={item.website}>{item.website}</a>
                   </Td>
@@ -223,6 +201,8 @@ const BusinessRanking = () => {
                 </Tr>
               ))}
 
+            {/* Ranking mensal-------------------------------------------- */}
+
             {score === "mensal" &&
               size != "Sem filtro" &&
               category === "Sem filtro" &&
@@ -232,49 +212,27 @@ const BusinessRanking = () => {
                 .map((item, index) => (
                   <Tr key={index}>
                     <Td>{index + 1}ª</Td>
-                    <Td
-                      style={{
-                        display: "flex",
-                        alignContent: "center",
-                        alignItems: "center",
-                        justifyContent: "space-start",
-                        cursor: "pointer",
-                      }}
-                    >
-                      {
-                        <img
-                          src={item.imageUrl}
-                          style={{ width: "40px", borderRadius: "50px" }}
-                        />
-                      }{" "}
+                    <BrandTd>
+                      {<BrandImg src={item.imageUrl} />}
                       <>&nbsp;&nbsp;&nbsp;</>
                       {
-                        <span
+                        <StyledBrandSpan
                           onClick={() => history.push(`users/${item.id}`)}
-                          style={{ color: "green", fontWeight: "bolder" }}
                         >
                           {item.brand}
-                        </span>
+                        </StyledBrandSpan>
                       }
-                    </Td>
+                    </BrandTd>
                     <Td>
-                      {index === 0 && (
-                        <img src={goldTrophie} style={{ width: "30px" }} />
-                      )}
-                      {index === 1 && (
-                        <img src={silverTrophie} style={{ width: "30px" }} />
-                      )}
-                      {index === 2 && (
-                        <img src={bronzeTrophie} style={{ width: "30px" }} />
-                      )}
+                      {index === 0 && <ImageTrophies src={goldTrophie} />}
+                      {index === 1 && <ImageTrophies src={silverTrophie} />}
+                      {index === 2 && <ImageTrophies src={bronzeTrophie} />}
                       {index <=
                         business
                           .sort(orderByScoreMonth)
                           .filter((item) => item.businessSize === size).length /
                           3 &&
-                        index > 2 && (
-                          <img src={goldHonor} style={{ width: "30px" }} />
-                        )}
+                        index > 2 && <ImageTrophies src={goldHonor} />}
                       {index >
                         business
                           .sort(orderByScoreMonth)
@@ -286,9 +244,7 @@ const BusinessRanking = () => {
                               .sort(orderByScoreMonth)
                               .filter((item) => item.businessSize === size)
                               .length) /
-                            3 && (
-                          <img src={silverHonor} style={{ width: "30px" }} />
-                        )}
+                            3 && <ImageTrophies src={silverHonor} />}
                       {index >=
                         (2 *
                           business
@@ -302,11 +258,9 @@ const BusinessRanking = () => {
                               .sort(orderByScoreMonth)
                               .filter((item) => item.businessSize === size)
                               .length) /
-                            3 && (
-                          <img src={bronzeHonor} style={{ width: "30px" }} />
-                        )}
+                            3 && <ImageTrophies src={bronzeHonor} />}
                     </Td>
-                    <Td style={{ color: "#5A91C7" }}>{item.score.mensal} </Td>
+                    <ScoreTd>{item.score.mensal} </ScoreTd>
                     <Td>
                       <a href={item.website}>{item.website}</a>
                     </Td>
@@ -324,49 +278,27 @@ const BusinessRanking = () => {
                 .map((item, index) => (
                   <Tr key={index}>
                     <Td>{index + 1}ª</Td>
-                    <Td
-                      style={{
-                        display: "flex",
-                        alignContent: "center",
-                        alignItems: "center",
-                        justifyContent: "space-start",
-                        cursor: "pointer",
-                      }}
-                    >
-                      {
-                        <img
-                          src={item.imageUrl}
-                          style={{ width: "40px", borderRadius: "50px" }}
-                        />
-                      }{" "}
+                    <BrandTd>
+                      {<BrandImg src={item.imageUrl} />}
                       <>&nbsp;&nbsp;&nbsp;</>
                       {
-                        <span
+                        <StyledBrandSpan
                           onClick={() => history.push(`users/${item.id}`)}
-                          style={{ color: "green", fontWeight: "bolder" }}
                         >
                           {item.brand}
-                        </span>
+                        </StyledBrandSpan>
                       }
-                    </Td>
+                    </BrandTd>
                     <Td>
-                      {index === 0 && (
-                        <img src={goldTrophie} style={{ width: "30px" }} />
-                      )}
-                      {index === 1 && (
-                        <img src={silverTrophie} style={{ width: "30px" }} />
-                      )}
-                      {index === 2 && (
-                        <img src={bronzeTrophie} style={{ width: "30px" }} />
-                      )}
+                      {index === 0 && <ImageTrophies src={goldTrophie} />}
+                      {index === 1 && <ImageTrophies src={silverTrophie} />}
+                      {index === 2 && <ImageTrophies src={bronzeTrophie} />}
                       {index <=
                         business
                           .sort(orderByScoreMonth)
                           .filter((item) => item.business === category).length /
                           3 &&
-                        index > 2 && (
-                          <img src={goldHonor} style={{ width: "30px" }} />
-                        )}
+                        index > 2 && <ImageTrophies src={goldHonor} />}
                       {index >
                         business
                           .sort(orderByScoreMonth)
@@ -378,9 +310,7 @@ const BusinessRanking = () => {
                               .sort(orderByScoreMonth)
                               .filter((item) => item.business === category)
                               .length) /
-                            3 && (
-                          <img src={silverHonor} style={{ width: "30px" }} />
-                        )}
+                            3 && <ImageTrophies src={silverHonor} />}
                       {index >=
                         (2 *
                           business
@@ -394,11 +324,9 @@ const BusinessRanking = () => {
                               .sort(orderByScoreMonth)
                               .filter((item) => item.business === category)
                               .length) /
-                            3 && (
-                          <img src={bronzeHonor} style={{ width: "30px" }} />
-                        )}
+                            3 && <ImageTrophies src={bronzeHonor} />}
                     </Td>
-                    <Td style={{ color: "#5A91C7" }}>{item.score.mensal} </Td>
+                    <ScoreTd>{item.score.mensal} </ScoreTd>
                     <Td>
                       <a href={item.website}>{item.website}</a>
                     </Td>
@@ -417,50 +345,28 @@ const BusinessRanking = () => {
                 .map((item, index) => (
                   <Tr key={index}>
                     <Td>{index + 1}ª</Td>
-                    <Td
-                      style={{
-                        display: "flex",
-                        alignContent: "center",
-                        alignItems: "center",
-                        justifyContent: "space-start",
-                        cursor: "pointer",
-                      }}
-                    >
-                      {
-                        <img
-                          src={item.imageUrl}
-                          style={{ width: "40px", borderRadius: "50px" }}
-                        />
-                      }{" "}
+                    <BrandTd>
+                      {<BrandImg src={item.imageUrl} />}
                       <>&nbsp;&nbsp;&nbsp;</>
                       {
-                        <span
+                        <StyledBrandSpan
                           onClick={() => history.push(`users/${item.id}`)}
-                          style={{ color: "green", fontWeight: "bolder" }}
                         >
                           {item.brand}
-                        </span>
+                        </StyledBrandSpan>
                       }
-                    </Td>
+                    </BrandTd>
                     <Td>
-                      {index === 0 && (
-                        <img src={goldTrophie} style={{ width: "30px" }} />
-                      )}
-                      {index === 1 && (
-                        <img src={silverTrophie} style={{ width: "30px" }} />
-                      )}
-                      {index === 2 && (
-                        <img src={bronzeTrophie} style={{ width: "30px" }} />
-                      )}
+                      {index === 0 && <ImageTrophies src={goldTrophie} />}
+                      {index === 1 && <ImageTrophies src={silverTrophie} />}
+                      {index === 2 && <ImageTrophies src={bronzeTrophie} />}
                       {index <=
                         business
                           .sort(orderByScoreMonth)
                           .filter((item) => item.business === category)
                           .filter((item) => item.businessSize === size).length /
                           3 &&
-                        index > 2 && (
-                          <img src={goldHonor} style={{ width: "30px" }} />
-                        )}
+                        index > 2 && <ImageTrophies src={goldHonor} />}
                       {index >
                         business
                           .sort(orderByScoreMonth)
@@ -474,9 +380,7 @@ const BusinessRanking = () => {
                               .filter((item) => item.business === category)
                               .filter((item) => item.businessSize === size)
                               .length) /
-                            3 && (
-                          <img src={silverHonor} style={{ width: "30px" }} />
-                        )}
+                            3 && <ImageTrophies src={silverHonor} />}
                       {index >=
                         (2 *
                           business
@@ -492,11 +396,9 @@ const BusinessRanking = () => {
                               .filter((item) => item.business === category)
                               .filter((item) => item.businessSize === size)
                               .length) /
-                            3 && (
-                          <img src={bronzeHonor} style={{ width: "30px" }} />
-                        )}
+                            3 && <ImageTrophies src={bronzeHonor} />}
                     </Td>
-                    <Td style={{ color: "#5A91C7" }}>{item.score.mensal} </Td>
+                    <ScoreTd>{item.score.mensal} </ScoreTd>
                     <Td>
                       <a href={item.website}>{item.website}</a>
                     </Td>
@@ -513,58 +415,36 @@ const BusinessRanking = () => {
               business.sort(orderByScoreYear).map((item, index) => (
                 <Tr key={index}>
                   <Td>{index + 1}ª</Td>
-                  <Td
-                    style={{
-                      display: "flex",
-                      alignContent: "center",
-                      alignItems: "center",
-                      justifyContent: "space-start",
-                      cursor: "pointer",
-                    }}
-                  >
-                    {
-                      <img
-                        src={item.imageUrl}
-                        style={{ width: "40px", borderRadius: "50px" }}
-                      />
-                    }{" "}
+                  <BrandTd>
+                    {<BrandImg src={item.imageUrl} />}
                     <>&nbsp;&nbsp;&nbsp;</>
                     {
-                      <span
+                      <StyledBrandSpan
                         onClick={() => history.push(`users/${item.id}`)}
-                        style={{ color: "green", fontWeight: "bolder" }}
                       >
                         {item.brand}
-                      </span>
+                      </StyledBrandSpan>
                     }
-                  </Td>
+                  </BrandTd>
                   <Td>
-                    {index === 0 && (
-                      <img src={goldTrophie} style={{ width: "30px" }} />
-                    )}
-                    {index === 1 && (
-                      <img src={silverTrophie} style={{ width: "30px" }} />
-                    )}
-                    {index === 2 && (
-                      <img src={bronzeTrophie} style={{ width: "30px" }} />
-                    )}
+                    {index === 0 && <ImageTrophies src={goldTrophie} />}
+                    {index === 1 && <ImageTrophies src={silverTrophie} />}
+                    {index === 2 && <ImageTrophies src={bronzeTrophie} />}
                     {index <= business.sort(orderByScoreYear).length / 3 &&
-                      index > 2 && (
-                        <img src={goldHonor} style={{ width: "30px" }} />
-                      )}
+                      index > 2 && <ImageTrophies src={goldHonor} />}
                     {index > business.sort(orderByScoreYear).length / 3 &&
                       index <
                         (2 * business.sort(orderByScoreYear).length) / 3 && (
-                        <img src={silverHonor} style={{ width: "30px" }} />
+                        <ImageTrophies src={silverHonor} />
                       )}
                     {index >=
                       (2 * business.sort(orderByScoreYear).length) / 3 &&
                       index <=
                         (3 * business.sort(orderByScoreYear).length) / 3 && (
-                        <img src={bronzeHonor} style={{ width: "30px" }} />
+                        <ImageTrophies src={bronzeHonor} />
                       )}
                   </Td>
-                  <Td style={{ color: "#5A91C7" }}>{item.score.anual} </Td>
+                  <ScoreTd>{item.score.anual} </ScoreTd>
                   <Td>
                     <a href={item.website}>{item.website}</a>
                   </Td>
@@ -582,49 +462,27 @@ const BusinessRanking = () => {
                 .map((item, index) => (
                   <Tr key={index}>
                     <Td>{index + 1}ª</Td>
-                    <Td
-                      style={{
-                        display: "flex",
-                        alignContent: "center",
-                        alignItems: "center",
-                        justifyContent: "space-start",
-                        cursor: "pointer",
-                      }}
-                    >
-                      {
-                        <img
-                          src={item.imageUrl}
-                          style={{ width: "40px", borderRadius: "50px" }}
-                        />
-                      }{" "}
+                    <BrandTd>
+                      {<BrandImg src={item.imageUrl} />}
                       <>&nbsp;&nbsp;&nbsp;</>
                       {
-                        <span
+                        <StyledBrandSpan
                           onClick={() => history.push(`users/${item.id}`)}
-                          style={{ color: "green", fontWeight: "bolder" }}
                         >
                           {item.brand}
-                        </span>
+                        </StyledBrandSpan>
                       }
-                    </Td>
+                    </BrandTd>
                     <Td>
-                      {index === 0 && (
-                        <img src={goldTrophie} style={{ width: "30px" }} />
-                      )}
-                      {index === 1 && (
-                        <img src={silverTrophie} style={{ width: "30px" }} />
-                      )}
-                      {index === 2 && (
-                        <img src={bronzeTrophie} style={{ width: "30px" }} />
-                      )}
+                      {index === 0 && <ImageTrophies src={goldTrophie} />}
+                      {index === 1 && <ImageTrophies src={silverTrophie} />}
+                      {index === 2 && <ImageTrophies src={bronzeTrophie} />}
                       {index <=
                         business
                           .sort(orderByScoreYear)
                           .filter((item) => item.businessSize === size).length /
                           3 &&
-                        index > 2 && (
-                          <img src={goldHonor} style={{ width: "30px" }} />
-                        )}
+                        index > 2 && <ImageTrophies src={goldHonor} />}
                       {index >
                         business
                           .sort(orderByScoreYear)
@@ -636,9 +494,7 @@ const BusinessRanking = () => {
                               .sort(orderByScoreYear)
                               .filter((item) => item.businessSize === size)
                               .length) /
-                            3 && (
-                          <img src={silverHonor} style={{ width: "30px" }} />
-                        )}
+                            3 && <ImageTrophies src={silverHonor} />}
                       {index >=
                         (2 *
                           business
@@ -652,11 +508,9 @@ const BusinessRanking = () => {
                               .sort(orderByScoreYear)
                               .filter((item) => item.businessSize === size)
                               .length) /
-                            3 && (
-                          <img src={bronzeHonor} style={{ width: "30px" }} />
-                        )}
+                            3 && <ImageTrophies src={bronzeHonor} />}
                     </Td>
-                    <Td style={{ color: "#5A91C7" }}>{item.score.anual} </Td>
+                    <ScoreTd>{item.score.anual} </ScoreTd>
                     <Td>
                       <a href={item.website}>{item.website}</a>
                     </Td>
@@ -674,49 +528,27 @@ const BusinessRanking = () => {
                 .map((item, index) => (
                   <Tr key={index}>
                     <Td>{index + 1}ª</Td>
-                    <Td
-                      style={{
-                        display: "flex",
-                        alignContent: "center",
-                        alignItems: "center",
-                        justifyContent: "space-start",
-                        cursor: "pointer",
-                      }}
-                    >
-                      {
-                        <img
-                          src={item.imageUrl}
-                          style={{ width: "40px", borderRadius: "50px" }}
-                        />
-                      }{" "}
+                    <BrandTd>
+                      {<BrandImg src={item.imageUrl} />}
                       <>&nbsp;&nbsp;&nbsp;</>
                       {
-                        <span
+                        <StyledBrandSpan
                           onClick={() => history.push(`users/${item.id}`)}
-                          style={{ color: "green", fontWeight: "bolder" }}
                         >
                           {item.brand}
-                        </span>
+                        </StyledBrandSpan>
                       }
-                    </Td>
+                    </BrandTd>
                     <Td>
-                      {index === 0 && (
-                        <img src={goldTrophie} style={{ width: "30px" }} />
-                      )}
-                      {index === 1 && (
-                        <img src={silverTrophie} style={{ width: "30px" }} />
-                      )}
-                      {index === 2 && (
-                        <img src={bronzeTrophie} style={{ width: "30px" }} />
-                      )}
+                      {index === 0 && <ImageTrophies src={goldTrophie} />}
+                      {index === 1 && <ImageTrophies src={silverTrophie} />}
+                      {index === 2 && <ImageTrophies src={bronzeTrophie} />}
                       {index <=
                         business
                           .sort(orderByScoreYear)
                           .filter((item) => item.business === category).length /
                           3 &&
-                        index > 2 && (
-                          <img src={goldHonor} style={{ width: "30px" }} />
-                        )}
+                        index > 2 && <ImageTrophies src={goldHonor} />}
                       {index >
                         business
                           .sort(orderByScoreYear)
@@ -728,9 +560,7 @@ const BusinessRanking = () => {
                               .sort(orderByScoreYear)
                               .filter((item) => item.business === category)
                               .length) /
-                            3 && (
-                          <img src={silverHonor} style={{ width: "30px" }} />
-                        )}
+                            3 && <ImageTrophies src={silverHonor} />}
                       {index >=
                         (2 *
                           business
@@ -744,11 +574,9 @@ const BusinessRanking = () => {
                               .sort(orderByScoreYear)
                               .filter((item) => item.business === category)
                               .length) /
-                            3 && (
-                          <img src={bronzeHonor} style={{ width: "30px" }} />
-                        )}
+                            3 && <ImageTrophies src={bronzeHonor} />}
                     </Td>
-                    <Td style={{ color: "#5A91C7" }}>{item.score.anual} </Td>
+                    <ScoreTd>{item.score.anual} </ScoreTd>
                     <Td>
                       <a href={item.website}>{item.website}</a>
                     </Td>
@@ -767,50 +595,28 @@ const BusinessRanking = () => {
                 .map((item, index) => (
                   <Tr key={index}>
                     <Td>{index + 1}ª</Td>
-                    <Td
-                      style={{
-                        display: "flex",
-                        alignContent: "center",
-                        alignItems: "center",
-                        justifyContent: "space-start",
-                        cursor: "pointer",
-                      }}
-                    >
-                      {
-                        <img
-                          src={item.imageUrl}
-                          style={{ width: "40px", borderRadius: "50px" }}
-                        />
-                      }{" "}
+                    <BrandTd>
+                      {<BrandImg src={item.imageUrl} />}
                       <>&nbsp;&nbsp;&nbsp;</>
                       {
-                        <span
+                        <StyledBrandSpan
                           onClick={() => history.push(`users/${item.id}`)}
-                          style={{ color: "green", fontWeight: "bolder" }}
                         >
                           {item.brand}
-                        </span>
+                        </StyledBrandSpan>
                       }
-                    </Td>
+                    </BrandTd>
                     <Td>
-                      {index === 0 && (
-                        <img src={goldTrophie} style={{ width: "30px" }} />
-                      )}
-                      {index === 1 && (
-                        <img src={silverTrophie} style={{ width: "30px" }} />
-                      )}
-                      {index === 2 && (
-                        <img src={bronzeTrophie} style={{ width: "30px" }} />
-                      )}
+                      {index === 0 && <ImageTrophies src={goldTrophie} />}
+                      {index === 1 && <ImageTrophies src={silverTrophie} />}
+                      {index === 2 && <ImageTrophies src={bronzeTrophie} />}
                       {index <=
                         business
                           .sort(orderByScoreYear)
                           .filter((item) => item.businessSize === size)
                           .filter((item) => item.business === category).length /
                           3 &&
-                        index > 2 && (
-                          <img src={goldHonor} style={{ width: "30px" }} />
-                        )}
+                        index > 2 && <ImageTrophies src={goldHonor} />}
                       {index >
                         business
                           .sort(orderByScoreYear)
@@ -824,9 +630,7 @@ const BusinessRanking = () => {
                               .filter((item) => item.businessSize === size)
                               .filter((item) => item.business === category)
                               .length) /
-                            3 && (
-                          <img src={silverHonor} style={{ width: "30px" }} />
-                        )}
+                            3 && <ImageTrophies src={silverHonor} />}
                       {index >=
                         (2 *
                           business
@@ -842,11 +646,9 @@ const BusinessRanking = () => {
                               .filter((item) => item.businessSize === size)
                               .filter((item) => item.business === category)
                               .length) /
-                            3 && (
-                          <img src={bronzeHonor} style={{ width: "30px" }} />
-                        )}
+                            3 && <ImageTrophies src={bronzeHonor} />}
                     </Td>
-                    <Td style={{ color: "#5A91C7" }}>{item.score.anual} </Td>
+                    <ScoreTd>{item.score.anual} </ScoreTd>
                     <Td>
                       <a href={item.website}>{item.website}</a>
                     </Td>
