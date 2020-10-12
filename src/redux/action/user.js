@@ -1,25 +1,15 @@
 import axios from "axios";
 
-export const GET_USER = "GET_USER";
+export const SET_USER = "SET_USER";
 
-export const setBusiness = (business) => ({
-  type: GET_USER,
-  business,
-});
-
-export const requestBusiness = (userId, token) => (dispatch) => {
+export const getPerfil = (id) => (dispatch) => {
   axios
-    .get(`https://reciclatonapi.herokuapp.com/664/users/${userId}`, {
-      headers: {
-        Authorization: token,
-      },
-    })
-
-    .then(({ data }) => {
-      dispatch(requestBusiness(data));
-      console.log("data action: " + data);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+    .get(`https://reciclatonapi.herokuapp.com/664/users/${id}`)
+    .then(({ data }) => dispatch(setUser(data)))
+    .catch(({ response }) => console.log(response.data));
 };
+
+const setUser = (user) => ({
+  type: SET_USER,
+  user,
+});
