@@ -9,13 +9,13 @@ import {
   CheckBoxContainerd,
   StyledSubmit,
   Error,
+  Notification,
 } from "./new-service.style";
 import { useForm } from "react-hook-form";
 import { addService, getService } from "../../redux/action/card-informations";
 import { useDispatch, useSelector } from "react-redux";
-import { inputData, openNotification } from "./helper";
+import { inputData } from "./helper";
 import { useHistory } from "react-router-dom";
-
 const materiais = {
   organic: false,
   plastic: false,
@@ -30,9 +30,12 @@ const materiais = {
 const NewServiceCalls = () => {
   const [materialsError, setMaterialsError] = useState(false);
   const { register, handleSubmit, errors } = useForm();
+  const [approved, setApproved] = useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
   const services = useSelector((state) => state.card);
+  const { brand, id } = useSelector((state) => state.user);
+
   useEffect(() => {
     dispatch(getService());
   }, [dispatch]);
@@ -62,22 +65,23 @@ const NewServiceCalls = () => {
           services[0] && services[0].length
         )
       );
-      openNotification();
+      setApproved(true);
       setTimeout(() => {
         history.push("/");
       }, 2000);
     }
     inputData({ ...data, materiais }, 300, services[0] && services[0].length);
+    setApproved(false);
   };
   return (
     <Box>
-      <MainTitle>Title</MainTitle>
+      <MainTitle>{brand && brand}Title</MainTitle>
       <form onSubmit={handleSubmit(onSubmit)}>
         <SubTitles>Materiais para a coleta</SubTitles>
         <StyledLabel>Valor para a coleta </StyledLabel>
         <StyledInput
           type="number"
-          placeholder="Ponha um valor para a coleta"
+          placeholder="Insira um valor para a coleta"
           name="contribuicao"
           ref={register({ required: "true", min: 0 })}
         />
@@ -157,7 +161,7 @@ const NewServiceCalls = () => {
           </StyledLabel>
           <StyledInput
             type="number"
-            placeholder="Ponha a quantidade da coleta"
+            placeholder="insira a quantidade aqui"
             name="quantidade_estimada"
             ref={register({ required: "true" })}
           />
@@ -172,6 +176,9 @@ const NewServiceCalls = () => {
         <div>
           <StyledSubmit type="submit" />
         </div>
+        {approved && (
+          <Notification>Seu cadastro foi efetuado com sucesso!!</Notification>
+        )}
       </form>
     </Box>
   );

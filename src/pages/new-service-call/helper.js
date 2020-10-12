@@ -1,6 +1,4 @@
 import React from "react";
-import { notification } from "antd";
-import { SmileOutlined } from "@ant-design/icons";
 
 export const inputData = (values, conctractor, idOs) => {
   const os = {
@@ -26,12 +24,4 @@ export const inputData = (values, conctractor, idOs) => {
   console.log(os);
 
   return os;
-};
-
-export const openNotification = () => {
-  notification.open({
-    message: "Boa!",
-    description: "Seu cadastro foi enviado com sucesso",
-    icon: <SmileOutlined style={{ color: "#108ee9" }} />,
-  });
 };

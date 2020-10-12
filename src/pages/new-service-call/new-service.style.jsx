@@ -40,12 +40,13 @@ export const StyledLabel = styled.label`
 export const StyledInput = styled.input`
   font-family: "Roboto", sans-serif;
   font-weight: bold;
-
+  width: 200px;
   border: none;
   background-color: #d6e4c8;
   border-radius: 3px;
   padding: 5px;
   color: #526d36;
+  text-align: center;
 `;
 
 export const CheckBoxContainerd = styled.div`
@@ -59,12 +60,16 @@ export const CheckBox = styled.input`
 export const StyledSubmit = styled.input`
   display: block;
   text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  font-size: 16.5px;
   margin: 0 auto;
   margin-top: 30px;
+  border-radius: 3px;
   border: none;
   padding: 10px;
-  letter-spacing: 10px;
-  color: #e1ead6;
+  letter-spacing: 5px;
+  color: #ffff;
   background-color: #90b569;
   :hover {
     background-color: #88ab5f;
@@ -74,4 +79,11 @@ export const StyledSubmit = styled.input`
 
 export const Error = styled.div`
   color: #f35361;
+`;
+
+export const Notification = styled.div`
+  font-family: "Roboto", sans-serif;
+  margin-top: 8px;
+  text-align: center;
+  color: #88ab5f;
 `;
