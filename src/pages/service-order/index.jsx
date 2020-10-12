@@ -7,34 +7,38 @@ import { loginAction } from "../../redux/action/login";
 import jwt_decode from "jwt-decode";
 
 const ServiceOrder = () => {
-  const [status, setStatus] = useState("");
-  const business = useSelector((state) => state.user);
-  const token = useSelector((state) => state.authentication);
-  const [decode, setDecode] = useState();
-  const userId = jwt_decode(
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhZmFlbEByYWZhZWwuY29tLmJyIiwiaWF0IjoxNjAxOTI5ODMwLCJleHAiOjE2MDE5MzM0MzAsInN1YiI6Ijg3MiJ9.jp9THO7eBScUktm4Nie-SSBJf-NzpTCg2EWyu7jODWo"
-  );
-
-  useEffect(() => {}, [status]);
+  const [userId, setUserId] = useState("");
   const dispatch = useDispatch();
-  console.log(userId.sub);
+  const [status, setStatus] = useState("");
+  const business = useSelector((state) => state.user.business);
+  const os = useSelector((state) => state.user.os);
+  const token = useSelector((state) => state.authentication);
+
+  useEffect(() => {
+    token == !undefined && setUserId(jwt_decode(token));
+    token == !undefined && dispatch(requestBusiness(userId.sub, token));
+  }, [dispatch, token, userId.sub]);
+
   return (
     <>
+      {console.log(token)}
       <ContainerButton>
-        <StyledButton
-          onClick={() => {
-            setStatus("Aberto");
-          }}
-        >
-          Aberto
-        </StyledButton>
-        <StyledButton
-          onClick={() => {
-            setStatus("Aceito");
-          }}
-        >
-          Aceito
-        </StyledButton>
+        {business == !"Coleta" && ( // empresa
+          <StyledButton onClick={() => setStatus("Chamado")}>
+            Chamado
+          </StyledButton>
+        )}
+
+        {business === "Coleta" && ( // coletador
+          <StyledButton
+            onClick={() => {
+              setStatus("Aceito");
+            }}
+          >
+            Aceito
+          </StyledButton>
+        )}
+
         <StyledButton
           onClick={() => {
             setStatus("Em Andamento");
@@ -42,9 +46,11 @@ const ServiceOrder = () => {
         >
           Em Andamento
         </StyledButton>
+
         <StyledButton onClick={() => setStatus("Finalizado")}>
           Finalizado
         </StyledButton>
+
         <StyledButton
           onClick={() => {
             setStatus("Cancelado");
@@ -53,7 +59,6 @@ const ServiceOrder = () => {
           Cancelado
         </StyledButton>
       </ContainerButton>
-      {console.log(status)}
     </>
   );
 };

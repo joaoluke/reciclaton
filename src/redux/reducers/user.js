@@ -1,17 +1,16 @@
-import { SET_USER } from "../action/user";
+import { GET_USER } from "../action/user";
 
 const defaultState = {
   user: {},
 };
 
-const userPage = (state = defaultState, action) => {
-  switch (action.type) {
-    case SET_USER:
-      const { user } = action;
-      return { ...state, user };
+const user = (state = defaultState, { business, type }) => {
+  switch (type) {
+    case GET_USER:
+      return business;
     default:
       return state;
   }
 };
 
-export default userPage;
+export default user;
