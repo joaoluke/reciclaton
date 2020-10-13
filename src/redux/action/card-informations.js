@@ -66,3 +66,19 @@ export const getService = (id, token, service) => (dispatch) => {
       dispatch(cardInformation(data));
     });
 };
+
+export const changeCardStatus = (id, token, service) => {
+  const header = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  axios
+    .patch(
+      `https://reciclatonapi.herokuapp.com/664/services/${id}`,
+      service,
+      header
+    )
+    .then(({ data }) => {
+      console.log(data);
+    })
+    .catch(({ response }) => console.log(response));
+};
