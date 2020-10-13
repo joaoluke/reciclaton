@@ -58,7 +58,9 @@ const Perfil = () => {
               <h1>{user.brand}</h1>
               <h2>{user.business}</h2>
               <p>{user.email}</p>
-              <a href={user.website}>{user.website}</a>
+              <a href={user.website} target="_blank">
+                {user.website}
+              </a>
               <div>
                 <p>
                   {user.adress.street}, {user.adress.number}
