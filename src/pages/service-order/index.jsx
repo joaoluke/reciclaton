@@ -38,8 +38,8 @@ const ServiceOrder = () => {
             {status === "Chamado" ? (
               <StyledSelct>Chamado</StyledSelct>
             ) : (
-              "Chamado"
-            )}
+                "Chamado"
+              )}
           </StyledButton>
         )}
 
@@ -61,16 +61,16 @@ const ServiceOrder = () => {
           {status === "Em Andamento" ? (
             <StyledSelct>Em Andamento</StyledSelct>
           ) : (
-            "Em Andamento"
-          )}
+              "Em Andamento"
+            )}
         </StyledButton>
 
         <StyledButton onClick={() => setStatus("Finalizado")}>
           {status === "Finalizado" ? (
             <StyledSelct>Finalizado</StyledSelct>
           ) : (
-            "Finalizado"
-          )}
+              "Finalizado"
+            )}
         </StyledButton>
 
         <StyledButton
@@ -81,8 +81,8 @@ const ServiceOrder = () => {
           {status === "Cancelado" ? (
             <StyledSelct>Cancelado</StyledSelct>
           ) : (
-            "Cancelado"
-          )}
+              "Cancelado"
+            )}
         </StyledButton>
       </ContainerButton>
       <Card status={status} />

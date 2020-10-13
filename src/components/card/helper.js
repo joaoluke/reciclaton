@@ -32,7 +32,7 @@ export const content = (
   rating,
   list,
   token,
-  { business, os, id },
+  { business, os, id, brand },
   popUp,
   setPopUp
 ) => {
@@ -91,7 +91,7 @@ export const content = (
     case "Aceito":
       return list.map(
         (
-          { contribuicao, materiais, status, contratante_id, contratado_id },
+          { contribuicao, materiais, status, contratante_id, contratado_id, id },
           key
         ) => {
           const price =
@@ -101,8 +101,8 @@ export const content = (
               currency: "BRL",
             });
           if (
-            status === "Aceito" && (contratante_id === id ||
-              contratado_id === id)
+            status === "Aceito" && (contratante_id === idUser ||
+              contratado_id === idUser)
           ) {
             return (
               <Container key={key}>
@@ -134,9 +134,16 @@ export const content = (
                     </TitlePrice>
                     <Choice>
                       <Decline onClick={() => setPopUp(false)} />
-                      <Accept onClick={() => setPopUp(false)} />
+                      <Accept onClick={() => {
+                        setPopUp(false)
+                        changeCardStatus(id, token, { status: 'Cancelado', cancelado: brand })
+                      }
+                      } />
                     </Choice>
                   </PopUp>
+                )}
+                {business === 'Coleta' && (
+                  <StyledButton onClick={changeCardStatus(id, token, { status: 'Em Andamento' })}> <ButtonTitle>Começar Rota</ButtonTitle></StyledButton>
                 )}
               </Container>
             );
@@ -146,7 +153,7 @@ export const content = (
     case "Em Andamento":
       return list.map(
         (
-          { contribuicao, status, adress, contratante_id, contratado_id },
+          { contribuicao, status, adress, contratante_id, contratado_id, id },
           key
         ) => {
           const price =
@@ -156,8 +163,8 @@ export const content = (
               currency: "BRL",
             });
           if (
-            status === "Em Andamento" && (contratante_id === id ||
-              contratado_id === id)
+            status === "Em Andamento" && (contratante_id === idUser ||
+              contratado_id === idUser)
           ) {
             return (
               <Container key={key}>
@@ -185,9 +192,16 @@ export const content = (
                     </TitlePrice>
                     <Choice>
                       <Decline onClick={() => setPopUp(false)} />
-                      <Accept onClick={() => setPopUp(false)} />
+                      <Accept onClick={() => {
+                        setPopUp(false)
+                        changeCardStatus(id, token, { status: 'Cancelado', cancelado: brand })
+
+                      }} />
                     </Choice>
                   </PopUp>
+                )}
+                {business !== 'Coleta' && (
+                  <StyledButton onClick={changeCardStatus(id, token, { status: 'Finalizado' })}> <ButtonTitle>Finalizar</ButtonTitle></StyledButton>
                 )}
               </Container>
             );
@@ -247,23 +261,32 @@ export const content = (
       });
 
     case "Cancelado":
-      list.map(({ status, contratante_id, contratado_id }, key) => {
+      return list.map(({ status, contratante_id, contratado_id, cancelado, contribuicao }, key) => {
+        const price =
+          contribuicao &&
+          parseInt(contribuicao).toLocaleString("pt-br", {
+            style: "currency",
+            currency: "BRL",
+          });
         if (
-          status === "Cancelado" && (contratante_id === os.id ||
-            contratado_id === id)
+          status === "Cancelado" &&
+          (contratado_id === idUser || contratante_id === idUser)
         ) {
           return (
-            <>
-              <Container key={key}>
-                <TitlePrice style={{ fontSize: "35px" }}>Valor: {}</TitlePrice>
-                {<TitlePrice>Motivo: </TitlePrice>}
-                {<TitlePrice>Cancelado por:</TitlePrice>}
-              </Container>
-            </>
+            <Container key={key}>
+
+              <CardTitle>{"No Title"}</CardTitle>
+              <Content>
+                <Title>
+                  Endereço:
+                </Title>
+              </Content>
+              <TitlePrice style={{ fontSize: "35px" }}>Valor: {price}</TitlePrice>
+              <Title style={{ fontSize: "23px" }}>Cancelado por:{cancelado}</Title>
+            </Container>
           );
         }
       });
-      break;
 
     default:
       return;
