@@ -16,7 +16,6 @@ export const requestBusiness = (userId, token) => (dispatch) => {
     })
 
     .then(({ data }) => {
-      // console.log(data);
       dispatch(setBusiness(data));
     })
     .catch((err) => {
