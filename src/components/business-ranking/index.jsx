@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Loading from '../loading';
 import {
   BackgroundRank,
   StyledButton,
   StyledTable,
   Td,
   Tr,
-  Option,
   BusinessCard,
   SpotlightDiv,
   SpotlightChildDiv,
@@ -38,7 +36,6 @@ import bronzeHonor from "./images/medalha-bronze.png";
 
 const BusinessRanking = () => {
   const [business, setBusiness] = useState([]);
-  const [saveBusiness, setSaveBusiness] = useState([]);
   const [score, setScore] = useState("mensal");
   const [size, setSize] = useState("Sem filtro");
   const [category, setCategory] = useState("Sem filtro");
@@ -51,7 +48,6 @@ const BusinessRanking = () => {
       .get("https://reciclatonapi.herokuapp.com/664/users")
       .then((res) => {
         setBusiness(res.data);
-        setSaveBusiness(res.data);
       })
       .catch(({ error }) => console.log(error));
   }, []);
