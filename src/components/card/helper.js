@@ -8,46 +8,45 @@ import {
   Rating,
   StarContainer,
 } from "./card.styled";
-export const content = (
-  status = "Aberto",
-  setRating,
-  rating,
-  { contribuicao }
-) => {
-  const price =
-    contribuicao &&
-    contribuicao.toLocaleString("pt-br", {
-      style: "currency",
-      currency: "BRL",
-    });
+
+import { changeCardStatus } from "../../redux/action/card-informations";
+
+export const content = (status = "Aberto", setRating, rating, list) => {
   const GetRating = () => {
     console.log(rating);
   };
   switch (status) {
     case "Aberto":
-      return (
-        <>
-          <TitlePrice>Valor:{price}</TitlePrice>
-          <div>
+      list.map(({ contribuicao, status }, key) => {
+        const price =
+          contribuicao &&
+          contribuicao.toLocaleString("pt-br", {
+            style: "currency",
+            currency: "BRL",
+          });
+        return (
+          <div key={key}>
+            <TitlePrice>Valor:{price}</TitlePrice>
             <StyledButton
               onClick={() => {
-                console.log("oi");
+                changeCardStatus("Aceito");
               }}
             >
               <ButtonTitle>Aceitar</ButtonTitle>
             </StyledButton>
           </div>
-        </>
-      );
+        );
+      });
+
+      break;
+
     case "Aceito":
-      return (
-        <TitlePrice style={{ fontSize: "35px" }}>Valor:{price}</TitlePrice>
-      );
+      return <TitlePrice style={{ fontSize: "35px" }}>Valor:{}</TitlePrice>;
     case "Em Andamento":
       return (
         <>
           <TitlePrice>
-            <TitlePrice>Valor: {price}</TitlePrice>
+            <TitlePrice>Valor: {}</TitlePrice>
             <Location />
             -----------------
             <Tresh />
@@ -98,7 +97,7 @@ export const content = (
     case "Cancelado":
       return (
         <>
-          <TitlePrice style={{ fontSize: "35px" }}>Valor: {price}</TitlePrice>
+          <TitlePrice style={{ fontSize: "35px" }}>Valor: {}</TitlePrice>
           {<TitlePrice>Motivo: </TitlePrice>}
           {<TitlePrice>Cancelado por:</TitlePrice>}
         </>

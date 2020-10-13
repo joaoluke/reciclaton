@@ -13,7 +13,6 @@ const ServiceOrder = () => {
   const { business, os } = useSelector((state) => state.userService);
   const { authen } = useSelector((state) => state.login);
   const state = useSelector((state) => state);
-  console.log(authen);
   const history = useHistory();
   useEffect(() => {
     authen && setUserId(jwt_decode(authen));

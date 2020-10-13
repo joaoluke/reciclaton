@@ -13,10 +13,13 @@ import {
 } from "./new-service.style";
 import decode from "jwt-decode";
 import { useForm } from "react-hook-form";
-import { addService, getServices } from "../../redux/action/card-informations";
+import {
+  addService,
+  getServices,
+  changeInformations,
+} from "../../redux/action/card-informations";
 import { useDispatch, useSelector } from "react-redux";
 import { inputData } from "./helper";
-import { changeInformations } from "../../redux/action/card-informations";
 import { requestBusiness } from "../../redux/action/user-service";
 import { useHistory } from "react-router-dom";
 const materiais = {
