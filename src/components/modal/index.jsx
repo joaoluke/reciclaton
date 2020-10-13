@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { registerForm } from "../../redux/action/register";
+// import { registerForm } from "../../redux/action/register";
 import { AiOutlineCloseSquare } from "react-icons/ai";
 import {
   ComponentNewAccount,
@@ -15,6 +15,8 @@ import {
   StyledInput,
   StyledSelect,
   StyledProductsDiv,
+  StyledButtonRegister,
+  StyledH2
 } from "./styled.js";
 import axios from "axios";
 import ProductInput from "./productsInput";
@@ -45,7 +47,7 @@ const customStyles = {
   },
 };
 
-const ModalComponent = ({ visible, setVisible }) => {
+const ModalComponent = ({ visible, setVisible, children }) => {
   const [errorText, setErrorText] = useState("");
   const [areIdentical, setAreIdentical] = useState(true);
   const [password, setPassword] = useState("");
@@ -96,7 +98,7 @@ const ModalComponent = ({ visible, setVisible }) => {
       website: data.site,
       imageUrl: data.image,
     };
-    dispatch(registerForm(formData, setVisible, setErrorText));
+    // dispatch(registerForm(formData, setVisible, setErrorText));
   };
 
   const openModal = () => {
@@ -159,22 +161,21 @@ const ModalComponent = ({ visible, setVisible }) => {
   };
 
   return (
-    <div>
-      <ComponentNewAccount>
-        <button onClick={openModal}>Open Modal</button>
-      </ComponentNewAccount>
+    <>
+      <StyledButtonRegister onClick={openModal}>{children}</StyledButtonRegister>
       <Modal
         isOpen={visible}
         onRequestClose={closeModal}
         style={customStyles}
         contentLabel="Example Modal"
+        ariaHideApp={false}
       >
         <StyledCloseModalDiv>
           <StyledCloseModalP onClick={closeModal}>
             <AiOutlineCloseSquare />
           </StyledCloseModalP>
         </StyledCloseModalDiv>
-        <h2 style={{ textAlign: "center", marginTop: "0" }}>Registre-se</h2>
+        <StyledH2>Registre-se</StyledH2>
         <ComponentForm onSubmit={handleSubmit(onSubmit)}>
           <StyledLabel>Nome Fantasia*:</StyledLabel>
           <StyledInput name="nameFantasy" ref={register({ required: true })} />
@@ -199,7 +200,7 @@ const ModalComponent = ({ visible, setVisible }) => {
           <StyledLabel>CNPJ*:</StyledLabel>
           <StyledInput
             name="cnpj"
-            value={cnpjMask(cnpj)}
+            defaultValue={cnpjMask(cnpj)}
             onChange={(e) => setCNPJ(e.target.value)}
             placeholder="Ex.: 00.000.000/0000-00"
             ref={register({ required: true })}
@@ -210,7 +211,7 @@ const ModalComponent = ({ visible, setVisible }) => {
           <StyledInput
             name="cep"
             placeholder="Ex.: 00000-000"
-            value={cepMask(cep)}
+            defaultValue={cepMask(cep)}
             onBlur={catchZip}
             onChange={(e) => setCEP(e.target.value)}
             ref={register}
@@ -222,14 +223,14 @@ const ModalComponent = ({ visible, setVisible }) => {
           <StyledLabel>Estado:</StyledLabel>
           <StyledInput
             name="state"
-            value={valuesAddress.uf}
+            defaultValue={valuesAddress.uf}
             ref={register({ required: true })}
           />
 
           <StyledLabel>Cidade:</StyledLabel>
           <StyledInput
             name="city"
-            value={valuesAddress.localidade}
+            defaultValue={valuesAddress.localidade}
             ref={register({ required: true })}
           />
 
@@ -244,7 +245,7 @@ const ModalComponent = ({ visible, setVisible }) => {
             <StyledInput
               name="district"
               type="text"
-              value={valuesAddress.bairro}
+              defaultValue={valuesAddress.bairro}
               ref={register({ required: true })}
             />
           )}
@@ -261,7 +262,7 @@ const ModalComponent = ({ visible, setVisible }) => {
             <StyledInput
               type="text"
               name="street"
-              value={valuesAddress.logradouro}
+              defaultValue={valuesAddress.logradouro}
               ref={register({ required: true })}
             />
           )}
@@ -284,16 +285,16 @@ const ModalComponent = ({ visible, setVisible }) => {
             onChange={companyOrCollector}
           >
             <div>
-              <StyledInput type="radio" name="type" id="company" value={1} />
+              <StyledInput type="radio" name="type" id="company" defaultValue={1} />
               <label>Empresa</label>
             </div>
             <div>
-              <StyledInput type="radio" name="type" id="collector" value={2} />
-              <label>Coletador</label>
+              <StyledInput type="radio" name="type" id="collector" defaultValue={2} />
+              <label>Coletor</label>
             </div>
           </div>
           {typeUser === "1" ? (
-            <div style={{ margin: "20px 0 5px" }}>
+            <>
               <StyledLabel>Tipo de Negocio*:</StyledLabel>
               <StyledSelect
                 className="branch"
@@ -313,7 +314,7 @@ const ModalComponent = ({ visible, setVisible }) => {
                 <option>Hotel / Motel</option>
               </StyledSelect>
               {errors.branch && <p>Selecione o ramo da Empresa</p>}
-            </div>
+            </>
           ) : (
             <StyledProductsDiv>
               <StyledLabel>Materiais pra Coleta*:</StyledLabel>
@@ -387,7 +388,7 @@ const ModalComponent = ({ visible, setVisible }) => {
           {errorText && <p>{errorText}</p>}
         </ComponentForm>
       </Modal>
-    </div>
+    </>
   );
 };
 

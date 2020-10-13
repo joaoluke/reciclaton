@@ -1,11 +1,9 @@
 import React from "react";
-import Layout from "./components/layout";
 import Routes from "./components/routes";
-
-
+import Layout from "./components/layout";
 function App() {
   return (
-    <div className="App">
+    <div>
       <Layout>
         <Routes />
       </Layout>

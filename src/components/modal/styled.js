@@ -30,6 +30,11 @@ export const StyledCloseModalDiv = styled.div`
   flex-flow: column;
 `;
 
+export const StyledH2 = styled.h2`
+  text-align: center;
+  margin-top: 0;
+`;
+
 export const StyledCloseModalP = styled.p`
   display: flex;
   padding: 5px;
@@ -62,6 +67,17 @@ export const StyledCancelar = styled(StyledRegister)`
 export const StyledButtonsDiv = styled.div`
   display: flex;
   justify-content: space-between;
+`;
+
+export const StyledButtonRegister = styled.button`
+  border: none;
+  background: none;
+  font-size: 20px;
+  margin-top: 10px;
+  cursor: pointer;
+  :focus {
+    outline: none;
+  }
 `;
 
 export const ComponentProducts = styled.div`

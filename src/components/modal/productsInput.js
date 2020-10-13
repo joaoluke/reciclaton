@@ -29,7 +29,7 @@ const ProductInput = ({ collector }) => {
         <ComponentCheck name="battery" type="checkbox" ref={collector} />
       </ComponentProducts>
       <ComponentProducts>
-        <ComponentProduct>Pano</ComponentProduct>
+        <ComponentProduct>Tecido</ComponentProduct>
         <ComponentCheck name="cloth" type="checkbox" ref={collector} />
       </ComponentProducts>
       <ComponentProducts>
