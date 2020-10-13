@@ -13,9 +13,7 @@ const ServiceOrder = () => {
   const { business, os } = useSelector((state) => state.userService);
   const { authen } = useSelector((state) => state.login);
   const state = useSelector((state) => state);
-  console.log(authen);
   const history = useHistory();
-  const teste = useSelector((state) => console.log("teste" + state.userService));
   useEffect(() => {
     authen && setUserId(jwt_decode(authen));
     authen && dispatch(requestBusiness(userId.sub, authen));
@@ -24,12 +22,23 @@ const ServiceOrder = () => {
   return (
     <>
       <ContainerButton>
+
+        {business === "Coleta" && ( // coletador
+          <StyledButton
+            onClick={() => {
+              setStatus("Aberto");
+            }}
+          >
+            {status === "Aberto" ? <StyledSelct>Aberto</StyledSelct> : "Aberto"}
+          </StyledButton>
+        )}
         {business !== "Coleta" && ( // empresa
           <StyledButton
             onClick={() => history.push(`/new-service-order/${userId.sub}`)}
           >
             {status === "Chamado" ? <StyledSelct>Chamado</StyledSelct> : "Chamado"}
           </StyledButton>
+
         )}
 
         {business === "Coleta" && ( // coletador
@@ -41,6 +50,8 @@ const ServiceOrder = () => {
             {status === "Aceito" ? <StyledSelct>Aceito</StyledSelct> : "Aceito"}
           </StyledButton>
         )}
+
+
 
         <StyledButton
           onClick={() => {

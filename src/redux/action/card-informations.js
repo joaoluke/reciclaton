@@ -78,7 +78,7 @@ export const changeCardStatus = (id, token, service) => {
       header
     )
     .then(({ data }) => {
-      console.log(data);
+      console.log(id);
     })
     .catch(({ response }) => console.log(response));
 };
