@@ -4,14 +4,14 @@ export const StyledButton = styled.button`
   font-size: 18px;
   background: transparent;
   border: solid 2px #95c763;
-  margin-right: 4px;
-  margin-top: 4px;
+  margin-top: 10px;
+  margin-right: 5px;
   padding: 5px;
   :hover {
     cursor: pointer;
     border-color: #84b84f;
   }
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 5400px) {
     font-size: 0.75em;
   }
 `;
@@ -25,3 +25,7 @@ export const ContainerButton = styled.div`
     flex-wrap: nowrap;
   }
 `;
+
+export const StyledSelct = styled.div`
+  border-bottom: solid 2px  #0C7FBF;
+` 
