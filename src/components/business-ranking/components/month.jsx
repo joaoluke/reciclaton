@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React from "react";
+import { LastElement } from "../styled-business";
 import Case1 from "./components-month/case1";
 import Case2 from "./components-month/case2";
 import Case3 from "./components-month/case3";
@@ -28,7 +29,7 @@ const Month = ({
         currentBusiness.sort(orderByScoreMonth).map((item, index) => {
           if (currentBusiness.length === index + 1) {
             return (
-              <div ref={lastBusinessRefElement}>
+              <LastElement ref={lastBusinessRefElement}>
                 <Case1
                   item={item}
                   index={index}
@@ -41,7 +42,7 @@ const Month = ({
                   goldTrophy={goldTrophy}
                   orderByScoreMonth={orderByScoreMonth}
                 />
-              </div>
+              </LastElement>
             );
           } else {
             return (
@@ -70,7 +71,7 @@ const Month = ({
           .map((item, index) => {
             if (currentBusiness.length === index + 1) {
               return (
-                <div ref={lastBusinessRefElement}>
+                <LastElement ref={lastBusinessRefElement}>
                   <Case2
                     item={item}
                     index={index}
@@ -84,7 +85,7 @@ const Month = ({
                     orderByScoreMonth={orderByScoreMonth}
                     size={size}
                   />
-                </div>
+                </LastElement>
               );
             } else {
               return (
@@ -114,7 +115,7 @@ const Month = ({
           .map((item, index) => {
             if (currentBusiness.length === index + 1) {
               return (
-                <div ref={lastBusinessRefElement}>
+                <LastElement ref={lastBusinessRefElement}>
                   <Case3
                     item={item}
                     index={index}
@@ -128,7 +129,7 @@ const Month = ({
                     orderByScoreMonth={orderByScoreMonth}
                     category={category}
                   />
-                </div>
+                </LastElement>
               );
             } else {
               return (
@@ -155,7 +156,7 @@ const Month = ({
         currentBusiness.sort(orderByScoreMonth).map((item, index) => {
           if (currentBusiness.length === index + 1) {
             return (
-              <div ref={lastBusinessRefElement}>
+              <LastElement ref={lastBusinessRefElement}>
                 <Case4
                   item={item}
                   index={index}
@@ -170,7 +171,7 @@ const Month = ({
                   category={category}
                   size={size}
                 />
-              </div>
+              </LastElement>
             );
           } else {
             return (

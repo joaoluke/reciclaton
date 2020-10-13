@@ -199,38 +199,36 @@ const BusinessRanking = () => {
             </th>
           </thead>
           <tbody>
-            <>
-              <Month
-                lastBusinessRefElement={lastBusinessRefElement}
-                goldHonor={goldHonor}
-                silverHonor={silverHonor}
-                bronzeHonor={bronzeHonor}
-                bronzeTrophy={bronzeTrophy}
-                silverTrophy={silverTrophy}
-                goldTrophy={goldTrophy}
-                orderByScoreMonth={orderByScoreMonth}
-                score={score}
-                size={size}
-                category={category}
-                currentBusiness={currentBusiness}
-                business={business}
-              />
+            <Month
+              lastBusinessRefElement={lastBusinessRefElement}
+              goldHonor={goldHonor}
+              silverHonor={silverHonor}
+              bronzeHonor={bronzeHonor}
+              bronzeTrophy={bronzeTrophy}
+              silverTrophy={silverTrophy}
+              goldTrophy={goldTrophy}
+              orderByScoreMonth={orderByScoreMonth}
+              score={score}
+              size={size}
+              category={category}
+              currentBusiness={currentBusiness}
+              business={business}
+            />
 
-              <Year
-                lastBusinessRefElement={lastBusinessRefElement}
-                goldHonor={goldHonor}
-                silverHonor={silverHonor}
-                bronzeHonor={bronzeHonor}
-                bronzeTrophy={bronzeTrophy}
-                silverTrophy={silverTrophy}
-                goldTrophy={goldTrophy}
-                orderByScoreYear={orderByScoreYear}
-                score={score}
-                size={size}
-                category={category}
-                currentBusiness={currentBusiness}
-              />
-            </>
+            <Year
+              lastBusinessRefElement={lastBusinessRefElement}
+              goldHonor={goldHonor}
+              silverHonor={silverHonor}
+              bronzeHonor={bronzeHonor}
+              bronzeTrophy={bronzeTrophy}
+              silverTrophy={silverTrophy}
+              goldTrophy={goldTrophy}
+              orderByScoreYear={orderByScoreYear}
+              score={score}
+              size={size}
+              category={category}
+              currentBusiness={currentBusiness}
+            />
           </tbody>
         </StyledTable>
       </BackgroundRank>
