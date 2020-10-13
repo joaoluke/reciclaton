@@ -41,7 +41,7 @@ export const content = (
     case "Aberto":
       return list.map(
         (
-          { contribuicao, materiais, status, id, contratante_id, adress },
+          { contribuicao, materiais, status, id, adress },
           key
         ) => {
           const price =
@@ -101,8 +101,8 @@ export const content = (
               currency: "BRL",
             });
           if (
-            (status === "Aceito" && contratante_id === id) ||
-            contratado_id === id
+            status === "Aceito" && (contratante_id === id ||
+              contratado_id === id)
           ) {
             return (
               <Container key={key}>
@@ -118,10 +118,10 @@ export const content = (
                   <Title>
                     Materiais:
                     {Object.values(materiais).map((material, key) => {
-                      if (material === true) {
-                        return Object.keys(materiais)[key];
-                      }
-                    })}
+                    if (material === true) {
+                      return Object.keys(materiais)[key];
+                    }
+                  })}
                   </Title>
                 </Content>
                 <TitlePrice style={{ fontSize: "35px" }}>
@@ -156,8 +156,8 @@ export const content = (
               currency: "BRL",
             });
           if (
-            (status === "Em Andamento" && contratante_id === id) ||
-            contratado_id === id
+            status === "Em Andamento" && (contratante_id === id ||
+              contratado_id === id)
           ) {
             return (
               <Container key={key}>
@@ -198,9 +198,7 @@ export const content = (
     case "Finalizado":
       return list.map(({ status, contratante_id, contratado_id }, key) => {
         if (
-          (status === "Finalizado" && contratante_id === os.id) ||
-          contratado_id === id
-        ) {
+          status === "Finalizado" && (contratado_id === idUser || contratante_id === idUser)) {
           return (
             <Container key={key}>
               <StarContainer>
@@ -234,11 +232,11 @@ export const content = (
                 onClick={() => {
                   business === "Coleta"
                     ? changeCardStatus(id, token, {
-                        "avaliacao-contratado": rating,
-                      })
+                      "avaliacao-contratado": rating,
+                    })
                     : changeCardStatus(id, token, {
-                        "avaliacao-contratante": rating,
-                      });
+                      "avaliacao-contratante": rating,
+                    });
                 }}
               >
                 <ButtonTitle>Avaliar</ButtonTitle>
@@ -251,8 +249,8 @@ export const content = (
     case "Cancelado":
       list.map(({ status, contratante_id, contratado_id }, key) => {
         if (
-          (status === "Cancelado" && contratante_id === os.id) ||
-          contratado_id === id
+          status === "Cancelado" && (contratante_id === os.id ||
+            contratado_id === id)
         ) {
           return (
             <>
