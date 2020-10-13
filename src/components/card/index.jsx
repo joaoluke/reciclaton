@@ -7,19 +7,7 @@ import {
   getServices,
 } from "../../redux/action/card-informations";
 import { requestBusiness } from "../../redux/action/user-service";
-import {
-  Container,
-  CloseCard,
-  Content,
-  Title,
-  CloseCointainer,
-  CardTitle,
-  PopUp,
-  Accept,
-  Decline,
-  Choice,
-  TitlePrice,
-} from "./card.styled";
+import { Container } from "./card.styled";
 const Card = ({ status }) => {
   const [popUp, setPopUp] = useState(false);
   const dispatch = useDispatch();
@@ -38,9 +26,9 @@ const Card = ({ status }) => {
   const test = useSelector((state) => state);
   console.log(test);
   return (
-    <Container>
+    <div>
       {content(status, setRating, rating, list, token, user, popUp, setPopUp)}
-    </Container>
+    </div>
   );
 };
 
