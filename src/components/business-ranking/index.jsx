@@ -73,21 +73,19 @@ const BusinessRanking = () => {
   const orderByScoreYear = (businessA, businessB) =>
     businessB.score.anual - businessA.score.anual;
 
-    window.onscroll = function (ev) {
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-        setHasMore(hasMore + 20);
-      }
-    };
+  window.onscroll = function (ev) {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+      setHasMore(hasMore + 20);
+    }
+  };
 
   return (
     <div>
-      {console.log(document.body.scrollHeight)}
-      {console.log()}
       <BusinessCard>
-        <H1>Destaques do mês</H1>
+        <H1>{score === 'mensal' ? 'Destaques do mês' : 'Destaques do ano'}</H1>
         <Hr />
         <SpotlightDiv>
-          {business.sort(orderByScoreMonth).map(
+          {score === 'mensal' ? business.sort(orderByScoreMonth).map(
             (item, index) =>
               index >= 0 &&
               index <= 2 && (
@@ -99,6 +97,29 @@ const BusinessRanking = () => {
                   <StyledImg src={item.imageUrl} />
                   <StyledSpanBrand>{item.brand}</StyledSpanBrand>
                   {item.score.mensal} pontos
+                  <StyledThophieImage
+                    src={
+                      index === 0
+                        ? goldTrophie
+                        : index === 1
+                        ? silverTrophie
+                        : bronzeTrophie
+                    }
+                  />
+                </SpotlightChildDiv>
+              )
+          ) : business.sort(orderByScoreYear).map(
+            (item, index) =>
+              index >= 0 &&
+              index <= 2 && (
+                <SpotlightChildDiv
+                  key={index}
+                  onClick={() => history.push(`users/${item.id}`)}
+                >
+                  <StyledSpan>{index + 1}ª</StyledSpan>
+                  <StyledImg src={item.imageUrl} />
+                  <StyledSpanBrand>{item.brand}</StyledSpanBrand>
+                  {item.score.anual} pontos
                   <StyledThophieImage
                     src={
                       index === 0
