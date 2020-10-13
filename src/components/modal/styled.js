@@ -6,27 +6,27 @@ export const ComponentNewAccount = styled.div`
 `;
 
 export const ComponentForm = styled.form`
-  background-color: #fff;
-  padding: 10px;
-  border-radius: 10px;
-  display: grid;
-  width: 40%;
-  position: absolute;
-  margin: auto 30% auto 30%;
-  top: 13%;
+  display: flex;
+  flex-flow: column;
+  width: 30vw;
+  margin: 0 auto;
 `;
 
-export const ComponentClose = styled.div`
-  color: #bfbeba;
-  font-family: Arial, Helvetica, sans-serif;
-  text-decoration: none;
-  position: absolute;
-  font-size: 20px;
-  width: 17px;
-  height: 17px;
-  text-align: center;
-  right: 5px;
+export const StyledCloseModalDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
+`;
+
+export const StyledCloseModalP = styled.p`
+  display: flex;
+  padding: 5px;
+  font-size: 35px;
+  margin: 0;
   cursor: pointer;
+  color: #a5a5a5;
+  align-self: flex-end;
+  align-items: center;
 `;
 
 export const ComponentSubmit = styled.input`
@@ -34,19 +34,22 @@ export const ComponentSubmit = styled.input`
   color: #000;
   text-transform: uppercase;
   border: none;
-  margin-top: 40px;
+  margin: 20px 0;
   padding: 20px;
   font-size: 16px;
   font-weight: 100;
   letter-spacing: 10px;
 `;
 
-export const ComponentProducts = styled(Col)`
+export const ComponentProducts = styled.div`
   display: flex;
+  padding: 5px;
+  align-items: center;
+  justify-content: space-around;
 `;
 
 export const ComponentProduct = styled.label`
-  width: 50%;
+  width: 10vw;
 `;
 
 export const ComponentCheck = styled.input`
@@ -55,9 +58,10 @@ export const ComponentCheck = styled.input`
 `;
 
 export const ComponentRadio = styled(Radio)`
-  display: "block";
-  height: "30px";
-  line-height: "30px";
+  margin: 20px 0 5px;
+  display: block;
+  height: 30px;
+  line-height: 30px;
 `;
 
 export const ComponentModal = styled.div`
@@ -71,6 +75,10 @@ export const ComponentModal = styled.div`
   :target {
     display: block;
   }
+`;
+
+export const StyledLabel = styled.label`
+  margin: 20px 5px 5px 0;
 `;
 
 export const ComponentBox = styled.form`

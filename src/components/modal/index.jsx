@@ -3,21 +3,18 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import Modal from "react-modal";
 import { registerForm } from "../../redux/action/register";
-import "antd/dist/antd.css";
-import { Checkbox, Row } from "antd";
+import { AiOutlineCloseSquare } from "react-icons/ai";
 import axios from "axios";
 import {
   ComponentNewAccount,
-  ComponentModal,
   ComponentRadio,
-  ComponentProducts,
-  ComponentCheck,
-  ComponentProduct,
   ComponentForm,
-  ComponentClose,
+  StyledCloseModalDiv,
+  StyledCloseModalP,
+  StyledLabel,
   ComponentSubmit,
 } from "./styled.js";
-import "./style.css";
+import ProductInput from "./productsInput";
 
 let ifCollectorMock = {
   organic: false,
@@ -33,8 +30,8 @@ let ifCollectorMock = {
 
 const customStyles = {
   content: {
-    width: "88%",
-    height: "78%",
+    width: "40vw",
+    height: "80vh",
     padding: "0",
     top: "50%",
     left: "50%",
@@ -53,7 +50,7 @@ const ModalComponent = () => {
   const [cepError, setCepError] = useState(false);
   const [cep, setCEP] = useState("");
   const [cnpj, setCNPJ] = useState("");
-  const [typeUser, setTypeUser] = useState(1);
+  const [typeUser, setTypeUser] = useState("1");
   const [valuesAddress, setValuesAddress] = useState({
     cep: "",
     logradouro: "",
@@ -106,17 +103,18 @@ const ModalComponent = () => {
     setIsOpen(true);
   };
 
-  const afterOpenModal = () => {
-    subtitle.style.color = "#000";
-    subtitle.style.textAlign = "center";
-    subtitle.style.marginTop = "14px";
-  };
+  // const afterOpenModal = () => {
+  //   subtitle.style.color = "#000";
+  //   subtitle.style.textAlign = "center";
+  //   subtitle.style.marginTop = "14px";
+  // };
 
   const closeModal = () => {
     setIsOpen(false);
   };
 
   const companyOrCollector = (e) => {
+    console.log(e.target.value);
     setTypeUser(e.target.value);
   };
 
@@ -172,22 +170,25 @@ const ModalComponent = () => {
       <ComponentNewAccount>
         <button onClick={openModal}>Open Modal</button>
       </ComponentNewAccount>
-      <ComponentModal id="modal"></ComponentModal>
       <Modal
-        isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
+        isOpen={true}
+        onAfterOpen={""}
         onRequestClose={closeModal}
         style={customStyles}
         contentLabel="Example Modal"
       >
-        <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Registre-se</h2>
-
-        <ComponentForm className="box" onSubmit={handleSubmit(onSubmit)}>
-          <label>Nome Fantasia*:</label>
+        <StyledCloseModalDiv>
+          <StyledCloseModalP onClick={closeModal}>
+            <AiOutlineCloseSquare />
+          </StyledCloseModalP>
+        </StyledCloseModalDiv>
+        <h2 style={{ textAlign: "center", marginTop: "0" }}>Registre-se</h2>
+        <ComponentForm onSubmit={handleSubmit(onSubmit)}>
+          <StyledLabel>Nome Fantasia*:</StyledLabel>
           <input name="nameFantasy" ref={register({ required: true })} />
           {errors.nameFantasy && <p>Digite o nome da Empresa</p>}
 
-          <label>Email*:</label>
+          <StyledLabel>Email*:</StyledLabel>
           <input
             name="email"
             ref={register({
@@ -203,7 +204,7 @@ const ModalComponent = () => {
             <p>{errors.email && errors.email.message}</p>
           )}
 
-          <label>CNPJ*:</label>
+          <StyledLabel>CNPJ*:</StyledLabel>
           <input
             name="cnpj"
             value={cnpjMask(cnpj)}
@@ -213,7 +214,7 @@ const ModalComponent = () => {
           />
           {errors.cnpj && <p>Digite o CNPJ da Empresa</p>}
 
-          <label>CEP*:</label>
+          <StyledLabel>CEP*:</StyledLabel>
           <input
             name="cep"
             placeholder="Ex.: 00000-000"
@@ -226,21 +227,21 @@ const ModalComponent = () => {
           {cepError === true && <p>Erro ao buscar CEP</p>}
           {errors.cep && <p>Digite o CEP da Empresa</p>}
 
-          <label>Estado:</label>
+          <StyledLabel>Estado:</StyledLabel>
           <input
             name="state"
             value={valuesAddress.uf}
             ref={register({ required: true })}
           />
 
-          <label>Cidade:</label>
+          <StyledLabel>Cidade:</StyledLabel>
           <input
             name="city"
             value={valuesAddress.localidade}
             ref={register({ required: true })}
           />
 
-          <label>Bairro*:</label>
+          <StyledLabel>Bairro*:</StyledLabel>
           {valuesAddress.bairro === "" ? (
             <input
               name="district"
@@ -257,7 +258,7 @@ const ModalComponent = () => {
           )}
           {errors.district && <p>Digite o nome do bairro da empresa</p>}
 
-          <label>Logradouro*:</label>
+          <StyledLabel>Logradouro*:</StyledLabel>
           {valuesAddress.logradouro === "" ? (
             <input
               type="text"
@@ -274,7 +275,7 @@ const ModalComponent = () => {
           )}
           {errors.street && <p>Digite o nome da rua da empresa</p>}
 
-          <label>Número*:</label>
+          <StyledLabel>Número*:</StyledLabel>
           <input name="number" ref={register({ required: true })} />
           {errors.number && (
             <p>
@@ -282,17 +283,26 @@ const ModalComponent = () => {
             </p>
           )}
 
-          <ComponentRadio.Group onChange={companyOrCollector} value={typeUser}>
-            <ComponentRadio name="company" value={1}>
-              Empresa
-            </ComponentRadio>
-            <ComponentRadio name="collector" value={2}>
-              Coletador
-            </ComponentRadio>
-          </ComponentRadio.Group>
-          {typeUser === 1 ? (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-around",
+              margin: "20px 0 5px",
+            }}
+            onChange={companyOrCollector}
+          >
             <div>
-              <label>Tipo de Negocio*:</label>
+              <input type="radio" name="type" id="company" value={1} />
+              <label>Empresa</label>
+            </div>
+            <div>
+              <input type="radio" name="type" id="collector" value={2} />
+              <label>Coletador</label>
+            </div>
+          </div>
+          {typeUser === "1" ? (
+            <div style={{ margin: "20px 0 5px" }}>
+              <StyledLabel>Tipo de Negocio*:</StyledLabel>
               <select
                 className="branch"
                 name="branch"
@@ -314,93 +324,17 @@ const ModalComponent = () => {
             </div>
           ) : (
             <div>
-              <label>
-                Materiais pra Coleta*:{" "}
-                <h6 className="tip">
-                  Segurando CTRL você seleciona mais de um
-                </h6>
-              </label>
-              <Checkbox.Group style={{ width: "100%" }}>
-                <Row>
-                  <ComponentProducts span={12}>
-                    <ComponentProduct>Organicos</ComponentProduct>
-                    <ComponentCheck
-                      name="organic"
-                      type="checkbox"
-                      ref={collector}
-                    />
-                  </ComponentProducts>
-                  <ComponentProducts span={12}>
-                    <ComponentProduct>Plasticos</ComponentProduct>
-                    <ComponentCheck
-                      name="plastic"
-                      type="checkbox"
-                      ref={collector}
-                    />
-                  </ComponentProducts>
-                  <ComponentProducts span={12}>
-                    <ComponentProduct>Vidro</ComponentProduct>
-                    <ComponentCheck
-                      name="glass"
-                      type="checkbox"
-                      ref={collector}
-                    />
-                  </ComponentProducts>
-                  <ComponentProducts span={12}>
-                    <ComponentProduct>Papel</ComponentProduct>
-                    <ComponentCheck
-                      name="paper"
-                      type="checkbox"
-                      ref={collector}
-                    />
-                  </ComponentProducts>
-                  <ComponentProducts span={12}>
-                    <ComponentProduct>Metal</ComponentProduct>
-                    <ComponentCheck
-                      name="metal"
-                      type="checkbox"
-                      ref={collector}
-                    />
-                  </ComponentProducts>
-                  <ComponentProducts span={12}>
-                    <ComponentProduct>Bateria</ComponentProduct>
-                    <ComponentCheck
-                      name="battery"
-                      type="checkbox"
-                      ref={collector}
-                    />
-                  </ComponentProducts>
-                  <ComponentProducts span={12}>
-                    <ComponentProduct>Pano</ComponentProduct>
-                    <ComponentCheck
-                      name="cloth"
-                      type="checkbox"
-                      ref={collector}
-                    />
-                  </ComponentProducts>
-                  <ComponentProducts span={12}>
-                    <ComponentProduct>Eletronicos</ComponentProduct>
-                    <ComponentCheck
-                      name="electronic"
-                      type="checkbox"
-                      ref={collector}
-                    />
-                  </ComponentProducts>
-                  <ComponentProducts span={12}>
-                    <ComponentProduct>Borracha</ComponentProduct>
-                    <ComponentCheck
-                      name="rubber"
-                      type="checkbox"
-                      ref={collector}
-                    />
-                  </ComponentProducts>
-                </Row>
-              </Checkbox.Group>
+              <StyledLabel>Materiais pra Coleta*:</StyledLabel>
+              <div style={{ columnCount: "3" }}>
+                <div>
+                  <ProductInput collector={collector} />
+                </div>
+              </div>
               {errors.materials && <p>Selecione o tipo da Coleta que deseja</p>}
             </div>
           )}
 
-          <label>Porte da Empresa*:</label>
+          <StyledLabel>Porte da Empresa*:</StyledLabel>
           <select
             className="branch"
             name="port"
@@ -414,21 +348,21 @@ const ModalComponent = () => {
           </select>
           {errors.port && <p>Selecione o tipo da Coleta que deseja</p>}
 
-          <label>Site da Empresa:</label>
+          <StyledLabel>Site da Empresa:</StyledLabel>
           <input
             name="site"
             placeholder="Ex.: https://www.empresa.com.br"
             ref={register}
           />
 
-          <label>Imagem da Empresa (URL):</label>
+          <StyledLabel>Imagem da Empresa (URL):</StyledLabel>
           <input
             name="image"
             placeholder="Ex.: https://imagem.net.com/imagemdaempresa"
             ref={register}
           />
 
-          <label>Senha*</label>
+          <StyledLabel>Senha*</StyledLabel>
           <input
             type="password"
             name="password"
@@ -439,7 +373,7 @@ const ModalComponent = () => {
           />
           {errors.password && <p>Digite sua senha com mais de 4 caracteres</p>}
 
-          <label>Confirmação de Senha*</label>
+          <StyledLabel>Confirmação de Senha*</StyledLabel>
           <input
             type="password"
             name="confirmPassword"
@@ -454,10 +388,11 @@ const ModalComponent = () => {
           />
           {areIdentical === false && <p>Senhas não se correspondem</p>}
           {errors.confirmPassword && <p>Digite a confirmação da senha</p>}
-
-          <ComponentSubmit type="submit" value="Registrar" />
+          <div>
+            <button style={{color: "#F55536"}}>Cancelar</button>
+            <ComponentSubmit type="submit" value="Registrar" />
+          </div>
           {errorText && <p>{errorText}</p>}
-          <ComponentClose onClick={closeModal}>Fechar</ComponentClose>
         </ComponentForm>
       </Modal>
     </div>
