@@ -1,13 +1,14 @@
 import React from "react";
-import Modal from "./components/modal";
+import Layout from "./components/layout";
+import Routes from "./components/routes";
+
 
 function App() {
   return (
     <div className="App">
-      <Modal />
-      {/* <Layout>
+      <Layout>
         <Routes />
-      </Layout> */}
+      </Layout>
     </div>
   );
 }

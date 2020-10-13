@@ -1,20 +1,24 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import Modal from "react-modal";
 import { registerForm } from "../../redux/action/register";
 import { AiOutlineCloseSquare } from "react-icons/ai";
-import axios from "axios";
 import {
   ComponentNewAccount,
-  ComponentRadio,
   ComponentForm,
   StyledCloseModalDiv,
   StyledCloseModalP,
   StyledLabel,
-  ComponentSubmit,
+  StyledRegister,
+  StyledCancelar,
+  StyledButtonsDiv,
+  StyledInput,
+  StyledSelect,
+  StyledProductsDiv,
 } from "./styled.js";
+import axios from "axios";
 import ProductInput from "./productsInput";
+import Modal from "react-modal";
 
 let ifCollectorMock = {
   organic: false,
@@ -30,7 +34,6 @@ let ifCollectorMock = {
 
 const customStyles = {
   content: {
-    width: "40vw",
     height: "80vh",
     padding: "0",
     top: "50%",
@@ -42,9 +45,8 @@ const customStyles = {
   },
 };
 
-const ModalComponent = () => {
+const ModalComponent = ({ visible, setVisible }) => {
   const [errorText, setErrorText] = useState("");
-  const [modalIsOpen, setIsOpen] = useState(false);
   const [areIdentical, setAreIdentical] = useState(true);
   const [password, setPassword] = useState("");
   const [cepError, setCepError] = useState(false);
@@ -94,27 +96,18 @@ const ModalComponent = () => {
       website: data.site,
       imageUrl: data.image,
     };
-    dispatch(registerForm(formData, setIsOpen, setErrorText));
+    dispatch(registerForm(formData, setVisible, setErrorText));
   };
-
-  let subtitle;
 
   const openModal = () => {
-    setIsOpen(true);
+    setVisible(true);
   };
 
-  // const afterOpenModal = () => {
-  //   subtitle.style.color = "#000";
-  //   subtitle.style.textAlign = "center";
-  //   subtitle.style.marginTop = "14px";
-  // };
-
   const closeModal = () => {
-    setIsOpen(false);
+    setVisible(false);
   };
 
   const companyOrCollector = (e) => {
-    console.log(e.target.value);
     setTypeUser(e.target.value);
   };
 
@@ -171,8 +164,7 @@ const ModalComponent = () => {
         <button onClick={openModal}>Open Modal</button>
       </ComponentNewAccount>
       <Modal
-        isOpen={true}
-        onAfterOpen={""}
+        isOpen={visible}
         onRequestClose={closeModal}
         style={customStyles}
         contentLabel="Example Modal"
@@ -185,11 +177,11 @@ const ModalComponent = () => {
         <h2 style={{ textAlign: "center", marginTop: "0" }}>Registre-se</h2>
         <ComponentForm onSubmit={handleSubmit(onSubmit)}>
           <StyledLabel>Nome Fantasia*:</StyledLabel>
-          <input name="nameFantasy" ref={register({ required: true })} />
+          <StyledInput name="nameFantasy" ref={register({ required: true })} />
           {errors.nameFantasy && <p>Digite o nome da Empresa</p>}
 
           <StyledLabel>Email*:</StyledLabel>
-          <input
+          <StyledInput
             name="email"
             ref={register({
               required: true,
@@ -205,7 +197,7 @@ const ModalComponent = () => {
           )}
 
           <StyledLabel>CNPJ*:</StyledLabel>
-          <input
+          <StyledInput
             name="cnpj"
             value={cnpjMask(cnpj)}
             onChange={(e) => setCNPJ(e.target.value)}
@@ -215,7 +207,7 @@ const ModalComponent = () => {
           {errors.cnpj && <p>Digite o CNPJ da Empresa</p>}
 
           <StyledLabel>CEP*:</StyledLabel>
-          <input
+          <StyledInput
             name="cep"
             placeholder="Ex.: 00000-000"
             value={cepMask(cep)}
@@ -228,14 +220,14 @@ const ModalComponent = () => {
           {errors.cep && <p>Digite o CEP da Empresa</p>}
 
           <StyledLabel>Estado:</StyledLabel>
-          <input
+          <StyledInput
             name="state"
             value={valuesAddress.uf}
             ref={register({ required: true })}
           />
 
           <StyledLabel>Cidade:</StyledLabel>
-          <input
+          <StyledInput
             name="city"
             value={valuesAddress.localidade}
             ref={register({ required: true })}
@@ -243,13 +235,13 @@ const ModalComponent = () => {
 
           <StyledLabel>Bairro*:</StyledLabel>
           {valuesAddress.bairro === "" ? (
-            <input
+            <StyledInput
               name="district"
               type="text"
               ref={register({ required: true })}
             />
           ) : (
-            <input
+            <StyledInput
               name="district"
               type="text"
               value={valuesAddress.bairro}
@@ -260,13 +252,13 @@ const ModalComponent = () => {
 
           <StyledLabel>Logradouro*:</StyledLabel>
           {valuesAddress.logradouro === "" ? (
-            <input
+            <StyledInput
               type="text"
               name="street"
               ref={register({ required: true })}
             />
           ) : (
-            <input
+            <StyledInput
               type="text"
               name="street"
               value={valuesAddress.logradouro}
@@ -276,7 +268,7 @@ const ModalComponent = () => {
           {errors.street && <p>Digite o nome da rua da empresa</p>}
 
           <StyledLabel>Número*:</StyledLabel>
-          <input name="number" ref={register({ required: true })} />
+          <StyledInput name="number" ref={register({ required: true })} />
           {errors.number && (
             <p>
               Digite o numero da empresa, caso não tiver numero, digitar: "S/N"
@@ -292,18 +284,18 @@ const ModalComponent = () => {
             onChange={companyOrCollector}
           >
             <div>
-              <input type="radio" name="type" id="company" value={1} />
+              <StyledInput type="radio" name="type" id="company" value={1} />
               <label>Empresa</label>
             </div>
             <div>
-              <input type="radio" name="type" id="collector" value={2} />
+              <StyledInput type="radio" name="type" id="collector" value={2} />
               <label>Coletador</label>
             </div>
           </div>
           {typeUser === "1" ? (
             <div style={{ margin: "20px 0 5px" }}>
               <StyledLabel>Tipo de Negocio*:</StyledLabel>
-              <select
+              <StyledSelect
                 className="branch"
                 name="branch"
                 ref={register({ required: true })}
@@ -319,23 +311,21 @@ const ModalComponent = () => {
                 <option>Shopping</option>
                 <option>Condominio</option>
                 <option>Hotel / Motel</option>
-              </select>
+              </StyledSelect>
               {errors.branch && <p>Selecione o ramo da Empresa</p>}
             </div>
           ) : (
-            <div>
+            <StyledProductsDiv>
               <StyledLabel>Materiais pra Coleta*:</StyledLabel>
-              <div style={{ columnCount: "3" }}>
-                <div>
-                  <ProductInput collector={collector} />
-                </div>
-              </div>
+              <StyledProductsDiv>
+                <ProductInput collector={collector} />
+              </StyledProductsDiv>
               {errors.materials && <p>Selecione o tipo da Coleta que deseja</p>}
-            </div>
+            </StyledProductsDiv>
           )}
 
           <StyledLabel>Porte da Empresa*:</StyledLabel>
-          <select
+          <StyledSelect
             className="branch"
             name="port"
             ref={register({ required: true })}
@@ -345,25 +335,25 @@ const ModalComponent = () => {
             <option>Empresa de Pequeno Porte (EPP)</option>
             <option>Empresa de Médio Porte</option>
             <option>Empresa de Grande Porte</option>
-          </select>
+          </StyledSelect>
           {errors.port && <p>Selecione o tipo da Coleta que deseja</p>}
 
           <StyledLabel>Site da Empresa:</StyledLabel>
-          <input
+          <StyledInput
             name="site"
             placeholder="Ex.: https://www.empresa.com.br"
             ref={register}
           />
 
           <StyledLabel>Imagem da Empresa (URL):</StyledLabel>
-          <input
+          <StyledInput
             name="image"
             placeholder="Ex.: https://imagem.net.com/imagemdaempresa"
             ref={register}
           />
 
           <StyledLabel>Senha*</StyledLabel>
-          <input
+          <StyledInput
             type="password"
             name="password"
             ref={register({ required: true, minLength: 4 })}
@@ -374,7 +364,7 @@ const ModalComponent = () => {
           {errors.password && <p>Digite sua senha com mais de 4 caracteres</p>}
 
           <StyledLabel>Confirmação de Senha*</StyledLabel>
-          <input
+          <StyledInput
             type="password"
             name="confirmPassword"
             ref={register({ required: true, minLength: 4 })}
@@ -388,10 +378,12 @@ const ModalComponent = () => {
           />
           {areIdentical === false && <p>Senhas não se correspondem</p>}
           {errors.confirmPassword && <p>Digite a confirmação da senha</p>}
-          <div>
-            <button style={{color: "#F55536"}}>Cancelar</button>
-            <ComponentSubmit type="submit" value="Registrar" />
-          </div>
+          <StyledButtonsDiv>
+            <StyledCancelar onClick={() => setVisible(false)}>
+              Cancelar
+            </StyledCancelar>
+            <StyledRegister type="submit">Registrar</StyledRegister>
+          </StyledButtonsDiv>
           {errorText && <p>{errorText}</p>}
         </ComponentForm>
       </Modal>
