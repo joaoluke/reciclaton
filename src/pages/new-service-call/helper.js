@@ -8,7 +8,7 @@ export const inputData = (values, conctractor, idOs) => {
     quantidade_estimada: values.quantidade_estimada,
     materiais: values.materiais,
     id: idOs,
-    status: "em-aberto",
+    status: "Aberto",
     "avaliacao-contratado": "n",
     "avaliacao-contratante": "n",
     "endereço-de-busca": {

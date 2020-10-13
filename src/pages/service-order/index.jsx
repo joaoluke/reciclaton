@@ -22,7 +22,6 @@ const ServiceOrder = () => {
   return (
     <>
       <ContainerButton>
-
         {business === "Coleta" && ( // coletador
           <StyledButton
             onClick={() => {
@@ -36,9 +35,12 @@ const ServiceOrder = () => {
           <StyledButton
             onClick={() => history.push(`/new-service-order/${userId.sub}`)}
           >
-            {status === "Chamado" ? <StyledSelct>Chamado</StyledSelct> : "Chamado"}
+            {status === "Chamado" ? (
+              <StyledSelct>Chamado</StyledSelct>
+            ) : (
+              "Chamado"
+            )}
           </StyledButton>
-
         )}
 
         {business === "Coleta" && ( // coletador
@@ -51,18 +53,24 @@ const ServiceOrder = () => {
           </StyledButton>
         )}
 
-
-
         <StyledButton
           onClick={() => {
             setStatus("Em Andamento");
           }}
         >
-          {status === "Em Andamento" ? <StyledSelct>Em Andamento</StyledSelct> : "Em Andamento"}
+          {status === "Em Andamento" ? (
+            <StyledSelct>Em Andamento</StyledSelct>
+          ) : (
+            "Em Andamento"
+          )}
         </StyledButton>
 
         <StyledButton onClick={() => setStatus("Finalizado")}>
-          {status === "Finalizado" ? <StyledSelct>Finalizado</StyledSelct> : "Finalizado"}
+          {status === "Finalizado" ? (
+            <StyledSelct>Finalizado</StyledSelct>
+          ) : (
+            "Finalizado"
+          )}
         </StyledButton>
 
         <StyledButton
@@ -70,7 +78,11 @@ const ServiceOrder = () => {
             setStatus("Cancelado");
           }}
         >
-          {status === "Cancelado" ? <StyledSelct>Cancelado</StyledSelct> : "Cancelado"}
+          {status === "Cancelado" ? (
+            <StyledSelct>Cancelado</StyledSelct>
+          ) : (
+            "Cancelado"
+          )}
         </StyledButton>
       </ContainerButton>
       <Card status={status} />

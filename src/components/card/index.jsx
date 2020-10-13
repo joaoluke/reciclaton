@@ -22,14 +22,11 @@ import {
 } from "./card.styled";
 const Card = ({ status }) => {
   const [popUp, setPopUp] = useState(false);
-  const [filteredList, setFilteredList] = useState([]);
   const dispatch = useDispatch();
   const token = useSelector((state) => state.login.authen);
   const { list } = useSelector((state) => state.card);
-  const { brand, id, business, adress } = useSelector(
-    (state) => state.userService
-  );
-
+  const user = useSelector((state) => state.userService);
+  const { brand, id, business, adress, os } = user;
   useEffect(() => {
     dispatch(getServices());
     if (!brand) {
@@ -42,28 +39,7 @@ const Card = ({ status }) => {
   console.log(test);
   return (
     <Container>
-      <CloseCointainer>
-        <CloseCard onClick={() => setPopUp(true)} />
-      </CloseCointainer>
-      <CardTitle>{brand ? brand : "No Title"}</CardTitle>
-      <Content>
-        <Title>Endereço: {adress && adress.street + " " + adress.city}</Title>
-        <Title>Materiais: {}</Title>
-      </Content>
-      <div>
-        {popUp && (
-          <PopUp>
-            <TitlePrice style={{ textAlign: "left" }}>
-              Tem certeza que gostaria de cancelar o serviço?
-            </TitlePrice>
-            <Choice>
-              <Decline onClick={() => setPopUp(false)} />
-              <Accept onClick={() => setPopUp(false)} />
-            </Choice>
-          </PopUp>
-        )}
-        {content(status, setRating, rating, list)}
-      </div>
+      {content(status, setRating, rating, list, token, user, popUp, setPopUp)}
     </Container>
   );
 };
