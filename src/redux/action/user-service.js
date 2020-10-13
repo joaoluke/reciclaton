@@ -11,7 +11,7 @@ export const requestBusiness = (userId, token) => (dispatch) => {
   axios
     .get(`https://reciclatonapi.herokuapp.com/664/users/${userId}`, {
       headers: {
-        Authorization: token,
+        Authorization: `Bearer ${token}`,
       },
     })
 

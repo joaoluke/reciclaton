@@ -1,20 +1,26 @@
 import axios from "axios";
-export const GET_CARD_INFORMATIONS = "GET_CARD_INFORMATIONS";
+export const GET_CARDS_LIST = "GET_CARDS_LIST";
+export const GET_CARD_INFORMATION = "GET_CARD_INFORMATIONS";
 
-const cardInformations = (informations) => ({
-  type: GET_CARD_INFORMATIONS,
-  informations,
+const cardList = (list) => ({
+  type: GET_CARDS_LIST,
+  list,
+});
+
+const cardInformation = (information) => ({
+  type: GET_CARD_INFORMATION,
+  information,
 });
 
 export const changeInformations = (id, token, values) => {
   const header = {
-    headers: { Authotization: `Bearer ${token}` },
+    headers: { Authorization: `Bearer ${token}` },
   };
   axios
     .patch(
       `https://reciclatonapi.herokuapp.com/664/users/${id}`,
-      header,
-      values
+      values,
+      header
     )
     .then(({ data }) => {
       console.log(data);
@@ -22,6 +28,16 @@ export const changeInformations = (id, token, values) => {
     .catch(({ response }) => console.log(response));
 };
 
+export const getServices = () => (dispatch) => {
+  axios
+    .get("https://reciclatonapi.herokuapp.com/664/services/")
+    .then(({ data }) => {
+      dispatch(cardList(data));
+    })
+    .catch(({ response }) => {
+      console.log(response);
+    });
+};
 export const addService = (token, sevice) => {
   const header = {
     headers: { Authorization: `Bearer ${token}` },
@@ -36,13 +52,33 @@ export const addService = (token, sevice) => {
     });
 };
 
-export const getService = () => (dispatch) => {
+export const getService = (id, token, service) => (dispatch) => {
+  const header = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
   axios
-    .get("https://reciclatonapi.herokuapp.com/664/services/")
+    .get(
+      `https://reciclatonapi.herokuapp.com/664/services/${id}`,
+      service,
+      header
+    )
     .then(({ data }) => {
-      dispatch(cardInformations(data));
-    })
-    .catch(({ response }) => {
-      console.log(response);
+      dispatch(cardInformation(data));
     });
+};
+
+export const changeCardStatus = (id, token, service) => {
+  const header = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  axios
+    .patch(
+      `https://reciclatonapi.herokuapp.com/664/services/${id}`,
+      service,
+      header
+    )
+    .then(({ data }) => {
+      console.log(data);
+    })
+    .catch(({ response }) => console.log(response));
 };

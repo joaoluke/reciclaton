@@ -1,9 +1,15 @@
-import { GET_CARD_INFORMATIONS } from "../action/card-informations";
-const defaultState = [];
-const card = (state = defaultState, { type, informations }) => {
+import {
+  GET_CARDS_LIST,
+  GET_CARD_INFORMATION,
+} from "../action/card-informations";
+const defaultState = { list: [], individual: [] };
+const card = (state = defaultState, { type, information, list }) => {
   switch (type) {
-    case GET_CARD_INFORMATIONS:
-      return [...state, informations];
+    case GET_CARDS_LIST:
+      return { ...state, list: [...list] };
+
+    case GET_CARD_INFORMATION:
+      return { ...state, individual: [...information] };
 
     default:
       return state;
