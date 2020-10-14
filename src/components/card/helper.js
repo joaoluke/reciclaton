@@ -88,7 +88,7 @@ export const content = (
                   onClick={() => {
                     changeCardStatus(id, token, {
                       status: "Aceito",
-                      contracted_id: idUser,
+                      contratado_id: idUser,
                     });
                     changeInformations(idUser, token, [...os, id]);
                   }}
@@ -108,8 +108,8 @@ export const content = (
             contribuicao,
             materiais,
             status,
-            contracting_id,
-            contracted_id,
+            contratante_id,
+            contratado_id,
             id,
             adress,
             contracting_name,
@@ -124,7 +124,7 @@ export const content = (
             });
           if (
             status === "Aceito" &&
-            (contracting_id === idUser || contracted_id === idUser)
+            (contratante_id === idUser || contratado_id === idUser)
           ) {
             return (
               <Container key={key}>
@@ -193,8 +193,8 @@ export const content = (
             contribuicao,
             status,
             adress,
-            contracting_id,
-            contracted_id,
+            contratante_id,
+            contratado_id,
             id,
             materiais,
             contracting_name,
@@ -209,7 +209,7 @@ export const content = (
             });
           if (
             status === "Em Andamento" &&
-            (contracting_id === idUser || contracted_id === idUser)
+            (contratante_id === idUser || contratado_id === idUser)
           ) {
             return (
               <Container key={key}>
@@ -282,8 +282,8 @@ export const content = (
         (
           {
             status,
-            contracting_id,
-            contracted_id,
+            contratante_id,
+            contratado_id,
             id,
             materiais,
             adress,
@@ -293,7 +293,7 @@ export const content = (
         ) => {
           if (
             status === "Finalizado" &&
-            (contracted_id === idUser || contracting_id === idUser)
+            (contratado_id === idUser || contratante_id === idUser)
           ) {
             return (
               <Container key={key}>
@@ -367,8 +367,8 @@ export const content = (
         (
           {
             status,
-            contracting_id,
-            contracted_id,
+            contratante_id,
+            contratado_id,
             cancelado,
             contribuicao,
             materiais,
@@ -385,7 +385,7 @@ export const content = (
             });
           if (
             status === "Cancelado" &&
-            (contracted_id === idUser || contracting_id === idUser)
+            (contratado_id === idUser || contratante_id === idUser)
           ) {
             return (
               <Container key={key}>

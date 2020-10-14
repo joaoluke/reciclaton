@@ -3,8 +3,8 @@ import React from "react";
 export const inputData = (values, { brand, id, adress }, idOs) => {
   const os = {
     contracting_name: brand,
-    contracting_id: id,
-    contracted_id: "n",
+    contratante_id: id,
+    contratado_id: "n",
     contribuicao: values.contribuicao,
     quantidade_estimada: values.quantidade_estimada,
     materiais: values.materiais,
