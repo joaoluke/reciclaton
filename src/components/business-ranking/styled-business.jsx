@@ -8,6 +8,10 @@ export const BackgroundRank = styled.div`
   }
 `;
 
+export const LastElement = styled.div`
+  visibility: hidden;
+`;
+
 export const BusinessCard = styled.div`
   display: flex;
   overflow: hidden;
@@ -87,9 +91,7 @@ export const SpotlightChildDiv = styled.div`
   padding: 5%;
   :hover {
     cursor: pointer;
-    border-radius: 14px;
-    background-color: white;
-    width: 50%;
+    box-shadow: 9px 0px 40px #ccc;
   }
   span::first-letter {
     text-transform: uppercase;
