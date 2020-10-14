@@ -7,6 +7,11 @@ export const StyleMain = styled.div`
   min-height: 100vh;
 `;
 
+export const StyleCadastro = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
 export const StyleTitle = styled.h3`
   text-align: center;
   font-size: 1.7rem;

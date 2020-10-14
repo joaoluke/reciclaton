@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import reciclagem from "./images/vector-illustration-recycling-nature-flat_82574-3408.png";
 import {
   StyledTextBox,
@@ -14,13 +14,17 @@ import {
   StyledBox,
   StyleCleitinho,
   StyleSelo,
+  StyleCadastro,
 } from "./styled";
 import cleitinho from "./images/cleitinho.png";
 import facebook from "./images/facebook.png";
 import linkedin from "./images/linkedin.png";
 import instagram from "./images/instagram.png";
 import BaseLayout from "../../components/layout";
+import Modal from "../../components/modal";
 const Home = () => {
+  const [visible, setVisible] = useState(false);
+
   return (
     <BaseLayout>
       <StyleMain>
@@ -36,7 +40,13 @@ const Home = () => {
               coletor, conseguimos garantir a qualidade do atendimento
             </StyledTextBox>
             <StyleTitle> GOSTOU ? </StyleTitle>
-            <StyleTitle style={{ color: "#70D548" }}> Cadastre-se </StyleTitle>
+            <StyleCadastro>
+              <Modal visible={visible} setVisible={setVisible}>
+                <StyleTitle style={{ color: "#70D548" }}>
+                  Cadastre-se
+                </StyleTitle>
+              </Modal>
+            </StyleCadastro>
           </StyledEmpresa>
         </StyleContainer>
 
