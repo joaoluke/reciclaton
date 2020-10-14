@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const BackgroundRank = styled.div`
+font-family: 'Roboto', sans-serif;
   overflow: hidden;
   width: 100%;
   @media (max-width: 1024px) {
@@ -11,6 +12,7 @@ export const BackgroundRank = styled.div`
 export const BusinessCard = styled.div`
   display: flex;
   overflow: hidden;
+  font-family: 'Roboto', sans-serif;
   flex-direction: column;
 //   border: 1px solid black;
   margin-bottom: 5px;
@@ -28,6 +30,7 @@ export const BusinessCard = styled.div`
 
 export const StyledButton = styled.button`
     background: transparent;
+    font-family: 'Roboto', sans-serif;
     cursor: pointer;
     margin-left: 10px;
     font-size: 16px;
@@ -35,6 +38,7 @@ export const StyledButton = styled.button`
 
 export const StyledTable = styled.table`
 border: 0px solid #333;
+font-family: 'Roboto', sans-serif;
 display: hidden;
 tr:nth-child(2n + 1) {
     // background: #e1e1e1;
@@ -47,6 +51,7 @@ tr:nth-child(2n + 1) {
 
 export const Td = styled.td`
 border: 0px solid #333;
+font-family: 'Roboto', sans-serif;
 text-align: center;
 color: #17271A;
  span::first-letter {
@@ -56,6 +61,7 @@ color: #17271A;
 
 export const Tr = styled.tr`
 border: 0px solid #333;
+font-family: 'Roboto', sans-serif;
 text-align: center;
 color: #17271A;
 span::first-letter {
@@ -64,6 +70,7 @@ span::first-letter {
 `;
 
 export const Option = styled.option`
+font-family: 'Roboto', sans-serif;
 :hover {
     cursor: pointer;
     border: 1px solid black;
@@ -75,6 +82,7 @@ export const Option = styled.option`
 
 export const SpotlightDiv = styled.div`
 display: flex;
+font-family: 'Roboto', sans-serif;
 flex-direction: row;
 background-color: whitesmoke;
 width: 100%;
@@ -87,6 +95,7 @@ justify-content: space-evenly;
 export const SpotlightChildDiv = styled.div`
 display: flex;
 margin: 0 15px;
+font-family: 'Roboto', sans-serif;
 flex-direction: column;
 justify-content: space-between;
 align-items: center;
@@ -113,32 +122,40 @@ span::first-letter{
 
 export const H1 = styled.h1`
 font-size: 26px;
+font-family: 'Roboto', sans-serif;
+font-family: 'Roboto', sans-serif;
 `;
 
 export const Hr = styled.hr`
+font-family: 'Roboto', sans-serif;
 heigth: 1px;
 width: 100%;
 `;
 
 export const StyledSpan = styled.span`
+font-family: 'Roboto', sans-serif;
 font-size: 40px;
 `;
 
 export const StyledImg = styled.img`
+font-family: 'Roboto', sans-serif;
 width: 100px;
 border-radius: 60px;
 `;
 
 export const StyledSpanBrand = styled.span`
+font-family: 'Roboto', sans-serif;
 font-weigth: bolder;
 `;
 
 export const StyledH3 = styled.h3`
+font-family: 'Roboto', sans-serif;
 display: flex;
 justify-content: flex-start;
 `;
 
 export const StyledDiv = styled.div`
+font-family: 'Roboto', sans-serif;
 display: flex;
 margin-bottom: 2.5%;
 justify-content: center;
@@ -146,19 +163,23 @@ align-items: center;
 `;
 
 export const StyledThead = styled.thead`
+font-family: 'Roboto', sans-serif;
 background-color: #60789C;
 `;
 
 export const StyledThophieImage = styled.img`
+font-family: 'Roboto', sans-serif;
 width: 40px;
 `;
 
 export const StyledTh = styled.th`
+font-family: 'Roboto', sans-serif;
 color: whitesmoke;
 `;
 
 export const BrandTd = styled.td`
 display: flex;
+font-family: 'Roboto', sans-serif;
 align-content: center;
 align-items: center;
 justify-content: space-start;
@@ -172,54 +193,64 @@ color: #17271A;
 `;
 
 export const BrandImg = styled.img`
+font-family: 'Roboto', sans-serif;
 width: 40px;
 border-radius: 50px;
 `;
 
 export const StyledBrandSpan = styled.span`
+font-family: 'Roboto', sans-serif;
 color: green;
 font-weigth: bolder;
 `;
 
 export const ImageTrophies = styled.img`
+font-family: 'Roboto', sans-serif;
 width: 30px;
 `;
 
 export const ScoreTd = styled.td`
+font-family: 'Roboto', sans-serif;
 color: #5A91C7;
 `;
 
 export const StyledThHide = styled(StyledTh)`
+font-family: 'Roboto', sans-serif;
   @media (max-width: 1000px) {
     display: none;
 }
 `;
 
 export const TdHide = styled(Td)`
+font-family: 'Roboto', sans-serif;
 @media (max-width: 1000px) {
     display: none;
 }
 `;
 
 export const TdHideSize = styled(Td)`
+font-family: 'Roboto', sans-serif;
 @media (max-width: 700px) {
     display: none;
 }
 `;
 
 export const StyledThHideSize = styled(StyledTh)`
+font-family: 'Roboto', sans-serif;
     @media (max-width: 701px) {
         display: none;
     }
 `;
 
 export const StyledThHideCategory = styled(StyledTh)`
+font-family: 'Roboto', sans-serif;
 @media (max-width: 900px) {
     display: none;
 }
 `;
 
 export const TdHideCategory = styled(Td)`
+font-family: 'Roboto', sans-serif;
 @media (max-width: 900px) {
     display: none;
 }
