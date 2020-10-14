@@ -1,23 +1,12 @@
 import styled from "styled-components";
 
-export const Box = styled.div`
-  margin: 0 auto;
-  margin-top: 125px;
-  border-radius: 10px;
-  width: calc(500px + 0.5rem);
-  height: 300px;
-  background-color: #f8faf7;
-  border: solid 2px #6c9148;
-  padding: 40px;
-`;
-
 export const MainTitle = styled.h1`
   font-family: "Roboto", sans-serif;
   color: #6d914a;
   font-weight: bold;
   margin: 5px;
   font-size: 35px;
-
+  margin: 10px 0;
   text-align: center;
 `;
 
@@ -26,13 +15,16 @@ export const SubTitles = styled.h2`
   font-weight: bold;
   color: #6d914a;
   font-size: 25px;
-  text-align: left;
-  margin: 5px;
+  text-align: center;
+  text-decoration: underline;
+  margin: 25px 0 15px 0;
 `;
 
 export const StyledLabel = styled.label`
   font-family: "Roboto", sans-serif;
   color: #6d914a;
+  margin-right: 15px;
+  margin-top: 3px;
   font-size: 17px;
   text-align: left;
 `;
@@ -50,12 +42,14 @@ export const StyledInput = styled.input`
 `;
 
 export const CheckBoxContainerd = styled.div`
-  margin: 10px 0;
-  display: flex;
-  flex-flow: wrap;
+  columns: 3;
+  @media screen and (max-width: 540px) {
+    columns: 2;
+  }
 `;
 export const CheckBox = styled.input`
   width: 30px;
+  margin: 10px 0;
 `;
 export const StyledSubmit = styled.input`
   display: block;
@@ -86,4 +80,11 @@ export const Notification = styled.div`
   margin-top: 8px;
   text-align: center;
   color: #88ab5f;
+`;
+
+export const InformationContainer = styled.div`
+  margin: 20px 0;
+  @media screen and (max-width: 540px) {
+    text-align: center;
+  }
 `;
