@@ -8,7 +8,7 @@ import Top3 from "./components/components-top3";
 import {
   BackgroundRank,
   StyledButton,
-  StyledTable,
+  StyledMenu,
   BusinessCard,
   SpotlightDiv,
 } from "./styled-business";
@@ -49,6 +49,9 @@ const BusinessRanking = () => {
   );
 
   useEffect(() => {
+    for (let i = 1; i > 0; i++) {
+      console.log(i);
+    }
     if (loading) return;
     let beginning = 0;
     let end = currentBusiness.length + 25;
@@ -102,7 +105,7 @@ const BusinessRanking = () => {
     businessB.score.anual - businessA.score.anual;
 
   return (
-    <div style={{}}>
+    <>
       <BusinessCard>
         <h1 style={{ fontSize: "26px" }}>Destaques do mês</h1>
         <SpotlightDiv>
@@ -144,97 +147,85 @@ const BusinessRanking = () => {
       <h3 style={{ display: "flex", justifyContent: "flex-start" }}>
         Overall ranking
       </h3>
-      <BackgroundRank>
-        <div
-          style={{
-            display: "flex",
-            marginBottom: "2.5%",
-            justifyContent: "center",
-            alignItems: "center",
-            // marginTop: "4%",
-          }}
-        >
-          <StyledButton onClick={() => setScore("mensal")}>
-            Monthly ranking
-          </StyledButton>
-          <StyledButton onClick={() => setScore("anual")}>
-            Yearly ranking
-          </StyledButton>
+      {/* <BackgroundRank> */}
+      <div
+        style={{
+          display: "flex",
+          marginBottom: "2.5%",
+          justifyContent: "center",
+          alignItems: "center",
+          // marginTop: "4%",
+        }}
+      >
+        <StyledButton onClick={() => setScore("mensal")}>
+          Monthly ranking
+        </StyledButton>
+        <StyledButton onClick={() => setScore("anual")}>
+          Yearly ranking
+        </StyledButton>
+      </div>
+      <StyledMenu border="1px" cellPadding="5px" cellSpacing="0">
+        <div style={{ backgroundColor: "#C0C0C0", display: "flex" }}>
+          <div>
+            <select name="Categoria" onChange={setCategoryValue}>
+              <option value="Sem filtro">Remover filtro</option>
+              <option value="Supermercado/Hipermercado">
+                Supermercado/Hipermercado{" "}
+              </option>
+              <option value="Restaurante/Bar">Restaurante/Bar</option>
+              <option value="Indústria">Indústria</option>
+              <option value="Mercearia">Mercearia</option>
+              <option value="Drogaria">Drogaria</option>
+              <option value="Shopping">Shopping</option>
+              <option value="Coleta">Coleta</option>
+              <option value="Padaria">Padaria</option>
+              <option value="Varejista">Varejista</option>
+              <option value="Hotel/Motel">Hotel/Motel</option>
+              <option value="Condominio">Condominio</option>
+            </select>
+          </div>
+          <div>
+            <select name="Porte da Empresa" onChange={setSizeValue}>
+              <option value="Sem filtro">Remover filtro</option>
+              <option value="microempresa">Micro</option>
+              <option value="pequena">Pequena</option>
+              <option value="media">Média</option>
+              <option value="grande">Grande</option>
+            </select>
+          </div>
         </div>
-        <StyledTable border="1px" cellPadding="5px" cellSpacing="0">
-          <thead style={{ backgroundColor: "#C0C0C0" }}>
-            <th>Posição</th>
-            <th>Nome</th>
-            <th>Prêmios</th>
-            <th>
-              <span>{score === "mensal" ? "Monthly" : "Yearly"}</span> Score
-            </th>
-            <th>Website</th>
-            <th>
-              <select name="Categoria" onChange={setCategoryValue}>
-                <option value="Sem filtro">Remover filtro</option>
-                <option value="Supermercado/Hipermercado">
-                  Supermercado/Hipermercado{" "}
-                </option>
-                <option value="Restaurante/Bar">Restaurante/Bar</option>
-                <option value="Indústria">Indústria</option>
-                <option value="Mercearia">Mercearia</option>
-                <option value="Drogaria">Drogaria</option>
-                <option value="Shopping">Shopping</option>
-                <option value="Coleta">Coleta</option>
-                <option value="Padaria">Padaria</option>
-                <option value="Varejista">Varejista</option>
-                <option value="Hotel/Motel">Hotel/Motel</option>
-                <option value="Condominio">Condominio</option>
-              </select>
-            </th>
-            <th>
-              <select name="Porte da Empresa" onChange={setSizeValue}>
-                <option value="Sem filtro">Remover filtro</option>
-                <option value="microempresa">Micro</option>
-                <option value="pequena">Pequena</option>
-                <option value="media">Média</option>
-                <option value="grande">Grande</option>
-              </select>
-            </th>
-          </thead>
-          <tbody>
-            <>
-              <Month
-                lastBusinessRefElement={lastBusinessRefElement}
-                goldHonor={goldHonor}
-                silverHonor={silverHonor}
-                bronzeHonor={bronzeHonor}
-                bronzeTrophy={bronzeTrophy}
-                silverTrophy={silverTrophy}
-                goldTrophy={goldTrophy}
-                orderByScoreMonth={orderByScoreMonth}
-                score={score}
-                size={size}
-                category={category}
-                currentBusiness={currentBusiness}
-                business={business}
-              />
+        <Month
+          goldHonor={goldHonor}
+          silverHonor={silverHonor}
+          bronzeHonor={bronzeHonor}
+          bronzeTrophy={bronzeTrophy}
+          silverTrophy={silverTrophy}
+          goldTrophy={goldTrophy}
+          orderByScoreMonth={orderByScoreMonth}
+          score={score}
+          size={size}
+          category={category}
+          currentBusiness={currentBusiness}
+          business={business}
+        />
 
-              <Year
-                lastBusinessRefElement={lastBusinessRefElement}
-                goldHonor={goldHonor}
-                silverHonor={silverHonor}
-                bronzeHonor={bronzeHonor}
-                bronzeTrophy={bronzeTrophy}
-                silverTrophy={silverTrophy}
-                goldTrophy={goldTrophy}
-                orderByScoreYear={orderByScoreYear}
-                score={score}
-                size={size}
-                category={category}
-                currentBusiness={currentBusiness}
-              />
-            </>
-          </tbody>
-        </StyledTable>
-      </BackgroundRank>
-    </div>
+        {/* <Year
+          lastBusinessRefElement={lastBusinessRefElement}
+          goldHonor={goldHonor}
+          silverHonor={silverHonor}
+          bronzeHonor={bronzeHonor}
+          bronzeTrophy={bronzeTrophy}
+          silverTrophy={silverTrophy}
+          goldTrophy={goldTrophy}
+          orderByScoreYear={orderByScoreYear}
+          score={score}
+          size={size}
+          category={category}
+          currentBusiness={currentBusiness}
+        /> */}
+      </StyledMenu>
+      {/* </BackgroundRank> */}
+    </>
   );
 };
 

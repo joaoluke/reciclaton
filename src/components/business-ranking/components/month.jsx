@@ -14,184 +14,94 @@ const Month = ({
   size,
   category,
   business,
-  currentBusiness,
   goldHonor,
   silverHonor,
   bronzeHonor,
-  lastBusinessRefElement,
 }) => {
   return (
-    <>
+    <div>
       {score === "mensal" &&
         size === "Sem filtro" &&
-        category === "Sem filtro" &&
-        currentBusiness.sort(orderByScoreMonth).map((item, index) => {
-          if (currentBusiness.length === index + 1) {
-            return (
-              <div ref={lastBusinessRefElement}>
-                <Case1
-                  item={item}
-                  index={index}
-                  goldHonor={goldHonor}
-                  silverHonor={silverHonor}
-                  bronzeHonor={bronzeHonor}
-                  bronzeTrophy={bronzeTrophy}
-                  business={business}
-                  silverTrophy={silverTrophy}
-                  goldTrophy={goldTrophy}
-                  orderByScoreMonth={orderByScoreMonth}
-                />
-              </div>
-            );
-          } else {
-            return (
-              <Case1
-                item={item}
-                index={index}
-                goldHonor={goldHonor}
-                silverHonor={silverHonor}
-                bronzeHonor={bronzeHonor}
-                bronzeTrophy={bronzeTrophy}
-                business={business}
-                silverTrophy={silverTrophy}
-                goldTrophy={goldTrophy}
-                orderByScoreMonth={orderByScoreMonth}
-              />
-            );
-          }
-        })}
+        category === "Sem filtro" && (
+          <Case1
+            goldHonor={goldHonor}
+            silverHonor={silverHonor}
+            bronzeHonor={bronzeHonor}
+            bronzeTrophy={bronzeTrophy}
+            business={business}
+            silverTrophy={silverTrophy}
+            goldTrophy={goldTrophy}
+            orderByScoreMonth={orderByScoreMonth}
+            size={size}
+          />
+        )}
 
       {score === "mensal" &&
         size !== "Sem filtro" &&
         category === "Sem filtro" &&
-        currentBusiness
+        business
           .sort(orderByScoreMonth)
           .filter((item) => item.businessSize === size)
-          .map((item, index) => {
-            if (currentBusiness.length === index + 1) {
-              return (
-                <div ref={lastBusinessRefElement}>
-                  <Case2
-                    item={item}
-                    index={index}
-                    goldHonor={goldHonor}
-                    silverHonor={silverHonor}
-                    bronzeHonor={bronzeHonor}
-                    bronzeTrophy={bronzeTrophy}
-                    business={business}
-                    silverTrophy={silverTrophy}
-                    goldTrophy={goldTrophy}
-                    orderByScoreMonth={orderByScoreMonth}
-                    size={size}
-                  />
-                </div>
-              );
-            } else {
-              return (
-                <Case2
-                  item={item}
-                  index={index}
-                  goldHonor={goldHonor}
-                  silverHonor={silverHonor}
-                  bronzeHonor={bronzeHonor}
-                  bronzeTrophy={bronzeTrophy}
-                  business={business}
-                  silverTrophy={silverTrophy}
-                  goldTrophy={goldTrophy}
-                  orderByScoreMonth={orderByScoreMonth}
-                  size={size}
-                />
-              );
-            }
-          })}
+          .map((item, index) => (
+            <Case2
+              item={item}
+              index={index}
+              goldHonor={goldHonor}
+              silverHonor={silverHonor}
+              bronzeHonor={bronzeHonor}
+              bronzeTrophy={bronzeTrophy}
+              business={business}
+              silverTrophy={silverTrophy}
+              goldTrophy={goldTrophy}
+              orderByScoreMonth={orderByScoreMonth}
+              size={size}
+            />
+          ))}
 
       {score === "mensal" &&
         size === "Sem filtro" &&
         category !== "Sem filtro" &&
-        currentBusiness
+        business
           .sort(orderByScoreMonth)
           .filter((item) => item.business === category)
-          .map((item, index) => {
-            if (currentBusiness.length === index + 1) {
-              return (
-                <div ref={lastBusinessRefElement}>
-                  <Case3
-                    item={item}
-                    index={index}
-                    goldHonor={goldHonor}
-                    silverHonor={silverHonor}
-                    bronzeHonor={bronzeHonor}
-                    bronzeTrophy={bronzeTrophy}
-                    business={business}
-                    silverTrophy={silverTrophy}
-                    goldTrophy={goldTrophy}
-                    orderByScoreMonth={orderByScoreMonth}
-                    category={category}
-                  />
-                </div>
-              );
-            } else {
-              return (
-                <Case3
-                  item={item}
-                  index={index}
-                  goldHonor={goldHonor}
-                  silverHonor={silverHonor}
-                  bronzeHonor={bronzeHonor}
-                  bronzeTrophy={bronzeTrophy}
-                  business={business}
-                  silverTrophy={silverTrophy}
-                  goldTrophy={goldTrophy}
-                  orderByScoreMonth={orderByScoreMonth}
-                  category={category}
-                />
-              );
-            }
-          })}
+          .map((item, index) => (
+            <Case3
+              item={item}
+              index={index}
+              goldHonor={goldHonor}
+              silverHonor={silverHonor}
+              bronzeHonor={bronzeHonor}
+              bronzeTrophy={bronzeTrophy}
+              business={business}
+              silverTrophy={silverTrophy}
+              goldTrophy={goldTrophy}
+              orderByScoreMonth={orderByScoreMonth}
+              category={category}
+            />
+          ))}
 
       {score === "mensal" &&
         size !== "Sem filtro" &&
         category !== "Sem filtro" &&
-        currentBusiness.sort(orderByScoreMonth).map((item, index) => {
-          if (currentBusiness.length === index + 1) {
-            return (
-              <div ref={lastBusinessRefElement}>
-                <Case4
-                  item={item}
-                  index={index}
-                  goldHonor={goldHonor}
-                  silverHonor={silverHonor}
-                  bronzeHonor={bronzeHonor}
-                  bronzeTrophy={bronzeTrophy}
-                  business={business}
-                  silverTrophy={silverTrophy}
-                  goldTrophy={goldTrophy}
-                  orderByScoreMonth={orderByScoreMonth}
-                  category={category}
-                  size={size}
-                />
-              </div>
-            );
-          } else {
-            return (
-              <Case4
-                item={item}
-                index={index}
-                goldHonor={goldHonor}
-                silverHonor={silverHonor}
-                bronzeHonor={bronzeHonor}
-                bronzeTrophy={bronzeTrophy}
-                business={business}
-                silverTrophy={silverTrophy}
-                goldTrophy={goldTrophy}
-                orderByScoreMonth={orderByScoreMonth}
-                category={category}
-                size={size}
-              />
-            );
-          }
-        })}
-    </>
+        business
+          .sort(orderByScoreMonth)
+          .map((item, index) => (
+            <Case4
+              item={item}
+              index={index}
+              goldHonor={goldHonor}
+              silverHonor={silverHonor}
+              bronzeHonor={bronzeHonor}
+              bronzeTrophy={bronzeTrophy}
+              business={business}
+              silverTrophy={silverTrophy}
+              goldTrophy={goldTrophy}
+              orderByScoreMonth={orderByScoreMonth}
+              category={category}
+              size={size}
+            />
+          ))}
+    </div>
   );
 };
 

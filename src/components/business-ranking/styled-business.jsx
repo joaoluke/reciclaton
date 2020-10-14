@@ -34,16 +34,8 @@ export const StyledButton = styled.button`
   font-size: 16px;
 `;
 
-export const StyledTable = styled.table`
-  border: 0px solid #333;
-  display: hidden;
-  tr:nth-child(2n + 1) {
-    // background: #e1e1e1;
-    background: #92d143;
-  }
-  tr:nth-child(2n) {
-    background: #f3e8e2;
-  }
+export const StyledMenu = styled.div`
+  background-color: #eee;
 `;
 
 export const Td = styled.td`
