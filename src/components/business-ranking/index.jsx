@@ -49,9 +49,6 @@ const BusinessRanking = () => {
   );
 
   useEffect(() => {
-    for (let i = 1; i > 0; i++) {
-      console.log(i);
-    }
     if (loading) return;
     let beginning = 0;
     let end = currentBusiness.length + 25;
@@ -207,6 +204,7 @@ const BusinessRanking = () => {
           category={category}
           currentBusiness={currentBusiness}
           business={business}
+          lastBusinessRefElement={lastBusinessRefElement}
         />
 
         {/* <Year

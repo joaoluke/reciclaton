@@ -17,6 +17,8 @@ const Month = ({
   goldHonor,
   silverHonor,
   bronzeHonor,
+  currentBusiness,
+  lastBusinessRefElement
 }) => {
   return (
     <div>
@@ -29,10 +31,12 @@ const Month = ({
             bronzeHonor={bronzeHonor}
             bronzeTrophy={bronzeTrophy}
             business={business}
+            currentBusiness={currentBusiness}
             silverTrophy={silverTrophy}
             goldTrophy={goldTrophy}
             orderByScoreMonth={orderByScoreMonth}
             size={size}
+            lastBusinessRefElement={lastBusinessRefElement}
           />
         )}
 
