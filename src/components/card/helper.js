@@ -349,10 +349,10 @@ export const content = (
                   onClick={() => {
                     business === "Coleta"
                       ? changeCardStatus(id, token, {
-                          "avaliacao-contratado": rating,
+                          contracted_rating: rating,
                         })
                       : changeCardStatus(id, token, {
-                          "avaliacao-contratante": rating,
+                          contracting_rating: rating,
                         });
                   }}
                 >
