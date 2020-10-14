@@ -27,7 +27,7 @@ const Card = ({ status }) => {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [brand, dispatch]);
+  }, [brand, dispatch, user]);
   return (
     <div>
       {content(

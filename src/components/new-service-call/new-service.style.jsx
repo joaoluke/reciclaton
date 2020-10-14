@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { CloseCard } from "../card/card.styled";
 
 export const MainTitle = styled.h1`
   font-family: "Roboto", sans-serif;
@@ -51,7 +52,7 @@ export const CheckBox = styled.input`
   width: 30px;
   margin: 10px 0;
 `;
-export const StyledSubmit = styled.input`
+export const StyledSubmit = styled.button`
   display: block;
   text-align: center;
   font-family: "Roboto", sans-serif;
@@ -87,4 +88,8 @@ export const InformationContainer = styled.div`
   @media screen and (max-width: 540px) {
     text-align: center;
   }
+`;
+
+export const CloseModal = styled(CloseCard)`
+  font-size: 30px;
 `;

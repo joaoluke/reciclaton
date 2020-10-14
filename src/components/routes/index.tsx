@@ -5,7 +5,7 @@ import Home from "../../pages/home";
 import NewServiceOrder from "../new-service-call";
 import ServiceOrder from "../../pages/service-order";
 import { Switch, Route } from "react-router-dom";
-import Complaint from "../../pages/perfil-user/complaint-modal"
+import Complaint from "../../pages/perfil-user/complaint-modal";
 const Routes = () => {
   return (
     <>
@@ -27,10 +27,6 @@ const Routes = () => {
         </Route>
         <Route exact path="/">
           <Home />
-        </Route>
-
-        <Route path="/new-service-order/:userId">
-          <NewServiceOrder />
         </Route>
       </Switch>
     </>

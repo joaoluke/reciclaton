@@ -39,13 +39,13 @@ export const ButtonTitle = styled(CardTitle)`
 `;
 
 export const TitlePrice = styled(ButtonTitle)`
-  margin: 10px;
+  margin: 20px;
   font-size: 30px;
 `;
 
 export const Container = styled.div`
   display: flex;
-  flex-flow: nowrap column;
+  flex-flow: wrap column;
   background-color: #bdf492;
   border: solid 1px #abe181;
   border-radius: 15px;
@@ -53,6 +53,7 @@ export const Container = styled.div`
   width: 387px;
   margin: 0 auto;
   margin-top: 50px;
+  padding: 25px;
 `;
 
 export const CloseCard = styled(CgClose)`

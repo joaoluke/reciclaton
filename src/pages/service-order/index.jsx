@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { StyledButton, ContainerButton, StyledSelct } from "./styled";
 import { useDispatch, useSelector } from "react-redux";
+import NewServiceCalls from "../../components/new-service-call";
 import { requestBusiness } from "../../redux/action/user-service";
 import { loginAction } from "../../redux/action/login";
 import jwt_decode from "jwt-decode";
@@ -8,6 +9,7 @@ import { useHistory } from "react-router-dom";
 import Card from "../../components/card";
 const ServiceOrder = () => {
   const [userId, setUserId] = useState("");
+  const [visibility, setVisibility] = useState(false);
   const dispatch = useDispatch();
   const [status, setStatus] = useState("Chamado");
   const { business, os } = useSelector((state) => state.userService);
@@ -21,6 +23,7 @@ const ServiceOrder = () => {
 
   return (
     <>
+      <NewServiceCalls visibility={visibility} setVisibility={setVisibility} />
       <ContainerButton>
         {business === "Coleta" && ( // coletador
           <StyledButton
@@ -32,14 +35,12 @@ const ServiceOrder = () => {
           </StyledButton>
         )}
         {business !== "Coleta" && ( // empresa
-          <StyledButton
-            onClick={() => history.push(`/new-service-order/${userId.sub}`)}
-          >
+          <StyledButton onClick={() => setVisibility(true)}>
             {status === "Chamado" ? (
               <StyledSelct>Chamado</StyledSelct>
             ) : (
-                "Chamado"
-              )}
+              "Chamado"
+            )}
           </StyledButton>
         )}
 
@@ -61,16 +62,16 @@ const ServiceOrder = () => {
           {status === "Em Andamento" ? (
             <StyledSelct>Em Andamento</StyledSelct>
           ) : (
-              "Em Andamento"
-            )}
+            "Em Andamento"
+          )}
         </StyledButton>
 
         <StyledButton onClick={() => setStatus("Finalizado")}>
           {status === "Finalizado" ? (
             <StyledSelct>Finalizado</StyledSelct>
           ) : (
-              "Finalizado"
-            )}
+            "Finalizado"
+          )}
         </StyledButton>
 
         <StyledButton
@@ -81,8 +82,8 @@ const ServiceOrder = () => {
           {status === "Cancelado" ? (
             <StyledSelct>Cancelado</StyledSelct>
           ) : (
-              "Cancelado"
-            )}
+            "Cancelado"
+          )}
         </StyledButton>
       </ContainerButton>
       <Card status={status} />

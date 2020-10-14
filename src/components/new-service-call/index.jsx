@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Box } from "./new-service.style";
 import {
   MainTitle,
   SubTitles,
@@ -11,6 +10,7 @@ import {
   Error,
   Notification,
   InformationContainer,
+  CloseModal,
 } from "./new-service.style";
 import decode from "jwt-decode";
 import Modal from "react-modal";
@@ -36,14 +36,13 @@ const materiais = {
   electronic: false,
   rubber: false,
 };
-const NewServiceCalls = () => {
+const NewServiceCalls = ({ visibility, setVisibility }) => {
   const [materialsError, setMaterialsError] = useState(false);
-  const [visibility, setVisibility] = useState(false);
   const { register, handleSubmit, errors } = useForm();
   const [approved, setApproved] = useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
-  const { list, individual } = useSelector((state) => state.card);
+  const { list } = useSelector((state) => state.card);
 
   const userPerfil = useSelector((state) => state.userService);
 
@@ -104,13 +103,6 @@ const NewServiceCalls = () => {
   };
   return (
     <>
-      <button
-        onClick={() => {
-          setVisibility(true);
-        }}
-      >
-        oi
-      </button>
       <Modal
         isOpen={visibility}
         onAfterOpen={() => {
@@ -121,6 +113,9 @@ const NewServiceCalls = () => {
         style={customStyles}
         contentLabel="Example Modal"
       >
+        <div style={{ display: "flex", flexFlow: "row-reverse" }}>
+          <CloseModal onClick={() => setVisibility(false)} />
+        </div>
         <MainTitle>{brand ? brand + " / " + business : "Title"}</MainTitle>
         <form onSubmit={handleSubmit(onSubmit)}>
           <SubTitles>Materiais para a coleta:</SubTitles>
@@ -240,7 +235,7 @@ const NewServiceCalls = () => {
             <Error>Por favor selecionar pelo menos 1 material</Error>
           )}
           <div>
-            <StyledSubmit type="submit" />
+            <StyledSubmit type="submit">Enviar ordem de serviço</StyledSubmit>
           </div>
           {approved && (
             <Notification>Seu cadastro foi efetuado com sucesso!!</Notification>
