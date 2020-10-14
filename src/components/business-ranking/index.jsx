@@ -24,6 +24,12 @@ import {
   StyledBrandSpan,
   ImageTrophies,
   ScoreTd,
+  TdHide,
+  StyledThHide,
+  TdHideSize,
+  StyledThHideSize,
+  StyledThHideCategory,
+  TdHideCategory,
 } from "./syled-business";
 import { useHistory } from "react-router-dom";
 //images
@@ -151,12 +157,12 @@ const BusinessRanking = () => {
           <StyledThead>
             <StyledTh>Posição</StyledTh>
             <StyledTh>Nome</StyledTh>
-            <StyledTh>Prêmios</StyledTh>
+            <StyledThHide>Prêmios</StyledThHide>
             <StyledTh>
               Pontuação <span>{score === "mensal" ? "mensal" : "anual"}</span>
             </StyledTh>
-            <StyledTh>Site</StyledTh>
-            <StyledTh>
+            <StyledThHide>Site</StyledThHide>
+            <StyledThHideCategory>
               <label>Categoria: </label>
               <select name="Category" onChange={setCategoryValue}>
                 <option value="Sem filtro">Remover filtro</option>
@@ -174,8 +180,8 @@ const BusinessRanking = () => {
                 <option value="Hotel/Motel">Hotel/Motel</option>
                 <option value="Condominio">Condominio</option>
               </select>
-            </StyledTh>
-            <StyledTh>
+            </StyledThHideCategory>
+            <StyledThHideSize>
               <label>
                 Porte: <>&nbsp;</>
               </label>
@@ -186,7 +192,7 @@ const BusinessRanking = () => {
                 <option value="media">Média</option>
                 <option value="grande">Grande</option>
               </select>
-            </StyledTh>
+            </StyledThHideSize>
           </StyledThead>
           <tbody>
             {score === "mensal" &&
@@ -209,7 +215,7 @@ const BusinessRanking = () => {
                           </StyledBrandSpan>
                         }
                       </BrandTd>
-                      <Td>
+                      <TdHide>
                         {index === 0 && <ImageTrophies src={goldTrophie} />}
                         {index === 1 && <ImageTrophies src={silverTrophie} />}
                         {index === 2 && <ImageTrophies src={bronzeTrophie} />}
@@ -224,15 +230,15 @@ const BusinessRanking = () => {
                           index <=
                             (3 * business.sort(orderByScoreMonth).length) /
                               3 && <ImageTrophies src={bronzeHonor} />}
-                      </Td>
+                      </TdHide>
                       <ScoreTd>{item.score.mensal} </ScoreTd>
-                      <Td>
+                      <TdHide>
                         <a href={item.website}>{item.website}</a>
-                      </Td>
-                      <Td>{item.business}</Td>
-                      <Td>
+                      </TdHide>
+                      <TdHideCategory>{item.business}</TdHideCategory>
+                      <TdHideSize>
                         <span>{item.businessSize}</span>
-                      </Td>
+                      </TdHideSize>
                     </Tr>
                   )
               )}

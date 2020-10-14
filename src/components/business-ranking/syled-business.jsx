@@ -79,7 +79,7 @@ flex-direction: row;
 background-color: whitesmoke;
 width: 100%;
 justify-content: space-evenly;
-@media (max-width: 600px) {
+@media (max-width: 700px) {
     flex-direction:  column;
 }
 `;
@@ -187,4 +187,40 @@ width: 30px;
 
 export const ScoreTd = styled.td`
 color: #5A91C7;
+`;
+
+export const StyledThHide = styled(StyledTh)`
+  @media (max-width: 1000px) {
+    display: none;
+}
+`;
+
+export const TdHide = styled(Td)`
+@media (max-width: 1000px) {
+    display: none;
+}
+`;
+
+export const TdHideSize = styled(Td)`
+@media (max-width: 700px) {
+    display: none;
+}
+`;
+
+export const StyledThHideSize = styled(StyledTh)`
+    @media (max-width: 701px) {
+        display: none;
+    }
+`;
+
+export const StyledThHideCategory = styled(StyledTh)`
+@media (max-width: 900px) {
+    display: none;
+}
+`;
+
+export const TdHideCategory = styled(Td)`
+@media (max-width: 900px) {
+    display: none;
+}
 `;
