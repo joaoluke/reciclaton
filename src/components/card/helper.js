@@ -45,7 +45,7 @@ export const content = (
   { business, os, id, brand },
   popUp,
   setPopUp,
-  users
+  dispatch
 ) => {
   const idUser = id;
   switch (status) {
@@ -90,9 +90,11 @@ export const content = (
                       status: "Aceito",
                       contratado_id: idUser,
                     });
-                    changeInformations(idUser, token, {
-                      os: [...Object.values(os), list.length + 1],
-                    });
+                    if (Object.values(os).includes(id) === false) {
+                      changeInformations(idUser, token, {
+                        os: [...Object.values(os), id],
+                      });
+                    }
                   }}
                 >
                   <ButtonTitle>Aceitar</ButtonTitle>

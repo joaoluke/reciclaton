@@ -67,7 +67,7 @@ export const getService = (id, token, service) => (dispatch) => {
     });
 };
 
-export const changeCardStatus = (id, token, service) => (dispatch) => {
+export const changeCardStatus = (id, token, service) => {
   const header = {
     headers: { Authorization: `Bearer ${token}` },
   };
@@ -79,7 +79,6 @@ export const changeCardStatus = (id, token, service) => (dispatch) => {
     )
     .then(({ data }) => {
       console.log(data);
-      dispatch(cardList(data));
     })
     .catch(({ response }) => console.log(response));
 };

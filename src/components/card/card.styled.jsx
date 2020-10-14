@@ -146,4 +146,7 @@ export const StarContainer = styled.div`
   justify-content: center;
 `;
 
-export const CardContainer = styled.div``;
+export const CardContainer = styled.div`
+  display: flex;
+  flex-flow: wrap row;
+`;
