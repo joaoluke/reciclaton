@@ -173,7 +173,7 @@ const ModalComponent = ({ visible, setVisible, children }) => {
         {children}
       </StyledButtonRegister>
       <Modal
-        isOpen={true}
+        isOpen={visible}
         onRequestClose={closeModal}
         style={customStyles}
         contentLabel="Example Modal"
