@@ -24,18 +24,18 @@ import {
   changeInformations,
 } from "../../redux/action/card-informations";
 
-const materialsName = {
-  rubber: 'Borracha',
-  electronic: 'Eletrônico',
-  cloth: 'Tecido',
-  battery: 'Bateria',
-  metal: 'Metal',
-  paper: 'Papel',
-  glass: 'Vidro',
-  plastic: 'Plástico',
-  organic: 'Orgânico',
+export const materialsName = {
+  rubber: "Borracha",
+  electronic: "Eletrônico",
+  cloth: "Tecido",
+  battery: "Bateria",
+  metal: "Metal",
+  paper: "Papel",
+  glass: "Vidro",
+  plastic: "Plástico",
+  organic: "Orgânico",
+};
 
-}
 export const content = (
   status = "Aberto",
   setRating,
@@ -44,14 +44,15 @@ export const content = (
   token,
   { business, os, id, brand },
   popUp,
-  setPopUp
+  setPopUp,
+  users
 ) => {
   const idUser = id;
   switch (status) {
     case "Aberto":
       return list.map(
         (
-          { contribuicao, materiais, status, id, adress },
+          { contribuicao, materiais, status, id, adress, contracting_name },
           key
         ) => {
           const price =
@@ -64,30 +65,30 @@ export const content = (
           if (status === "Aberto") {
             return (
               <Container key={key}>
-                <CardTitle>{/* ? brand : */ "No Title"}</CardTitle>
+                <CardTitle>{contracting_name}</CardTitle>
                 <Content>
                   <Title>
-                    Endereço:{" "}
-                    {/* adress && adress.street + " " + adress.city */}
+                    Endereço:{adress && adress.street + " " + adress.city}
                   </Title>
                   <Title>
                     Materiais:
-                  <Title>
+                    <Title>
                       {Object.values(materiais).map((material, key) => {
                         if (material === true) {
-                          return materialsName[Object.keys(materiais)[key]] + ",";
+                          return (
+                            materialsName[Object.keys(materiais)[key]] + ", "
+                          );
                         }
                       })}
                     </Title>
                   </Title>
                 </Content>
-
                 <TitlePrice>Valor:{price}</TitlePrice>
                 <StyledButton
                   onClick={() => {
                     changeCardStatus(id, token, {
                       status: "Aceito",
-                      contratado_id: idUser,
+                      contracted_id: idUser,
                     });
                     changeInformations(idUser, token, { os: { id: id } });
                   }}
@@ -103,7 +104,16 @@ export const content = (
     case "Aceito":
       return list.map(
         (
-          { contribuicao, materiais, status, contratante_id, contratado_id, id },
+          {
+            contribuicao,
+            materiais,
+            status,
+            contracting_id,
+            contracted_id,
+            id,
+            adress,
+            contracting_name,
+          },
           key
         ) => {
           const price =
@@ -113,26 +123,28 @@ export const content = (
               currency: "BRL",
             });
           if (
-            status === "Aceito" && (contratante_id === idUser ||
-              contratado_id === idUser)
+            status === "Aceito" &&
+            (contracting_id === idUser || contracted_id === idUser)
           ) {
             return (
               <Container key={key}>
                 <CloseCointainer>
                   <CloseCard onClick={() => setPopUp(true)} />
                 </CloseCointainer>
-                <CardTitle>{/* ? brand : */ "No Title"}</CardTitle>
+                <CardTitle>{contracting_name}</CardTitle>
+
                 <Content>
                   <Title>
-                    Endereço:{" "}
-                    {/* adress && adress.street + " " + adress.city */}
+                    Endereço:{adress && adress.street + " " + adress.city}
                   </Title>
                   <Title>
                     Materiais:
-                  <Title>
+                    <Title>
                       {Object.values(materiais).map((material, key) => {
                         if (material === true) {
-                          return materialsName[Object.keys(materiais)[key]] + ", ";
+                          return (
+                            materialsName[Object.keys(materiais)[key]] + ", "
+                          );
                         }
                       })}
                     </Title>
@@ -148,16 +160,26 @@ export const content = (
                     </TitlePrice>
                     <Choice>
                       <Decline onClick={() => setPopUp(false)} />
-                      <Accept onClick={() => {
-                        setPopUp(false)
-                        changeCardStatus(id, token, { status: 'Cancelado', cancelado: brand })
-                      }
-                      } />
+                      <Accept
+                        onClick={() => {
+                          setPopUp(false);
+                          changeCardStatus(id, token, {
+                            status: "Cancelado",
+                            cancelado: brand,
+                          });
+                        }}
+                      />
                     </Choice>
                   </PopUp>
                 )}
-                {business === 'Coleta' && (
-                  <StyledButton onClick={changeCardStatus(id, token, { status: 'Em Andamento' })}> <ButtonTitle>Começar Rota</ButtonTitle></StyledButton>
+                {business === "Coleta" && (
+                  <StyledButton
+                    onClick={changeCardStatus(id, token, {
+                      status: "Em Andamento",
+                    })}
+                  >
+                    <ButtonTitle>Começar Rota</ButtonTitle>
+                  </StyledButton>
                 )}
               </Container>
             );
@@ -167,7 +189,16 @@ export const content = (
     case "Em Andamento":
       return list.map(
         (
-          { contribuicao, status, adress, contratante_id, contratado_id, id, materiais },
+          {
+            contribuicao,
+            status,
+            adress,
+            contracting_id,
+            contracted_id,
+            id,
+            materiais,
+            contracting_name,
+          },
           key
         ) => {
           const price =
@@ -177,25 +208,28 @@ export const content = (
               currency: "BRL",
             });
           if (
-            status === "Em Andamento" && (contratante_id === idUser ||
-              contratado_id === idUser)
+            status === "Em Andamento" &&
+            (contracting_id === idUser || contracted_id === idUser)
           ) {
             return (
               <Container key={key}>
                 <CloseCointainer>
                   <CloseCard onClick={() => setPopUp(true)} />
                 </CloseCointainer>
-                <CardTitle>{"No Title"}</CardTitle>
+                <CardTitle>{contracting_name}</CardTitle>
+
                 <Content>
                   <Title>
-                    Endereço: {adress && adress.street + " " + adress.city}
+                    Endereço:{adress && adress.street + " " + adress.city}
                   </Title>
                   <Title>
                     Materiais:
-                  <Title>
+                    <Title>
                       {Object.values(materiais).map((material, key) => {
                         if (material === true) {
-                          return materialsName[Object.keys(materiais)[key]] + ", ";
+                          return (
+                            materialsName[Object.keys(materiais)[key]] + ", "
+                          );
                         }
                       })}
                     </Title>
@@ -215,16 +249,27 @@ export const content = (
                     </TitlePrice>
                     <Choice>
                       <Decline onClick={() => setPopUp(false)} />
-                      <Accept onClick={() => {
-                        setPopUp(false)
-                        changeCardStatus(id, token, { status: 'Cancelado', cancelado: brand })
-
-                      }} />
+                      <Accept
+                        onClick={() => {
+                          setPopUp(false);
+                          changeCardStatus(id, token, {
+                            status: "Cancelado",
+                            cancelado: brand,
+                          });
+                        }}
+                      />
                     </Choice>
                   </PopUp>
                 )}
-                {business !== 'Coleta' && (
-                  <StyledButton onClick={changeCardStatus(id, token, { status: 'Finalizado' })}> <ButtonTitle>Finalizar</ButtonTitle></StyledButton>
+                {business !== "Coleta" && (
+                  <StyledButton
+                    onClick={changeCardStatus(id, token, {
+                      status: "Finalizado",
+                    })}
+                  >
+                    {" "}
+                    <ButtonTitle>Finalizar</ButtonTitle>
+                  </StyledButton>
                 )}
               </Container>
             );
@@ -233,110 +278,147 @@ export const content = (
       );
 
     case "Finalizado":
-      return list.map(({ status, contratante_id, contratado_id, id, materiais }, key) => {
-        if (
-          status === "Finalizado" && (contratado_id === idUser || contratante_id === idUser)) {
-          return (
-            <Container key={key}>
-              <CardTitle>{"No Title"}</CardTitle>
-              <Content>
-                <Title>
-                  Endereço:{" "}
-                  {/* adress && adress.street + " " + adress.city */}
-                </Title>
-                <Title>
-                  Materiais:
+      return list.map(
+        (
+          {
+            status,
+            contracting_id,
+            contracted_id,
+            id,
+            materiais,
+            adress,
+            contracting_name,
+          },
+          key
+        ) => {
+          if (
+            status === "Finalizado" &&
+            (contracted_id === idUser || contracting_id === idUser)
+          ) {
+            return (
+              <Container key={key}>
+                <CardTitle>{contracting_name}</CardTitle>
+
+                <Content>
                   <Title>
-                    {Object.values(materiais).map((material, key) => {
-                      if (material === true) {
-                        return materialsName[Object.keys(materiais)[key]] + ", ";
-                      }
-                    })}
+                    Endereço:{adress && adress.street + " " + adress.city}
                   </Title>
-                </Title>
-              </Content>
-              <StarContainer>
-                <Rating
+                  <Title>
+                    Materiais:
+                    <Title>
+                      {Object.values(materiais).map((material, key) => {
+                        if (material === true) {
+                          return (
+                            materialsName[Object.keys(materiais)[key]] + ", "
+                          );
+                        }
+                      })}
+                    </Title>
+                  </Title>
+                </Content>
+                <StarContainer>
+                  <Rating
+                    onClick={() => {
+                      setRating(1);
+                    }}
+                  />
+                  <Rating
+                    onClick={() => {
+                      setRating(2);
+                    }}
+                  />
+                  <Rating
+                    onClick={() => {
+                      setRating(3);
+                    }}
+                  />
+                  <Rating
+                    onClick={() => {
+                      setRating(4);
+                    }}
+                  />
+                  <Rating
+                    onClick={() => {
+                      setRating(5);
+                    }}
+                  />
+                </StarContainer>
+                <StyledButton
                   onClick={() => {
-                    setRating(1);
+                    business === "Coleta"
+                      ? changeCardStatus(id, token, {
+                          "avaliacao-contratado": rating,
+                        })
+                      : changeCardStatus(id, token, {
+                          "avaliacao-contratante": rating,
+                        });
                   }}
-                />
-                <Rating
-                  onClick={() => {
-                    setRating(2);
-                  }}
-                />
-                <Rating
-                  onClick={() => {
-                    setRating(3);
-                  }}
-                />
-                <Rating
-                  onClick={() => {
-                    setRating(4);
-                  }}
-                />
-                <Rating
-                  onClick={() => {
-                    setRating(5);
-                  }}
-                />
-              </StarContainer>
-              <StyledButton
-                onClick={() => {
-                  business === "Coleta"
-                    ? changeCardStatus(id, token, {
-                      "avaliacao-contratado": rating,
-                    })
-                    : changeCardStatus(id, token, {
-                      "avaliacao-contratante": rating,
-                    });
-                }}
-              >
-                <ButtonTitle>Avaliar</ButtonTitle>
-              </StyledButton>
-            </Container>
-          );
+                >
+                  <ButtonTitle>Avaliar</ButtonTitle>
+                </StyledButton>
+              </Container>
+            );
+          }
         }
-      });
+      );
 
     case "Cancelado":
-      return list.map(({ status, contratante_id, contratado_id, cancelado, contribuicao, materiais }, key) => {
-        const price =
-          contribuicao &&
-          parseInt(contribuicao).toLocaleString("pt-br", {
-            style: "currency",
-            currency: "BRL",
-          });
-        if (
-          status === "Cancelado" &&
-          (contratado_id === idUser || contratante_id === idUser)
-        ) {
-          return (
-            <Container key={key}>
+      return list.map(
+        (
+          {
+            status,
+            contracting_id,
+            contracted_id,
+            cancelado,
+            contribuicao,
+            materiais,
+            adress,
+            contracting_name,
+          },
+          key
+        ) => {
+          const price =
+            contribuicao &&
+            parseInt(contribuicao).toLocaleString("pt-br", {
+              style: "currency",
+              currency: "BRL",
+            });
+          if (
+            status === "Cancelado" &&
+            (contracted_id === idUser || contracting_id === idUser)
+          ) {
+            return (
+              <Container key={key}>
+                <CardTitle>{contracting_name}</CardTitle>
 
-              <CardTitle>{"No Title"}</CardTitle>
-              <Content>
-                <Title>
-                  Endereço:
-                </Title>
-                <Title>
-                  Materiais:
+                <Content>
                   <Title>
-                    {Object.values(materiais).map((material, key) => {
-                      if (material === true) {
-                        return materialsName[Object.keys(materiais)[key]] + ",";
-                      }
-                    })}
+                    Endereço:{adress && adress.street + " " + adress.city}
                   </Title>
+                  <Title>
+                    Materiais:
+                    <Title>
+                      {Object.values(materiais).map((material, key) => {
+                        if (material === true) {
+                          return (
+                            materialsName[Object.keys(materiais)[key]] + ", "
+                          );
+                        }
+                      })}
+                    </Title>
+                  </Title>
+                </Content>
+                <TitlePrice style={{ fontSize: "35px" }}>
+                  Valor: {price}
+                </TitlePrice>
+                <Title style={{ fontSize: "23px" }}>
+                  Cancelado por:{cancelado}
                 </Title>
-              </Content>
-              <TitlePrice style={{ fontSize: "35px" }}>Valor: {price}</TitlePrice>
-              <Title style={{ fontSize: "23px" }}>Cancelado por:{cancelado}</Title>
-            </Container>
-          );
+              </Container>
+            );
+          }
         }
-      });
+      );
 
     default:
       return;

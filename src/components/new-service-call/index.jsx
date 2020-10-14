@@ -45,7 +45,9 @@ const NewServiceCalls = () => {
   const dispatch = useDispatch();
   const { list, individual } = useSelector((state) => state.card);
 
-  const { brand, id, business } = useSelector((state) => state.userService);
+  const userPerfil = useSelector((state) => state.userService);
+
+  const { brand, id, business } = userPerfil;
   useEffect(() => {
     dispatch(getServices());
     if (!brand) {
@@ -86,7 +88,7 @@ const NewServiceCalls = () => {
     if (token && list) {
       addService(
         token,
-        inputData({ ...data, materiais }, id, list && list.length + 1)
+        inputData({ ...data, materiais }, userPerfil, list && list.length + 1)
       );
 
       changeInformations(id, token, {
@@ -98,7 +100,7 @@ const NewServiceCalls = () => {
         history.push(`/services/${id}`);
       }, 2000);
     }
-    inputData({ ...data, materiais }, id, list && list.length + 1);
+    inputData({ ...data, materiais }, userPerfil, list && list.length + 1);
   };
   return (
     <>
