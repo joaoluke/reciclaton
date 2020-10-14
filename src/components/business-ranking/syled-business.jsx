@@ -96,7 +96,7 @@ padding: 5%;
     cursor: pointer;
     // border: 0px 0px solid gray;
     background-color: white;
-    width: 150%;
+    // width: 150%;
 }
 span::first-letter{
     text-transform: uppercase;

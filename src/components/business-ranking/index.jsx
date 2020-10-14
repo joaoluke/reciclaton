@@ -70,7 +70,7 @@ const BusinessRanking = () => {
     businessB.score.anual - businessA.score.anual;
 
   window.onscroll = function (ev) {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+    if (window.innerHeight + window.scrollY + 1000 >= document.body.offsetHeight) {
       setHasMore(hasMore + 20);
     }
   };
