@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
-// import { registerForm } from "../../redux/action/register";
+import { Redirect } from "react-router-dom";
+import { registerAction } from "../../redux/action/register";
 import { AiOutlineCloseSquare } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
 import {
-  ComponentNewAccount,
   ComponentForm,
   StyledCloseModalDiv,
   StyledCloseModalP,
@@ -16,11 +16,11 @@ import {
   StyledSelect,
   StyledProductsDiv,
   StyledButtonRegister,
-  StyledH2
+  StyledH2,
 } from "./styled.js";
 import axios from "axios";
-import ProductInput from "./productsInput";
 import Modal from "react-modal";
+import ProductInput from "./productsInput";
 
 let ifCollectorMock = {
   organic: false,
@@ -48,7 +48,6 @@ const customStyles = {
 };
 
 const ModalComponent = ({ visible, setVisible, children }) => {
-  const [errorText, setErrorText] = useState("");
   const [areIdentical, setAreIdentical] = useState(true);
   const [password, setPassword] = useState("");
   const [cepError, setCepError] = useState(false);
@@ -69,6 +68,7 @@ const ModalComponent = ({ visible, setVisible, children }) => {
     erro: false,
   });
 
+  const { err, pass } = useSelector((state) => state.register);
   const dispatch = useDispatch();
   const { register, handleSubmit, errors } = useForm();
 
@@ -97,8 +97,15 @@ const ModalComponent = ({ visible, setVisible, children }) => {
       businessSize: data.port,
       website: data.site,
       imageUrl: data.image,
+      score: {
+        mensal: 0,
+        anual: 0,
+      },
+      os: {},
+      award: {},
+      complaints: [],
     };
-    // dispatch(registerForm(formData, setVisible, setErrorText));
+    dispatch(registerAction(formData, setVisible));
   };
 
   const openModal = () => {
@@ -162,9 +169,11 @@ const ModalComponent = ({ visible, setVisible, children }) => {
 
   return (
     <>
-      <StyledButtonRegister onClick={openModal}>{children}</StyledButtonRegister>
+      <StyledButtonRegister onClick={openModal}>
+        {children}
+      </StyledButtonRegister>
       <Modal
-        isOpen={visible}
+        isOpen={true}
         onRequestClose={closeModal}
         style={customStyles}
         contentLabel="Example Modal"
@@ -200,9 +209,10 @@ const ModalComponent = ({ visible, setVisible, children }) => {
           <StyledLabel>CNPJ*:</StyledLabel>
           <StyledInput
             name="cnpj"
-            defaultValue={cnpjMask(cnpj)}
+            value={cnpjMask(cnpj)}
             onChange={(e) => setCNPJ(e.target.value)}
             placeholder="Ex.: 00.000.000/0000-00"
+            maxLength="18"
             ref={register({ required: true })}
           />
           {errors.cnpj && <p>Digite o CNPJ da Empresa</p>}
@@ -211,7 +221,7 @@ const ModalComponent = ({ visible, setVisible, children }) => {
           <StyledInput
             name="cep"
             placeholder="Ex.: 00000-000"
-            defaultValue={cepMask(cep)}
+            value={cepMask(cep)}
             onBlur={catchZip}
             onChange={(e) => setCEP(e.target.value)}
             ref={register}
@@ -285,11 +295,21 @@ const ModalComponent = ({ visible, setVisible, children }) => {
             onChange={companyOrCollector}
           >
             <div>
-              <StyledInput type="radio" name="type" id="company" defaultValue={1} />
+              <StyledInput
+                type="radio"
+                name="type"
+                id="company"
+                defaultValue={1}
+              />
               <label>Empresa</label>
             </div>
             <div>
-              <StyledInput type="radio" name="type" id="collector" defaultValue={2} />
+              <StyledInput
+                type="radio"
+                name="type"
+                id="collector"
+                defaultValue={2}
+              />
               <label>Coletor</label>
             </div>
           </div>
@@ -385,7 +405,8 @@ const ModalComponent = ({ visible, setVisible, children }) => {
             </StyledCancelar>
             <StyledRegister type="submit">Registrar</StyledRegister>
           </StyledButtonsDiv>
-          {errorText && <p>{errorText}</p>}
+          {pass && <Redirect to={{ pathname: "/ranking" }} />}
+          {err && <p>{err}</p>}
         </ComponentForm>
       </Modal>
     </>
