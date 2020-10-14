@@ -90,7 +90,9 @@ export const content = (
                       status: "Aceito",
                       contratado_id: idUser,
                     });
-                    changeInformations(idUser, token, [...os, id]);
+                    changeInformations(idUser, token, {
+                      os: [...Object.values(os), list.length + 1],
+                    });
                   }}
                 >
                   <ButtonTitle>Aceitar</ButtonTitle>

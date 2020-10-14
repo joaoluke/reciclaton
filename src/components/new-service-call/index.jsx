@@ -46,14 +46,14 @@ const NewServiceCalls = ({ visibility, setVisibility }) => {
 
   const userPerfil = useSelector((state) => state.userService);
 
-  const { brand, id, business } = userPerfil;
+  const { brand, id, business, os } = userPerfil;
   useEffect(() => {
     dispatch(getServices());
     if (!brand) {
       dispatch(requestBusiness(decode(token).sub, token));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [brand, dispatch]);
+  }, [brand, dispatch, userPerfil]);
 
   const token = useSelector((state) => state.login.authen);
 
@@ -91,12 +91,12 @@ const NewServiceCalls = ({ visibility, setVisibility }) => {
       );
 
       changeInformations(id, token, {
-        os: { id: list.length + 1 },
+        os: [...Object.values(os), list.length + 1],
       });
 
       setApproved(true);
       setTimeout(() => {
-        history.push(`/services/${id}`);
+        setVisibility(false);
       }, 2000);
     }
     inputData({ ...data, materiais }, userPerfil, list && list.length + 1);
