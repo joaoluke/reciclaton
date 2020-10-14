@@ -3,11 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { content, materialsName } from "./helper";
 import decode from "jwt-decode";
 
-import {
-  changeInformations,
-  getServices,
-  changeCardStatus,
-} from "../../redux/action/card-informations";
+import { getServices } from "../../redux/action/card-informations";
 import { requestUsers } from "../../redux/action/users";
 import { requestBusiness } from "../../redux/action/user-service";
 const Card = ({ status }) => {
@@ -18,6 +14,7 @@ const Card = ({ status }) => {
   const { list } = useSelector((state) => state.card);
   const user = useSelector((state) => state.userService);
   const userList = useSelector((state) => state.usersList.usersArray);
+  const test = useSelector((state) => console.log(state));
   const { brand } = user;
   useEffect(() => {
     dispatch(getServices());

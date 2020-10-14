@@ -1,7 +1,7 @@
 import axios from "axios";
 export const GET_CARDS_LIST = "GET_CARDS_LIST";
 export const GET_CARD_INFORMATION = "GET_CARD_INFORMATIONS";
-export const SET_CARD_MESSAGE = 'SET_CARD_MESSAGE'
+export const SET_CARD_MESSAGE = "SET_CARD_MESSAGE";
 const cardList = (list) => ({
   type: GET_CARDS_LIST,
   list,
@@ -67,7 +67,7 @@ export const getService = (id, token, service) => (dispatch) => {
     });
 };
 
-export const changeCardStatus = (id, token, service) => {
+export const changeCardStatus = (id, token, service) => (dispatch) => {
   const header = {
     headers: { Authorization: `Bearer ${token}` },
   };
@@ -79,11 +79,12 @@ export const changeCardStatus = (id, token, service) => {
     )
     .then(({ data }) => {
       console.log(data);
+      dispatch(cardList(data));
     })
     .catch(({ response }) => console.log(response));
 };
 
 export const setSucessMessage = (message) => ({
   type: SET_CARD_MESSAGE,
-  message
-})
+  message,
+});
