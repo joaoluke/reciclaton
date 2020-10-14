@@ -1,7 +1,7 @@
 import axios from "axios";
 export const GET_CARDS_LIST = "GET_CARDS_LIST";
 export const GET_CARD_INFORMATION = "GET_CARD_INFORMATIONS";
-
+export const SET_CARD_MESSAGE = 'SET_CARD_MESSAGE'
 const cardList = (list) => ({
   type: GET_CARDS_LIST,
   list,
@@ -82,3 +82,8 @@ export const changeCardStatus = (id, token, service) => {
     })
     .catch(({ response }) => console.log(response));
 };
+
+export const setSucessMessage = (message) => ({
+  type: SET_CARD_MESSAGE,
+  message
+})

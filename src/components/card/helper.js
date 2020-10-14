@@ -19,13 +19,23 @@ import {
   Choice,
 } from "./card.styled";
 
-import { useSelector } from "react-redux";
-
 import {
   changeCardStatus,
   changeInformations,
 } from "../../redux/action/card-informations";
 
+const materialsName = {
+  rubber: 'Borracha',
+  electronic: 'Eletrônico',
+  cloth: 'Tecido',
+  battery: 'Bateria',
+  metal: 'Metal',
+  paper: 'Papel',
+  glass: 'Vidro',
+  plastic: 'Plástico',
+  organic: 'Orgânico',
+
+}
 export const content = (
   status = "Aberto",
   setRating,
@@ -60,13 +70,15 @@ export const content = (
                     Endereço:{" "}
                     {/* adress && adress.street + " " + adress.city */}
                   </Title>
-                  <Title>Materiais:</Title>
                   <Title>
-                    {Object.values(materiais).map((material, key) => {
-                      if (material === true) {
-                        return Object.keys(materiais)[key] + ",";
-                      }
-                    })}
+                    Materiais:
+                  <Title>
+                      {Object.values(materiais).map((material, key) => {
+                        if (material === true) {
+                          return materialsName[Object.keys(materiais)[key]] + ",";
+                        }
+                      })}
+                    </Title>
                   </Title>
                 </Content>
 
@@ -117,11 +129,13 @@ export const content = (
                   </Title>
                   <Title>
                     Materiais:
-                    {Object.values(materiais).map((material, key) => {
-                    if (material === true) {
-                      return Object.keys(materiais)[key];
-                    }
-                  })}
+                  <Title>
+                      {Object.values(materiais).map((material, key) => {
+                        if (material === true) {
+                          return materialsName[Object.keys(materiais)[key]] + ", ";
+                        }
+                      })}
+                    </Title>
                   </Title>
                 </Content>
                 <TitlePrice style={{ fontSize: "35px" }}>
@@ -153,7 +167,7 @@ export const content = (
     case "Em Andamento":
       return list.map(
         (
-          { contribuicao, status, adress, contratante_id, contratado_id, id },
+          { contribuicao, status, adress, contratante_id, contratado_id, id, materiais },
           key
         ) => {
           const price =
@@ -176,8 +190,17 @@ export const content = (
                   <Title>
                     Endereço: {adress && adress.street + " " + adress.city}
                   </Title>
+                  <Title>
+                    Materiais:
+                  <Title>
+                      {Object.values(materiais).map((material, key) => {
+                        if (material === true) {
+                          return materialsName[Object.keys(materiais)[key]] + ", ";
+                        }
+                      })}
+                    </Title>
+                  </Title>
                 </Content>
-                <Title>Materiais: {}</Title>
                 <TitlePrice>
                   <TitlePrice>Valor: {price}</TitlePrice>
                   {adress && adress.state}
@@ -210,11 +233,28 @@ export const content = (
       );
 
     case "Finalizado":
-      return list.map(({ status, contratante_id, contratado_id }, key) => {
+      return list.map(({ status, contratante_id, contratado_id, id, materiais }, key) => {
         if (
           status === "Finalizado" && (contratado_id === idUser || contratante_id === idUser)) {
           return (
             <Container key={key}>
+              <CardTitle>{"No Title"}</CardTitle>
+              <Content>
+                <Title>
+                  Endereço:{" "}
+                  {/* adress && adress.street + " " + adress.city */}
+                </Title>
+                <Title>
+                  Materiais:
+                  <Title>
+                    {Object.values(materiais).map((material, key) => {
+                      if (material === true) {
+                        return materialsName[Object.keys(materiais)[key]] + ", ";
+                      }
+                    })}
+                  </Title>
+                </Title>
+              </Content>
               <StarContainer>
                 <Rating
                   onClick={() => {
@@ -261,7 +301,7 @@ export const content = (
       });
 
     case "Cancelado":
-      return list.map(({ status, contratante_id, contratado_id, cancelado, contribuicao }, key) => {
+      return list.map(({ status, contratante_id, contratado_id, cancelado, contribuicao, materiais }, key) => {
         const price =
           contribuicao &&
           parseInt(contribuicao).toLocaleString("pt-br", {
@@ -279,6 +319,16 @@ export const content = (
               <Content>
                 <Title>
                   Endereço:
+                </Title>
+                <Title>
+                  Materiais:
+                  <Title>
+                    {Object.values(materiais).map((material, key) => {
+                      if (material === true) {
+                        return materialsName[Object.keys(materiais)[key]] + ",";
+                      }
+                    })}
+                  </Title>
                 </Title>
               </Content>
               <TitlePrice style={{ fontSize: "35px" }}>Valor: {price}</TitlePrice>
