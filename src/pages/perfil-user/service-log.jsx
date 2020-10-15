@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import styled from "styled-components"
 
 const ServiceLog = () => {
   const { userId } = useParams();
   const [services, setServices] = useState(() => {
     axios
-      .get("https://reciclatonapi.herokuapp.com/664/services/")
+      .get("https://reciclatonapi.herokuapp.com/services/")
       .then(({ data }) =>
         setServices(
           data.filter(
             ({ status, contratante_id }) =>
-              status === "Cancelado" && contratante_id === parseInt(userId)
+              status === "finalizado" && contratante_id === parseInt(userId)
           )
         )
       )
@@ -51,21 +52,46 @@ const ServiceLog = () => {
   }
 
   useEffect(() => {}, [services]);
-  console.log(services)
   return (
-    <>
-      {services &&
-        services.map(
-          ({ contribuicao, quantidade_estimada, materiais }, key) => (
-            <div key={key}>
-              <p>Contribuição: {contribuicao}</p>
-              <p>Quantidade: {quantidade_estimada}</p>
-              <p>Materiais: {material(materiais)}</p>
-            </div>
-          )
-        )}
-    </>
+    <StyledContainer>
+      <StyledCardContainer>
+        {services &&
+          services.map(
+            ({ contribuicao, quantidade_estimada, materiais }, key) => (
+              <StyledCards key={key}>
+                <p>Contribuição: {contribuicao}</p>
+                <p>Quantidade: {quantidade_estimada}</p>
+                <p>Materiais: {material(materiais)}</p>
+              </StyledCards>
+            )
+          )}
+      </StyledCardContainer>
+    </StyledContainer>
   );
 };
 
 export default ServiceLog;
+
+const StyledCards = styled.div`
+  width: 33vw;
+  height: 125px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3),
+    0px 0px 20px 5px rgba(0, 0, 0, 0.1) inset;
+  padding: 10px;
+  background-color: #68A428;
+  color: white;
+  margin: 10px;
+`;
+
+const StyledContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+`;
+
+const StyledCardContainer = styled.div`
+  flex-flow: column;
+  overflow: scroll;
+  overflow-x: hidden;
+  height: 225px;
+`;
