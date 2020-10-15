@@ -2,23 +2,20 @@ import styled from 'styled-components';
 
 export const BackgroundRank = styled.div`
 font-family: 'Roboto', sans-serif;
-  overflow: hidden;
     width: 80vw;
     margin: 0 auto;
-//   width: 100%;
-  @media (max-width: 1024px) {
-    overflow: auto;
-}
+    overflow: hidden;
+    width: 100%;
+    @media (max-width: 768px) {
+        width: 100%;
+    }
 `;
 
 export const BusinessCard = styled.div`
   display: flex;
-  overflow: hidden;
   font-family: 'Roboto', sans-serif;
   flex-direction: column;
-//   border: 1px solid black;
   margin-bottom: 5px;
-//   padding: 1rem;
   width: 100%;
   height: auto;
   justify-content: center;
@@ -45,15 +42,13 @@ display: hidden;
 width: 80vw;
 margin: 0 auto;
 tr:nth-child(2n + 1) {
-    // background: #92D143;
     background: #e1f3ce;
  }
  tr:nth-child(2n) {
-    //  background: #F3E8E2;
     background: #F5FBEF;
- }
- @media only screen and (max-width: 768px) {
-    width: 95vw;
+    @media (max-width: 768px) {
+        width: 100%;
+    }
  }
 `;
 
@@ -111,14 +106,11 @@ align-content: center;
 padding: 5%;
 :hover {
     cursor: pointer;
-    // border: 0px 0px solid gray;
     background-color: white;
-    // width: 150%;
 }
 span::first-letter{
     text-transform: uppercase;
 }
-
 @media (max-width: 600px) {
     :hover {
         cursor: pointer;
@@ -167,9 +159,10 @@ font-family: 'Roboto', sans-serif;
 display: flex;
 margin-bottom: 2.5%;
 justify-content: space-around;
+flex-flow: row wrap;
 `;
 
-export const StyledThead = styled.thead`
+export const StyledThead = styled.tr`
 font-family: 'Roboto', sans-serif;
 background-color: #60789C;
 `;
@@ -181,7 +174,7 @@ width: 40px;
 
 export const StyledTh = styled.th`
 font-family: 'Roboto', sans-serif;
-color: whitesmoke;
+color: black;
 `;
 
 export const BrandTd = styled.td`
@@ -210,7 +203,10 @@ border-radius: 50px;
 
 export const StyledBrandSpan = styled.span`
 font-family: 'Roboto', sans-serif;
-color: green;
+color: black;
+:hover {
+    color: green;
+}
 font-weigth: bolder;
 `;
 
@@ -221,7 +217,8 @@ width: 30px;
 
 export const ScoreTd = styled.td`
 font-family: 'Roboto', sans-serif;
-color: #5A91C7;
+:hover{ color: #5A91C7;}
+color: black;
 `;
 
 export const StyledThHide = styled(StyledTh)`

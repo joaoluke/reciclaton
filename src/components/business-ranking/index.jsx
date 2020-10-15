@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import {
   BackgroundRank,
   StyledButtonGreen,
-  StyledButton,
   StyledTable,
   Td,
   Tr,
@@ -41,24 +39,14 @@ import goldHonor from "./images/medalha-ouro.png";
 import silverHonor from "./images/medalha-prata.png";
 import bronzeHonor from "./images/medalha-bronze.png";
 
-const BusinessRanking = () => {
-  const [business, setBusiness] = useState([]);
+const BusinessRanking = ({users}) => {
+  const [business] = useState(users);
   const [score, setScore] = useState("mensal");
   const [size, setSize] = useState("Sem filtro");
   const [category, setCategory] = useState("Sem filtro");
   const [hasMore, setHasMore] = useState(20);
 
   const history = useHistory();
-
-  useEffect(() => {
-    axios
-      .get("https://reciclatonapi.herokuapp.com/664/users")
-      .then((res) => {
-        setBusiness(res.data);
-      })
-      .catch(({ error }) => console.log(error));
-  }, []);
-
   const setSizeValue = (value) => {
     const select = value.target.value;
     setHasMore(20);
@@ -94,7 +82,7 @@ const BusinessRanking = () => {
               index <= 2 && (
                 <SpotlightChildDiv
                   key={index}
-                  onClick={() => history.push(`users/${item.id}`)}
+                  onClick={() => history.push(`profile/${item.id}`)}
                 >
                   <StyledSpan>{index + 1}ª</StyledSpan>
                   <StyledImg src={item.imageUrl} />
@@ -117,7 +105,7 @@ const BusinessRanking = () => {
               index <= 2 && (
                 <SpotlightChildDiv
                   key={index}
-                  onClick={() => history.push(`users/${item.id}`)}
+                  onClick={() => history.push(`profile/${item.id}`)}
                 >
                   <StyledSpan>{index + 1}ª</StyledSpan>
                   <StyledImg src={item.imageUrl} />
@@ -155,6 +143,7 @@ const BusinessRanking = () => {
           </StyledButtonGreen>
         </StyledDiv>
         <StyledTable border="1px" cellPadding="3px" cellSpacing="0">
+          <thead>
           <StyledThead>
             <StyledTh>Posição</StyledTh>
             <StyledTh>Nome</StyledTh>
@@ -195,6 +184,7 @@ const BusinessRanking = () => {
               </select>
             </StyledThHideSize>
           </StyledThead>
+          </thead>
           <tbody>
             {score === "mensal" &&
               size === "Sem filtro" &&
@@ -210,7 +200,7 @@ const BusinessRanking = () => {
                         <>&nbsp;&nbsp;&nbsp;</>
                         {
                           <StyledBrandSpan
-                            onClick={() => history.push(`users/${item.id}`)}
+                            onClick={() => history.push(`profile/${item.id}`)}
                           >
                             {item.brand}
                           </StyledBrandSpan>
@@ -263,13 +253,13 @@ const BusinessRanking = () => {
                           <>&nbsp;&nbsp;&nbsp;</>
                           {
                             <StyledBrandSpan
-                              onClick={() => history.push(`users/${item.id}`)}
+                              onClick={() => history.push(`profile/${item.id}`)}
                             >
                               {item.brand}
                             </StyledBrandSpan>
                           }
                         </BrandTd>
-                        <Td>
+                        <TdHide>
                           {index === 0 && <ImageTrophies src={goldTrophie} />}
                           {index === 1 && <ImageTrophies src={silverTrophie} />}
                           {index === 2 && <ImageTrophies src={bronzeTrophie} />}
@@ -307,13 +297,13 @@ const BusinessRanking = () => {
                                   .filter((item) => item.businessSize === size)
                                   .length) /
                                 3 && <ImageTrophies src={bronzeHonor} />}
-                        </Td>
+                        </TdHide>
                         <ScoreTd>{item.score.mensal} </ScoreTd>
-                        <Td>
+                        <TdHide>
                           <a href={item.website}>{item.website}</a>
-                        </Td>
-                        <Td>{item.business}</Td>
-                        <Td>{<span>{item.businessSize}</span>}</Td>
+                        </TdHide>
+                        <TdHideCategory>{item.business}</TdHideCategory>
+                        <TdHideSize>{<span>{item.businessSize}</span>}</TdHideSize>
                       </Tr>
                     )
                 )}
@@ -332,13 +322,13 @@ const BusinessRanking = () => {
                       <>&nbsp;&nbsp;&nbsp;</>
                       {
                         <StyledBrandSpan
-                          onClick={() => history.push(`users/${item.id}`)}
+                          onClick={() => history.push(`profile/${item.id}`)}
                         >
                           {item.brand}
                         </StyledBrandSpan>
                       }
                     </BrandTd>
-                    <Td>
+                    <TdHide>
                       {index === 0 && <ImageTrophies src={goldTrophie} />}
                       {index === 1 && <ImageTrophies src={silverTrophie} />}
                       {index === 2 && <ImageTrophies src={bronzeTrophie} />}
@@ -374,13 +364,13 @@ const BusinessRanking = () => {
                               .filter((item) => item.business === category)
                               .length) /
                             3 && <ImageTrophies src={bronzeHonor} />}
-                    </Td>
+                    </TdHide>
                     <ScoreTd>{item.score.mensal} </ScoreTd>
-                    <Td>
+                    <TdHide>
                       <a href={item.website}>{item.website}</a>
-                    </Td>
-                    <Td>{item.business}</Td>
-                    <Td>{<span>{item.businessSize}</span>}</Td>
+                    </TdHide>
+                    <TdHideCategory>{item.business}</TdHideCategory>
+                    <TdHideSize>{<span>{item.businessSize}</span>}</TdHideSize>
                   </Tr>
                 ))}
 
@@ -399,13 +389,13 @@ const BusinessRanking = () => {
                       <>&nbsp;&nbsp;&nbsp;</>
                       {
                         <StyledBrandSpan
-                          onClick={() => history.push(`users/${item.id}`)}
+                          onClick={() => history.push(`profile/${item.id}`)}
                         >
                           {item.brand}
                         </StyledBrandSpan>
                       }
                     </BrandTd>
-                    <Td>
+                    <TdHide>
                       {index === 0 && <ImageTrophies src={goldTrophie} />}
                       {index === 1 && <ImageTrophies src={silverTrophie} />}
                       {index === 2 && <ImageTrophies src={bronzeTrophie} />}
@@ -446,13 +436,13 @@ const BusinessRanking = () => {
                               .filter((item) => item.businessSize === size)
                               .length) /
                             3 && <ImageTrophies src={bronzeHonor} />}
-                    </Td>
+                    </TdHide>
                     <ScoreTd>{item.score.mensal} </ScoreTd>
-                    <Td>
+                    <TdHide>
                       <a href={item.website}>{item.website}</a>
-                    </Td>
-                    <Td>{item.business}</Td>
-                    <Td>{<span>{item.businessSize}</span>}</Td>
+                    </TdHide>
+                    <TdHideCategory>{item.business}</TdHideCategory>
+                    <TdHideSize>{<span>{item.businessSize}</span>}</TdHideSize>
                   </Tr>
                 ))}
 
@@ -469,13 +459,13 @@ const BusinessRanking = () => {
                     <>&nbsp;&nbsp;&nbsp;</>
                     {
                       <StyledBrandSpan
-                        onClick={() => history.push(`users/${item.id}`)}
+                        onClick={() => history.push(`profile/${item.id}`)}
                       >
                         {item.brand}
                       </StyledBrandSpan>
                     }
                   </BrandTd>
-                  <Td>
+                  <TdHide>
                     {index === 0 && <ImageTrophies src={goldTrophie} />}
                     {index === 1 && <ImageTrophies src={silverTrophie} />}
                     {index === 2 && <ImageTrophies src={bronzeTrophie} />}
@@ -492,13 +482,13 @@ const BusinessRanking = () => {
                         (3 * business.sort(orderByScoreYear).length) / 3 && (
                         <ImageTrophies src={bronzeHonor} />
                       )}
-                  </Td>
+                  </TdHide>
                   <ScoreTd>{item.score.anual} </ScoreTd>
-                  <Td>
+                  <TdHide>
                     <a href={item.website}>{item.website}</a>
-                  </Td>
-                  <Td>{item.business}</Td>
-                  <Td>{<span>{item.businessSize}</span>}</Td>
+                  </TdHide>
+                  <TdHideCategory>{item.business}</TdHideCategory>
+                  <TdHideSize>{<span>{item.businessSize}</span>}</TdHideSize>
                 </Tr>
               ))}
 
@@ -516,13 +506,13 @@ const BusinessRanking = () => {
                       <>&nbsp;&nbsp;&nbsp;</>
                       {
                         <StyledBrandSpan
-                          onClick={() => history.push(`users/${item.id}`)}
+                          onClick={() => history.push(`profile/${item.id}`)}
                         >
                           {item.brand}
                         </StyledBrandSpan>
                       }
                     </BrandTd>
-                    <Td>
+                    <TdHide>
                       {index === 0 && <ImageTrophies src={goldTrophie} />}
                       {index === 1 && <ImageTrophies src={silverTrophie} />}
                       {index === 2 && <ImageTrophies src={bronzeTrophie} />}
@@ -558,13 +548,13 @@ const BusinessRanking = () => {
                               .filter((item) => item.businessSize === size)
                               .length) /
                             3 && <ImageTrophies src={bronzeHonor} />}
-                    </Td>
+                    </TdHide>
                     <ScoreTd>{item.score.anual} </ScoreTd>
-                    <Td>
+                    <TdHide>
                       <a href={item.website}>{item.website}</a>
-                    </Td>
-                    <Td>{item.business}</Td>
-                    <Td>{<span>{item.businessSize}</span>}</Td>
+                    </TdHide>
+                    <TdHideCategory>{item.business}</TdHideCategory>
+                    <TdHideSize>{<span>{item.businessSize}</span>}</TdHideSize>
                   </Tr>
                 ))}
 
@@ -582,13 +572,13 @@ const BusinessRanking = () => {
                       <>&nbsp;&nbsp;&nbsp;</>
                       {
                         <StyledBrandSpan
-                          onClick={() => history.push(`users/${item.id}`)}
+                          onClick={() => history.push(`profile/${item.id}`)}
                         >
                           {item.brand}
                         </StyledBrandSpan>
                       }
                     </BrandTd>
-                    <Td>
+                    <TdHide>
                       {index === 0 && <ImageTrophies src={goldTrophie} />}
                       {index === 1 && <ImageTrophies src={silverTrophie} />}
                       {index === 2 && <ImageTrophies src={bronzeTrophie} />}
@@ -624,13 +614,13 @@ const BusinessRanking = () => {
                               .filter((item) => item.business === category)
                               .length) /
                             3 && <ImageTrophies src={bronzeHonor} />}
-                    </Td>
+                    </TdHide>
                     <ScoreTd>{item.score.anual} </ScoreTd>
-                    <Td>
+                    <TdHide>
                       <a href={item.website}>{item.website}</a>
-                    </Td>
-                    <Td>{item.business}</Td>
-                    <Td>{<span>{item.businessSize}</span>}</Td>
+                    </TdHide>
+                    <TdHideCategory>{item.business}</TdHideCategory>
+                    <TdHideSize>{<span>{item.businessSize}</span>}</TdHideSize>
                   </Tr>
                 ))}
 
@@ -649,13 +639,13 @@ const BusinessRanking = () => {
                       <>&nbsp;&nbsp;&nbsp;</>
                       {
                         <StyledBrandSpan
-                          onClick={() => history.push(`users/${item.id}`)}
+                          onClick={() => history.push(`profile/${item.id}`)}
                         >
                           {item.brand}
                         </StyledBrandSpan>
                       }
                     </BrandTd>
-                    <Td>
+                    <TdHide>
                       {index === 0 && <ImageTrophies src={goldTrophie} />}
                       {index === 1 && <ImageTrophies src={silverTrophie} />}
                       {index === 2 && <ImageTrophies src={bronzeTrophie} />}
@@ -696,13 +686,13 @@ const BusinessRanking = () => {
                               .filter((item) => item.business === category)
                               .length) /
                             3 && <ImageTrophies src={bronzeHonor} />}
-                    </Td>
+                    </TdHide>
                     <ScoreTd>{item.score.anual} </ScoreTd>
-                    <Td>
+                    <TdHide>
                       <a href={item.website}>{item.website}</a>
-                    </Td>
-                    <Td>{item.business}</Td>
-                    <Td>{<span>{item.businessSize}</span>}</Td>
+                    </TdHide>
+                    <TdHideCategory>{item.business}</TdHideCategory>
+                    <TdHideSize>{<span>{item.businessSize}</span>}</TdHideSize>
                   </Tr>
                 ))}
           </tbody>
