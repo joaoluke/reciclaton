@@ -16,9 +16,9 @@ import {
   FuncButton,
   StyledPerfilMaterials,
   StyledMaterials
-
 } from "./styled";
 import ReportModal from "./complaint-modal"
+import Log from "./service-log"
 
 const Perfil = () => {
   const dispatch = useDispatch();
@@ -82,15 +82,17 @@ const Perfil = () => {
             </StyledReportDiv>
           </StyledPerfilDiv>
           <StyledPerfilMaterials>
-            {Object.keys(user.ifCollector).map(
-              (material, key) =>
-                user.ifCollector[material] && (
-                  <StyledMaterials key={key}>
-                    {showMaterial(material)}
-                  </StyledMaterials>
-                )
-            )}
+            {user &&
+              Object.keys(user.ifCollector).map(
+                (material, key) =>
+                  user.ifCollector[material] && (
+                    <StyledMaterials key={key}>
+                      {showMaterial(material)}
+                    </StyledMaterials>
+                  )
+              )}
           </StyledPerfilMaterials>
+          <Log />
         </div>
       )}
     </>
