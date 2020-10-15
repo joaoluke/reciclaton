@@ -79,6 +79,7 @@ export default ServiceLog;
 
 const StyledCards = styled.div`
   width: 45vw;
+  height: fit-content;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3),
     0px 0px 20px 5px rgba(0, 0, 0, 0.1) inset;
   padding: 10px;
