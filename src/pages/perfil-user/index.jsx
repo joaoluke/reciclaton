@@ -15,7 +15,7 @@ import {
   ReportButton,
   FuncButton,
   StyledPerfilMaterials,
-  StyledMaterials
+  StyledMaterials,
 } from "./styled";
 import ReportModal from "./complaint-modal"
 import Log from "./service-log"

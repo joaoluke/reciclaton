@@ -17,6 +17,7 @@ import {
   StyledLink,
   SubmitButton,
   Login,
+  Report,
 } from "./header-style";
 import { logout } from "../../redux/action/login";
 import { useDispatch, useSelector } from "react-redux";
@@ -41,6 +42,7 @@ const Header = () => {
   const decodefy = authen && decode(authen);
 
   useEffect(() => {
+    setMenu(false);
   }, [authen]);
 
   return (
@@ -110,22 +112,33 @@ const Header = () => {
               </StyledLink>
             </>
           ) : (
+            <StyledLink
+              onClick={() => {
+                history.push("/login");
+                setMenu(false);
+              }}
+            >
+              <Login />
+              Login
+            </StyledLink>
+          )}
+
+          {authen && (
+            <>
+              <StyledLink>
+                <ChangeProfile />
+                Mudar Informações
+              </StyledLink>
               <StyledLink
                 onClick={() => {
-                  history.push("/login");
+                  history.push("/complaints");
                   setMenu(false);
                 }}
               >
-                <Login />
-              Login
+                <Report />
+                Denúncias
               </StyledLink>
-            )}
-
-          {authen && (
-            <StyledLink>
-              <ChangeProfile />
-              Mudar Informações
-            </StyledLink>
+            </>
           )}
           <StyledLink
             onClick={() => {
