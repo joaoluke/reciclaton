@@ -3,6 +3,7 @@ import Login from "../../pages/login";
 import User from "../../pages/perfil-user";
 import Home from "../../pages/home";
 import { Switch, Route } from "react-router-dom";
+import Ranking from '../../pages/ranking'
 import Complaint from "../../pages/complaints";
 
 const Routes = () => {
@@ -12,8 +13,8 @@ const Routes = () => {
         <Route exact path="/login">
           <Login />
         </Route>
-        <Route exact path="/ranking">
-          *PAGINA DE RANKING*
+        <Route path="/ranking">
+            <Ranking/>
         </Route>
         <Route exact path="/profile/:userId">
           <User />
