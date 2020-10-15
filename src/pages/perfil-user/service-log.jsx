@@ -48,7 +48,8 @@ const ServiceLog = () => {
         types.push(tradutor(type));
       }
     }
-    return types.join(" ")
+    const typesWOUndefined = types.filter((type) => typeof type !== "undefined" )
+    return typesWOUndefined.join(", ")
   }
 
   useEffect(() => { }, [services]);
@@ -61,7 +62,7 @@ const ServiceLog = () => {
               <StyledCards key={key}>
                 <p>Contribuição: {contribuicao}</p>
                 <p>Quantidade: {quantidade_estimada}</p>
-                <p>Materiais: {material(materiais)}</p>
+                <p>Materiais: {material(materiais)}.</p>
               </StyledCards>
             )
           )}
