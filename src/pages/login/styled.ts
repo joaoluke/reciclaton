@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import natureza from "./images/natureza.jpg";
+import natureza from "./images/oie_4roWYNCfhSHW.jpg";
 
 export const FormContainer = styled.div`
   display: flex;
@@ -7,7 +7,7 @@ export const FormContainer = styled.div`
   height: calc(100vh - 46px);
   width: 100vw;
   justify-content: center;
-  background-image: url(${natureza});
+  background-image: linear-gradient(rgba(0,0,0,.8) 0,rgba(0,0,0,0) 60%,rgba(0,0,0,.8) 100%), url(${natureza});
   background-size: cover;
   background-repeat: no-repeat;
 `;
