@@ -15,10 +15,9 @@ import {
   ReportButton,
   FuncButton,
   StyledPerfilMaterials,
-  StyledMaterials
-
+  StyledMaterials,
 } from "./styled";
-import ReportModal from "./complaint-modal"
+import ReportModal from "./complaint-modal";
 
 const Perfil = () => {
   const dispatch = useDispatch();
@@ -33,69 +32,69 @@ const Perfil = () => {
     [userId, visible]
   );
   console.log(visible);
+  console.log(user);
   return (
     <>
       {parseInt(userId) !== user.id ? (
         <Loading />
       ) : (
-          <div>
-            <ReportModal visible={visible} setVisible={setVisible} />
-            <StyledPerfilDiv>
-              <StyledImgRankCenter>
-                <StyledUserImage src={user.imageUrl} alt="User" />
-                <div style={{ display: "flex" }}>
-                  <StyledRankUser>
-                    <p>{user.score.anual}</p>
-                    <p>Recipoints Anual</p>
-                  </StyledRankUser>
-                  <StyledRankUser>
-                    <p>{user.score.mensal}</p>
-                    <p>Recipoints Mensal</p>
-                  </StyledRankUser>
-                </div>
-              </StyledImgRankCenter>
-              <InfoDiv>
-                <h1>{user.brand}</h1>
-                <h2>{user.business}</h2>
-                <p>{user.email}</p>
-                <a href={user.website} target="_blank">
-                  {user.website}
-                </a>
-                <div>
-                  <p>
-                    {user.adress.street}, {user.adress.number}
-                  </p>
-                  <p>
-                    {user.adress.city}, {user.adress.state}
-                  </p>
-                </div>
-              </InfoDiv>
-              <StyledReportDiv>
-                <ReportButton
-                  onClick={() => {
-                    setVisible(true);
-                  }}
-                >
-                  Denuncia?
+        <div>
+          <ReportModal visible={visible} setVisible={setVisible} />
+          <StyledPerfilDiv>
+            <StyledImgRankCenter>
+              <StyledUserImage src={user.imageUrl} alt="User" />
+              <div style={{ display: "flex" }}>
+                <StyledRankUser>
+                  <p>{user.score.anual}</p>
+                  <p>Recipoints Anual</p>
+                </StyledRankUser>
+                <StyledRankUser>
+                  <p>{user.score.mensal}</p>
+                  <p>Recipoints Mensal</p>
+                </StyledRankUser>
+              </div>
+            </StyledImgRankCenter>
+            <InfoDiv>
+              <h1>{user.brand}</h1>
+              <h2>{user.business}</h2>
+              <p>{user.email}</p>
+              <a href={user.website} target="_blank">
+                {user.website}
+              </a>
+              <div>
+                <p>
+                  {user.adress.street}, {user.adress.number}
+                </p>
+                <p>
+                  {user.adress.city}, {user.adress.state}
+                </p>
+              </div>
+            </InfoDiv>
+            <StyledReportDiv>
+              <ReportButton
+                onClick={() => {
+                  setVisible(true);
+                }}
+              >
+                Denuncia?
               </ReportButton>
-                <FuncButton>Emitir Chamado</FuncButton>
-              </StyledReportDiv>
-            </StyledPerfilDiv>
-            <StyledPerfilMaterials>
-              {Object.keys(user.ifCollector).map(
-                (material, key) =>
-                  user.ifCollector[material] && (
-                    <StyledMaterials key={key}>
-                      {showMaterial(material)}
-                    </StyledMaterials>
-                  )
-              )}
-            </StyledPerfilMaterials>
-          </div>
-        )}
+              <FuncButton>Emitir Chamado</FuncButton>
+            </StyledReportDiv>
+          </StyledPerfilDiv>
+          <StyledPerfilMaterials>
+            {Object.keys(user.ifCollector).map(
+              (material, key) =>
+                user.ifCollector[material] && (
+                  <StyledMaterials key={key}>
+                    {showMaterial(material)}
+                  </StyledMaterials>
+                )
+            )}
+          </StyledPerfilMaterials>
+        </div>
+      )}
     </>
   );
 };
 
 export default Perfil;
-

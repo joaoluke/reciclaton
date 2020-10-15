@@ -41,7 +41,6 @@ const Header = () => {
   const decodefy = authen && decode(authen);
 
   useEffect(() => {
-    console.log(authen);
   }, [authen]);
 
   return (
@@ -111,16 +110,16 @@ const Header = () => {
               </StyledLink>
             </>
           ) : (
-            <StyledLink
-              onClick={() => {
-                history.push("/login");
-                setMenu(false);
-              }}
-            >
-              <Login />
+              <StyledLink
+                onClick={() => {
+                  history.push("/login");
+                  setMenu(false);
+                }}
+              >
+                <Login />
               Login
-            </StyledLink>
-          )}
+              </StyledLink>
+            )}
 
           {authen && (
             <StyledLink>

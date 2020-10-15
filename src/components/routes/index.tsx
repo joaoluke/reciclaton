@@ -5,16 +5,14 @@ import Home from "../../pages/home";
 import NewServiceOrder from "../new-service-call";
 import ServiceOrder from "../../pages/service-order";
 import { Switch, Route } from "react-router-dom";
-import Complaint from "../../pages/perfil-user/complaint-modal";
+import Complaint from "../../pages/complaints";
+
 const Routes = () => {
   return (
     <>
       <Switch>
         <Route exact path="/login">
           <Login />
-        </Route>
-        <Route exact path="/test-modal">
-          <Complaint visible={true} setVisible={true} />
         </Route>
         <Route exact path="/ranking">
           *PAGINA DE RANKING*
@@ -27,6 +25,9 @@ const Routes = () => {
         </Route>
         <Route exact path="/">
           <Home />
+        </Route>
+        <Route exact path="/complaints">
+          <Complaint />
         </Route>
       </Switch>
     </>
