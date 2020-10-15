@@ -169,7 +169,7 @@ const ModalComponent = ({ visible, setVisible, children }) => {
 
   return (
     <>
-      <StyledButtonRegister onClick={openModal}>
+      <StyledButtonRegister onClick={openModal} type="button">
         {children}
       </StyledButtonRegister>
       <Modal
@@ -252,13 +252,13 @@ const ModalComponent = ({ visible, setVisible, children }) => {
               ref={register({ required: true })}
             />
           ) : (
-            <StyledInput
-              name="district"
-              type="text"
-              defaultValue={valuesAddress.bairro}
-              ref={register({ required: true })}
-            />
-          )}
+              <StyledInput
+                name="district"
+                type="text"
+                defaultValue={valuesAddress.bairro}
+                ref={register({ required: true })}
+              />
+            )}
           {errors.district && <p>Digite o nome do bairro da empresa</p>}
 
           <StyledLabel>Logradouro*:</StyledLabel>
@@ -269,13 +269,13 @@ const ModalComponent = ({ visible, setVisible, children }) => {
               ref={register({ required: true })}
             />
           ) : (
-            <StyledInput
-              type="text"
-              name="street"
-              defaultValue={valuesAddress.logradouro}
-              ref={register({ required: true })}
-            />
-          )}
+              <StyledInput
+                type="text"
+                name="street"
+                defaultValue={valuesAddress.logradouro}
+                ref={register({ required: true })}
+              />
+            )}
           {errors.street && <p>Digite o nome da rua da empresa</p>}
 
           <StyledLabel>Número*:</StyledLabel>
@@ -336,14 +336,14 @@ const ModalComponent = ({ visible, setVisible, children }) => {
               {errors.branch && <p>Selecione o ramo da Empresa</p>}
             </>
           ) : (
-            <StyledProductsDiv>
-              <StyledLabel>Materiais pra Coleta*:</StyledLabel>
               <StyledProductsDiv>
-                <ProductInput collector={collector} />
+                <StyledLabel>Materiais pra Coleta*:</StyledLabel>
+                <StyledProductsDiv>
+                  <ProductInput collector={collector} />
+                </StyledProductsDiv>
+                {errors.materials && <p>Selecione o tipo da Coleta que deseja</p>}
               </StyledProductsDiv>
-              {errors.materials && <p>Selecione o tipo da Coleta que deseja</p>}
-            </StyledProductsDiv>
-          )}
+            )}
 
           <StyledLabel>Porte da Empresa*:</StyledLabel>
           <StyledSelect
