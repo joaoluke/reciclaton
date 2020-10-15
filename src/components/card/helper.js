@@ -388,7 +388,7 @@ export const content = (
                     if (
                       contracted_rating <= 5 &&
                       contracting_rating <= 5 &&
-                      !hasPoints
+                      hasPoints === false
                     ) {
                       changeInformations(contratante_id, token, {
                         score: {
