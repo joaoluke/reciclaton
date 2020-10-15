@@ -11,8 +11,8 @@ const ServiceLog = () => {
       .then(({ data }) =>
         setServices(
           data.filter(
-            ({ status, contratante_id }) =>
-              status === "finalizado" && contratante_id === parseInt(userId)
+            ({ status, contratante_id, contratado_id }) =>
+              status === "finalizado" && (contratante_id === parseInt(userId) || contratado_id === parseInt(userId))
           )
         )
       )
@@ -38,6 +38,7 @@ const ServiceLog = () => {
         return "Eletronico";
       case "rubber":
         return "Borracha";
+      default:
     }
   }
 
@@ -48,49 +49,61 @@ const ServiceLog = () => {
         types.push(tradutor(type));
       }
     }
-    const typesWOUndefined = types.filter((type) => typeof type !== "undefined" )
+    const typesWOUndefined = types.filter((type) => typeof type !== "undefined")
     return typesWOUndefined.join(", ")
   }
 
   useEffect(() => { }, [services]);
   return (
-    <StyledContainer>
-      <StyledCardContainer>
-        {services &&
-          services.map(
-            ({ contribuicao, quantidade_estimada, materiais }, key) => (
-              <StyledCards key={key}>
-                <p>Contribuição: {contribuicao}</p>
-                <p>Quantidade: {quantidade_estimada}</p>
-                <p>Materiais: {material(materiais)}.</p>
-              </StyledCards>
-            )
-          )}
-      </StyledCardContainer>
-    </StyledContainer>
+    <StyledCardContainer>
+      <h1 style={{ width: "98vw" }}>LOG de Serviços:</h1>
+      {services &&
+        services.map(
+          ({ contribuicao, quantidade_estimada, materiais }, key) => (
+            <StyledCards key={key}>
+              <p>Contribuição: {contribuicao}</p>
+              <p>Quantidade: {quantidade_estimada}</p>
+              <p>Materiais: {material(materiais)}.</p>
+            </StyledCards>
+          )
+        )}
+    </StyledCardContainer>
+
   );
 };
 
 export default ServiceLog;
 
 const StyledCards = styled.div`
-  width: 33vw;
-  height: 125px;
+  width: 45vw;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3),
     0px 0px 20px 5px rgba(0, 0, 0, 0.1) inset;
   padding: 10px;
   background-color: #68A428;
   color: white;
-  margin: 10px;
-`;
-
-const StyledContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 10px;
+  margin: 5px 2px;
+  margin-bottom: 0;
+  text-align: center;
+  h1, p{
+    margin-bottom: 0;
+  }
 `;
 
 const StyledCardContainer = styled.div`
-  flex-flow: column;
-  overflow-x: hidden;
+display: flex;
+  margin: 1px auto;
+  margin-bottom: 0;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  width: 99.5vw;
+  background-color:#e1f3ce;
+  box-sizing: border-box;
+  text-align: center;
+  letter-spacing: 1px;
+  padding: 0 2vw;
+  padding-bottom: 4vh;
+  min-height: 37.2vh;
+  @media only screen and (max-width: 768px){
+    justify-content: center;
+  }
 `;
