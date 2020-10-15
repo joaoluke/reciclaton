@@ -40,18 +40,18 @@ const ServiceLog = () => {
         return "Borracha";
     }
   }
-  
+
   const material = (data) => {
     const types = []
-    for(let type in data ){
-      if(data[type]){
+    for (let type in data) {
+      if (data[type]) {
         types.push(tradutor(type));
       }
     }
     return types.join(" ")
   }
 
-  useEffect(() => {}, [services]);
+  useEffect(() => { }, [services]);
   return (
     <StyledContainer>
       <StyledCardContainer>
@@ -85,13 +85,11 @@ const StyledCards = styled.div`
 
 const StyledContainer = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   margin-top: 10px;
 `;
 
 const StyledCardContainer = styled.div`
   flex-flow: column;
-  overflow: scroll;
   overflow-x: hidden;
-  height: 225px;
 `;
