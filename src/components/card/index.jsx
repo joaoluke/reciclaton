@@ -13,7 +13,6 @@ const Card = ({ status }) => {
   const token = useSelector((state) => state.login.authen);
   const { list } = useSelector((state) => state.card);
   const user = useSelector((state) => state.userService);
-  const userList = useSelector((state) => state.usersList.usersArray);
   const test = useSelector((state) => console.log(state));
   const { brand } = user;
   useEffect(() => {
@@ -25,6 +24,7 @@ const Card = ({ status }) => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [brand, dispatch, user]);
+
   return (
     <CardContainer>
       {content(

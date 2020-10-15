@@ -18,7 +18,6 @@ import {
   Decline,
   Choice,
 } from "./card.styled";
-
 import {
   changeCardStatus,
   changeInformations,
