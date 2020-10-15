@@ -153,7 +153,7 @@ const BusinessRanking = () => {
             Ranking anual
           </StyledButton>
         </StyledDiv>
-        <StyledTable border="1px" cellPadding="5px" cellSpacing="0">
+        <StyledTable border="1px" cellPadding="3px" cellSpacing="0">
           <StyledThead>
             <StyledTh>Posição</StyledTh>
             <StyledTh>Nome</StyledTh>

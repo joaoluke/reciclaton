@@ -196,6 +196,9 @@ export const BrandImg = styled.img`
 font-family: 'Roboto', sans-serif;
 width: 40px;
 border-radius: 50px;
+@media only screen and (max-width: 500px) {
+    display: none;
+}
 `;
 
 export const StyledBrandSpan = styled.span`
