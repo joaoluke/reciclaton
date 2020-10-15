@@ -7,13 +7,12 @@ interface props {
   reviews: number;
   concordoClick: (a: number, b: number[], c: number) => {};
   discordoClick: (a: number, b: number[], c: number) => {};
-  userid: number;
   allow: number[];
   notAllow: number[];
   id: number;
 }
 
-const ComplaintCard = ({ imgUrl, complaintMsg, reviews, concordoClick, discordoClick, userid, allow, notAllow, id }: props) => {
+const ComplaintCard = ({ imgUrl, complaintMsg, reviews, concordoClick, discordoClick, allow, notAllow, id }: props) => {
 
   return (
     <StyledCard>
@@ -21,8 +20,12 @@ const ComplaintCard = ({ imgUrl, complaintMsg, reviews, concordoClick, discordoC
       <p>{complaintMsg}</p>
       <p>{reviews} Reviews</p>
       <DivButton>
-        <StyledButtonGreen onClick={() => concordoClick(id, allow, reviews)}>Concordo</StyledButtonGreen>
-        <StyledButtonRed onClick={() => discordoClick(id, notAllow, reviews)}>Discordo</StyledButtonRed>
+        <StyledButtonGreen onClick={() => concordoClick(id, allow, reviews)}>
+          Concordo
+        </StyledButtonGreen>
+        <StyledButtonRed onClick={() => discordoClick(id, notAllow, reviews)}>
+          Discordo
+        </StyledButtonRed>
       </DivButton>
     </StyledCard>
   );
@@ -47,7 +50,8 @@ const StyledCard = styled.div`
   
 `
 const CardImg = styled.img`
-  width: 200px;
+  min-width: 200px;
+  min-height: 200px;
   margin: 0 auto;
 `
 
