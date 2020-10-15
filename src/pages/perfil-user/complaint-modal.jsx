@@ -35,8 +35,8 @@ class Report {
     this.id_denunciado = id_denunciado;
     this.mensagem_denuncia = mensagem_denuncia;
     this.reviews = 0;
-    this.indicted = 0;
-    this.innocent = 0;
+    this.indicted = [];
+    this.innocent = [];
   }
 }
 

@@ -41,20 +41,22 @@ const ComplaintsPage = () => {
           <p>Nos Ajude a ajudar o mundo analisando empresas que foram denunciadas!</p>
         </StyledBackgroundTop>
         <CardGroup>
-          {complaint?.filter((element) => !(element.indicted.includes(decoded.sub) || element.innocent.includes(decoded.sub))).map((element) => {
-            return <ComplaintCard
-              imgUrl={element.foto}
-              complaintMsg={element.mensagem_denuncia}
-              reviews={element.reviews}
-              concordoClick={conc}
-              discordoClick={disc}
-              userid={decoded.sub}
-              allow={element.indicted}
-              notAllow={element.innocent}
-              id={element.id}
-            />
-          }
-          )}
+          {complaint &&
+            complaint.filter((element) => !(element.indicted.includes(decoded.sub) || element.innocent.includes(decoded.sub)))
+              .map((element) => {
+                return <ComplaintCard
+                  imgUrl={element.foto}
+                  complaintMsg={element.mensagem_denuncia}
+                  reviews={element.reviews}
+                  concordoClick={conc}
+                  discordoClick={disc}
+                  userid={decoded.sub}
+                  allow={element.indicted}
+                  notAllow={element.innocent}
+                  id={element.id}
+                />
+              }
+              )}
 
         </CardGroup>
         <NotificationContainer />
