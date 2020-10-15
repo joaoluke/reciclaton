@@ -61,8 +61,8 @@ const ServiceLog = () => {
         services.map(
           ({ contribuicao, quantidade_estimada, materiais }, key) => (
             <StyledCards key={key}>
-              <p>Contribuição: {contribuicao}</p>
-              <p>Quantidade: {quantidade_estimada}</p>
+              <p>Contribuição: R${contribuicao},00</p>
+              <p>Quantidade: {quantidade_estimada} sacos de 200L</p>
               <p>Materiais: {material(materiais)}.</p>
             </StyledCards>
           )
