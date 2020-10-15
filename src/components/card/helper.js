@@ -390,32 +390,25 @@ export const content = (
                       contracting_rating <= 5 &&
                       hasPoints === false
                     ) {
+                      const contractedSumOfPoints =
+                        contracted_rating *
+                        100 *
+                        (contribuicao / 10 + quantidade_estimada / 100);
                       changeInformations(contratante_id, token, {
                         score: {
-                          mensal:
-                            score.mensal +
-                            contracted_rating *
-                              100 *
-                              (contribuicao / 10 + quantidade_estimada / 100),
-                          anual:
-                            score.anual +
-                            contracted_rating *
-                              100 *
-                              (contribuicao / 10 + quantidade_estimada / 100),
+                          mensal: score.mensal + contractedSumOfPoints,
+                          anual: score.anual + contractedSumOfPoints,
                         },
                       });
+                      const contractingSumOfPoints =
+                        contracting_rating *
+                        100 *
+                        (contribuicao / 10 + quantidade_estimada / 100);
+
                       changeInformations(contratado_id, token, {
                         score: {
-                          mensal:
-                            score.mensal +
-                            contracting_rating *
-                              100 *
-                              (contribuicao / 10 + quantidade_estimada / 100),
-                          anual:
-                            score.anual +
-                            contracting_rating *
-                              100 *
-                              (contribuicao / 10 + quantidade_estimada / 100),
+                          mensal: score.mensal + contractingSumOfPoints,
+                          anual: score.anual + contractingSumOfPoints,
                         },
                       });
                       changeCardStatus(id, token, {
