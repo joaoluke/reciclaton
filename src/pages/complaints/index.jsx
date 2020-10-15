@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import ComplaintCard from './complaint-card';
 import { requireComplaints, allowComplaint, notAllowComplaint } from '../../redux/action/complaint';
+import { NotificationContainer } from 'react-notifications';
 import background from "./images/backgroundComplaint2.jpg";
 import { Redirect } from 'react-router-dom';
 import Loading from "../../components/loading";
@@ -56,6 +57,7 @@ const ComplaintsPage = () => {
           )}
 
         </CardGroup>
+        <NotificationContainer />
       </Allstyled>
       }
 
