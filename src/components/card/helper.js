@@ -303,9 +303,17 @@ export const content = (
             materiais,
             adress,
             contracting_name,
+            contribuicao,
           },
           key
         ) => {
+          const price =
+            contribuicao &&
+            parseInt(contribuicao).toLocaleString("pt-br", {
+              style: "currency",
+              currency: "BRL",
+            });
+
           if (
             status === "Finalizado" &&
             (contratado_id === idUser || contratante_id === idUser)
@@ -332,6 +340,7 @@ export const content = (
                       })}
                     </Title>
                   </Title>
+                  <Title>Valor do serviço: {price}</Title>
                 </Content>
                 <StarContainer>
                   <Rating
