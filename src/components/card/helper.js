@@ -307,6 +307,7 @@ export const content = (
             contracted_rating,
             contribuicao,
             quantidade_estimada,
+            hasPoints,
           },
           key
         ) => {
@@ -379,43 +380,47 @@ export const content = (
                       changeCardStatus(id, token, {
                         contracted_rating: rating,
                       });
-                      if (contracting_rating && contracting_rating <= 5) {
-                        changeInformations(idUser, token, {
-                          score: {
-                            mensal:
-                              score.mensal +
-                              contracting_rating *
-                                100 *
-                                (contribuicao / 10 + quantidade_estimada / 100),
-                            anual:
-                              score.anual +
-                              contracting_rating *
-                                100 *
-                                (contribuicao / 10 + quantidade_estimada / 100),
-                          },
-                        });
-                      }
                     } else {
                       changeCardStatus(id, token, {
                         contracting_rating: rating,
                       });
-
-                      if (contracted_rating <= 5) {
-                        changeInformations(idUser, token, {
-                          score: {
-                            mensal:
-                              score.mensal +
-                              contracted_rating *
-                                100 *
-                                (contribuicao / 10 + quantidade_estimada / 100),
-                            anual:
-                              score.anual +
-                              contracted_rating *
-                                100 *
-                                (contribuicao / 10 + quantidade_estimada / 100),
-                          },
-                        });
-                      }
+                    }
+                    if (
+                      contracted_rating <= 5 &&
+                      contracting_rating <= 5 &&
+                      !hasPoints
+                    ) {
+                      changeInformations(contratante_id, token, {
+                        score: {
+                          mensal:
+                            score.mensal +
+                            contracted_rating *
+                              100 *
+                              (contribuicao / 10 + quantidade_estimada / 100),
+                          anual:
+                            score.anual +
+                            contracted_rating *
+                              100 *
+                              (contribuicao / 10 + quantidade_estimada / 100),
+                        },
+                      });
+                      changeInformations(contratado_id, token, {
+                        score: {
+                          mensal:
+                            score.mensal +
+                            contracting_rating *
+                              100 *
+                              (contribuicao / 10 + quantidade_estimada / 100),
+                          anual:
+                            score.anual +
+                            contracting_rating *
+                              100 *
+                              (contribuicao / 10 + quantidade_estimada / 100),
+                        },
+                      });
+                      changeCardStatus(id, token, {
+                        hasPoints: true,
+                      });
                     }
                   }}
                 >

@@ -20,6 +20,7 @@ export const inputData = (values, { brand, id, adress }, idOs) => {
       city: adress.city,
       state: adress.state,
     },
+    hasPoints: false,
   };
 
   console.log(os);
