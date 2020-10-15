@@ -20,7 +20,7 @@ const authentication = (state = defaultState, action) => {
       return { ...state, err: action.err };
     case LOGOUT:
       token && localStorage.removeItem("accessToken");
-      return { ...state, ...defaultState };
+      return { ...defaultState, authen: "" };
     default:
       return state;
   }
