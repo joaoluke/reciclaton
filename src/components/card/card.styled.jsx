@@ -97,7 +97,12 @@ export const PopUp = styled.div`
   background-color: #555;
   color: white;
   padding: 20px 20px;
-  top: 250px;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
   width: 350px;
   background-color: #f8faf7;
   border: solid 1px #000000;

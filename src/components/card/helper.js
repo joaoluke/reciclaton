@@ -67,7 +67,9 @@ export const content = (
                 <CardTitle>{contracting_name}</CardTitle>
                 <Content>
                   <Title>
-                    Endereço:{adress && adress.street + " " + adress.city}
+                    Endereço:
+                    {adress &&
+                      adress.street + " " + adress.city + " " + adress.number}
                   </Title>
                   <Title>
                     Materiais:
@@ -130,32 +132,7 @@ export const content = (
             (contratante_id === idUser || contratado_id === idUser)
           ) {
             return (
-              <Container key={key}>
-                <CloseCointainer>
-                  <CloseCard onClick={() => setPopUp(true)} />
-                </CloseCointainer>
-                <CardTitle>{contracting_name}</CardTitle>
-
-                <Content>
-                  <Title>
-                    Endereço:{adress && adress.street + " " + adress.city}
-                  </Title>
-                  <Title>
-                    Materiais:
-                    <Title>
-                      {Object.values(materiais).map((material, key) => {
-                        if (material === true) {
-                          return (
-                            materialsName[Object.keys(materiais)[key]] + ", "
-                          );
-                        }
-                      })}
-                    </Title>
-                  </Title>
-                </Content>
-                <TitlePrice style={{ fontSize: "35px" }}>
-                  Valor:{price}
-                </TitlePrice>
+              <>
                 {popUp && (
                   <PopUp>
                     <TitlePrice style={{ textAlign: "left" }}>
@@ -175,16 +152,47 @@ export const content = (
                     </Choice>
                   </PopUp>
                 )}
-                {business === "Coleta" && (
-                  <StyledButton
-                    onClick={changeCardStatus(id, token, {
-                      status: "Em Andamento",
-                    })}
-                  >
-                    <ButtonTitle>Começar Rota</ButtonTitle>
-                  </StyledButton>
-                )}
-              </Container>
+                <Container key={key}>
+                  <CloseCointainer>
+                    <CloseCard onClick={() => setPopUp(true)} />
+                  </CloseCointainer>
+                  <CardTitle>{contracting_name}</CardTitle>
+
+                  <Content>
+                    <Title>
+                      Endereço:
+                      {adress &&
+                        adress.street + " " + adress.city + " " + adress.number}
+                    </Title>
+                    <Title>
+                      Materiais:
+                      <Title>
+                        {Object.values(materiais).map((material, key) => {
+                          if (material === true) {
+                            return (
+                              materialsName[Object.keys(materiais)[key]] + ", "
+                            );
+                          }
+                        })}
+                      </Title>
+                    </Title>
+                  </Content>
+                  <TitlePrice style={{ fontSize: "35px" }}>
+                    Valor:{price}
+                  </TitlePrice>
+                  {business === "Coleta" && (
+                    <StyledButton
+                      onClick={() => {
+                        changeCardStatus(id, token, {
+                          status: "Em Andamento",
+                        });
+                      }}
+                    >
+                      <ButtonTitle>Começar Rota</ButtonTitle>
+                    </StyledButton>
+                  )}
+                </Container>
+              </>
             );
           }
         }
@@ -215,36 +223,7 @@ export const content = (
             (contratante_id === idUser || contratado_id === idUser)
           ) {
             return (
-              <Container key={key}>
-                <CloseCointainer>
-                  <CloseCard onClick={() => setPopUp(true)} />
-                </CloseCointainer>
-                <CardTitle>{contracting_name}</CardTitle>
-
-                <Content>
-                  <Title>
-                    Endereço:{adress && adress.street + " " + adress.city}
-                  </Title>
-                  <Title>
-                    Materiais:
-                    <Title>
-                      {Object.values(materiais).map((material, key) => {
-                        if (material === true) {
-                          return (
-                            materialsName[Object.keys(materiais)[key]] + ", "
-                          );
-                        }
-                      })}
-                    </Title>
-                  </Title>
-                </Content>
-                <TitlePrice>
-                  <TitlePrice>Valor: {price}</TitlePrice>
-                  {adress && adress.state}
-                  <Location />
-                  -----------------
-                  <Tresh />
-                </TitlePrice>
+              <>
                 {popUp && (
                   <PopUp>
                     <TitlePrice style={{ textAlign: "left" }}>
@@ -264,17 +243,50 @@ export const content = (
                     </Choice>
                   </PopUp>
                 )}
-                {business !== "Coleta" && (
-                  <StyledButton
-                    onClick={changeCardStatus(id, token, {
-                      status: "Finalizado",
-                    })}
-                  >
-                    {" "}
-                    <ButtonTitle>Finalizar</ButtonTitle>
-                  </StyledButton>
-                )}
-              </Container>
+                <Container key={key}>
+                  <CloseCointainer>
+                    <CloseCard onClick={() => setPopUp(true)} />
+                  </CloseCointainer>
+                  <CardTitle>{contracting_name}</CardTitle>
+
+                  <Content>
+                    <Title>
+                      Endereço:
+                      {adress &&
+                        adress.street + " " + adress.city + " " + adress.number}
+                    </Title>
+                    <Title>
+                      Materiais:
+                      <Title>
+                        {Object.values(materiais).map((material, key) => {
+                          if (material === true) {
+                            return (
+                              materialsName[Object.keys(materiais)[key]] + ", "
+                            );
+                          }
+                        })}
+                      </Title>
+                    </Title>
+                  </Content>
+                  <TitlePrice>
+                    <TitlePrice>Valor: {price}</TitlePrice>
+                    {adress && adress.state}
+                    <Location />
+                    -----------------
+                    <Tresh />
+                  </TitlePrice>
+
+                  {business !== "Coleta" && status === "Em Andamento" && (
+                    <StyledButton
+                      onClick={changeCardStatus(id, token, {
+                        status: "Finalizado",
+                      })}
+                    >
+                      <ButtonTitle>Finalizar</ButtonTitle>
+                    </StyledButton>
+                  )}
+                </Container>
+              </>
             );
           }
         }
@@ -304,7 +316,9 @@ export const content = (
 
                 <Content>
                   <Title>
-                    Endereço:{adress && adress.street + " " + adress.city}
+                    Endereço:
+                    {adress &&
+                      adress.street + " " + adress.city + " " + adress.number}
                   </Title>
                   <Title>
                     Materiais:
@@ -396,7 +410,9 @@ export const content = (
 
                 <Content>
                   <Title>
-                    Endereço:{adress && adress.street + " " + adress.city}
+                    Endereço:
+                    {adress &&
+                      adress.street + " " + adress.city + " " + adress.number}
                   </Title>
                   <Title>
                     Materiais:
