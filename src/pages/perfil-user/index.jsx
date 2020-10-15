@@ -32,8 +32,7 @@ const Perfil = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [userId, visible]
   );
-  console.log(visible);
-  console.log(user);
+  
   return (
     <>
       {parseInt(userId) !== user.id ? (
