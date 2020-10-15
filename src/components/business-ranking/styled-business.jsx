@@ -8,6 +8,16 @@ export const BackgroundRank = styled.div`
   }
 `;
 
+export const TextBusiness = styled.div`
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+`;
+
+export const TextTitleandWeb = styled.div`
+  color: #E1F3CE;
+  font-family: 'Roboto', sans-serif;
+`;
+
 export const LastElement = styled.div`
   visibility: hidden;
 `;

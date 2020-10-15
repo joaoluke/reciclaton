@@ -51,7 +51,7 @@ const BusinessRanking = () => {
   useEffect(() => {
     if (loading) return;
     let beginning = 0;
-    let end = currentBusiness.length + 25;
+    let end = currentBusiness.length + 13;
     if (category === "Sem filtro") {
       setCurrentBusiness([...business].slice(beginning, end));
     } else {

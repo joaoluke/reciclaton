@@ -3,6 +3,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import { StyleRoot } from "radium";
 import Timeline from "react-dual-timeline";
+import {TextBusiness, TextTitleandWeb} from "../../styled-business"
 
 const Case1 = ({
   bronzeTrophy,
@@ -61,28 +62,28 @@ const Case1 = ({
                           <img src={bronzeHonor} style={{ width: "30px" }} />
                         )}
                     </div>
-                    <div
+                    <TextTitleandWeb
                       onClick={() => history.push(`users/${item.id}`)}
-                      style={{ color: "green", fontWeight: "bolder" }}
+                      style={{ fontWeight: "bolder" }}
                     >
                       {item.brand}
-                    </div>
-                    <div>
+                    </TextTitleandWeb>
+                    <TextTitleandWeb>
                       <a href={item.website}>{item.website}</a>
-                    </div>
-                    <div>Categoria: {item.business}</div>
-                    <div>
+                    </TextTitleandWeb>
+                    <TextBusiness>Categoria: {item.business}</TextBusiness>
+                    <TextBusiness>
                       <span>Porte: {item.businessSize}</span>
-                    </div>
+                    </TextBusiness>
                     <div>
                       <img
                         src={item.imageUrl}
                         style={{ width: "40px", borderRadius: "10px" }}
                       />
                     </div>
-                    <div style={{ color: "#000" }}>
+                    <TextBusiness>
                       {item.score.mensal} Score
-                    </div>
+                    </TextBusiness>
                   </div>
                 </div>
               );
@@ -124,26 +125,26 @@ const Case1 = ({
                         <img src={bronzeHonor} style={{ width: "30px" }} />
                       )}
                   </div>
-                  <div
+                  <TextTitleandWeb
                     onClick={() => history.push(`users/${item.id}`)}
-                    style={{ color: "green", fontWeight: "bolder" }}
+                    style={{ fontWeight: "bolder" }}
                   >
                     {item.brand}
-                  </div>
-                  <div>
+                  </TextTitleandWeb>
+                  <TextTitleandWeb>
                     <a href={item.website}>{item.website}</a>
-                  </div>
-                  <div>Categoria: {item.business}</div>
-                  <div>
+                  </TextTitleandWeb>
+                  <TextBusiness>Categoria: {item.business}</TextBusiness>
+                  <TextBusiness>
                     <span>Porte: {item.businessSize}</span>
-                  </div>
+                  </TextBusiness>
                   <div>
                     <img
                       src={item.imageUrl}
                       style={{ width: "40px", borderRadius: "10px" }}
                     />
                   </div>
-                  <div style={{ color: "#000" }}>{item.score.mensal} Score</div>
+                  <TextBusiness>{item.score.mensal} Score</TextBusiness>
                 </div>
               );
             }
