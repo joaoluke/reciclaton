@@ -3,7 +3,9 @@ import styled from 'styled-components';
 export const BackgroundRank = styled.div`
 font-family: 'Roboto', sans-serif;
   overflow: hidden;
-  width: 100%;
+    width: 80vw;
+    margin: 0 auto;
+//   width: 100%;
   @media (max-width: 1024px) {
     overflow: auto;
 }
@@ -40,12 +42,18 @@ export const StyledTable = styled.table`
 border: 0px solid #333;
 font-family: 'Roboto', sans-serif;
 display: hidden;
+width: 80vw;
+margin: 0 auto;
 tr:nth-child(2n + 1) {
-    // background: #e1e1e1;
-    background: #92D143;
+    // background: #92D143;
+    background: #e1f3ce;
  }
  tr:nth-child(2n) {
-     background: #F3E8E2;
+    //  background: #F3E8E2;
+    background: #F5FBEF;
+ }
+ @media only screen and (max-width: 768px) {
+    width: 95vw;
  }
 `;
 
@@ -158,8 +166,7 @@ export const StyledDiv = styled.div`
 font-family: 'Roboto', sans-serif;
 display: flex;
 margin-bottom: 2.5%;
-justify-content: center;
-align-items: center;
+justify-content: space-around;
 `;
 
 export const StyledThead = styled.thead`
@@ -257,4 +264,18 @@ font-family: 'Roboto', sans-serif;
 @media (max-width: 900px) {
     display: none;
 }
+`;
+
+export const StyledButtonGreen = styled.button`
+    font-size: 25px;
+    padding: 10px;
+    border: none;
+    color: white;
+    letter-spacing:2px;
+    background-color: #68A428;
+    margin-bottom: 10px;
+    cursor: pointer;
+    :focus {
+        outline: none;
+    }
 `;

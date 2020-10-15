@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render styledPerfilDiv 1`] = `
+<div
+  className="sc-bdnylx gkeIqc"
+>
+  <img
+    className="sc-gtssRu cDgtuC"
+    src="https://picsum.photos/200"
+  />
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque venenatis dolor arcu, id aliquam enim bibendum euismod. Maecenas tempor diam justo, non lobortis purus vulputate vitae. Vestibulum rutrum scelerisque congue. Fusce vestibulum id augue et posuere. Pellentesque a ex semper, sagittis magna ac, sollicitudin sapien.
+  </p>
+  <p>
+    3
+     Reviews
+  </p>
+  <div
+    className="sc-dlnjPT glnNnG"
+  >
+    <button
+      className="sc-hKFyIo gwzSPB"
+      onClick={[Function]}
+    >
+      Concordo
+    </button>
+    <button
+      className="sc-hKFyIo sc-eCApGN gwzSPB dksaTh"
+      onClick={[Function]}
+    >
+      Discordo
+    </button>
+  </div>
+</div>
+`;

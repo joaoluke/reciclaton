@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {
   BackgroundRank,
+  StyledButtonGreen,
   StyledButton,
   StyledTable,
   Td,
@@ -140,18 +141,18 @@ const BusinessRanking = () => {
       <StyledH3>Ranking</StyledH3>
       <BackgroundRank>
         <StyledDiv>
-          <StyledButton onClick={() => {
+          <StyledButtonGreen onClick={() => {
             setScore("mensal");
             setHasMore(20);
             }}>
             Ranking mensal
-          </StyledButton>
-          <StyledButton onClick={() => {
+          </StyledButtonGreen>
+          <StyledButtonGreen onClick={() => {
             setScore("anual");
             setHasMore(20);
             }}>
             Ranking anual
-          </StyledButton>
+          </StyledButtonGreen>
         </StyledDiv>
         <StyledTable border="1px" cellPadding="3px" cellSpacing="0">
           <StyledThead>
