@@ -36,7 +36,8 @@ const Card = ({ status }) => {
         user,
         popUp,
         setPopUp,
-        dispatch
+        dispatch,
+        getServices
       )}
     </CardContainer>
   );

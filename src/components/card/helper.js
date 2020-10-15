@@ -44,8 +44,7 @@ export const content = (
   token,
   { business, os, id, brand },
   popUp,
-  setPopUp,
-  dispatch
+  setPopUp
 ) => {
   const idUser = id;
   switch (status) {
