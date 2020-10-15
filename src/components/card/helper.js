@@ -42,7 +42,7 @@ export const content = (
   rating,
   list,
   token,
-  { business, os, id, brand },
+  { business, os, id, brand, score },
   popUp,
   setPopUp
 ) => {
@@ -61,7 +61,7 @@ export const content = (
               currency: "BRL",
             });
 
-          if (status === "Aberto") {
+          if (status === "aberto") {
             return (
               <Container key={key}>
                 <CardTitle>{contracting_name}</CardTitle>
@@ -88,7 +88,7 @@ export const content = (
                 <StyledButton
                   onClick={() => {
                     changeCardStatus(id, token, {
-                      status: "Aceito",
+                      status: "aceito",
                       contratado_id: idUser,
                     });
                     if (Object.values(os).includes(id) === false) {
@@ -128,7 +128,7 @@ export const content = (
               currency: "BRL",
             });
           if (
-            status === "Aceito" &&
+            status === "aceito" &&
             (contratante_id === idUser || contratado_id === idUser)
           ) {
             return (
@@ -144,7 +144,7 @@ export const content = (
                         onClick={() => {
                           setPopUp(false);
                           changeCardStatus(id, token, {
-                            status: "Cancelado",
+                            status: "cancelado",
                             cancelado: brand,
                           });
                         }}
@@ -184,7 +184,7 @@ export const content = (
                     <StyledButton
                       onClick={() => {
                         changeCardStatus(id, token, {
-                          status: "Em Andamento",
+                          status: "em andamento",
                         });
                       }}
                     >
@@ -219,7 +219,7 @@ export const content = (
               currency: "BRL",
             });
           if (
-            status === "Em Andamento" &&
+            status === "em andamento" &&
             (contratante_id === idUser || contratado_id === idUser)
           ) {
             return (
@@ -235,7 +235,7 @@ export const content = (
                         onClick={() => {
                           setPopUp(false);
                           changeCardStatus(id, token, {
-                            status: "Cancelado",
+                            status: "cancelado",
                             cancelado: brand,
                           });
                         }}
@@ -276,10 +276,10 @@ export const content = (
                     <Tresh />
                   </TitlePrice>
 
-                  {business !== "Coleta" && status === "Em Andamento" && (
+                  {business !== "Coleta" && status === "em andamento" && (
                     <StyledButton
                       onClick={changeCardStatus(id, token, {
-                        status: "Finalizado",
+                        status: "finalizado",
                       })}
                     >
                       <ButtonTitle>Finalizar</ButtonTitle>
@@ -303,10 +303,14 @@ export const content = (
             materiais,
             adress,
             contracting_name,
+            contracting_rating,
+            contracted_rating,
             contribuicao,
+            quantidade_estimada,
           },
           key
         ) => {
+          console.log(score);
           const price =
             contribuicao &&
             parseInt(contribuicao).toLocaleString("pt-br", {
@@ -315,7 +319,7 @@ export const content = (
             });
 
           if (
-            status === "Finalizado" &&
+            status === "finalizado" &&
             (contratado_id === idUser || contratante_id === idUser)
           ) {
             return (
@@ -371,13 +375,48 @@ export const content = (
                 </StarContainer>
                 <StyledButton
                   onClick={() => {
-                    business === "Coleta"
-                      ? changeCardStatus(id, token, {
-                          contracted_rating: rating,
-                        })
-                      : changeCardStatus(id, token, {
-                          contracting_rating: rating,
+                    if (business === "Coleta") {
+                      changeCardStatus(id, token, {
+                        contracted_rating: rating,
+                      });
+                      if (contracting_rating && contracting_rating <= 5) {
+                        changeInformations(idUser, token, {
+                          score: {
+                            mensal:
+                              score.mensal +
+                              contracting_rating *
+                                100 *
+                                (contribuicao / 10 + quantidade_estimada / 100),
+                            anual:
+                              score.anual +
+                              contracting_rating *
+                                100 *
+                                (contribuicao / 10 + quantidade_estimada / 100),
+                          },
                         });
+                      }
+                    } else {
+                      changeCardStatus(id, token, {
+                        contracting_rating: rating,
+                      });
+
+                      if (contracted_rating <= 5) {
+                        changeInformations(idUser, token, {
+                          score: {
+                            mensal:
+                              score.mensal +
+                              contracted_rating *
+                                100 *
+                                (contribuicao / 10 + quantidade_estimada / 100),
+                            anual:
+                              score.anual +
+                              contracted_rating *
+                                100 *
+                                (contribuicao / 10 + quantidade_estimada / 100),
+                          },
+                        });
+                      }
+                    }
                   }}
                 >
                   <ButtonTitle>Avaliar</ButtonTitle>
@@ -410,7 +449,7 @@ export const content = (
               currency: "BRL",
             });
           if (
-            status === "Cancelado" &&
+            status === "cancelado" &&
             (contratado_id === idUser || contratante_id === idUser)
           ) {
             return (

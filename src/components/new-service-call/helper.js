@@ -9,7 +9,7 @@ export const inputData = (values, { brand, id, adress }, idOs) => {
     quantidade_estimada: values.quantidade_estimada,
     materiais: values.materiais,
     id: idOs,
-    status: "Aberto",
+    status: "aberto",
     contracting_rating: "n",
     contracted_rating: "n",
     adress: {
