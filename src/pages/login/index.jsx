@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { loginAction, reqError } from "../../redux/action/login";
 import { Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,8 +11,10 @@ import {
   StyledButton,
   StyledError,
 } from "./styled";
+import Modal from "../../components/modal/";
 
 const Login = () => {
+  const [visible, setVisible] = useState(false);
   const { err, pass } = useSelector((state) => state.login);
   const dispatch = useDispatch();
   const { register, handleSubmit, errors } = useForm();
@@ -47,7 +49,12 @@ const Login = () => {
         <StyledLabel>Remember-me?</StyledLabel>
         <StyledInput name="rememberme" type="checkbox" ref={register} />
         {pass && <Redirect to={{ pathname: "/" }} />}
-        <StyledButton type="submit">Login</StyledButton>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <Modal visible={visible} setVisible={setVisible}>
+            Registrar
+          </Modal>
+          <StyledButton type="submit">Login</StyledButton>
+        </div>
       </StyledForm>
     </FormContainer>
   );

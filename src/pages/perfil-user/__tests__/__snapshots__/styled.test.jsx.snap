@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render FuncButton 1`] = `
+<button
+  className="sc-fujyUd sc-pNWxx kWuwGs hgVpPr"
+/>
+`;
+
+exports[`render InfoDiv 1`] = `
+<div
+  className="sc-gKAblj feBrzO"
+/>
+`;
+
+exports[`render ReportButton 1`] = `
+<button
+  className="sc-fujyUd kWuwGs"
+/>
+`;
+
+exports[`render StyledImgRankCenter 1`] = `
+<div
+  className="sc-jSFkmK bXBWRb"
+/>
+`;
+
+exports[`render StyledMaterials 1`] = `
+<div
+  className="sc-dlnjPT qJemq"
+/>
+`;
+
+exports[`render StyledPerfilMaterials 1`] = `
+<div
+  className="sc-gtssRu lkCwPz"
+/>
+`;
+
+exports[`render StyledRankUser 1`] = `
+<div
+  className="sc-eCApGN iWBcgg"
+/>
+`;
+
+exports[`render StyledReportDiv 1`] = `
+<div
+  className="sc-iCoHVE kcubFd"
+/>
+`;
+
+exports[`render StyledUserImage 1`] = `
+<img
+  className="sc-hKFyIo fxFGM"
+/>
+`;
+
+exports[`render styledPerfilDiv 1`] = `<styledPerfilDiv />`;
