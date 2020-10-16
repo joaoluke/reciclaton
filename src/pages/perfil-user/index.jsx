@@ -71,7 +71,7 @@ const Perfil = () => {
                 </div>
               </InfoDiv>
               <StyledReportDiv>
-                {decoded.sub !== userId && <ReportButton
+                {decoded && decoded.sub !== userId && <ReportButton
                   onClick={() => {
                     setVisible(true);
                   }}
