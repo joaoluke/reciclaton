@@ -15,6 +15,7 @@ export const StyleCadastro = styled.div`
 export const StyleTitle = styled.h3`
   text-align: center;
   font-size: 1.7rem;
+  margin-right: 60px;
   @media screen and (max-width: 540px) {
     font-size: 15px;
   }
@@ -146,9 +147,19 @@ export const StyledLogo = styled.div<{ logo: string }>`
 
 export const StyledTextBox = styled(StyleParagraph)`
   font-size: 20px;
+  margin-right: 60px;
   @media screen and (max-width: 540px) {
     font-size: 12px;
     margin: 0 28px;
     text-align: left;
   }
 `;
+
+export const StyledSelo = styled(StyleParagraph)`
+  font-size: 20px;
+`
+
+export const StyledRanking = styled(StyleTitle)`
+  color: #70D548;
+  cursor: pointer;
+`
