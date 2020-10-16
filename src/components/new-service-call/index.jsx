@@ -65,8 +65,6 @@ const NewServiceCalls = ({ visibility, setVisibility }) => {
         (materiais[data && data.name] = data && data.checked);
     }
   };
-  console.log(id);
-  console.log(list.length);
 
   const customStyles = {
     content: {
@@ -107,9 +105,6 @@ const NewServiceCalls = ({ visibility, setVisibility }) => {
     <>
       <Modal
         isOpen={visibility}
-        onAfterOpen={() => {
-          console.log("open");
-        }}
         onRequestClose={() => setVisibility(false)}
         ariaHideApp={false}
         style={customStyles}

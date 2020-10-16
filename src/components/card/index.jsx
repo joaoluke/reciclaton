@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Content from "./helper";
+import Content from "./cardRender";
 import decode from "jwt-decode";
 import { CardContainer } from "./card.styled";
 import { getServices } from "../../redux/action/card-informations";
@@ -11,7 +11,6 @@ const Card = ({ status }) => {
   const token = useSelector((state) => state.login.authen);
   const { list } = useSelector((state) => state.card);
   const user = useSelector((state) => state.userService);
-  const test = useSelector((state) => console.log(state));
   const { brand } = user;
   useEffect(() => {
     dispatch(getServices());

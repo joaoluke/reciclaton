@@ -23,7 +23,6 @@ export const inputData = (values, { brand, id, adress }, idOs) => {
     hasPoints: false,
   };
 
-  console.log(os);
 
   return os;
 };

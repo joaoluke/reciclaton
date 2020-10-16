@@ -26,14 +26,6 @@ const ServiceOrder = () => {
       <ContainerButton>
         <StyledButton
           onClick={() => {
-            setStatus("Aberto");
-          }}
-        >
-          {status === "Aberto" ? <StyledSelct>Aberto</StyledSelct> : "Aberto"}
-        </StyledButton>
-
-        <StyledButton
-          onClick={() => {
             setVisibility(true);
             setStatus("Chamado");
           }}
@@ -41,9 +33,20 @@ const ServiceOrder = () => {
           {status === "Chamado" ? (
             <StyledSelct>Chamado</StyledSelct>
           ) : (
-            "Chamado"
-          )}
+              "Chamado"
+            )}
         </StyledButton>
+
+        {business === 'Coleta' && (
+          <StyledButton
+            onClick={() => {
+              setStatus("Aberto");
+            }}
+          >
+            {status === "Aberto" ? <StyledSelct>Aberto</StyledSelct> : "Aberto"}
+          </StyledButton>
+        )}
+
         {business === "Coleta" && ( // coletador
           <StyledButton
             onClick={() => {
@@ -61,15 +64,15 @@ const ServiceOrder = () => {
           {status === "Em Andamento" ? (
             <StyledSelct>Em Andamento</StyledSelct>
           ) : (
-            "Em Andamento"
-          )}
+              "Em Andamento"
+            )}
         </StyledButton>
         <StyledButton onClick={() => setStatus("Finalizado")}>
           {status === "Finalizado" ? (
             <StyledSelct>Finalizado</StyledSelct>
           ) : (
-            "Finalizado"
-          )}
+              "Finalizado"
+            )}
         </StyledButton>
         <StyledButton
           onClick={() => {
@@ -79,8 +82,8 @@ const ServiceOrder = () => {
           {status === "Cancelado" ? (
             <StyledSelct>Cancelado</StyledSelct>
           ) : (
-            "Cancelado"
-          )}
+              "Cancelado"
+            )}
         </StyledButton>
       </ContainerButton>
       <Card status={status} />

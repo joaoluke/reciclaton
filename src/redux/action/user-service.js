@@ -19,6 +19,5 @@ export const requestBusiness = (userId, token) => (dispatch) => {
       dispatch(setBusiness(data));
     })
     .catch((err) => {
-      console.log(err);
     });
 };

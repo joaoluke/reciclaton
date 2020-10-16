@@ -1,4 +1,7 @@
 import axios from "axios";
+import {
+  NotificationManager,
+} from "react-notifications";
 export const GET_CARDS_LIST = "GET_CARDS_LIST";
 export const GET_CARD_INFORMATION = "GET_CARD_INFORMATIONS";
 export const SET_CARD_MESSAGE = "SET_CARD_MESSAGE";
@@ -6,6 +9,7 @@ const cardList = (list) => ({
   type: GET_CARDS_LIST,
   list,
 });
+
 
 const cardInformation = (information) => ({
   type: GET_CARD_INFORMATION,
@@ -23,9 +27,7 @@ export const changeInformations = (id, token, values) => {
       header
     )
     .then(({ data }) => {
-      console.log(data);
     })
-    .catch(({ response }) => console.log(response));
 };
 
 export const getServices = () => (dispatch) => {
@@ -35,7 +37,6 @@ export const getServices = () => (dispatch) => {
       dispatch(cardList(data));
     })
     .catch(({ response }) => {
-      console.log(response);
     });
 };
 export const addService = (token, sevice) => {
@@ -45,10 +46,8 @@ export const addService = (token, sevice) => {
   axios
     .post(`https://reciclatonapi.herokuapp.com/664/services/`, sevice, header)
     .then(({ data }) => {
-      console.log(data);
     })
     .catch(({ response }) => {
-      console.log(response);
     });
 };
 
@@ -59,10 +58,11 @@ export const getService = (status) => (dispatch) => {
     })
     .then(({ data }) => {
       dispatch(cardInformation(data));
+
     });
 };
 
-export const changeCardStatus = (id, token, service) => {
+export const changeCardStatus = (id, token, service, newStatus) => {
   const header = {
     headers: { Authorization: `Bearer ${token}` },
   };
@@ -73,9 +73,14 @@ export const changeCardStatus = (id, token, service) => {
       header
     )
     .then(({ data }) => {
-      console.log(data);
+      if (newStatus !== undefined) {
+        NotificationManager.success(
+          "Boa!!",
+          "Seu card foi para " + newStatus + ", vá até a proxima seção para conferir",
+          1000
+        );
+      }
     })
-    .catch(({ response }) => console.log(response));
 };
 
 export const setSucessMessage = (message) => ({

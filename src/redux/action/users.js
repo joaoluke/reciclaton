@@ -12,5 +12,4 @@ export const requestUsers = () => (dispatch) => {
     .then(({ data }) => {
       dispatch(getUserList(data));
     })
-    .catch(({ response }) => console.log(response));
 };
