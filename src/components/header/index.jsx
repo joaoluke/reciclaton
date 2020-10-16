@@ -1,22 +1,18 @@
 import React, { useState, useEffect } from "react";
 import decode from "jwt-decode";
 import {
-  SearchIcon,
-  SearchContainer,
   Logo,
   StyledHeader,
   HeaderBar,
-  SearchInput,
   StyledMenu,
   Menu,
   Logout,
   User,
-  ChangeProfile,
   Services,
   Ranking,
   StyledLink,
-  SubmitButton,
   Login,
+  Report,
 } from "./header-style";
 import { logout } from "../../redux/action/login";
 import { useDispatch, useSelector } from "react-redux";
@@ -24,15 +20,6 @@ import { useHistory } from "react-router-dom";
 
 const Header = () => {
   const [menu, setMenu] = useState(false);
-  const [search, setSearch] = useState("");
-  const FormValue = (e) => {
-    e.preventDefault();
-    console.log(search);
-  };
-
-  const getValue = (e) => {
-    setSearch(e.target.value);
-  };
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -41,6 +28,7 @@ const Header = () => {
   const decodefy = authen && decode(authen);
 
   useEffect(() => {
+    setMenu(false);
   }, [authen]);
 
   return (
@@ -53,20 +41,6 @@ const Header = () => {
               setMenu(false);
             }}
           />
-
-          <SearchContainer>
-            <form onSubmit={(e) => FormValue(e)}>
-              <SearchInput
-                type="text"
-                placeholder="Procurar empresa"
-                name="search"
-                onChange={(e) => getValue(e)}
-              />
-              <SubmitButton type="submit">
-                <SearchIcon />
-              </SubmitButton>
-            </form>
-          </SearchContainer>
 
           <div>
             <StyledMenu onClick={() => setMenu(!menu)} />
@@ -122,10 +96,17 @@ const Header = () => {
             )}
 
           {authen && (
-            <StyledLink>
-              <ChangeProfile />
-              Mudar Informações
-            </StyledLink>
+            <>
+              <StyledLink
+                onClick={() => {
+                  history.push("/complaints");
+                  setMenu(false);
+                }}
+              >
+                <Report />
+                Denúncias
+              </StyledLink>
+            </>
           )}
           <StyledLink
             onClick={() => {

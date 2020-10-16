@@ -3,6 +3,8 @@ import userService from "./user-service";
 import user from "./user";
 import complaint from "./complaint";
 import register from "./register";
+import ranking from "./ranking";
+
 import card from "./card-informations";
 import usersList from "./users";
 import { combineReducers } from "redux";
@@ -14,4 +16,5 @@ export default combineReducers({
   usersList,
   register,
   complaint,
+  ranking,
 });

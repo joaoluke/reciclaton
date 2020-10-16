@@ -2,7 +2,6 @@ import axios from "axios";
 import { userToken, ERROR, PASS } from "./login";
 
 export const registerAction = (registerData) => (dispatch) => {
-  console.log("action submit")
   axios
     .post("https://reciclatonapi.herokuapp.com/register", registerData)
     .then(({ data }) => {

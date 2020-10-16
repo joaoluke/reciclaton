@@ -5,6 +5,7 @@ import Home from "../../pages/home";
 import NewServiceOrder from "../new-service-call";
 import ServiceOrder from "../../pages/service-order";
 import { Switch, Route } from "react-router-dom";
+import Ranking from '../../pages/ranking'
 import Complaint from "../../pages/complaints";
 
 const Routes = () => {
@@ -14,8 +15,8 @@ const Routes = () => {
         <Route exact path="/login">
           <Login />
         </Route>
-        <Route exact path="/ranking">
-          *PAGINA DE RANKING*
+        <Route path="/ranking">
+            <Ranking/>
         </Route>
         <Route exact path="/profile/:userId">
           <User />

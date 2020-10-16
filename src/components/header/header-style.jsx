@@ -10,6 +10,7 @@ import { CgLogOut, CgProfile, CgLogIn } from "react-icons/cg";
 import { RiUserSettingsLine, RiVipCrownLine } from "react-icons/ri";
 import { FaRegBell } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { GoReport } from "react-icons/go"
 
 export const StyledHeader = styled.div`
   z-index: 1;
@@ -154,6 +155,10 @@ export const Ranking = styled(RiVipCrownLine)`
 export const Services = styled(FaRegBell)`
   margin-right: 10px;
 `;
+
+export const Report = styled(GoReport)`
+  margin-right: 10px;
+`
 
 export const StyledLink = styled.div`
   margin-bottom: 10px;

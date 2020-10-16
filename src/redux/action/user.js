@@ -6,7 +6,7 @@ export const getPerfil = (id) => (dispatch) => {
   axios
     .get(`https://reciclatonapi.herokuapp.com/664/users/${id}`)
     .then(({ data }) => dispatch(setUser(data)))
-    .catch(({ response }) => console.log(response && response.data));
+    .catch(({ response }) => { });
 };
 
 const setUser = (user) => ({

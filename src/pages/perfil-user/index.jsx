@@ -18,6 +18,7 @@ import {
   StyledMaterials,
 } from "./styled";
 import ReportModal from "./complaint-modal";
+import Log from "./service-log";
 
 const Perfil = () => {
   const dispatch = useDispatch();
@@ -25,14 +26,13 @@ const Perfil = () => {
   const [visible, setVisible] = useState(false);
   let { user } = useSelector((state) => state.user);
   let logged = useSelector((state) => state.login);
-  const decoded = logged.authen && decode(logged.authen);
+  const decoded = logged.authen ? decode(logged.authen) : undefined;
   useEffect(
     () => dispatch(getPerfil(userId)),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [userId, visible]
   );
-  console.log(visible);
-  console.log(user);
+
   return (
     <>
       {parseInt(userId) !== user.id ? (
@@ -58,9 +58,7 @@ const Perfil = () => {
               <h1>{user.brand}</h1>
               <h2>{user.business}</h2>
               <p>{user.email}</p>
-              <a href={user.website} target="_blank">
-                {user.website}
-              </a>
+              <a href={"https://" + user.website}>{user.website}</a>
               <div>
                 <p>
                   {user.adress.street}, {user.adress.number}
@@ -71,26 +69,36 @@ const Perfil = () => {
               </div>
             </InfoDiv>
             <StyledReportDiv>
-              <ReportButton
-                onClick={() => {
-                  setVisible(true);
-                }}
-              >
-                Denuncia?
-              </ReportButton>
-              <FuncButton>Emitir Chamado</FuncButton>
+              {decoded && decoded.sub !== userId && (
+                <ReportButton
+                  onClick={() => {
+                    setVisible(true);
+                  }}
+                >
+                  Denuncia?
+                </ReportButton>
+              )}
+              {user.business === "Coleta" &&
+                decoded !== undefined &&
+                decoded.sub !== userId && (
+                  <FuncButton>Emitir Chamado</FuncButton>
+                )}
             </StyledReportDiv>
           </StyledPerfilDiv>
-          <StyledPerfilMaterials>
-            {Object.keys(user.ifCollector).map(
-              (material, key) =>
-                user.ifCollector[material] && (
-                  <StyledMaterials key={key}>
-                    {showMaterial(material)}
-                  </StyledMaterials>
-                )
-            )}
-          </StyledPerfilMaterials>
+          {user?.business === "Coleta" && (
+            <StyledPerfilMaterials>
+              {Object.keys(user.ifCollector).map(
+                (material, key) =>
+                  user.ifCollector[material] && (
+                    <StyledMaterials key={key}>
+                      {showMaterial(material)}
+                    </StyledMaterials>
+                  )
+              )}
+            </StyledPerfilMaterials>
+          )}
+
+          <Log />
         </div>
       )}
     </>
