@@ -25,15 +25,14 @@ const ServiceOrder = () => {
     <>
       <NewServiceCalls visibility={visibility} setVisibility={setVisibility} />
       <ContainerButton>
-        {business === "Coleta" && (
-          <StyledButton
-            onClick={() => {
-              setStatus("Aberto");
-            }}
-          >
-            {status === "Aberto" ? <StyledSelct>Aberto</StyledSelct> : "Aberto"}
-          </StyledButton>
-        )}
+        <StyledButton
+          onClick={() => {
+            setStatus("Aberto");
+          }}
+        >
+          {status === "Aberto" ? <StyledSelct>Aberto</StyledSelct> : "Aberto"}
+        </StyledButton>
+
         <StyledButton
           onClick={() => {
             setVisibility(true);
