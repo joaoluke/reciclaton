@@ -25,7 +25,7 @@ const Header = () => {
   const history = useHistory();
 
   const { authen } = useSelector((state) => state.login);
-  const decodefy = authen && decode(authen);
+  const decodefy = authen !== "" && decode(authen);
 
   useEffect(() => {
     setMenu(false);

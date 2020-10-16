@@ -49,7 +49,7 @@ const NewServiceCalls = ({ visibility, setVisibility }) => {
   const { brand, id, business, os } = userPerfil;
   useEffect(() => {
     dispatch(getServices());
-    if (!brand) {
+    if (!brand && token !== "") {
       dispatch(requestBusiness(decode(token).sub, token));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

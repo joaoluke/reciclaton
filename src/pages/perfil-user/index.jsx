@@ -28,7 +28,7 @@ const Perfil = () => {
   const [visibleOS, setVisibleOS] = useState(false);
   let { user } = useSelector((state) => state.user);
   let logged = useSelector((state) => state.login);
-  const decoded = logged.authen ? decode(logged.authen) : undefined;
+  const decoded = logged.authen !== "" ? decode(logged.authen) : undefined;
   useEffect(
     () => dispatch(getPerfil(userId)),
     // eslint-disable-next-line react-hooks/exhaustive-deps

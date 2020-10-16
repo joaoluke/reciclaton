@@ -14,7 +14,7 @@ const Card = ({ status }) => {
   const { brand } = user;
   useEffect(() => {
     dispatch(getServices());
-    if (!brand) {
+    if (!brand && token !== "") {
       dispatch(requestBusiness(decode(token).sub, token));
       dispatch(requestUsers());
     }
