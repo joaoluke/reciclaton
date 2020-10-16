@@ -33,8 +33,6 @@ const Perfil = () => {
     [userId, visible]
   );
 
-  console.log(decoded)
-
   return (
     <>
       {parseInt(userId) !== user.id ? (

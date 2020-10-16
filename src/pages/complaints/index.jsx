@@ -19,7 +19,6 @@ const ComplaintsPage = () => {
     dispatch(requireComplaints()),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [])
-  console.log(decoded.sub)
   const conc = (id, indicted, reviews) => {
     dispatch(allowComplaint(id, indicted, reviews, decoded.sub))
   }

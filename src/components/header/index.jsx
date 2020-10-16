@@ -125,10 +125,6 @@ const Header = () => {
 
           {authen && (
             <>
-              <StyledLink>
-                <ChangeProfile />
-                Mudar Informações
-              </StyledLink>
               <StyledLink
                 onClick={() => {
                   history.push("/complaints");
