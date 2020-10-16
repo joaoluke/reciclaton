@@ -1,10 +1,20 @@
 import login from "./login";
+import userService from "./user-service";
 import user from "./user";
 import complaint from "./complaint";
-import { combineReducers } from "redux";
 import register from "./register";
-import ranking from './ranking';
+import ranking from "./ranking";
 
-export default combineReducers({ login, user, complaint, register, ranking });
-
-
+import card from "./card-informations";
+import usersList from "./users";
+import { combineReducers } from "redux";
+export default combineReducers({
+  login,
+  userService,
+  user,
+  card,
+  usersList,
+  register,
+  complaint,
+  ranking,
+});

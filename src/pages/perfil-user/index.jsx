@@ -17,13 +17,15 @@ import {
   StyledPerfilMaterials,
   StyledMaterials,
 } from "./styled";
-import ReportModal from "./complaint-modal"
-import Log from "./service-log"
+import ReportModal from "./complaint-modal";
+import Log from "./service-log";
+import NewServiceCalls from "../../components/new-service-call";
 
 const Perfil = () => {
   const dispatch = useDispatch();
   const { userId } = useParams();
   const [visible, setVisible] = useState(false);
+  const [visibleOS, setVisibleOS] = useState(false);
   let { user } = useSelector((state) => state.user);
   let logged = useSelector((state) => state.login);
   const decoded = logged.authen ? decode(logged.authen) : undefined;
@@ -35,71 +37,75 @@ const Perfil = () => {
 
   return (
     <>
+    <NewServiceCalls visibility={visibleOS} setVisibility={setVisibleOS}/>
       {parseInt(userId) !== user.id ? (
         <Loading />
       ) : (
-          <div>
-            <ReportModal visible={visible} setVisible={setVisible} />
-            <StyledPerfilDiv>
-              <StyledImgRankCenter>
-                <StyledUserImage src={user.imageUrl} alt="User" />
-                <div style={{ display: "flex" }}>
-                  <StyledRankUser>
-                    <p>{user.score.anual}</p>
-                    <p>Recipoints Anual</p>
-                  </StyledRankUser>
-                  <StyledRankUser>
-                    <p>{user.score.mensal}</p>
-                    <p>Recipoints Mensal</p>
-                  </StyledRankUser>
-                </div>
-              </StyledImgRankCenter>
-              <InfoDiv>
-                <h1>{user.brand}</h1>
-                <h2>{user.business}</h2>
-                <p>{user.email}</p>
-                <a href={"https://" + user.website}>
-                  {user.website}
-                </a>
-                <div>
-                  <p>
-                    {user.adress.street}, {user.adress.number}
-                  </p>
-                  <p>
-                    {user.adress.city}, {user.adress.state}
-                  </p>
-                </div>
-              </InfoDiv>
-              <StyledReportDiv>
-                {decoded && decoded.sub !== userId && <ReportButton
+        <div>
+          <ReportModal visible={visible} setVisible={setVisible} />
+          <StyledPerfilDiv>
+            <StyledImgRankCenter>
+              <StyledUserImage src={user.imageUrl} alt="User" />
+              <div style={{ display: "flex" }}>
+                <StyledRankUser>
+                  <p>{user.score.anual}</p>
+                  <p>Recipoints Anual</p>
+                </StyledRankUser>
+                <StyledRankUser>
+                  <p>{user.score.mensal}</p>
+                  <p>Recipoints Mensal</p>
+                </StyledRankUser>
+              </div>
+            </StyledImgRankCenter>
+            <InfoDiv>
+              <h1>{user.brand}</h1>
+              <h2>{user.business}</h2>
+              <p>{user.email}</p>
+              <a href={"https://" + user.website}>{user.website}</a>
+              <div>
+                <p>
+                  {user.adress.street}, {user.adress.number}
+                </p>
+                <p>
+                  {user.adress.city}, {user.adress.state}
+                </p>
+              </div>
+            </InfoDiv>
+            <StyledReportDiv>
+              {decoded && decoded.sub !== userId && (
+                <ReportButton
                   onClick={() => {
                     setVisible(true);
                   }}
                 >
                   Denuncia?
-              </ReportButton>}
-                {user.business === "Coleta" && decoded !== undefined && decoded.sub !== userId && <FuncButton>Emitir Chamado</FuncButton>}
-              </StyledReportDiv>
-            </StyledPerfilDiv>
-            {user?.business === "Coleta" && (
-              <StyledPerfilMaterials>
-                {Object.keys(user.ifCollector).map(
-                  (material, key) =>
-                    user.ifCollector[material] && (
-                      <StyledMaterials key={key}>
-                        {showMaterial(material)}
-                      </StyledMaterials>
-                    )
+                </ReportButton>
+              )}
+              {user.business === "Coleta" &&
+                decoded !== undefined &&
+                decoded.sub !== userId && (
+                  <FuncButton onClick={() => {setVisibleOS(true)}}>Emitir Chamado</FuncButton>
                 )}
-              </StyledPerfilMaterials>
-            )}
+            </StyledReportDiv>
+          </StyledPerfilDiv>
+          {user?.business === "Coleta" && (
+            <StyledPerfilMaterials>
+              {Object.keys(user.ifCollector).map(
+                (material, key) =>
+                  user.ifCollector[material] && (
+                    <StyledMaterials key={key}>
+                      {showMaterial(material)}
+                    </StyledMaterials>
+                  )
+              )}
+            </StyledPerfilMaterials>
+          )}
 
-            <Log />
-          </div>
-        )}
+          <Log />
+        </div>
+      )}
     </>
   );
 };
 
 export default Perfil;
-
