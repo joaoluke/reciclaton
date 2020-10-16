@@ -59,12 +59,12 @@ const Home = () => {
               </StyleCadastro>}
 
 
-            <StyleTitle onClick={() => {
-              history.push("/ranking");
-            }}>
+            <StyleTitle >
               Conheça nosso
               </StyleTitle>
-            <StyledRanking>Ranking</StyledRanking>
+            <StyledRanking onClick={() => {
+              history.push("/ranking");
+            }}>Ranking</StyledRanking>
 
 
           </StyledEmpresa>
