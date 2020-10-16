@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { loginAction } from "../../redux/action/login"
 import reciclagem from "./images/vector-illustration-recycling-nature-flat_82574-3408.png";
 import {
   StyledTextBox,
@@ -15,6 +18,8 @@ import {
   StyleCleitinho,
   StyleSelo,
   StyleCadastro,
+  StyledSelo,
+  StyledRanking,
 } from "./styled";
 import cleitinho from "./images/cleitinho.png";
 import facebook from "./images/facebook.png";
@@ -23,7 +28,11 @@ import instagram from "./images/instagram.png";
 import BaseLayout from "../../components/layout";
 import Modal from "../../components/modal";
 const Home = () => {
+  const history = useHistory();
   const [visible, setVisible] = useState(false);
+  const [visibleCadastro, setVisibleCadastro] = useState(false);
+  const authen = useSelector((state) => state.login.authen);
+  console.log(authen)
 
   return (
     <BaseLayout>
@@ -39,14 +48,25 @@ const Home = () => {
               coleta do lixo reciclável. A partir da nota de avaliação dada ao
               coletor, conseguimos garantir a qualidade do atendimento
             </StyledTextBox>
-            <StyleTitle> GOSTOU ? </StyleTitle>
-            <StyleCadastro>
-              <Modal visible={visible} setVisible={setVisible}>
-                <StyleTitle style={{ color: "#70D548" }}>
-                  Cadastre-se
-                </StyleTitle>
-              </Modal>
-            </StyleCadastro>
+            <StyleTitle> {authen === "" && "GOSTOU ?"}  </StyleTitle>
+            {authen === "" &&
+              <StyleCadastro>
+                <Modal visible={visible} setVisible={setVisible}>
+                  <StyleTitle style={{ color: "#70D548" }} >
+                    Cadastre - se
+              </StyleTitle>
+                </Modal>
+              </StyleCadastro>}
+
+
+            <StyleTitle onClick={() => {
+              history.push("/ranking");
+            }}>
+              Conheça nosso
+              </StyleTitle>
+            <StyledRanking>Ranking</StyledRanking>
+
+
           </StyledEmpresa>
         </StyleContainer>
 
@@ -72,42 +92,42 @@ const Home = () => {
           <StyleCleitinho src={cleitinho} />
           <StyleSelo>
             <StyleTitle>Sobre Nosso SELO:</StyleTitle>
-            <StyleParagraph>
+            <StyledSelo>
               De acordo com a classificação, sua empresa ganha um selo, atraindo
               um número maior de clientes que cada vez mais estão preocupados
               com o meio ambiente e a sustentabilidade e com as pessoas cada vez
               mais se preocupando com a qualidade de vida, de forma racional e
               sustentável, é importante que as empresas demonstrem que estão
               preocupadas e cuidando do meio ambiente. I
-            </StyleParagraph>
-            <StyleParagraph>
+            </StyledSelo>
+            <StyledSelo>
               As empresas de reciclagem de lixo possuem uma grande importância
               para o meio ambiente, mas sabemos que o lixo reciclável nem sempre
               chega a usina de reciclagem.
-            </StyleParagraph>
-            <StyleParagraph>
+            </StyledSelo>
+            <StyledSelo>
               Estamos em um mundo que preza cada vez mais por meios sustentáveis
               e existe a importância de melhorarmos este sistema de coleta de
               lixo e preservar o meio ambiente.
-            </StyleParagraph>
-            <StyleParagraph>
+            </StyledSelo>
+            <StyledSelo>
               Com o crescente aumento da população mundial e o expressivo
               crescimento industrial há também de se constatar um considerável
               aumento da quantia de resíduos produzidos pela sociedade, sejam
               eles orgânicos ou inorgânicos.
-            </StyleParagraph>
-            <StyleParagraph>
+            </StyledSelo>
+            <StyledSelo>
               De maneira simples, a reciclagem pode ser entendida como o
               processo de reaproveitamento pelo qual passam objetos usados, a
               fim de que novos produtos possam ser confeccionados a partir
               deles.
-            </StyleParagraph>
-            <StyleParagraph>
+            </StyledSelo>
+            <StyledSelo>
               Economicamente, a reciclagem é geradora de riquezas, uma vez que
               as empresas se valem desse processo para redução de custos no
               processo produtivo, ao passo em que contribuem para a preservação
               do meio ambiente.
-            </StyleParagraph>
+            </StyledSelo>
           </StyleSelo>
         </StyleContainer>
 
