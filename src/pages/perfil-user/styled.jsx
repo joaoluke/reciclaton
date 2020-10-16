@@ -39,6 +39,9 @@ export const StyledMaterials = styled.div`
 
 export const StyledUserImage = styled.img`
   border-radius: 1rem;
+  width:200px;
+  height:200px;
+  background-color:white;
 `;
 
 export const StyledRankUser = styled.div`
@@ -48,6 +51,8 @@ export const StyledRankUser = styled.div`
   justify-content: center;
   background: #68A428;
   width: 5rem;
+  max-width: 250px;
+  max-height: 250px;
   height: 4rem;
   padding: 1rem;
   margin-top: 1em;
