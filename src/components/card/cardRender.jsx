@@ -272,8 +272,8 @@ const CardsContent = ({ status }) => {
                                   (contribuicao / 10 + quantidade_estimada / 100);
                                 changeInformations(contratante_id, token, {
                                   score: {
-                                    mensal: user.score.mensal + contractedSumOfPoints,
-                                    anual: user.score.anual + contractedSumOfPoints,
+                                    mensal: Math.round(user.score.mensal + contractedSumOfPoints),
+                                    anual: Math.round(user.score.anual + contractedSumOfPoints),
                                   },
                                 });
                                 const contractingSumOfPoints =
@@ -283,8 +283,8 @@ const CardsContent = ({ status }) => {
 
                                 changeInformations(contratado_id, token, {
                                   score: {
-                                    mensal: user.score.mensal + contractingSumOfPoints,
-                                    anual: user.score.anual + contractingSumOfPoints,
+                                    mensal: Math.round(user.score.mensal + contractingSumOfPoints),
+                                    anual: Math.round(user.score.anual + contractingSumOfPoints),
                                   },
                                 });
                                 changeCardStatus(id, token, {
