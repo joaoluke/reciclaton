@@ -28,6 +28,7 @@ import {
   NotificationContainer,
   NotificationManager,
 } from "react-notifications";
+import "react-notifications/lib/notifications.css";
 export const materialsName = {
   rubber: "Borracha",
   electronic: "Eletrônico",
@@ -81,7 +82,7 @@ const CardsContent = ({ status }) => {
       });
     }
     dispatch(getService(status));
-    NotificationManager.sucess(
+    NotificationManager.success(
       "Boa!!",
       "Você aceitou um card, vá até a proxima seção para conferir",
       1000
@@ -93,20 +94,18 @@ const CardsContent = ({ status }) => {
       status: "em andamento",
     });
     dispatch(getService(status));
-    dispatch(getService(status));
-    NotificationManager.sucess(
+    NotificationManager.success(
       "Boa!!",
       "O status de sua card mudou para [Em Andamento], vá até a proxima seção para conferir",
       1000
     );
   };
-
   const FinishService = (id) => {
     changeCardStatus(id, token, {
       status: "finalizado",
     });
     dispatch(getService(status));
-    NotificationManager.sucess(
+    NotificationManager.success(
       "Boa!!",
       "O status de sua card mudou para [Finalizado], vá até a proxima seção para conferir",
       1000
@@ -120,7 +119,7 @@ const CardsContent = ({ status }) => {
       cancelado: user.brand,
     });
     dispatch(getService(status));
-    NotificationManager.sucess(
+    NotificationManager.success(
       "Boa!!",
       "O status de sua card mudou para [Cancelado], vá até a proxima seção para conferir",
       1000
@@ -128,7 +127,7 @@ const CardsContent = ({ status }) => {
   };
   return (
     <>
-      {status !== "Aberto" && (
+      {status !== "Aberto" && status && (
         <>
           {individual.map(
             (
@@ -309,7 +308,7 @@ const CardsContent = ({ status }) => {
                               changeCardStatus(id, token, {
                                 hasPoints: true,
                               });
-                              NotificationManager.sucess(
+                              NotificationManager.success(
                                 "Boa!!",
                                 "Avaliação e pontuação atribuidas com sucesso, para confirmar sua pontuação, vá até seu perfil",
                                 1000

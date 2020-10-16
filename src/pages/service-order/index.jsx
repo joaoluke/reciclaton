@@ -18,9 +18,8 @@ const ServiceOrder = () => {
   useEffect(() => {
     authen && setUserId(jwt_decode(authen));
     authen && dispatch(requestBusiness(userId.sub, authen));
-    dispatch(getService(status));
+    status && dispatch(getService(status));
   }, [dispatch, authen, userId.sub, status]);
-
   return (
     <>
       <NewServiceCalls visibility={visibility} setVisibility={setVisibility} />
