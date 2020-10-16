@@ -3,7 +3,7 @@ import { CloseCard } from "../card/card.styled";
 
 export const MainTitle = styled.h1`
   font-family: "Roboto", sans-serif;
-  color: #6d914a;
+  color: #000;
   font-weight: bold;
   margin: 5px;
   font-size: 35px;
@@ -14,7 +14,7 @@ export const MainTitle = styled.h1`
 export const SubTitles = styled.h2`
   font-family: "Roboto", sans-serif;
   font-weight: bold;
-  color: #6d914a;
+  color: #000;
   font-size: 25px;
   text-align: center;
   text-decoration: underline;
@@ -23,7 +23,7 @@ export const SubTitles = styled.h2`
 
 export const StyledLabel = styled.label`
   font-family: "Roboto", sans-serif;
-  color: #6d914a;
+  color: #000;
   margin-right: 15px;
   margin-top: 3px;
   font-size: 17px;
@@ -38,7 +38,7 @@ export const StyledInput = styled.input`
   background-color: #d6e4c8;
   border-radius: 3px;
   padding: 5px;
-  color: #526d36;
+  color: #000;
   text-align: center;
 `;
 
@@ -64,11 +64,10 @@ export const StyledSubmit = styled.button`
   border: none;
   padding: 10px;
   letter-spacing: 5px;
-  color: #ffff;
-  background-color: #90b569;
+  color: #fff;
+  background-color: #68A428;
   :hover {
-    background-color: #88ab5f;
-    color: #cedcbc;
+    background-color: #76b532;
   }
 `;
 
@@ -92,4 +91,5 @@ export const InformationContainer = styled.div`
 
 export const CloseModal = styled(CloseCard)`
   font-size: 30px;
+  color: #f55536;
 `;

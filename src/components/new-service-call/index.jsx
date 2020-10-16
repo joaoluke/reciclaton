@@ -76,6 +76,8 @@ const NewServiceCalls = ({ visibility, setVisibility }) => {
       bottom: "auto",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
+      height: 'fit-content',
+      maxHeight: '80vh',
     },
   };
   const onSubmit = (data) => {
@@ -235,7 +237,7 @@ const NewServiceCalls = ({ visibility, setVisibility }) => {
             <Error>Por favor selecionar pelo menos 1 material</Error>
           )}
           <div>
-            <StyledSubmit type="submit">Enviar ordem de serviço</StyledSubmit>
+            <StyledSubmit type="submit">Enviar Chamado</StyledSubmit>
           </div>
           {approved && (
             <Notification>Seu cadastro foi efetuado com sucesso!!</Notification>

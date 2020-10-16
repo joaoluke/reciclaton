@@ -19,11 +19,13 @@ import {
 } from "./styled";
 import ReportModal from "./complaint-modal";
 import Log from "./service-log";
+import NewServiceCalls from "../../components/new-service-call";
 
 const Perfil = () => {
   const dispatch = useDispatch();
   const { userId } = useParams();
   const [visible, setVisible] = useState(false);
+  const [visibleOS, setVisibleOS] = useState(false);
   let { user } = useSelector((state) => state.user);
   let logged = useSelector((state) => state.login);
   const decoded = logged.authen ? decode(logged.authen) : undefined;
@@ -35,6 +37,7 @@ const Perfil = () => {
 
   return (
     <>
+    <NewServiceCalls visibility={visibleOS} setVisibility={setVisibleOS}/>
       {parseInt(userId) !== user.id ? (
         <Loading />
       ) : (
@@ -81,7 +84,7 @@ const Perfil = () => {
               {user.business === "Coleta" &&
                 decoded !== undefined &&
                 decoded.sub !== userId && (
-                  <FuncButton>Emitir Chamado</FuncButton>
+                  <FuncButton onClick={() => {setVisibleOS(true)}}>Emitir Chamado</FuncButton>
                 )}
             </StyledReportDiv>
           </StyledPerfilDiv>

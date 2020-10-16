@@ -2,10 +2,9 @@ import React from "react";
 import Login from "../../pages/login";
 import User from "../../pages/perfil-user";
 import Home from "../../pages/home";
-import NewServiceOrder from "../new-service-call";
 import ServiceOrder from "../../pages/service-order";
 import { Switch, Route } from "react-router-dom";
-import Ranking from '../../pages/ranking'
+import Ranking from "../../pages/ranking";
 import Complaint from "../../pages/complaints";
 
 const Routes = () => {
@@ -16,7 +15,7 @@ const Routes = () => {
           <Login />
         </Route>
         <Route path="/ranking">
-            <Ranking/>
+          <Ranking />
         </Route>
         <Route exact path="/profile/:userId">
           <User />
