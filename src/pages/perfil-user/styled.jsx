@@ -23,7 +23,7 @@ export const StyledPerfilMaterials = styled.div`
   background-color:#68A428;
   color:white;
   height: fit-content;
-  width: fit-content;
+  width: 99vw;
   font-size: 20px;
   padding: 7px;
   margin: 0 auto;

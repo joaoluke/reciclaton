@@ -15,7 +15,7 @@ interface props {
 const ComplaintCard = ({ imgUrl, complaintMsg, reviews, concordoClick, discordoClick, allow, notAllow, id }: props) => {
 
   return (
-    <StyledCard>
+    <StyledCard key={id}>
       <CardImg src={imgUrl} />
       <p>{complaintMsg}</p>
       <p>{reviews} Reviews</p>
