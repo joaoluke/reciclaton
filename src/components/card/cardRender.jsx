@@ -143,7 +143,7 @@ const CardsContent = ({ status }) => {
                           }}
                         />
                       </CloseCointainer>
-                      {popUp && (
+                      {popUp && status !== 'finalizado' && (
                         <PopUp>
                           <TitlePrice style={{ textAlign: "left" }}>
                             Tem certeza que gostaria de cancelar o serviço?
