@@ -5,7 +5,6 @@ exports[`render 1`] = `
   style={
     Object {
       "backgroundColor": "#f4f9ef",
-      "boxSizing": "border-box",
       "display": "flex",
       "flexDirection": "column",
       "height": "100%",

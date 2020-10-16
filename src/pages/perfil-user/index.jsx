@@ -33,8 +33,6 @@ const Perfil = () => {
     [userId, visible]
   );
 
-  console.log(decoded)
-
   return (
     <>
       {parseInt(userId) !== user.id ? (
@@ -60,7 +58,7 @@ const Perfil = () => {
                 <h1>{user.brand}</h1>
                 <h2>{user.business}</h2>
                 <p>{user.email}</p>
-                <a href={"https://" + user.website} target="_blank">
+                <a href={"https://" + user.website}>
                   {user.website}
                 </a>
                 <div>

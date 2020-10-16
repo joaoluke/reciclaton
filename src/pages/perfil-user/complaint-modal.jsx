@@ -47,7 +47,6 @@ const Requisition = (data) => {
       NotificationManager.success("Denúncia feita com Sucesso!", "Feito!", 2000)
     })
     .catch((resp) => {
-      console.log(resp.response);
     });
 };
 
@@ -71,7 +70,6 @@ const Complaint = ({ visible, setVisible }) => {
         setVisible(false);
       })
       .catch((resp) => {
-        console.log(resp.response);
       });
   };
 
@@ -91,7 +89,6 @@ const Complaint = ({ visible, setVisible }) => {
       <Modal
         isOpen={visible}
         onAfterOpen={() => {
-          console.log("open");
         }}
         onRequestClose={() => setVisible(false)}
         ariaHideApp={false}

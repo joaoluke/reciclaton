@@ -9,10 +9,9 @@ const Loading = () => {
 
     height: "100%",
     width: "100vw",
-    boxSizing: "border-box",
     backgroundColor: "#f4f9ef",
     display: "flex",
-    flexDirection: "column",
+    flexDirection: 'column',
     justifyContent: "center"
   }
 
