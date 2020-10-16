@@ -38,24 +38,28 @@ export const getServices = () => (dispatch) => {
       console.log(response);
     });
 };
-export const addService = (token, sevice) => (dispatch) => {
+export const addService = (token, sevice) => {
   const header = {
     headers: { Authorization: `Bearer ${token}` },
   };
   axios
     .post(`https://reciclatonapi.herokuapp.com/664/services/`, sevice, header)
     .then(({ data }) => {
-      dispatch(cardInformation(data));
+      console.log(data);
     })
     .catch(({ response }) => {
       console.log(response);
     });
 };
 
-export const getService = (status) => {
-  axios.get(`https://reciclatonapi.herokuapp.com/664/services/`, {
-    params: { status_like: status },
-  });
+export const getService = (status) => (dispatch) => {
+  axios
+    .get(`https://reciclatonapi.herokuapp.com/664/services/`, {
+      params: { status_like: status },
+    })
+    .then(({ data }) => {
+      dispatch(cardInformation(data));
+    });
 };
 
 export const changeCardStatus = (id, token, service) => {
